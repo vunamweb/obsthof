@@ -37,6 +37,7 @@ class ControllerExtensionModuleCategoryHierarchy extends Controller {
                     $sub_child = array();
 
                     foreach ($categories as $category) {
+                        $sub_child = array();
 
                                 $children = $this->model_catalog_category->getCategories($category['category_id']);
                             if(count($children)>0){
