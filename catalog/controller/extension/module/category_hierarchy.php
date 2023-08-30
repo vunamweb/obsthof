@@ -27,19 +27,24 @@ class ControllerExtensionModuleCategoryHierarchy extends Controller {
 
 		$this->load->model('catalog/product');
 
-                $data["cat_id"] = (isset($parts[1]))?$parts[1]:((isset($parts[0]))?$parts[0]:0);
+                //$data["cat_id"] = (isset($parts[1]))?$parts[1]:((isset($parts[0]))?$parts[0]:0);
+                $data["cat_id"] = $this->model_catalog_category->getRootCategory();//$parts[0];
+                $data["current"] = $parts[1];
+                
 		$data['categories'] = array();
                 if($data["cat_id"]!=0){
 
                     $currrent_category = $this->model_catalog_category->getCategory($data["cat_id"]);
                     $categories = $this->model_catalog_category->getCategories($data["cat_id"]);
+                    //echo $data["cat_id"] . '/' . count($categories);
                     $children_data = array();
                     $sub_child = array();
 
                     foreach ($categories as $category) {
                         $sub_child = array();
 
-                                $children = $this->model_catalog_category->getCategories($category['category_id']);
+                        //print_r($category);        
+                        $children = $this->model_catalog_category->getCategories($category['category_id']);
                             if(count($children)>0){
                                         foreach($children as $child) {
 
@@ -78,6 +83,14 @@ class ControllerExtensionModuleCategoryHierarchy extends Controller {
                             'href'        => $this->url->link('product/category', 'path=' . $currrent_category['category_id']),
                             'children'    => $children_data
                         );
+                        /*$zeroLevel[1] = array(
+                            'category_id' => $currrent_category["category_id"],
+                            'name'        => $currrent_category['name'],
+                            'href'        => $this->url->link('product/category', 'path=' . $currrent_category['category_id']),
+                            'children'    => $children_data
+                        );*/
+                    //print_r($zeroLevel);    
+                        
                     $parentLevel1 = array();
                     $parentLevel2 = array();
                     $parent1 = array();
@@ -88,7 +101,9 @@ class ControllerExtensionModuleCategoryHierarchy extends Controller {
                     }else{
                         if(empty($children_data)){
 //                            die('here');
-                            $siblings_cats = $this->model_catalog_category->getCategories($currrent_category["parent_id"]);
+//print_r($currrent_category);                            
+$siblings_cats = $this->model_catalog_category->getCategories($currrent_category["parent_id"]);
+//print_r($siblings_cats);
                             foreach($siblings_cats as $siblings_cat) {
                                     $filter_data = array();
                                     $filter_data = array(
