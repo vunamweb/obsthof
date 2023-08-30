@@ -1,0 +1,39 @@
+<div class="box-nav">
+	<span>
+		<a href="callto:{{telephone|replace({' ': '', ")" : '', '(' : '', "-" : ''})}}">
+			<span>{{ telephone }}</span>
+		</a>
+	</span>
+	<a class="btn-wishlist" href="{{ wishlist }}" id="wishlist-total" title="{{ text_wishlist }}">
+		<i class="fa fa-heart"></i> <span>{{ text_wishlist }}</span>
+	</a>
+	<nav id="top-links" class="nav toggle-wrap">
+		<a class="toggle fa fa-user" href='#'></a>
+		<ul class="toggle_cont">
+			<li class="toggle-wrap">
+				<a href="{{ account }}" title="{{ text_account }}" class="toggle">
+					<i class="fa fa-user"></i> <span>{{ text_account }}</span>
+				</a>
+				<ul class="toggle_cont toggle_cont__right">
+					{% if (logged) %}
+						<li><a href="{{ account }}">{{ text_account }}</a></li>
+						<li><a href="{{ order }}">{{ text_order }}</a></li>
+						<li><a href="{{ wishlist }}">{{ text_wishlist }}</a></li>
+						<li><a href="{{ compare }}" id="compare-total2">{{ text_compare }}</a></li>
+						<li><a href="{{ transaction }}">{{ text_transaction }}</a></li>
+						<li><a href="{{ download }}">{{ text_download }}</a></li>
+						<li><a href="{{ shopping_cart }}">{{ text_shopping_cart }}</a></li>
+						<li><a href="{{ checkout }}">{{ text_checkout }}</a></li>
+						<li><a href="{{ logout }}">{{ text_logout }}</a></li>
+					{% else %}
+						<li><a href="{{ login }}">{{ text_login }}</a></li>
+						<li><a href="{{ register }}">{{ text_register }}</a></li>
+						<li><a href="{{ wishlist }}">{{ text_wishlist }}</a></li>
+						<li><a href="{{ shopping_cart }}">{{ text_shopping_cart }}</a></li>
+						<li><a href="{{ checkout }}">{{ text_checkout }}</a></li>
+					{% endif %}
+				</ul>
+			</li>
+		</ul>
+	</nav>
+</div>

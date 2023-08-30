@@ -1,0 +1,5 @@
+<?php
+$navarray = array("0"=>"", "1"=>"home", "2"=>"wer", "3"=>"wie", "4"=>"was", "5"=>"warum", "6"=>"kontakt", "7"=>"impressum", "8"=>"datenschutz", "9"=>"therapie", "10"=>"diagnostik", "11"=>"psychotherapie", "12"=>"traumatherapie", "13"=>"systemische-familientherapie", "14"=>"leistungsdiagnostik", "15"=>"diagnostik-von-entwicklungsstoerungen", "16"=>"coaching", "17"=>"eltern-baby-kurse");
+?><?php
+$navarrayFULL = array("0"=>"", "1"=>"home", "2"=>"wer", "3"=>"wie", "4"=>"was", "5"=>"warum", "6"=>"Kontakt", "7"=>"Impressum", "8"=>"Datenschutz", "9"=>"Therapie", "10"=>"Diagnostik", "11"=>"Psychotherapie", "12"=>"Traumatherapie", "13"=>"Systemische Familientherapie", "14"=>"Leistungsdiagnostik", "15"=>"Diagnostik von Entwicklungs&shy;störungen", "16"=>"Coaching", "17"=>"Eltern-Baby-Kurse");
+?>

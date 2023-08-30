@@ -1,0 +1,34 @@
+<div class="box-nav">
+	<a href="{{ compare }}" id="compare-total2"> {{ text_compare }} </a>
+	<nav id="top-links" class="nav toggle-wrap">
+		<a class="toggle fa fa-cog" href='#'></a>
+		<ul class="toggle_cont">
+			<li class="toggle-wrap">
+				<span class="toggle">
+					<span>{{ text_account }}</span><i class="material-icons-expand_more"></i>
+				</span>
+				<ul class="toggle_cont toggle_cont__right">
+					{% if (logged) %}
+						<li><a href="{{ account }}">{{ text_account }}</a></li>
+						<li><a href="{{ order }}">{{ text_order }}</a></li>
+						<li><a href="{{ transaction }}">{{ text_transaction }}</a></li>
+						<li><a href="{{ download }}">{{ text_download }}</a></li>
+						<li><a href="{{ shopping_cart }}">{{ text_shopping_cart }}</a></li>
+						<li><a href="{{ checkout }}">{{ text_checkout }}</a></li>
+					{% else %}
+						<li><a href="{{ register }}">{{ text_register }}</a></li>
+						<li><a href="{{ shopping_cart }}">{{ text_shopping_cart }}</a></li>
+						<li><a href="{{ checkout }}">{{ text_checkout }}</a></li>
+					{% endif %}
+				</ul>
+			</li>
+		</ul>
+	</nav>
+	<a class="btn-wishlist" href="{{ wishlist }}" id="wishlist-total"><span>{{ text_wishlist }}</span>
+	</a>
+	{% if (logged) %}
+		<a href="{{ logout }}">{{ text_logout }}</a>
+	{% else %}
+		<a href="{{ login }}">{{ text_login }}</a>
+	{% endif %}
+</div>

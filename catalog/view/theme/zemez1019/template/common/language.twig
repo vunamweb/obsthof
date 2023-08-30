@@ -1,0 +1,35 @@
+{% if languages|length > 1 %}
+	<div class="box-language">
+		<form action="{{ action }}" method="post" enctype="multipart/form-data" id="form-language">
+			<div class="btn-group toggle-wrap">
+				<span class="toggle">
+					{% for language in languages %}
+						{% if (language['code'] == code) %}
+							{{ language['name'] }} 
+						{% endif %}
+					{% endfor %}
+					<span class="hidden-xs hidden-sm hidden-md hidden">{{ text_language }}</span>
+				</span>
+				<ul class="toggle_cont pull-right">
+					{% for language in languages %}
+						{% if (language['code'] == code) %}
+							<li>
+								<button class="language-select selected" type="button" name="{{ language['code'] }}">
+									{{ language['name'] }} 
+								</button>
+							</li>
+						{% else %}
+							<li>
+								<button class="language-select" type="button" name="{{ language['code'] }}">
+									{{ language['name'] }} 
+								</button>
+							</li>
+						{% endif %}
+					{% endfor %}
+				</ul>
+			</div>
+			<input type="hidden" name="code" value="" />
+			<input type="hidden" name="redirect" value="{{ redirect }}" />
+		</form>
+	</div>
+{% endif %}

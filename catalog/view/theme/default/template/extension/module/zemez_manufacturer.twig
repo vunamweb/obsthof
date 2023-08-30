@@ -1,0 +1,23 @@
+<div class="box manufacturer">
+	<div class="box-heading">
+		<h3>{{ heading_title }}</h3>
+		<div id="nav_brands-{{ module }}"></div>
+	</div>
+	<div class="box-content">
+		{% if (categories) %}
+			<div class="box-brand" data-box-carousel data-carousel-settings="items: 6, space: 105" data-nav-id="brands-{{ module }}">
+				{% for manufacturer in categories['manufacturer'] %}
+					<div class="box-brand__item">
+						<a class="" href="{{ manufacturer['href'] }}">
+							{% if (manufacturer['image']) %}
+								<img src="image/{{ manufacturer['image'] }}" alt="{{ manufacturer['name'] }}" class="img-responsive" />
+							{% else %}<span> {{ manufacturer['name'] }} </span>
+							{% endif %}
+						</a>
+					</div>
+				{% endfor %}
+			</div>
+		{% endif %}
+		<div class="clear"></div>
+	</div>
+</div>

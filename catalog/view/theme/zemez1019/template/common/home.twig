@@ -1,0 +1,30 @@
+{{ header }}
+{% if top %}
+{{ top }}
+{% endif %}
+<div id="common-home" class="container">
+	<div class="row">{{ column_left }}
+		{% if column_left and column_right %}
+			{%set class = 'col-sm-6' %}
+		{% elseif column_left or column_right %}
+			{%set class = 'col-sm-9' %}
+		{% else %}
+			{%set class = 'col-sm-12' %}
+		{% endif %}
+		<div class="{{ class }}">
+			{{ content_top }}
+			{{ content_morpheus_top }}
+			{{ content_bottom }}
+		</div>
+	</div>
+</div>
+		
+		{{ content_morpheus_bottom }}
+		
+		<!-- what is coulumn_right ?? -->
+		{{ column_right }}
+
+{% if bottom %}
+	<section class="bottom">{{ bottom }}</section>
+{% endif %}
+{{ footer }}

@@ -1,0 +1,21 @@
+
+<h3 class="box-heading">{{ text_store_info }}</h3>
+<div class="box-content footer_box">
+	<address>
+		<dl>
+			<dt><i class="linearicons-map-marker"></i>{{ text_address }}</dt>
+			<dd><a class="footer-link" href="//www.google.com/maps/{{ geocode ? '?q=' ~ geocode|replace({' ' : '+'}) : null }}" target="_blank">{{ address }}</a></dd>
+		</dl>
+		<dl>
+			<dt><i class="linearicons-telephone"></i>{{ text_phones }}</dt>
+			<dd>
+				<a class="footer-link" href="callto:{{telephone|replace({' ': '', ")" : '', '(' : '', '-' : '', "+" : ''})}}">{{ telephone }}</a>{% if fax %}; <a class="footer-link" href="callto:{{fax|replace({' ': '', ")" : '', '(' : '', '-' : '', "+" : ''})}}">{{ fax }}</a>{% endif %}
+			</dd>
+		</dl>
+		<dl>
+			<dt><i class="linearicons-clock3"></i>{{ text_open }}</dt>
+			<dd>{{ open }}</dd>
+		</dl>
+	</address>
+	<p><i class="linearicons-envelope"></i><span>{{ text_email }}</span> <a href="mailto:{{ email }}">{{ email }}</a></p>
+</div>

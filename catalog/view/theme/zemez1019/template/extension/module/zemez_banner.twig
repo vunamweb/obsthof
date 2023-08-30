@@ -1,0 +1,22 @@
+<div class="zemez-banner {{heading_title}}">
+	<div class="clearfix">			
+		<div class="zemez-banner-img">		
+			{% if image %}
+				{% if link %}<a href="{{link}}">{% endif %}
+					<img width="{{width}}" height="{{height}}" src="{{image}}" alt="">
+				{% if link %}</a>{% endif %}
+			{% endif %}
+			{% if image1 %}
+				{% if link1 %}<a href="{{link1}}">{% endif %}
+					<img width="{{width}}" height="{{height}}" src="{{image1}}" alt="">
+				{% if link1 %}</a>{% endif %}
+			{% endif %}
+			{% if image2 %}
+				{% if link2 %}<a href="{{link2}}">{% endif %}
+					<img width="{{width}}" height="{{height}}" src="{{image2}}" alt="">
+				{% if link2 %}</a>{% endif %}
+			{% endif %}
+		</div>	
+		<div class="zemez-banner-desc">{{ zemez_banner }}</div>	
+	</div>
+</div>

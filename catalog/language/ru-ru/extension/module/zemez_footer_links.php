@@ -1,0 +1,31 @@
+<?php
+// Text
+$_['text_information']  = 'Информация';
+$_['text_service']      = 'Обслуживание клиентов';
+$_['text_extra']        = 'Дополнительно';
+$_['text_store_info']     = 'Информация о магазине';
+$_['text_contacts']     = 'Связаться с нами';
+$_['text_return']       = 'Возврат';
+$_['text_sitemap']      = 'Карта сайта';
+$_['text_manufacturer'] = 'Бренд:';
+$_['text_voucher']      = 'Подарочные сертификаты';
+$_['text_affiliate']    = 'Филиалы';
+$_['text_special']      = 'Скидки';
+$_['text_account']      = 'Аккаунт';
+$_['text_order']        = 'История заказов';
+$_['text_wishlist']     = 'Список желаний';
+$_['text_newsletter']   = 'Новостная рассылка';
+$_['text_powered']      = 'Работает на <a href="http://www.opencart.com">OpenCart</a><br /> %s &copy; %s';
+$_['text_telephone']    = 'Телефон';
+$_['text_fax']          = 'Факс';
+$_['text_email']        = 'e-mail';
+$_['text_catalog']      = 'Каталог продуктов';
+$_['text_lookbook']     = 'Лукбук';
+$_['text_simple_blog']  = 'Блог';
+$_['text_more']         = 'Больше способов купить';
+$_['text_store']        = 'Найти в магазине';
+$_['text_gift_cards']   = 'Подарочные карты';
+$_['text_wishlist']     = 'Найти в списке желаний';
+$_['text_address']      = 'Адрес:';
+$_['text_open']         = 'Мы открыты:';
+$_['text_phones']       = 'Телефон:';

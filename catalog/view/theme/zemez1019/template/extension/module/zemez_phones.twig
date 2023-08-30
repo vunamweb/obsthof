@@ -1,0 +1,6 @@
+<div class="box-phones">
+	<i class="linearicons-telephone"></i>
+	<span>{{ text_phones }}</span> 
+	<a href="callto:{{telephone|replace({' ': '', ")" : '', '(' : '', '-' : '', "+" : ''})}}">{{ telephone }}</a>{% if fax %};{% endif %}
+	<a href="callto:{{fax|replace({' ': '', ")" : '', '(' : '', '-' : '', "+" : ''})}}"> {{ fax }}</a>
+</div>

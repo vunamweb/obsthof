@@ -1,0 +1,28 @@
+body { background-image: none; }
+.content_edit table {
+    width: 100%;
+    /* border: solid 1px #222f3e; */
+    background: inherit;
+    background: #efefef;
+    /* background: #222f3e; */
+}
+/* .content_edit table td:first-child {
+} */
+table.bgw { background: #fff !important; }
+th {
+	padding: 2px 8px;
+}
+th, th a, th a.link {
+	color: #222f3e !important; text-align: left;
+}
+
+.panel-body {
+    padding: 0 0 0 2px;
+    background: rgba(0,0,0,1);
+    background: #222f3e;
+}
+#content.pad { padding: 3em; }
+#content h2 { margin-bottom: 1em; }
+
+.grid table { margin-bottom: 3px; }
+

@@ -1,0 +1,11 @@
+<h1 class="logo">
+	{% if (logo) %} 
+	<a href="{{ home }}">
+		<img src="{{ logo }}" title="{{ name }}" alt="{{ name }}" class="img-responsive">
+	</a>
+	{% else %} 
+	<a href="{{ home }}">
+		{{ name }} 
+	</a>
+	{% endif %} 
+</h1>

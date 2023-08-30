@@ -1,0 +1,4103 @@
+Array
+(
+    [time] => Wed, 03 Feb 2010 19:59:52 +0100
+    [addr] => ******
+    [agent] => Shockwave Flash
+    [post] => Array
+        (
+            [Filename] => pixi - 2009.pdf
+            [PHPSESSID] => q84m93mi2vdcc57qqf4fbh6591
+            [Upload] => Submit Query
+        )
+
+    [files] => Array
+        (
+            [Filedata] => Array
+                (
+                    [name] => pixi - 2009.pdf
+                    [type] => application/octet-stream
+                    [tmp_name] => C:\xampp\tmp\php5B9A.tmp
+                    [error] => 0
+                    [size] => 23456
+                )
+
+        )
+
+)
+
+---
+Array
+(
+    [time] => Wed, 03 Feb 2010 20:00:13 +0100
+    [addr] => ******
+    [agent] => Shockwave Flash
+    [post] => Array
+        (
+            [Filename] => pixi - 2009.pdf
+            [PHPSESSID] => q84m93mi2vdcc57qqf4fbh6591
+            [Upload] => Submit Query
+        )
+
+    [files] => Array
+        (
+            [Filedata] => Array
+                (
+                    [name] => pixi - 2009.pdf
+                    [type] => application/octet-stream
+                    [tmp_name] => C:\xampp\tmp\phpAEF8.tmp
+                    [error] => 0
+                    [size] => 23456
+                )
+
+        )
+
+)
+
+---
+Array
+(
+    [time] => Thu, 04 Feb 2010 09:58:43 +0100
+    [addr] => ******
+    [agent] => Shockwave Flash
+    [post] => Array
+        (
+            [Filename] => pixi - 2009.pdf
+            [Value1] => null
+            [Upload] => Submit Query
+        )
+
+    [files] => Array
+        (
+            [Filedata] => Array
+                (
+                    [name] => pixi - 2009.pdf
+                    [type] => application/octet-stream
+                    [tmp_name] => C:\xampp\tmp\php5AD1.tmp
+                    [error] => 0
+                    [size] => 23456
+                )
+
+        )
+
+)
+
+---
+Array
+(
+    [time] => Thu, 04 Feb 2010 10:04:31 +0100
+    [addr] => ******
+    [agent] => Shockwave Flash
+    [post] => Array
+        (
+            [Filename] => pixi - 2009.pdf
+            [Value1] => null
+            [Upload] => Submit Query
+        )
+
+    [files] => Array
+        (
+            [Filedata] => Array
+                (
+                    [name] => pixi - 2009.pdf
+                    [type] => application/octet-stream
+                    [tmp_name] => C:\xampp\tmp\phpA652.tmp
+                    [error] => 0
+                    [size] => 23456
+                )
+
+        )
+
+)
+
+---
+Array
+(
+    [time] => Thu, 04 Feb 2010 10:09:11 +0100
+    [addr] => ******
+    [agent] => Shockwave Flash
+    [post] => Array
+        (
+            [Filename] => pixi - 2009.pdf
+            [Value1] => [object HTMLInputElement]
+            [Upload] => Submit Query
+        )
+
+    [files] => Array
+        (
+            [Filedata] => Array
+                (
+                    [name] => pixi - 2009.pdf
+                    [type] => application/octet-stream
+                    [tmp_name] => C:\xampp\tmp\phpED52.tmp
+                    [error] => 0
+                    [size] => 23456
+                )
+
+        )
+
+)
+
+---
+Array
+(
+    [time] => Thu, 04 Feb 2010 10:09:46 +0100
+    [addr] => ******
+    [agent] => Shockwave Flash
+    [post] => Array
+        (
+            [Filename] => pixi - 2009-01a allgemein.pdf
+            [enviro] => q84m93mi2vdcc57qqf4fbh6591
+            [PHPSESSID] => q84m93mi2vdcc57qqf4fbh6591
+            [Upload] => Submit Query
+        )
+
+    [files] => Array
+        (
+            [Filedata] => Array
+                (
+                    [name] => pixi - 2009-01a allgemein.pdf
+                    [type] => application/octet-stream
+                    [tmp_name] => C:\xampp\tmp\php75A4.tmp
+                    [error] => 0
+                    [size] => 72233
+                )
+
+        )
+
+)
+
+---
+Array
+(
+    [time] => Thu, 04 Feb 2010 10:10:01 +0100
+    [addr] => ******
+    [agent] => Shockwave Flash
+    [post] => Array
+        (
+            [Filename] => pixi - 2009.pdf
+            [Value1] => [object HTMLInputElement]
+            [Upload] => Submit Query
+        )
+
+    [files] => Array
+        (
+            [Filedata] => Array
+                (
+                    [name] => pixi - 2009.pdf
+                    [type] => application/octet-stream
+                    [tmp_name] => C:\xampp\tmp\phpB276.tmp
+                    [error] => 0
+                    [size] => 23456
+                )
+
+        )
+
+)
+
+---
+Array
+(
+    [time] => Thu, 04 Feb 2010 10:10:21 +0100
+    [addr] => ******
+    [agent] => Shockwave Flash
+    [post] => Array
+        (
+            [Filename] => pixi - 2009.pdf
+            [Value1] => xxx
+            [Upload] => Submit Query
+        )
+
+    [files] => Array
+        (
+            [Filedata] => Array
+                (
+                    [name] => pixi - 2009.pdf
+                    [type] => application/octet-stream
+                    [tmp_name] => C:\xampp\tmp\phpF4.tmp
+                    [error] => 0
+                    [size] => 23456
+                )
+
+        )
+
+)
+
+---
+Array
+(
+    [time] => Thu, 04 Feb 2010 10:11:36 +0100
+    [addr] => ******
+    [agent] => Shockwave Flash
+    [post] => Array
+        (
+            [Filename] => pixi - 2009.pdf
+            [Value1] => 3
+            [Upload] => Submit Query
+        )
+
+    [files] => Array
+        (
+            [Filedata] => Array
+                (
+                    [name] => pixi - 2009.pdf
+                    [type] => application/octet-stream
+                    [tmp_name] => C:\xampp\tmp\php24CA.tmp
+                    [error] => 0
+                    [size] => 23456
+                )
+
+        )
+
+)
+
+---
+Array
+(
+    [time] => Thu, 04 Feb 2010 10:11:53 +0100
+    [addr] => ******
+    [agent] => Shockwave Flash
+    [post] => Array
+        (
+            [Filename] => Morpheus Handbuch.pdf
+            [custid] => 3
+            [Upload] => Submit Query
+        )
+
+    [files] => Array
+        (
+            [Filedata] => Array
+                (
+                    [name] => Morpheus Handbuch.pdf
+                    [type] => application/octet-stream
+                    [tmp_name] => C:\xampp\tmp\php66CA.tmp
+                    [error] => 0
+                    [size] => 1197796
+                )
+
+        )
+
+)
+
+---
+Array
+(
+    [time] => Thu, 04 Feb 2010 10:12:43 +0100
+    [addr] => ******
+    [agent] => Shockwave Flash
+    [post] => Array
+        (
+            [Filename] => luening - 2009-T3.pdf
+            [custid] => 3
+            [Upload] => Submit Query
+        )
+
+    [files] => Array
+        (
+            [Filedata] => Array
+                (
+                    [name] => luening - 2009-T3.pdf
+                    [type] => application/octet-stream
+                    [tmp_name] => C:\xampp\tmp\php2BAF.tmp
+                    [error] => 0
+                    [size] => 150533
+                )
+
+        )
+
+)
+
+---
+Array
+(
+    [time] => Thu, 04 Feb 2010 10:13:20 +0100
+    [addr] => ******
+    [agent] => Shockwave Flash
+    [post] => Array
+        (
+            [Filename] => pixi - 2009.pdf
+            [custid] => 3
+            [Upload] => Submit Query
+        )
+
+    [files] => Array
+        (
+            [Filedata] => Array
+                (
+                    [name] => pixi - 2009.pdf
+                    [type] => application/octet-stream
+                    [tmp_name] => C:\xampp\tmp\phpB910.tmp
+                    [error] => 0
+                    [size] => 23456
+                )
+
+        )
+
+)
+
+---
+Array
+(
+    [time] => Thu, 04 Feb 2010 10:16:09 +0100
+    [addr] => ******
+    [agent] => Shockwave Flash
+    [post] => Array
+        (
+            [Filename] => luening - 2009-T3.pdf
+            [custid] => 3
+            [Upload] => Submit Query
+        )
+
+    [files] => Array
+        (
+            [Filedata] => Array
+                (
+                    [name] => luening - 2009-T3.pdf
+                    [type] => application/octet-stream
+                    [tmp_name] => C:\xampp\tmp\php4D73.tmp
+                    [error] => 0
+                    [size] => 150533
+                )
+
+        )
+
+)
+
+---
+Array
+(
+    [time] => Thu, 04 Feb 2010 18:19:16 +0100
+    [addr] => ******
+    [agent] => Shockwave Flash
+    [post] => Array
+        (
+            [Filename] => brandbelow - 2010-01 kein doping.pdf
+            [custid] => 3
+            [Upload] => Submit Query
+        )
+
+    [files] => Array
+        (
+            [Filedata] => Array
+                (
+                    [name] => brandbelow - 2010-01 kein doping.pdf
+                    [type] => application/octet-stream
+                    [tmp_name] => C:\xampp\tmp\phpF953.tmp
+                    [error] => 0
+                    [size] => 135577
+                )
+
+        )
+
+)
+
+---
+Array
+(
+    [time] => Thu, 04 Feb 2010 18:19:16 +0100
+    [addr] => ******
+    [agent] => Shockwave Flash
+    [post] => Array
+        (
+            [Filename] => biodentis relaunch und schulungssystem angebot 01 2010.pdf
+            [custid] => 3
+            [Upload] => Submit Query
+        )
+
+    [files] => Array
+        (
+            [Filedata] => Array
+                (
+                    [name] => biodentis relaunch und schulungssystem angebot 01 2010.pdf
+                    [type] => application/octet-stream
+                    [tmp_name] => C:\xampp\tmp\phpFA2F.tmp
+                    [error] => 0
+                    [size] => 158858
+                )
+
+        )
+
+)
+
+---
+Array
+(
+    [time] => Thu, 04 Feb 2010 18:19:16 +0100
+    [addr] => ******
+    [agent] => Shockwave Flash
+    [post] => Array
+        (
+            [Filename] => konzept5-01-2010-apotheker.pdf
+            [custid] => 3
+            [Upload] => Submit Query
+        )
+
+    [files] => Array
+        (
+            [Filedata] => Array
+                (
+                    [name] => konzept5-01-2010-apotheker.pdf
+                    [type] => application/octet-stream
+                    [tmp_name] => C:\xampp\tmp\phpFACC.tmp
+                    [error] => 0
+                    [size] => 63493
+                )
+
+        )
+
+)
+
+---
+Array
+(
+    [time] => Thu, 04 Feb 2010 18:19:16 +0100
+    [addr] => ******
+    [agent] => Shockwave Flash
+    [post] => Array
+        (
+            [Filename] => luening - 2009-T3.pdf
+            [custid] => 3
+            [Upload] => Submit Query
+        )
+
+    [files] => Array
+        (
+            [Filedata] => Array
+                (
+                    [name] => luening - 2009-T3.pdf
+                    [type] => application/octet-stream
+                    [tmp_name] => C:\xampp\tmp\phpFB2A.tmp
+                    [error] => 0
+                    [size] => 150533
+                )
+
+        )
+
+)
+
+---
+Array
+(
+    [time] => Thu, 04 Feb 2010 18:19:16 +0100
+    [addr] => ******
+    [agent] => Shockwave Flash
+    [post] => Array
+        (
+            [Filename] => pixi - 2009-01a allgemein.pdf
+            [custid] => 3
+            [Upload] => Submit Query
+        )
+
+    [files] => Array
+        (
+            [Filedata] => Array
+                (
+                    [name] => pixi - 2009-01a allgemein.pdf
+                    [type] => application/octet-stream
+                    [tmp_name] => C:\xampp\tmp\phpFB79.tmp
+                    [error] => 0
+                    [size] => 72233
+                )
+
+        )
+
+)
+
+---
+Array
+(
+    [time] => Thu, 04 Feb 2010 18:19:17 +0100
+    [addr] => ******
+    [agent] => Shockwave Flash
+    [post] => Array
+        (
+            [Filename] => Morpheus Handbuch.pdf
+            [custid] => 3
+            [Upload] => Submit Query
+        )
+
+    [files] => Array
+        (
+            [Filedata] => Array
+                (
+                    [name] => Morpheus Handbuch.pdf
+                    [type] => application/octet-stream
+                    [tmp_name] => C:\xampp\tmp\phpFC17.tmp
+                    [error] => 0
+                    [size] => 1197796
+                )
+
+        )
+
+)
+
+---
+Array
+(
+    [time] => Thu, 04 Feb 2010 18:20:48 +0100
+    [addr] => ******
+    [agent] => Shockwave Flash
+    [post] => Array
+        (
+            [Filename] => konzept5-01-2010-apotheker.pdf
+            [custid] => 3
+            [Upload] => Submit Query
+        )
+
+    [files] => Array
+        (
+            [Filedata] => Array
+                (
+                    [name] => konzept5-01-2010-apotheker.pdf
+                    [type] => application/octet-stream
+                    [tmp_name] => C:\xampp\tmp\php6036.tmp
+                    [error] => 0
+                    [size] => 63493
+                )
+
+        )
+
+)
+
+---
+Array
+(
+    [time] => Thu, 04 Feb 2010 18:20:48 +0100
+    [addr] => ******
+    [agent] => Shockwave Flash
+    [post] => Array
+        (
+            [Filename] => luening - 2009-T3.pdf
+            [custid] => 3
+            [Upload] => Submit Query
+        )
+
+    [files] => Array
+        (
+            [Filedata] => Array
+                (
+                    [name] => luening - 2009-T3.pdf
+                    [type] => application/octet-stream
+                    [tmp_name] => C:\xampp\tmp\php6066.tmp
+                    [error] => 0
+                    [size] => 150533
+                )
+
+        )
+
+)
+
+---
+Array
+(
+    [time] => Thu, 04 Feb 2010 18:20:48 +0100
+    [addr] => ******
+    [agent] => Shockwave Flash
+    [post] => Array
+        (
+            [Filename] => pixi - 2009-01a allgemein.pdf
+            [custid] => 3
+            [Upload] => Submit Query
+        )
+
+    [files] => Array
+        (
+            [Filedata] => Array
+                (
+                    [name] => pixi - 2009-01a allgemein.pdf
+                    [type] => application/octet-stream
+                    [tmp_name] => C:\xampp\tmp\php60E4.tmp
+                    [error] => 0
+                    [size] => 72233
+                )
+
+        )
+
+)
+
+---
+Array
+(
+    [time] => Thu, 04 Feb 2010 18:20:48 +0100
+    [addr] => ******
+    [agent] => Shockwave Flash
+    [post] => Array
+        (
+            [Filename] => Morpheus Handbuch.pdf
+            [custid] => 3
+            [Upload] => Submit Query
+        )
+
+    [files] => Array
+        (
+            [Filedata] => Array
+                (
+                    [name] => Morpheus Handbuch.pdf
+                    [type] => application/octet-stream
+                    [tmp_name] => C:\xampp\tmp\php620D.tmp
+                    [error] => 0
+                    [size] => 1197796
+                )
+
+        )
+
+)
+
+---
+Array
+(
+    [time] => Thu, 04 Feb 2010 18:21:59 +0100
+    [addr] => ******
+    [agent] => Shockwave Flash
+    [post] => Array
+        (
+            [Filename] => biodentis relaunch und schulungssystem angebot 01 2010.pdf
+            [custid] => 3
+            [Upload] => Submit Query
+        )
+
+    [files] => Array
+        (
+            [Filedata] => Array
+                (
+                    [name] => biodentis relaunch und schulungssystem angebot 01 2010.pdf
+                    [type] => application/octet-stream
+                    [tmp_name] => C:\xampp\tmp\php77C0.tmp
+                    [error] => 0
+                    [size] => 158858
+                )
+
+        )
+
+)
+
+---
+Array
+(
+    [time] => Thu, 04 Feb 2010 18:23:49 +0100
+    [addr] => ******
+    [agent] => Shockwave Flash
+    [post] => Array
+        (
+            [Filename] => luening - 2009-T3.pdf
+            [custid] => 2
+            [Upload] => Submit Query
+        )
+
+    [files] => Array
+        (
+            [Filedata] => Array
+                (
+                    [name] => luening - 2009-T3.pdf
+                    [type] => application/octet-stream
+                    [tmp_name] => C:\xampp\tmp\php24A3.tmp
+                    [error] => 0
+                    [size] => 150533
+                )
+
+        )
+
+)
+
+---
+Array
+(
+    [time] => Thu, 04 Feb 2010 18:24:39 +0100
+    [addr] => ******
+    [agent] => Shockwave Flash
+    [post] => Array
+        (
+            [Filename] => luening - 2009-T3.pdf
+            [custid] => 3
+            [Upload] => Submit Query
+        )
+
+    [files] => Array
+        (
+            [Filedata] => Array
+                (
+                    [name] => luening - 2009-T3.pdf
+                    [type] => application/octet-stream
+                    [tmp_name] => C:\xampp\tmp\phpE67C.tmp
+                    [error] => 0
+                    [size] => 150533
+                )
+
+        )
+
+)
+
+---
+Array
+(
+    [time] => Thu, 04 Feb 2010 18:40:57 +0100
+    [addr] => ******
+    [agent] => Shockwave Flash
+    [post] => Array
+        (
+            [Filename] => konzept5-01-2010-apotheker.pdf
+            [custid] => 3
+            [Upload] => Submit Query
+        )
+
+    [files] => Array
+        (
+            [Filedata] => Array
+                (
+                    [name] => konzept5-01-2010-apotheker.pdf
+                    [type] => application/octet-stream
+                    [tmp_name] => C:\xampp\tmp\phpD425.tmp
+                    [error] => 0
+                    [size] => 63493
+                )
+
+        )
+
+)
+
+---
+Array
+(
+    [time] => Thu, 04 Feb 2010 18:40:57 +0100
+    [addr] => ******
+    [agent] => Shockwave Flash
+    [post] => Array
+        (
+            [Filename] => luening - 2009-T3.pdf
+            [custid] => 3
+            [Upload] => Submit Query
+        )
+
+    [files] => Array
+        (
+            [Filedata] => Array
+                (
+                    [name] => luening - 2009-T3.pdf
+                    [type] => application/octet-stream
+                    [tmp_name] => C:\xampp\tmp\phpD474.tmp
+                    [error] => 0
+                    [size] => 150533
+                )
+
+        )
+
+)
+
+---
+Array
+(
+    [time] => Thu, 04 Feb 2010 18:40:57 +0100
+    [addr] => ******
+    [agent] => Shockwave Flash
+    [post] => Array
+        (
+            [Filename] => pixi - 2009-01a allgemein.pdf
+            [custid] => 3
+            [Upload] => Submit Query
+        )
+
+    [files] => Array
+        (
+            [Filedata] => Array
+                (
+                    [name] => pixi - 2009-01a allgemein.pdf
+                    [type] => application/octet-stream
+                    [tmp_name] => C:\xampp\tmp\phpD502.tmp
+                    [error] => 0
+                    [size] => 72233
+                )
+
+        )
+
+)
+
+---
+Array
+(
+    [time] => Thu, 04 Feb 2010 18:40:57 +0100
+    [addr] => ******
+    [agent] => Shockwave Flash
+    [post] => Array
+        (
+            [Filename] => Morpheus Handbuch.pdf
+            [custid] => 3
+            [Upload] => Submit Query
+        )
+
+    [files] => Array
+        (
+            [Filedata] => Array
+                (
+                    [name] => Morpheus Handbuch.pdf
+                    [type] => application/octet-stream
+                    [tmp_name] => C:\xampp\tmp\phpD5CD.tmp
+                    [error] => 0
+                    [size] => 1197796
+                )
+
+        )
+
+)
+
+---
+Array
+(
+    [time] => Fri, 05 Feb 2010 07:20:12 +0100
+    [addr] => ******226-17-148.vodafone-net.de
+    [agent] => Shockwave Flash
+    [post] => Array
+        (
+            [Filename] => Morpheus Handbuch.pdf
+            [custid] => 3
+            [Upload] => Submit Query
+        )
+
+    [files] => Array
+        (
+            [Filedata] => Array
+                (
+                    [name] => Morpheus Handbuch.pdf
+                    [type] => application/octet-stream
+                    [tmp_name] => /usr/home/enviro/.tmp/phpKoCIIx
+                    [error] => 0
+                    [size] => 1197796
+                )
+
+        )
+
+)
+
+---
+Array
+(
+    [time] => Fri, 05 Feb 2010 07:26:47 +0100
+    [addr] => ******226-17-148.vodafone-net.de
+    [agent] => Shockwave Flash
+    [post] => Array
+        (
+            [Filename] => test1.pdf
+            [custid] => 3
+            [Upload] => Submit Query
+        )
+
+    [files] => Array
+        (
+            [Filedata] => Array
+                (
+                    [name] => test1.pdf
+                    [type] => application/octet-stream
+                    [tmp_name] => /usr/home/enviro/.tmp/phph40Pzo
+                    [error] => 0
+                    [size] => 80778
+                )
+
+        )
+
+)
+
+---
+Array
+(
+    [time] => Fri, 05 Feb 2010 07:27:22 +0100
+    [addr] => ******226-17-148.vodafone-net.de
+    [agent] => Shockwave Flash
+    [post] => Array
+        (
+            [Filename] => test2.pdf
+            [custid] => 3
+            [Upload] => Submit Query
+        )
+
+    [files] => Array
+        (
+            [Filedata] => Array
+                (
+                    [name] => test2.pdf
+                    [type] => application/octet-stream
+                    [tmp_name] => /usr/home/enviro/.tmp/phpOqwGdB
+                    [error] => 0
+                    [size] => 80778
+                )
+
+        )
+
+)
+
+---
+Array
+(
+    [time] => Fri, 05 Feb 2010 08:19:57 +0100
+    [addr] => ******226-44-225.vodafone-net.de
+    [agent] => Shockwave Flash
+    [post] => Array
+        (
+            [Filename] => aXcd.pdf
+            [custid] => 3
+            [Upload] => Submit Query
+        )
+
+    [files] => Array
+        (
+            [Filedata] => Array
+                (
+                    [name] => aXcd.pdf
+                    [type] => application/octet-stream
+                    [tmp_name] => /usr/home/enviro/.tmp/phpRiz4e7
+                    [error] => 0
+                    [size] => 87857
+                )
+
+        )
+
+)
+
+---
+Array
+(
+    [time] => Fri, 05 Feb 2010 08:20:56 +0100
+    [addr] => ******48b.dip0.t-ipconnect.de
+    [agent] => Shockwave Flash
+    [post] => Array
+        (
+            [Filename] => AnlageZertifikat_VCF_09.pdf
+            [custid] => 3
+            [Upload] => Submit Query
+        )
+
+    [files] => Array
+        (
+            [Filedata] => Array
+                (
+                    [name] => AnlageZertifikat_VCF_09.pdf
+                    [type] => application/octet-stream
+                    [tmp_name] => /usr/home/enviro/.tmp/phpy2fOPS
+                    [error] => 0
+                    [size] => 61167
+                )
+
+        )
+
+)
+
+---
+Array
+(
+    [time] => Fri, 05 Feb 2010 08:21:40 +0100
+    [addr] => ******48b.dip0.t-ipconnect.de
+    [agent] => Shockwave Flash
+    [post] => Array
+        (
+            [Filename] => AnlageZertifikat_VCF_09.pdf
+            [custid] => 3
+            [Upload] => Submit Query
+        )
+
+    [files] => Array
+        (
+            [Filedata] => Array
+                (
+                    [name] => AnlageZertifikat_VCF_09.pdf
+                    [type] => application/octet-stream
+                    [tmp_name] => /usr/home/enviro/.tmp/phptEcful
+                    [error] => 0
+                    [size] => 61167
+                )
+
+        )
+
+)
+
+---
+Array
+(
+    [time] => Fri, 05 Feb 2010 14:45:04 +0100
+    [addr] => ******226-213-104.vodafone-net.de
+    [agent] => Shockwave Flash
+    [post] => Array
+        (
+            [Filename] => aXcd.pdf
+            [custid] => 3
+            [Upload] => Submit Query
+        )
+
+    [files] => Array
+        (
+            [Filedata] => Array
+                (
+                    [name] => aXcd.pdf
+                    [type] => application/octet-stream
+                    [tmp_name] => /usr/home/enviro/.tmp/phphLAG01
+                    [error] => 0
+                    [size] => 87857
+                )
+
+        )
+
+)
+
+---
+Array
+(
+    [time] => Fri, 05 Feb 2010 14:45:38 +0100
+    [addr] => ******226-213-104.vodafone-net.de
+    [agent] => Shockwave Flash
+    [post] => Array
+        (
+            [Filename] => test1.pdf
+            [custid] => 3
+            [Upload] => Submit Query
+        )
+
+    [files] => Array
+        (
+            [Filedata] => Array
+                (
+                    [name] => test1.pdf
+                    [type] => application/octet-stream
+                    [tmp_name] => /usr/home/enviro/.tmp/phps6vFlb
+                    [error] => 0
+                    [size] => 80778
+                )
+
+        )
+
+)
+
+---
+Array
+(
+    [time] => Fri, 05 Feb 2010 14:46:14 +0100
+    [addr] => ******226-213-104.vodafone-net.de
+    [agent] => Shockwave Flash
+    [post] => Array
+        (
+            [Filename] => test2.pdf
+            [custid] => 3
+            [Upload] => Submit Query
+        )
+
+    [files] => Array
+        (
+            [Filedata] => Array
+                (
+                    [name] => test2.pdf
+                    [type] => application/octet-stream
+                    [tmp_name] => /usr/home/enviro/.tmp/php9jRRcG
+                    [error] => 0
+                    [size] => 80778
+                )
+
+        )
+
+)
+
+---
+Array
+(
+    [time] => Fri, 05 Feb 2010 14:48:43 +0100
+    [addr] => ******226-213-104.vodafone-net.de
+    [agent] => Shockwave Flash
+    [post] => Array
+        (
+            [Filename] => aXcd.pdf
+            [custid] => 3
+            [Upload] => Submit Query
+        )
+
+    [files] => Array
+        (
+            [Filedata] => Array
+                (
+                    [name] => aXcd.pdf
+                    [type] => application/octet-stream
+                    [tmp_name] => /usr/home/enviro/.tmp/php2SxbRS
+                    [error] => 0
+                    [size] => 87857
+                )
+
+        )
+
+)
+
+---
+Array
+(
+    [time] => Fri, 05 Feb 2010 14:49:24 +0100
+    [addr] => ******226-213-104.vodafone-net.de
+    [agent] => Shockwave Flash
+    [post] => Array
+        (
+            [Filename] => test1.pdf
+            [custid] => 3
+            [Upload] => Submit Query
+        )
+
+    [files] => Array
+        (
+            [Filedata] => Array
+                (
+                    [name] => test1.pdf
+                    [type] => application/octet-stream
+                    [tmp_name] => /usr/home/enviro/.tmp/phpzKeoCE
+                    [error] => 0
+                    [size] => 80778
+                )
+
+        )
+
+)
+
+---
+Array
+(
+    [time] => Fri, 05 Feb 2010 14:49:51 +0100
+    [addr] => ******226-213-104.vodafone-net.de
+    [agent] => Shockwave Flash
+    [post] => Array
+        (
+            [Filename] => test2.pdf
+            [custid] => 3
+            [Upload] => Submit Query
+        )
+
+    [files] => Array
+        (
+            [Filedata] => Array
+                (
+                    [name] => test2.pdf
+                    [type] => application/octet-stream
+                    [tmp_name] => /usr/home/enviro/.tmp/phpTz304q
+                    [error] => 0
+                    [size] => 80778
+                )
+
+        )
+
+)
+
+---
+Array
+(
+    [time] => Fri, 05 Feb 2010 15:05:04 +0100
+    [addr] => ******226-213-104.vodafone-net.de
+    [agent] => Shockwave Flash
+    [post] => Array
+        (
+            [Filename] => test1.pdf
+            [custid] => 3
+            [Upload] => Submit Query
+        )
+
+    [files] => Array
+        (
+            [Filedata] => Array
+                (
+                    [name] => test1.pdf
+                    [type] => application/octet-stream
+                    [tmp_name] => /usr/home/enviro/.tmp/phpOhTrB3
+                    [error] => 0
+                    [size] => 80778
+                )
+
+        )
+
+)
+
+---
+Array
+(
+    [time] => Fri, 05 Feb 2010 15:05:38 +0100
+    [addr] => ******226-213-104.vodafone-net.de
+    [agent] => Shockwave Flash
+    [post] => Array
+        (
+            [Filename] => test2.pdf
+            [custid] => 3
+            [Upload] => Submit Query
+        )
+
+    [files] => Array
+        (
+            [Filedata] => Array
+                (
+                    [name] => test2.pdf
+                    [type] => application/octet-stream
+                    [tmp_name] => /usr/home/enviro/.tmp/phpl47etX
+                    [error] => 0
+                    [size] => 80778
+                )
+
+        )
+
+)
+
+---
+Array
+(
+    [time] => Wed, 17 Mar 2010 22:59:15 +0100
+    [addr] => ******
+    [agent] => Shockwave Flash
+    [post] => Array
+        (
+            [Filename] => testbild24.jpg
+            [custid] => 30
+            [Upload] => Submit Query
+        )
+
+    [files] => Array
+        (
+            [Filedata] => Array
+                (
+                    [name] => testbild24.jpg
+                    [type] => application/octet-stream
+                    [tmp_name] => C:\xampp\tmp\php9557.tmp
+                    [error] => 0
+                    [size] => 13940
+                )
+
+        )
+
+)
+
+---
+Array
+(
+    [time] => Wed, 17 Mar 2010 23:20:01 +0100
+    [addr] => ******
+    [agent] => Shockwave Flash
+    [post] => Array
+        (
+            [Filename] => testbild24.jpg
+            [bereich] => 2
+            [kid] => 30
+            [Upload] => Submit Query
+        )
+
+    [files] => Array
+        (
+            [Filedata] => Array
+                (
+                    [name] => testbild24.jpg
+                    [type] => application/octet-stream
+                    [tmp_name] => C:\xampp\tmp\php9B60.tmp
+                    [error] => 0
+                    [size] => 13940
+                )
+
+        )
+
+)
+
+---
+Array
+(
+    [time] => Wed, 17 Mar 2010 23:20:56 +0100
+    [addr] => ******
+    [agent] => Shockwave Flash
+    [post] => Array
+        (
+            [Filename] => testbild25.jpg
+            [bereich] => 2
+            [kid] => 30
+            [Upload] => Submit Query
+        )
+
+    [files] => Array
+        (
+            [Filedata] => Array
+                (
+                    [name] => testbild25.jpg
+                    [type] => application/octet-stream
+                    [tmp_name] => C:\xampp\tmp\php6F53.tmp
+                    [error] => 0
+                    [size] => 15656
+                )
+
+        )
+
+)
+
+---
+Array
+(
+    [time] => Wed, 17 Mar 2010 23:20:56 +0100
+    [addr] => ******
+    [agent] => Shockwave Flash
+    [post] => Array
+        (
+            [Filename] => 1.gif
+            [bereich] => 2
+            [kid] => 30
+            [Upload] => Submit Query
+        )
+
+    [files] => Array
+        (
+            [Filedata] => Array
+                (
+                    [name] => 1.gif
+                    [type] => application/octet-stream
+                    [tmp_name] => C:\xampp\tmp\php6FC1.tmp
+                    [error] => 0
+                    [size] => 22456
+                )
+
+        )
+
+)
+
+---
+Array
+(
+    [time] => Wed, 17 Mar 2010 23:20:56 +0100
+    [addr] => ******
+    [agent] => Shockwave Flash
+    [post] => Array
+        (
+            [Filename] => 1.jpg
+            [bereich] => 2
+            [kid] => 30
+            [Upload] => Submit Query
+        )
+
+    [files] => Array
+        (
+            [Filedata] => Array
+                (
+                    [name] => 1.jpg
+                    [type] => application/octet-stream
+                    [tmp_name] => C:\xampp\tmp\php705E.tmp
+                    [error] => 0
+                    [size] => 80230
+                )
+
+        )
+
+)
+
+---
+Array
+(
+    [time] => Wed, 17 Mar 2010 23:20:56 +0100
+    [addr] => ******
+    [agent] => Shockwave Flash
+    [post] => Array
+        (
+            [Filename] => 2.gif
+            [bereich] => 2
+            [kid] => 30
+            [Upload] => Submit Query
+        )
+
+    [files] => Array
+        (
+            [Filedata] => Array
+                (
+                    [name] => 2.gif
+                    [type] => application/octet-stream
+                    [tmp_name] => C:\xampp\tmp\php709D.tmp
+                    [error] => 0
+                    [size] => 23774
+                )
+
+        )
+
+)
+
+---
+Array
+(
+    [time] => Wed, 17 Mar 2010 23:20:56 +0100
+    [addr] => ******
+    [agent] => Shockwave Flash
+    [post] => Array
+        (
+            [Filename] => 2.jpg
+            [bereich] => 2
+            [kid] => 30
+            [Upload] => Submit Query
+        )
+
+    [files] => Array
+        (
+            [Filedata] => Array
+                (
+                    [name] => 2.jpg
+                    [type] => application/octet-stream
+                    [tmp_name] => C:\xampp\tmp\php711B.tmp
+                    [error] => 0
+                    [size] => 80519
+                )
+
+        )
+
+)
+
+---
+Array
+(
+    [time] => Wed, 17 Mar 2010 23:20:56 +0100
+    [addr] => ******
+    [agent] => Shockwave Flash
+    [post] => Array
+        (
+            [Filename] => 3.gif
+            [bereich] => 2
+            [kid] => 30
+            [Upload] => Submit Query
+        )
+
+    [files] => Array
+        (
+            [Filedata] => Array
+                (
+                    [name] => 3.gif
+                    [type] => application/octet-stream
+                    [tmp_name] => C:\xampp\tmp\php7189.tmp
+                    [error] => 0
+                    [size] => 21113
+                )
+
+        )
+
+)
+
+---
+Array
+(
+    [time] => Wed, 17 Mar 2010 23:23:40 +0100
+    [addr] => ******
+    [agent] => Shockwave Flash
+    [post] => Array
+        (
+            [Filename] => 080911_broschuere_projectblue.jpg
+            [bereich] => 2
+            [kid] => 30
+            [Upload] => Submit Query
+        )
+
+    [files] => Array
+        (
+            [Filedata] => Array
+                (
+                    [name] => 080911_broschuere_projectblue.jpg
+                    [type] => application/octet-stream
+                    [tmp_name] => C:\xampp\tmp\phpEFED.tmp
+                    [error] => 0
+                    [size] => 101330
+                )
+
+        )
+
+)
+
+---
+Array
+(
+    [time] => Wed, 17 Mar 2010 23:24:01 +0100
+    [addr] => ******
+    [agent] => Shockwave Flash
+    [post] => Array
+        (
+            [Filename] => 3.gif
+            [bereich] => 2
+            [kid] => 30
+            [Upload] => Submit Query
+        )
+
+    [files] => Array
+        (
+            [Filedata] => Array
+                (
+                    [name] => 3.gif
+                    [type] => application/octet-stream
+                    [tmp_name] => C:\xampp\tmp\php4186.tmp
+                    [error] => 0
+                    [size] => 21113
+                )
+
+        )
+
+)
+
+---
+Array
+(
+    [time] => Wed, 17 Mar 2010 23:25:07 +0100
+    [addr] => ******
+    [agent] => Shockwave Flash
+    [post] => Array
+        (
+            [Filename] => 080911_broschuere_projectblue.jpg
+            [bereich] => 2
+            [kid] => 30
+            [Upload] => Submit Query
+        )
+
+    [files] => Array
+        (
+            [Filedata] => Array
+                (
+                    [name] => 080911_broschuere_projectblue.jpg
+                    [type] => application/octet-stream
+                    [tmp_name] => C:\xampp\tmp\php458D.tmp
+                    [error] => 0
+                    [size] => 101330
+                )
+
+        )
+
+)
+
+---
+Array
+(
+    [time] => Wed, 17 Mar 2010 23:28:03 +0100
+    [addr] => ******
+    [agent] => Shockwave Flash
+    [post] => Array
+        (
+            [Filename] => 001_minifolder.jpg
+            [bereich] => 2
+            [kid] => 30
+            [Upload] => Submit Query
+        )
+
+    [files] => Array
+        (
+            [Filedata] => Array
+                (
+                    [name] => 001_minifolder.jpg
+                    [type] => application/octet-stream
+                    [tmp_name] => C:\xampp\tmp\phpF2EC.tmp
+                    [error] => 0
+                    [size] => 40659
+                )
+
+        )
+
+)
+
+---
+Array
+(
+    [time] => Wed, 17 Mar 2010 23:34:19 +0100
+    [addr] => ******
+    [agent] => Shockwave Flash
+    [post] => Array
+        (
+            [Filename] => 080911_broschuere_projectblue.jpg
+            [bereich] => 2
+            [kid] => 30
+            [Upload] => Submit Query
+        )
+
+    [files] => Array
+        (
+            [Filedata] => Array
+                (
+                    [name] => 080911_broschuere_projectblue.jpg
+                    [type] => application/octet-stream
+                    [tmp_name] => C:\xampp\tmp\phpB082.tmp
+                    [error] => 0
+                    [size] => 101330
+                )
+
+        )
+
+)
+
+---
+Array
+(
+    [time] => Wed, 17 Mar 2010 23:34:58 +0100
+    [addr] => ******
+    [agent] => Shockwave Flash
+    [post] => Array
+        (
+            [Filename] => 3.jpg
+            [bereich] => 2
+            [kid] => 30
+            [Upload] => Submit Query
+        )
+
+    [files] => Array
+        (
+            [Filedata] => Array
+                (
+                    [name] => 3.jpg
+                    [type] => application/octet-stream
+                    [tmp_name] => C:\xampp\tmp\php4ACF.tmp
+                    [error] => 0
+                    [size] => 77706
+                )
+
+        )
+
+)
+
+---
+Array
+(
+    [time] => Wed, 17 Mar 2010 23:35:49 +0100
+    [addr] => ******
+    [agent] => Shockwave Flash
+    [post] => Array
+        (
+            [Filename] => 2.jpg
+            [bereich] => 2
+            [kid] => 30
+            [Upload] => Submit Query
+        )
+
+    [files] => Array
+        (
+            [Filedata] => Array
+                (
+                    [name] => 2.jpg
+                    [type] => application/octet-stream
+                    [tmp_name] => C:\xampp\tmp\php1262.tmp
+                    [error] => 0
+                    [size] => 80519
+                )
+
+        )
+
+)
+
+---
+Array
+(
+    [time] => Wed, 17 Mar 2010 23:36:12 +0100
+    [addr] => ******
+    [agent] => Shockwave Flash
+    [post] => Array
+        (
+            [Filename] => 3.gif
+            [bereich] => 2
+            [kid] => 30
+            [Upload] => Submit Query
+        )
+
+    [files] => Array
+        (
+            [Filedata] => Array
+                (
+                    [name] => 3.gif
+                    [type] => application/octet-stream
+                    [tmp_name] => C:\xampp\tmp\php6A71.tmp
+                    [error] => 0
+                    [size] => 21113
+                )
+
+        )
+
+)
+
+---
+Array
+(
+    [time] => Wed, 17 Mar 2010 23:36:43 +0100
+    [addr] => ******
+    [agent] => Shockwave Flash
+    [post] => Array
+        (
+            [Filename] => 2.jpg
+            [bereich] => 2
+            [kid] => 30
+            [Upload] => Submit Query
+        )
+
+    [files] => Array
+        (
+            [Filedata] => Array
+                (
+                    [name] => 2.jpg
+                    [type] => application/octet-stream
+                    [tmp_name] => C:\xampp\tmp\phpE3D6.tmp
+                    [error] => 0
+                    [size] => 80519
+                )
+
+        )
+
+)
+
+---
+Array
+(
+    [time] => Wed, 17 Mar 2010 23:37:13 +0100
+    [addr] => ******
+    [agent] => Shockwave Flash
+    [post] => Array
+        (
+            [Filename] => 2.jpg
+            [kid] => 30
+            [bereich] => 2
+            [Upload] => Submit Query
+        )
+
+    [files] => Array
+        (
+            [Filedata] => Array
+                (
+                    [name] => 2.jpg
+                    [type] => application/octet-stream
+                    [tmp_name] => C:\xampp\tmp\php58F6.tmp
+                    [error] => 0
+                    [size] => 80519
+                )
+
+        )
+
+)
+
+---
+Array
+(
+    [time] => Wed, 17 Mar 2010 23:37:46 +0100
+    [addr] => ******
+    [agent] => Shockwave Flash
+    [post] => Array
+        (
+            [Filename] => 2.jpg
+            [kid] => 30
+            [bereich] => 2
+            [Upload] => Submit Query
+        )
+
+    [files] => Array
+        (
+            [Filedata] => Array
+                (
+                    [name] => 2.jpg
+                    [type] => application/octet-stream
+                    [tmp_name] => C:\xampp\tmp\phpD90F.tmp
+                    [error] => 0
+                    [size] => 80519
+                )
+
+        )
+
+)
+
+---
+Array
+(
+    [time] => Wed, 17 Mar 2010 23:48:27 +0100
+    [addr] => ******
+    [agent] => Shockwave Flash
+    [post] => Array
+        (
+            [Filename] => 080911_broschuere_projectblue.jpg
+            [kid] => 30
+            [bereich] => 2
+            [Upload] => Submit Query
+        )
+
+    [files] => Array
+        (
+            [Filedata] => Array
+                (
+                    [name] => 080911_broschuere_projectblue.jpg
+                    [type] => application/octet-stream
+                    [tmp_name] => C:\xampp\tmp\php9FB8.tmp
+                    [error] => 0
+                    [size] => 101330
+                )
+
+        )
+
+)
+
+---
+Array
+(
+    [time] => Wed, 17 Mar 2010 23:48:54 +0100
+    [addr] => ******
+    [agent] => Shockwave Flash
+    [post] => Array
+        (
+            [Filename] => 080911_broschuere_projectblue.jpg
+            [bereich] => 2
+            [kid] => 30
+            [Upload] => Submit Query
+        )
+
+    [files] => Array
+        (
+            [Filedata] => Array
+                (
+                    [name] => 080911_broschuere_projectblue.jpg
+                    [type] => application/octet-stream
+                    [tmp_name] => C:\xampp\tmp\phpBB4.tmp
+                    [error] => 0
+                    [size] => 101330
+                )
+
+        )
+
+)
+
+---
+Array
+(
+    [time] => Wed, 17 Mar 2010 23:49:02 +0100
+    [addr] => ******
+    [agent] => Shockwave Flash
+    [post] => Array
+        (
+            [Filename] => 001_minifolder.jpg
+            [bereich] => 2
+            [kid] => 30
+            [Upload] => Submit Query
+        )
+
+    [files] => Array
+        (
+            [Filedata] => Array
+                (
+                    [name] => 001_minifolder.jpg
+                    [type] => application/octet-stream
+                    [tmp_name] => C:\xampp\tmp\php2B85.tmp
+                    [error] => 0
+                    [size] => 40659
+                )
+
+        )
+
+)
+
+---
+Array
+(
+    [time] => Wed, 17 Mar 2010 23:51:36 +0100
+    [addr] => ******
+    [agent] => Shockwave Flash
+    [post] => Array
+        (
+            [Filename] => 001_minifolder.jpg
+            [bereich] => 2
+            [kid] => 30
+            [Upload] => Submit Query
+        )
+
+    [files] => Array
+        (
+            [Filedata] => Array
+                (
+                    [name] => 001_minifolder.jpg
+                    [type] => application/octet-stream
+                    [tmp_name] => C:\xampp\tmp\php8327.tmp
+                    [error] => 0
+                    [size] => 40659
+                )
+
+        )
+
+)
+
+---
+Array
+(
+    [time] => Thu, 18 Mar 2010 00:07:08 +0100
+    [addr] => ******
+    [agent] => Shockwave Flash
+    [post] => Array
+        (
+            [Filename] => 080911_broschuere_projectblue.jpg
+            [bereich] => 2
+            [kid] => 30
+            [Upload] => Submit Query
+        )
+
+    [files] => Array
+        (
+            [Filedata] => Array
+                (
+                    [name] => 080911_broschuere_projectblue.jpg
+                    [type] => application/octet-stream
+                    [tmp_name] => C:\xampp\tmp\phpBCCE.tmp
+                    [error] => 0
+                    [size] => 101330
+                )
+
+        )
+
+)
+
+---
+Array
+(
+    [time] => Thu, 18 Mar 2010 00:07:56 +0100
+    [addr] => ******
+    [agent] => Shockwave Flash
+    [post] => Array
+        (
+            [Filename] => 001_minifolder.jpg
+            [bereich] => 2
+            [kid] => 30
+            [Upload] => Submit Query
+        )
+
+    [files] => Array
+        (
+            [Filedata] => Array
+                (
+                    [name] => 001_minifolder.jpg
+                    [type] => application/octet-stream
+                    [tmp_name] => C:\xampp\tmp\php788F.tmp
+                    [error] => 0
+                    [size] => 40659
+                )
+
+        )
+
+)
+
+---
+Array
+(
+    [time] => Thu, 18 Mar 2010 00:09:19 +0100
+    [addr] => ******
+    [agent] => Shockwave Flash
+    [post] => Array
+        (
+            [Filename] => 3.gif
+            [bereich] => 2
+            [kid] => 30
+            [Upload] => Submit Query
+        )
+
+    [files] => Array
+        (
+            [Filedata] => Array
+                (
+                    [name] => 3.gif
+                    [type] => application/octet-stream
+                    [tmp_name] => C:\xampp\tmp\phpBACD.tmp
+                    [error] => 0
+                    [size] => 21113
+                )
+
+        )
+
+)
+
+---
+Array
+(
+    [time] => Thu, 18 Mar 2010 00:09:39 +0100
+    [addr] => ******
+    [agent] => Shockwave Flash
+    [post] => Array
+        (
+            [Filename] => 1.gif
+            [bereich] => 2
+            [kid] => 30
+            [Upload] => Submit Query
+        )
+
+    [files] => Array
+        (
+            [Filedata] => Array
+                (
+                    [name] => 1.gif
+                    [type] => application/octet-stream
+                    [tmp_name] => C:\xampp\tmp\php9D7.tmp
+                    [error] => 0
+                    [size] => 22456
+                )
+
+        )
+
+)
+
+---
+Array
+(
+    [time] => Thu, 18 Mar 2010 00:09:54 +0100
+    [addr] => ******
+    [agent] => Shockwave Flash
+    [post] => Array
+        (
+            [Filename] => 1.jpg
+            [bereich] => 2
+            [kid] => 30
+            [Upload] => Submit Query
+        )
+
+    [files] => Array
+        (
+            [Filedata] => Array
+                (
+                    [name] => 1.jpg
+                    [type] => application/octet-stream
+                    [tmp_name] => C:\xampp\tmp\php4533.tmp
+                    [error] => 0
+                    [size] => 80230
+                )
+
+        )
+
+)
+
+---
+Array
+(
+    [time] => Thu, 18 Mar 2010 00:10:36 +0100
+    [addr] => ******
+    [agent] => Shockwave Flash
+    [post] => Array
+        (
+            [Filename] => 001_minifolder.jpg
+            [kid] => 30
+            [bereich] => 2
+            [Upload] => Submit Query
+        )
+
+    [files] => Array
+        (
+            [Filedata] => Array
+                (
+                    [name] => 001_minifolder.jpg
+                    [type] => application/octet-stream
+                    [tmp_name] => C:\xampp\tmp\phpE95E.tmp
+                    [error] => 0
+                    [size] => 40659
+                )
+
+        )
+
+)
+
+---
+Array
+(
+    [time] => Thu, 18 Mar 2010 00:17:55 +0100
+    [addr] => ******
+    [agent] => Shockwave Flash
+    [post] => Array
+        (
+            [Filename] => 080911_broschuere_projectblue.jpg
+            [kid] => 30
+            [bereich] => 2
+            [Upload] => Submit Query
+        )
+
+    [files] => Array
+        (
+            [Filedata] => Array
+                (
+                    [name] => 080911_broschuere_projectblue.jpg
+                    [type] => application/octet-stream
+                    [tmp_name] => C:\xampp\tmp\php9C49.tmp
+                    [error] => 0
+                    [size] => 101330
+                )
+
+        )
+
+)
+
+---
+Array
+(
+    [time] => Thu, 18 Mar 2010 00:21:46 +0100
+    [addr] => ******
+    [agent] => Shockwave Flash
+    [post] => Array
+        (
+            [Filename] => 001_minifolder.jpg
+            [kid] => 30
+            [bereich] => 2
+            [Upload] => Submit Query
+        )
+
+    [files] => Array
+        (
+            [Filedata] => Array
+                (
+                    [name] => 001_minifolder.jpg
+                    [type] => application/octet-stream
+                    [tmp_name] => C:\xampp\tmp\php20A6.tmp
+                    [error] => 0
+                    [size] => 40659
+                )
+
+        )
+
+)
+
+---
+Array
+(
+    [time] => Thu, 18 Mar 2010 00:21:46 +0100
+    [addr] => ******
+    [agent] => Shockwave Flash
+    [post] => Array
+        (
+            [Filename] => 080911_broschuere_projectblue.jpg
+            [kid] => 30
+            [bereich] => 2
+            [Upload] => Submit Query
+        )
+
+    [files] => Array
+        (
+            [Filedata] => Array
+                (
+                    [name] => 080911_broschuere_projectblue.jpg
+                    [type] => application/octet-stream
+                    [tmp_name] => C:\xampp\tmp\php2133.tmp
+                    [error] => 0
+                    [size] => 101330
+                )
+
+        )
+
+)
+
+---
+Array
+(
+    [time] => Thu, 18 Mar 2010 00:21:46 +0100
+    [addr] => ******
+    [agent] => Shockwave Flash
+    [post] => Array
+        (
+            [Filename] => 081203_mini folder_&uuml;berarbeitet-1.jpg
+            [kid] => 30
+            [bereich] => 2
+            [Upload] => Submit Query
+        )
+
+    [files] => Array
+        (
+            [Filedata] => Array
+                (
+                    [name] => 081203_mini folder_&uuml;berarbeitet-1.jpg
+                    [type] => application/octet-stream
+                    [tmp_name] => C:\xampp\tmp\php21B1.tmp
+                    [error] => 0
+                    [size] => 32087
+                )
+
+        )
+
+)
+
+---
+Array
+(
+    [time] => Thu, 18 Mar 2010 00:21:46 +0100
+    [addr] => ******
+    [agent] => Shockwave Flash
+    [post] => Array
+        (
+            [Filename] => altarfalz _ rz_layout 1-4.jpg
+            [kid] => 30
+            [bereich] => 2
+            [Upload] => Submit Query
+        )
+
+    [files] => Array
+        (
+            [Filedata] => Array
+                (
+                    [name] => altarfalz _ rz_layout 1-4.jpg
+                    [type] => application/octet-stream
+                    [tmp_name] => C:\xampp\tmp\php223E.tmp
+                    [error] => 0
+                    [size] => 121079
+                )
+
+        )
+
+)
+
+---
+Array
+(
+    [time] => Thu, 18 Mar 2010 00:21:46 +0100
+    [addr] => ******
+    [agent] => Shockwave Flash
+    [post] => Array
+        (
+            [Filename] => altarfalz _ rz_layout 1-6.jpg
+            [kid] => 30
+            [bereich] => 2
+            [Upload] => Submit Query
+        )
+
+    [files] => Array
+        (
+            [Filedata] => Array
+                (
+                    [name] => altarfalz _ rz_layout 1-6.jpg
+                    [type] => application/octet-stream
+                    [tmp_name] => C:\xampp\tmp\php2339.tmp
+                    [error] => 0
+                    [size] => 105494
+                )
+
+        )
+
+)
+
+---
+Array
+(
+    [time] => Thu, 18 Mar 2010 00:26:54 +0100
+    [addr] => ******
+    [agent] => Shockwave Flash
+    [post] => Array
+        (
+            [Filename] => 001_minifolder.jpg
+            [kid] => 30
+            [bereich] => 2
+            [Upload] => Submit Query
+        )
+
+    [files] => Array
+        (
+            [Filedata] => Array
+                (
+                    [name] => 001_minifolder.jpg
+                    [type] => application/octet-stream
+                    [tmp_name] => C:\xampp\tmp\phpD559.tmp
+                    [error] => 0
+                    [size] => 40659
+                )
+
+        )
+
+)
+
+---
+Array
+(
+    [time] => Thu, 18 Mar 2010 00:26:54 +0100
+    [addr] => ******
+    [agent] => Shockwave Flash
+    [post] => Array
+        (
+            [Filename] => 080911_broschuere_projectblue.jpg
+            [kid] => 30
+            [bereich] => 2
+            [Upload] => Submit Query
+        )
+
+    [files] => Array
+        (
+            [Filedata] => Array
+                (
+                    [name] => 080911_broschuere_projectblue.jpg
+                    [type] => application/octet-stream
+                    [tmp_name] => C:\xampp\tmp\phpD599.tmp
+                    [error] => 0
+                    [size] => 101330
+                )
+
+        )
+
+)
+
+---
+Array
+(
+    [time] => Thu, 18 Mar 2010 00:26:54 +0100
+    [addr] => ******
+    [agent] => Shockwave Flash
+    [post] => Array
+        (
+            [Filename] => 081203_mini folder_&uuml;berarbeitet-1.jpg
+            [kid] => 30
+            [bereich] => 2
+            [Upload] => Submit Query
+        )
+
+    [files] => Array
+        (
+            [Filedata] => Array
+                (
+                    [name] => 081203_mini folder_&uuml;berarbeitet-1.jpg
+                    [type] => application/octet-stream
+                    [tmp_name] => C:\xampp\tmp\phpD5C8.tmp
+                    [error] => 0
+                    [size] => 32087
+                )
+
+        )
+
+)
+
+---
+Array
+(
+    [time] => Thu, 18 Mar 2010 00:26:54 +0100
+    [addr] => ******
+    [agent] => Shockwave Flash
+    [post] => Array
+        (
+            [Filename] => altarfalz _ rz_layout 1-4.jpg
+            [kid] => 30
+            [bereich] => 2
+            [Upload] => Submit Query
+        )
+
+    [files] => Array
+        (
+            [Filedata] => Array
+                (
+                    [name] => altarfalz _ rz_layout 1-4.jpg
+                    [type] => application/octet-stream
+                    [tmp_name] => C:\xampp\tmp\phpD5E9.tmp
+                    [error] => 0
+                    [size] => 121079
+                )
+
+        )
+
+)
+
+---
+Array
+(
+    [time] => Thu, 18 Mar 2010 00:26:54 +0100
+    [addr] => ******
+    [agent] => Shockwave Flash
+    [post] => Array
+        (
+            [Filename] => altarfalz _ rz_layout 1-6.jpg
+            [kid] => 30
+            [bereich] => 2
+            [Upload] => Submit Query
+        )
+
+    [files] => Array
+        (
+            [Filedata] => Array
+                (
+                    [name] => altarfalz _ rz_layout 1-6.jpg
+                    [type] => application/octet-stream
+                    [tmp_name] => C:\xampp\tmp\phpD609.tmp
+                    [error] => 0
+                    [size] => 105494
+                )
+
+        )
+
+)
+
+---
+Array
+(
+    [time] => Thu, 18 Mar 2010 00:28:25 +0100
+    [addr] => ******
+    [agent] => Shockwave Flash
+    [post] => Array
+        (
+            [Filename] => 001_minifolder.jpg
+            [bereich] => 2
+            [kid] => 30
+            [Upload] => Submit Query
+        )
+
+    [files] => Array
+        (
+            [Filedata] => Array
+                (
+                    [name] => 001_minifolder.jpg
+                    [type] => application/octet-stream
+                    [tmp_name] => C:\xampp\tmp\php3900.tmp
+                    [error] => 0
+                    [size] => 40659
+                )
+
+        )
+
+)
+
+---
+Array
+(
+    [time] => Thu, 18 Mar 2010 00:28:42 +0100
+    [addr] => ******
+    [agent] => Shockwave Flash
+    [post] => Array
+        (
+            [Filename] => 001_minifolder.jpg
+            [bereich] => 2
+            [kid] => 30
+            [Upload] => Submit Query
+        )
+
+    [files] => Array
+        (
+            [Filedata] => Array
+                (
+                    [name] => 001_minifolder.jpg
+                    [type] => application/octet-stream
+                    [tmp_name] => C:\xampp\tmp\php79D8.tmp
+                    [error] => 0
+                    [size] => 40659
+                )
+
+        )
+
+)
+
+---
+Array
+(
+    [time] => Thu, 18 Mar 2010 00:29:39 +0100
+    [addr] => ******
+    [agent] => Shockwave Flash
+    [post] => Array
+        (
+            [Filename] => 080911_broschuere_projectblue.jpg
+            [bereich] => 2
+            [kid] => 30
+            [Upload] => Submit Query
+        )
+
+    [files] => Array
+        (
+            [Filedata] => Array
+                (
+                    [name] => 080911_broschuere_projectblue.jpg
+                    [type] => application/octet-stream
+                    [tmp_name] => C:\xampp\tmp\php5AD4.tmp
+                    [error] => 0
+                    [size] => 101330
+                )
+
+        )
+
+)
+
+---
+Array
+(
+    [time] => Thu, 18 Mar 2010 00:31:32 +0100
+    [addr] => ******
+    [agent] => Shockwave Flash
+    [post] => Array
+        (
+            [Filename] => 001_minifolder.jpg
+            [kid] => 30
+            [bereich] => 2
+            [Upload] => Submit Query
+        )
+
+    [files] => Array
+        (
+            [Filedata] => Array
+                (
+                    [name] => 001_minifolder.jpg
+                    [type] => application/octet-stream
+                    [tmp_name] => C:\xampp\tmp\php14C1.tmp
+                    [error] => 0
+                    [size] => 40659
+                )
+
+        )
+
+)
+
+---
+Array
+(
+    [time] => Thu, 18 Mar 2010 00:31:48 +0100
+    [addr] => ******
+    [agent] => Shockwave Flash
+    [post] => Array
+        (
+            [Filename] => 080911_rz_brosch&uuml;re_project blue-2.jpg
+            [kid] => 30
+            [bereich] => 2
+            [Upload] => Submit Query
+        )
+
+    [files] => Array
+        (
+            [Filedata] => Array
+                (
+                    [name] => 080911_rz_brosch&uuml;re_project blue-2.jpg
+                    [type] => application/octet-stream
+                    [tmp_name] => C:\xampp\tmp\php4FFE.tmp
+                    [error] => 0
+                    [size] => 101330
+                )
+
+        )
+
+)
+
+---
+Array
+(
+    [time] => Thu, 18 Mar 2010 00:32:32 +0100
+    [addr] => ******
+    [agent] => Shockwave Flash
+    [post] => Array
+        (
+            [Filename] => 080911_rz_brosch&uuml;re_project blue-2.jpg
+            [bereich] => 2
+            [kid] => 30
+            [Upload] => Submit Query
+        )
+
+    [files] => Array
+        (
+            [Filedata] => Array
+                (
+                    [name] => 080911_rz_brosch&uuml;re_project blue-2.jpg
+                    [type] => application/octet-stream
+                    [tmp_name] => C:\xampp\tmp\phpFF50.tmp
+                    [error] => 0
+                    [size] => 101330
+                )
+
+        )
+
+)
+
+---
+Array
+(
+    [time] => Thu, 18 Mar 2010 01:07:32 +0100
+    [addr] => ******
+    [agent] => Shockwave Flash
+    [post] => Array
+        (
+            [Filename] => 001CRES7_innen.jpg
+            [kid] => 30
+            [bereich] => 2
+            [Upload] => Submit Query
+        )
+
+    [files] => Array
+        (
+            [Filedata] => Array
+                (
+                    [name] => 001CRES7_innen.jpg
+                    [type] => application/octet-stream
+                    [tmp_name] => C:\xampp\tmp\php970.tmp
+                    [error] => 0
+                    [size] => 130523
+                )
+
+        )
+
+)
+
+---
+Array
+(
+    [time] => Thu, 18 Mar 2010 01:07:33 +0100
+    [addr] => ******
+    [agent] => Shockwave Flash
+    [post] => Array
+        (
+            [Filename] => 001CRES7_titel.jpg
+            [kid] => 30
+            [bereich] => 2
+            [Upload] => Submit Query
+        )
+
+    [files] => Array
+        (
+            [Filedata] => Array
+                (
+                    [name] => 001CRES7_titel.jpg
+                    [type] => application/octet-stream
+                    [tmp_name] => C:\xampp\tmp\phpBA3.tmp
+                    [error] => 0
+                    [size] => 108038
+                )
+
+        )
+
+)
+
+---
+Array
+(
+    [time] => Thu, 18 Mar 2010 01:07:33 +0100
+    [addr] => ******
+    [agent] => Shockwave Flash
+    [post] => Array
+        (
+            [Filename] => 001Exit_innen.jpg
+            [kid] => 30
+            [bereich] => 2
+            [Upload] => Submit Query
+        )
+
+    [files] => Array
+        (
+            [Filedata] => Array
+                (
+                    [name] => 001Exit_innen.jpg
+                    [type] => application/octet-stream
+                    [tmp_name] => C:\xampp\tmp\phpC7E.tmp
+                    [error] => 0
+                    [size] => 133657
+                )
+
+        )
+
+)
+
+---
+Array
+(
+    [time] => Thu, 18 Mar 2010 01:07:33 +0100
+    [addr] => ******
+    [agent] => Shockwave Flash
+    [post] => Array
+        (
+            [Filename] => 001Exit_Titel.jpg
+            [kid] => 30
+            [bereich] => 2
+            [Upload] => Submit Query
+        )
+
+    [files] => Array
+        (
+            [Filedata] => Array
+                (
+                    [name] => 001Exit_Titel.jpg
+                    [type] => application/octet-stream
+                    [tmp_name] => C:\xampp\tmp\phpDD7.tmp
+                    [error] => 0
+                    [size] => 94478
+                )
+
+        )
+
+)
+
+---
+Array
+(
+    [time] => Thu, 18 Mar 2010 01:07:34 +0100
+    [addr] => ******
+    [agent] => Shockwave Flash
+    [post] => Array
+        (
+            [Filename] => 001FacilityManagement_Innen.jpg
+            [kid] => 30
+            [bereich] => 2
+            [Upload] => Submit Query
+        )
+
+    [files] => Array
+        (
+            [Filedata] => Array
+                (
+                    [name] => 001FacilityManagement_Innen.jpg
+                    [type] => application/octet-stream
+                    [tmp_name] => C:\xampp\tmp\phpF2F.tmp
+                    [error] => 0
+                    [size] => 151855
+                )
+
+        )
+
+)
+
+---
+Array
+(
+    [time] => Thu, 18 Mar 2010 01:07:34 +0100
+    [addr] => ******
+    [agent] => Shockwave Flash
+    [post] => Array
+        (
+            [Filename] => 001FacilityManagementTitel.jpg
+            [kid] => 30
+            [bereich] => 2
+            [Upload] => Submit Query
+        )
+
+    [files] => Array
+        (
+            [Filedata] => Array
+                (
+                    [name] => 001FacilityManagementTitel.jpg
+                    [type] => application/octet-stream
+                    [tmp_name] => C:\xampp\tmp\php1058.tmp
+                    [error] => 0
+                    [size] => 137406
+                )
+
+        )
+
+)
+
+---
+Array
+(
+    [time] => Thu, 18 Mar 2010 01:07:34 +0100
+    [addr] => ******
+    [agent] => Shockwave Flash
+    [post] => Array
+        (
+            [Filename] => 001Geotechnik_innen.jpg
+            [kid] => 30
+            [bereich] => 2
+            [Upload] => Submit Query
+        )
+
+    [files] => Array
+        (
+            [Filedata] => Array
+                (
+                    [name] => 001Geotechnik_innen.jpg
+                    [type] => application/octet-stream
+                    [tmp_name] => C:\xampp\tmp\php1153.tmp
+                    [error] => 0
+                    [size] => 127224
+                )
+
+        )
+
+)
+
+---
+Array
+(
+    [time] => Thu, 18 Mar 2010 01:07:34 +0100
+    [addr] => ******
+    [agent] => Shockwave Flash
+    [post] => Array
+        (
+            [Filename] => 001Geotechnik_Titel.jpg
+            [kid] => 30
+            [bereich] => 2
+            [Upload] => Submit Query
+        )
+
+    [files] => Array
+        (
+            [Filedata] => Array
+                (
+                    [name] => 001Geotechnik_Titel.jpg
+                    [type] => application/octet-stream
+                    [tmp_name] => C:\xampp\tmp\php11F0.tmp
+                    [error] => 0
+                    [size] => 98289
+                )
+
+        )
+
+)
+
+---
+Array
+(
+    [time] => Thu, 18 Mar 2010 01:07:35 +0100
+    [addr] => ******
+    [agent] => Shockwave Flash
+    [post] => Array
+        (
+            [Filename] => 001TDD_innen.jpg
+            [kid] => 30
+            [bereich] => 2
+            [Upload] => Submit Query
+        )
+
+    [files] => Array
+        (
+            [Filedata] => Array
+                (
+                    [name] => 001TDD_innen.jpg
+                    [type] => application/octet-stream
+                    [tmp_name] => C:\xampp\tmp\php12CB.tmp
+                    [error] => 0
+                    [size] => 153600
+                )
+
+        )
+
+)
+
+---
+Array
+(
+    [time] => Thu, 18 Mar 2010 01:07:35 +0100
+    [addr] => ******
+    [agent] => Shockwave Flash
+    [post] => Array
+        (
+            [Filename] => 001TDD_Titel.jpg
+            [kid] => 30
+            [bereich] => 2
+            [Upload] => Submit Query
+        )
+
+    [files] => Array
+        (
+            [Filedata] => Array
+                (
+                    [name] => 001TDD_Titel.jpg
+                    [type] => application/octet-stream
+                    [tmp_name] => C:\xampp\tmp\php1423.tmp
+                    [error] => 0
+                    [size] => 91442
+                )
+
+        )
+
+)
+
+---
+Array
+(
+    [time] => Thu, 18 Mar 2010 01:38:45 +0100
+    [addr] => ******
+    [agent] => Shockwave Flash
+    [post] => Array
+        (
+            [Filename] => 001CRES7_titel.jpg
+            [bereich] => 2
+            [kid] => 30
+            [Upload] => Submit Query
+        )
+
+    [files] => Array
+        (
+            [Filedata] => Array
+                (
+                    [name] => 001CRES7_titel.jpg
+                    [type] => application/octet-stream
+                    [tmp_name] => C:\xampp\tmp\php9E0C.tmp
+                    [error] => 0
+                    [size] => 108038
+                )
+
+        )
+
+)
+
+---
+Array
+(
+    [time] => Thu, 18 Mar 2010 01:38:46 +0100
+    [addr] => ******
+    [agent] => Shockwave Flash
+    [post] => Array
+        (
+            [Filename] => 001Exit_innen.jpg
+            [bereich] => 2
+            [kid] => 30
+            [Upload] => Submit Query
+        )
+
+    [files] => Array
+        (
+            [Filedata] => Array
+                (
+                    [name] => 001Exit_innen.jpg
+                    [type] => application/octet-stream
+                    [tmp_name] => C:\xampp\tmp\php9F35.tmp
+                    [error] => 0
+                    [size] => 133657
+                )
+
+        )
+
+)
+
+---
+Array
+(
+    [time] => Thu, 18 Mar 2010 01:38:46 +0100
+    [addr] => ******
+    [agent] => Shockwave Flash
+    [post] => Array
+        (
+            [Filename] => 001CRES7_innen.jpg
+            [bereich] => 2
+            [kid] => 30
+            [Upload] => Submit Query
+        )
+
+    [files] => Array
+        (
+            [Filedata] => Array
+                (
+                    [name] => 001CRES7_innen.jpg
+                    [type] => application/octet-stream
+                    [tmp_name] => C:\xampp\tmp\php9FE2.tmp
+                    [error] => 0
+                    [size] => 130523
+                )
+
+        )
+
+)
+
+---
+Array
+(
+    [time] => Thu, 18 Mar 2010 01:38:46 +0100
+    [addr] => ******
+    [agent] => Shockwave Flash
+    [post] => Array
+        (
+            [Filename] => 001Exit_Titel.jpg
+            [bereich] => 2
+            [kid] => 30
+            [Upload] => Submit Query
+        )
+
+    [files] => Array
+        (
+            [Filedata] => Array
+                (
+                    [name] => 001Exit_Titel.jpg
+                    [type] => application/octet-stream
+                    [tmp_name] => C:\xampp\tmp\phpA0BD.tmp
+                    [error] => 0
+                    [size] => 94478
+                )
+
+        )
+
+)
+
+---
+Array
+(
+    [time] => Thu, 18 Mar 2010 01:38:46 +0100
+    [addr] => ******
+    [agent] => Shockwave Flash
+    [post] => Array
+        (
+            [Filename] => 001FacilityManagement_Innen.jpg
+            [bereich] => 2
+            [kid] => 30
+            [Upload] => Submit Query
+        )
+
+    [files] => Array
+        (
+            [Filedata] => Array
+                (
+                    [name] => 001FacilityManagement_Innen.jpg
+                    [type] => application/octet-stream
+                    [tmp_name] => C:\xampp\tmp\phpA189.tmp
+                    [error] => 0
+                    [size] => 151855
+                )
+
+        )
+
+)
+
+---
+Array
+(
+    [time] => Thu, 18 Mar 2010 01:38:46 +0100
+    [addr] => ******
+    [agent] => Shockwave Flash
+    [post] => Array
+        (
+            [Filename] => 001FacilityManagementTitel.jpg
+            [bereich] => 2
+            [kid] => 30
+            [Upload] => Submit Query
+        )
+
+    [files] => Array
+        (
+            [Filedata] => Array
+                (
+                    [name] => 001FacilityManagementTitel.jpg
+                    [type] => application/octet-stream
+                    [tmp_name] => C:\xampp\tmp\phpA265.tmp
+                    [error] => 0
+                    [size] => 137406
+                )
+
+        )
+
+)
+
+---
+Array
+(
+    [time] => Thu, 18 Mar 2010 01:38:47 +0100
+    [addr] => ******
+    [agent] => Shockwave Flash
+    [post] => Array
+        (
+            [Filename] => 001Geotechnik_innen.jpg
+            [bereich] => 2
+            [kid] => 30
+            [Upload] => Submit Query
+        )
+
+    [files] => Array
+        (
+            [Filedata] => Array
+                (
+                    [name] => 001Geotechnik_innen.jpg
+                    [type] => application/octet-stream
+                    [tmp_name] => C:\xampp\tmp\phpA340.tmp
+                    [error] => 0
+                    [size] => 127224
+                )
+
+        )
+
+)
+
+---
+Array
+(
+    [time] => Thu, 18 Mar 2010 01:38:47 +0100
+    [addr] => ******
+    [agent] => Shockwave Flash
+    [post] => Array
+        (
+            [Filename] => 001Geotechnik_Titel.jpg
+            [bereich] => 2
+            [kid] => 30
+            [Upload] => Submit Query
+        )
+
+    [files] => Array
+        (
+            [Filedata] => Array
+                (
+                    [name] => 001Geotechnik_Titel.jpg
+                    [type] => application/octet-stream
+                    [tmp_name] => C:\xampp\tmp\phpA498.tmp
+                    [error] => 0
+                    [size] => 98289
+                )
+
+        )
+
+)
+
+---
+Array
+(
+    [time] => Thu, 18 Mar 2010 01:38:47 +0100
+    [addr] => ******
+    [agent] => Shockwave Flash
+    [post] => Array
+        (
+            [Filename] => 001TDD_innen.jpg
+            [bereich] => 2
+            [kid] => 30
+            [Upload] => Submit Query
+        )
+
+    [files] => Array
+        (
+            [Filedata] => Array
+                (
+                    [name] => 001TDD_innen.jpg
+                    [type] => application/octet-stream
+                    [tmp_name] => C:\xampp\tmp\phpA65E.tmp
+                    [error] => 0
+                    [size] => 153600
+                )
+
+        )
+
+)
+
+---
+Array
+(
+    [time] => Thu, 18 Mar 2010 01:38:47 +0100
+    [addr] => ******
+    [agent] => Shockwave Flash
+    [post] => Array
+        (
+            [Filename] => 001TDD_Titel.jpg
+            [bereich] => 2
+            [kid] => 30
+            [Upload] => Submit Query
+        )
+
+    [files] => Array
+        (
+            [Filedata] => Array
+                (
+                    [name] => 001TDD_Titel.jpg
+                    [type] => application/octet-stream
+                    [tmp_name] => C:\xampp\tmp\phpA6FB.tmp
+                    [error] => 0
+                    [size] => 91442
+                )
+
+        )
+
+)
+
+---
+Array
+(
+    [time] => Thu, 18 Mar 2010 01:40:40 +0100
+    [addr] => ******
+    [agent] => Shockwave Flash
+    [post] => Array
+        (
+            [Filename] => 001CRES7_titel.jpg
+            [kid] => 30
+            [bereich] => 2
+            [Upload] => Submit Query
+        )
+
+    [files] => Array
+        (
+            [Filedata] => Array
+                (
+                    [name] => 001CRES7_titel.jpg
+                    [type] => application/octet-stream
+                    [tmp_name] => C:\xampp\tmp\php5ED5.tmp
+                    [error] => 0
+                    [size] => 108038
+                )
+
+        )
+
+)
+
+---
+Array
+(
+    [time] => Thu, 18 Mar 2010 01:40:40 +0100
+    [addr] => ******
+    [agent] => Shockwave Flash
+    [post] => Array
+        (
+            [Filename] => 001Exit_innen.jpg
+            [kid] => 30
+            [bereich] => 2
+            [Upload] => Submit Query
+        )
+
+    [files] => Array
+        (
+            [Filedata] => Array
+                (
+                    [name] => 001Exit_innen.jpg
+                    [type] => application/octet-stream
+                    [tmp_name] => C:\xampp\tmp\php5F34.tmp
+                    [error] => 0
+                    [size] => 133657
+                )
+
+        )
+
+)
+
+---
+Array
+(
+    [time] => Thu, 18 Mar 2010 01:40:40 +0100
+    [addr] => ******
+    [agent] => Shockwave Flash
+    [post] => Array
+        (
+            [Filename] => 001CRES7_innen.jpg
+            [kid] => 30
+            [bereich] => 2
+            [Upload] => Submit Query
+        )
+
+    [files] => Array
+        (
+            [Filedata] => Array
+                (
+                    [name] => 001CRES7_innen.jpg
+                    [type] => application/octet-stream
+                    [tmp_name] => C:\xampp\tmp\php5F92.tmp
+                    [error] => 0
+                    [size] => 130523
+                )
+
+        )
+
+)
+
+---
+Array
+(
+    [time] => Thu, 18 Mar 2010 01:40:40 +0100
+    [addr] => ******
+    [agent] => Shockwave Flash
+    [post] => Array
+        (
+            [Filename] => 001Exit_Titel.jpg
+            [kid] => 30
+            [bereich] => 2
+            [Upload] => Submit Query
+        )
+
+    [files] => Array
+        (
+            [Filedata] => Array
+                (
+                    [name] => 001Exit_Titel.jpg
+                    [type] => application/octet-stream
+                    [tmp_name] => C:\xampp\tmp\php5FF1.tmp
+                    [error] => 0
+                    [size] => 94478
+                )
+
+        )
+
+)
+
+---
+Array
+(
+    [time] => Thu, 18 Mar 2010 01:40:40 +0100
+    [addr] => ******
+    [agent] => Shockwave Flash
+    [post] => Array
+        (
+            [Filename] => 001FacilityManagement_Innen.jpg
+            [kid] => 30
+            [bereich] => 2
+            [Upload] => Submit Query
+        )
+
+    [files] => Array
+        (
+            [Filedata] => Array
+                (
+                    [name] => 001FacilityManagement_Innen.jpg
+                    [type] => application/octet-stream
+                    [tmp_name] => C:\xampp\tmp\php6040.tmp
+                    [error] => 0
+                    [size] => 151855
+                )
+
+        )
+
+)
+
+---
+Array
+(
+    [time] => Thu, 18 Mar 2010 01:40:40 +0100
+    [addr] => ******
+    [agent] => Shockwave Flash
+    [post] => Array
+        (
+            [Filename] => 001FacilityManagementTitel.jpg
+            [kid] => 30
+            [bereich] => 2
+            [Upload] => Submit Query
+        )
+
+    [files] => Array
+        (
+            [Filedata] => Array
+                (
+                    [name] => 001FacilityManagementTitel.jpg
+                    [type] => application/octet-stream
+                    [tmp_name] => C:\xampp\tmp\php609F.tmp
+                    [error] => 0
+                    [size] => 137406
+                )
+
+        )
+
+)
+
+---
+Array
+(
+    [time] => Thu, 18 Mar 2010 01:40:41 +0100
+    [addr] => ******
+    [agent] => Shockwave Flash
+    [post] => Array
+        (
+            [Filename] => 001Geotechnik_innen.jpg
+            [kid] => 30
+            [bereich] => 2
+            [Upload] => Submit Query
+        )
+
+    [files] => Array
+        (
+            [Filedata] => Array
+                (
+                    [name] => 001Geotechnik_innen.jpg
+                    [type] => application/octet-stream
+                    [tmp_name] => C:\xampp\tmp\php60EE.tmp
+                    [error] => 0
+                    [size] => 127224
+                )
+
+        )
+
+)
+
+---
+Array
+(
+    [time] => Thu, 18 Mar 2010 01:40:41 +0100
+    [addr] => ******
+    [agent] => Shockwave Flash
+    [post] => Array
+        (
+            [Filename] => 001Geotechnik_Titel.jpg
+            [kid] => 30
+            [bereich] => 2
+            [Upload] => Submit Query
+        )
+
+    [files] => Array
+        (
+            [Filedata] => Array
+                (
+                    [name] => 001Geotechnik_Titel.jpg
+                    [type] => application/octet-stream
+                    [tmp_name] => C:\xampp\tmp\php615C.tmp
+                    [error] => 0
+                    [size] => 98289
+                )
+
+        )
+
+)
+
+---
+Array
+(
+    [time] => Thu, 18 Mar 2010 01:40:41 +0100
+    [addr] => ******
+    [agent] => Shockwave Flash
+    [post] => Array
+        (
+            [Filename] => 001TDD_innen.jpg
+            [kid] => 30
+            [bereich] => 2
+            [Upload] => Submit Query
+        )
+
+    [files] => Array
+        (
+            [Filedata] => Array
+                (
+                    [name] => 001TDD_innen.jpg
+                    [type] => application/octet-stream
+                    [tmp_name] => C:\xampp\tmp\php61BA.tmp
+                    [error] => 0
+                    [size] => 153600
+                )
+
+        )
+
+)
+
+---
+Array
+(
+    [time] => Thu, 18 Mar 2010 01:40:41 +0100
+    [addr] => ******
+    [agent] => Shockwave Flash
+    [post] => Array
+        (
+            [Filename] => 001TDD_Titel.jpg
+            [kid] => 30
+            [bereich] => 2
+            [Upload] => Submit Query
+        )
+
+    [files] => Array
+        (
+            [Filedata] => Array
+                (
+                    [name] => 001TDD_Titel.jpg
+                    [type] => application/octet-stream
+                    [tmp_name] => C:\xampp\tmp\php6219.tmp
+                    [error] => 0
+                    [size] => 91442
+                )
+
+        )
+
+)
+
+---
+Array
+(
+    [time] => Thu, 18 Mar 2010 10:36:26 +0100
+    [addr] => ******
+    [agent] => Shockwave Flash
+    [post] => Array
+        (
+            [Filename] => 001BB_Anzeige.jpg
+            [bereich] => 1
+            [kid] => 30
+            [Upload] => Submit Query
+        )
+
+    [files] => Array
+        (
+            [Filedata] => Array
+                (
+                    [name] => 001BB_Anzeige.jpg
+                    [type] => application/octet-stream
+                    [tmp_name] => C:\xampp\tmp\phpE00A.tmp
+                    [error] => 0
+                    [size] => 190498
+                )
+
+        )
+
+)
+
+---
+Array
+(
+    [time] => Thu, 18 Mar 2010 10:36:26 +0100
+    [addr] => ******
+    [agent] => Shockwave Flash
+    [post] => Array
+        (
+            [Filename] => 001BB_AZ_Nachhaltig_231x325_RZ.jpg
+            [bereich] => 1
+            [kid] => 30
+            [Upload] => Submit Query
+        )
+
+    [files] => Array
+        (
+            [Filedata] => Array
+                (
+                    [name] => 001BB_AZ_Nachhaltig_231x325_RZ.jpg
+                    [type] => application/octet-stream
+                    [tmp_name] => C:\xampp\tmp\phpE0A7.tmp
+                    [error] => 0
+                    [size] => 173200
+                )
+
+        )
+
+)
+
+---
+Array
+(
+    [time] => Thu, 18 Mar 2010 10:36:26 +0100
+    [addr] => ******
+    [agent] => Shockwave Flash
+    [post] => Array
+        (
+            [Filename] => 001BB_AZ_Wirtschaftlich_231x325_RZ.jpg
+            [bereich] => 1
+            [kid] => 30
+            [Upload] => Submit Query
+        )
+
+    [files] => Array
+        (
+            [Filedata] => Array
+                (
+                    [name] => 001BB_AZ_Wirtschaftlich_231x325_RZ.jpg
+                    [type] => application/octet-stream
+                    [tmp_name] => C:\xampp\tmp\phpE124.tmp
+                    [error] => 0
+                    [size] => 148537
+                )
+
+        )
+
+)
+
+---
+Array
+(
+    [time] => Thu, 18 Mar 2010 10:36:26 +0100
+    [addr] => ******
+    [agent] => Shockwave Flash
+    [post] => Array
+        (
+            [Filename] => 001BB_Innen.jpg
+            [bereich] => 1
+            [kid] => 30
+            [Upload] => Submit Query
+        )
+
+    [files] => Array
+        (
+            [Filedata] => Array
+                (
+                    [name] => 001BB_Innen.jpg
+                    [type] => application/octet-stream
+                    [tmp_name] => C:\xampp\tmp\phpE193.tmp
+                    [error] => 0
+                    [size] => 214057
+                )
+
+        )
+
+)
+
+---
+Array
+(
+    [time] => Thu, 18 Mar 2010 10:36:26 +0100
+    [addr] => ******
+    [agent] => Shockwave Flash
+    [post] => Array
+        (
+            [Filename] => 001BB_Innen2.jpg
+            [bereich] => 1
+            [kid] => 30
+            [Upload] => Submit Query
+        )
+
+    [files] => Array
+        (
+            [Filedata] => Array
+                (
+                    [name] => 001BB_Innen2.jpg
+                    [type] => application/octet-stream
+                    [tmp_name] => C:\xampp\tmp\phpE23F.tmp
+                    [error] => 0
+                    [size] => 285548
+                )
+
+        )
+
+)
+
+---
+Array
+(
+    [time] => Thu, 18 Mar 2010 10:36:26 +0100
+    [addr] => ******
+    [agent] => Shockwave Flash
+    [post] => Array
+        (
+            [Filename] => 001BB_Innen3.jpg
+            [bereich] => 1
+            [kid] => 30
+            [Upload] => Submit Query
+        )
+
+    [files] => Array
+        (
+            [Filedata] => Array
+                (
+                    [name] => 001BB_Innen3.jpg
+                    [type] => application/octet-stream
+                    [tmp_name] => C:\xampp\tmp\phpE2FB.tmp
+                    [error] => 0
+                    [size] => 146274
+                )
+
+        )
+
+)
+
+---
+Array
+(
+    [time] => Thu, 18 Mar 2010 10:36:27 +0100
+    [addr] => ******
+    [agent] => Shockwave Flash
+    [post] => Array
+        (
+            [Filename] => 001BB_Innen4.jpg
+            [bereich] => 1
+            [kid] => 30
+            [Upload] => Submit Query
+        )
+
+    [files] => Array
+        (
+            [Filedata] => Array
+                (
+                    [name] => 001BB_Innen4.jpg
+                    [type] => application/octet-stream
+                    [tmp_name] => C:\xampp\tmp\phpE36A.tmp
+                    [error] => 0
+                    [size] => 230907
+                )
+
+        )
+
+)
+
+---
+Array
+(
+    [time] => Thu, 18 Mar 2010 10:59:40 +0100
+    [addr] => ******
+    [agent] => Shockwave Flash
+    [post] => Array
+        (
+            [Filename] => 001PK_250_AZ Bilfinger_Berger_1_RZ.jpg
+            [bereich] => 2
+            [kid] => 30
+            [Upload] => Submit Query
+        )
+
+    [files] => Array
+        (
+            [Filedata] => Array
+                (
+                    [name] => 001PK_250_AZ Bilfinger_Berger_1_RZ.jpg
+                    [type] => application/octet-stream
+                    [tmp_name] => C:\xampp\tmp\php24CE.tmp
+                    [error] => 0
+                    [size] => 140835
+                )
+
+        )
+
+)
+
+---
+Array
+(
+    [time] => Tue, 23 Mar 2010 17:39:49 +0100
+    [addr] => ******
+    [agent] => Shockwave Flash
+    [post] => Array
+        (
+            [Filename] => 001_K+N_Sales-Magazin_2.jpg
+            [kid] => 1
+            [bereich] => 2
+            [Upload] => Submit Query
+        )
+
+    [files] => Array
+        (
+            [Filedata] => Array
+                (
+                    [name] => 001_K+N_Sales-Magazin_2.jpg
+                    [type] => application/octet-stream
+                    [tmp_name] => C:\xampp\tmp\php692F.tmp
+                    [error] => 0
+                    [size] => 158126
+                )
+
+        )
+
+)
+
+---
+Array
+(
+    [time] => Tue, 23 Mar 2010 17:39:49 +0100
+    [addr] => ******
+    [agent] => Shockwave Flash
+    [post] => Array
+        (
+            [Filename] => 001_orgatecmesse.jpg
+            [kid] => 1
+            [bereich] => 2
+            [Upload] => Submit Query
+        )
+
+    [files] => Array
+        (
+            [Filedata] => Array
+                (
+                    [name] => 001_orgatecmesse.jpg
+                    [type] => application/octet-stream
+                    [tmp_name] => C:\xampp\tmp\php6B23.tmp
+                    [error] => 0
+                    [size] => 278731
+                )
+
+        )
+
+)
+
+---
+Array
+(
+    [time] => Tue, 23 Mar 2010 17:39:50 +0100
+    [addr] => ******
+    [agent] => Shockwave Flash
+    [post] => Array
+        (
+            [Filename] => 001Anzeigen_1.jpg
+            [kid] => 1
+            [bereich] => 2
+            [Upload] => Submit Query
+        )
+
+    [files] => Array
+        (
+            [Filedata] => Array
+                (
+                    [name] => 001Anzeigen_1.jpg
+                    [type] => application/octet-stream
+                    [tmp_name] => C:\xampp\tmp\php6BB1.tmp
+                    [error] => 0
+                    [size] => 150848
+                )
+
+        )
+
+)
+
+---
+Array
+(
+    [time] => Tue, 23 Mar 2010 17:39:50 +0100
+    [addr] => ******
+    [agent] => Shockwave Flash
+    [post] => Array
+        (
+            [Filename] => 001Anzeigen_2.jpg
+            [kid] => 1
+            [bereich] => 2
+            [Upload] => Submit Query
+        )
+
+    [files] => Array
+        (
+            [Filedata] => Array
+                (
+                    [name] => 001Anzeigen_2.jpg
+                    [type] => application/octet-stream
+                    [tmp_name] => C:\xampp\tmp\php6C6D.tmp
+                    [error] => 0
+                    [size] => 130771
+                )
+
+        )
+
+)
+
+---
+Array
+(
+    [time] => Tue, 23 Mar 2010 17:39:50 +0100
+    [addr] => ******
+    [agent] => Shockwave Flash
+    [post] => Array
+        (
+            [Filename] => 001CHARTA_Folder.jpg
+            [kid] => 1
+            [bereich] => 2
+            [Upload] => Submit Query
+        )
+
+    [files] => Array
+        (
+            [Filedata] => Array
+                (
+                    [name] => 001CHARTA_Folder.jpg
+                    [type] => application/octet-stream
+                    [tmp_name] => C:\xampp\tmp\php6D39.tmp
+                    [error] => 0
+                    [size] => 123338
+                )
+
+        )
+
+)
+
+---
+Array
+(
+    [time] => Tue, 23 Mar 2010 17:39:50 +0100
+    [addr] => ******
+    [agent] => Shockwave Flash
+    [post] => Array
+        (
+            [Filename] => 001CHARTA_Folder_Innen.jpg
+            [kid] => 1
+            [bereich] => 2
+            [Upload] => Submit Query
+        )
+
+    [files] => Array
+        (
+            [Filedata] => Array
+                (
+                    [name] => 001CHARTA_Folder_Innen.jpg
+                    [type] => application/octet-stream
+                    [tmp_name] => C:\xampp\tmp\php6E14.tmp
+                    [error] => 0
+                    [size] => 193236
+                )
+
+        )
+
+)
+
+---
+Array
+(
+    [time] => Tue, 23 Mar 2010 17:39:50 +0100
+    [addr] => ******
+    [agent] => Shockwave Flash
+    [post] => Array
+        (
+            [Filename] => 001CHARTA_Folder_Innen2.jpg
+            [kid] => 1
+            [bereich] => 2
+            [Upload] => Submit Query
+        )
+
+    [files] => Array
+        (
+            [Filedata] => Array
+                (
+                    [name] => 001CHARTA_Folder_Innen2.jpg
+                    [type] => application/octet-stream
+                    [tmp_name] => C:\xampp\tmp\php6ED0.tmp
+                    [error] => 0
+                    [size] => 161812
+                )
+
+        )
+
+)
+
+---
+Array
+(
+    [time] => Tue, 23 Mar 2010 17:39:51 +0100
+    [addr] => ******
+    [agent] => Shockwave Flash
+    [post] => Array
+        (
+            [Filename] => 001CityGuide_1.jpg
+            [kid] => 1
+            [bereich] => 2
+            [Upload] => Submit Query
+        )
+
+    [files] => Array
+        (
+            [Filedata] => Array
+                (
+                    [name] => 001CityGuide_1.jpg
+                    [type] => application/octet-stream
+                    [tmp_name] => C:\xampp\tmp\php6F4E.tmp
+                    [error] => 0
+                    [size] => 134042
+                )
+
+        )
+
+)
+
+---
+Array
+(
+    [time] => Tue, 23 Mar 2010 17:39:51 +0100
+    [addr] => ******
+    [agent] => Shockwave Flash
+    [post] => Array
+        (
+            [Filename] => 001CityGuide_2.jpg
+            [kid] => 1
+            [bereich] => 2
+            [Upload] => Submit Query
+        )
+
+    [files] => Array
+        (
+            [Filedata] => Array
+                (
+                    [name] => 001CityGuide_2.jpg
+                    [type] => application/octet-stream
+                    [tmp_name] => C:\xampp\tmp\php6FCC.tmp
+                    [error] => 0
+                    [size] => 194528
+                )
+
+        )
+
+)
+
+---
+Array
+(
+    [time] => Tue, 23 Mar 2010 17:39:51 +0100
+    [addr] => ******
+    [agent] => Shockwave Flash
+    [post] => Array
+        (
+            [Filename] => 001CityGuide_3.jpg
+            [kid] => 1
+            [bereich] => 2
+            [Upload] => Submit Query
+        )
+
+    [files] => Array
+        (
+            [Filedata] => Array
+                (
+                    [name] => 001CityGuide_3.jpg
+                    [type] => application/octet-stream
+                    [tmp_name] => C:\xampp\tmp\php7098.tmp
+                    [error] => 0
+                    [size] => 192855
+                )
+
+        )
+
+)
+
+---
+Array
+(
+    [time] => Thu, 30 Sep 2010 18:03:57 +0200
+    [addr] => ******us-PC
+    [agent] => Shockwave Flash
+    [post] => Array
+        (
+            [Filename] => 2010 09 16_Unsere Whg Lindenstr 32 im 3.OG._3048.jpg
+            [kid] => 12
+            [bereich] => 1
+            [Upload] => Submit Query
+        )
+
+    [files] => Array
+        (
+            [Filedata] => Array
+                (
+                    [name] => 2010 09 16_Unsere Whg Lindenstr 32 im 3.OG._3048.jpg
+                    [type] => application/octet-stream
+                    [tmp_name] => C:\xampp\tmp\php63FB.tmp
+                    [error] => 0
+                    [size] => 117967
+                )
+
+        )
+
+)
+
+---
+Array
+(
+    [time] => Mon, 14 Feb 2011 18:19:20 +0100
+    [addr] => ******us-PC
+    [agent] => Shockwave Flash
+    [post] => Array
+        (
+            [Filename] => center.jpg
+            [bereich] => 1
+            [kid] => 1
+            [Upload] => Submit Query
+        )
+
+    [files] => Array
+        (
+            [Filedata] => Array
+                (
+                    [name] => center.jpg
+                    [type] => application/octet-stream
+                    [tmp_name] => C:\xampp\tmp\php548E.tmp
+                    [error] => 0
+                    [size] => 26816
+                )
+
+        )
+
+)
+
+---
+Array
+(
+    [time] => Mon, 14 Feb 2011 18:20:13 +0100
+    [addr] => ******us-PC
+    [agent] => Shockwave Flash
+    [post] => Array
+        (
+            [Filename] => flash.jpg
+            [kid] => 1
+            [bereich] => 1
+            [Upload] => Submit Query
+        )
+
+    [files] => Array
+        (
+            [Filedata] => Array
+                (
+                    [name] => flash.jpg
+                    [type] => application/octet-stream
+                    [tmp_name] => C:\xampp\tmp\php2297.tmp
+                    [error] => 0
+                    [size] => 100832
+                )
+
+        )
+
+)
+
+---
+Array
+(
+    [time] => Tue, 15 Feb 2011 10:03:15 +0100
+    [addr] => ******us-PC
+    [agent] => Shockwave Flash
+    [post] => Array
+        (
+            [Filename] => TMI_IMAGE_009.jpg
+            [kid] => 1
+            [bereich] => 1
+            [Upload] => Submit Query
+        )
+
+    [files] => Array
+        (
+            [Filedata] => Array
+                (
+                    [name] => TMI_IMAGE_009.jpg
+                    [type] => application/octet-stream
+                    [tmp_name] => C:\xampp\tmp\php8007.tmp
+                    [error] => 0
+                    [size] => 39313
+                )
+
+        )
+
+)
+
+---
+Array
+(
+    [time] => Tue, 15 Feb 2011 10:03:15 +0100
+    [addr] => ******us-PC
+    [agent] => Shockwave Flash
+    [post] => Array
+        (
+            [Filename] => Swarovski_-Image_01.jpg
+            [kid] => 1
+            [bereich] => 1
+            [Upload] => Submit Query
+        )
+
+    [files] => Array
+        (
+            [Filedata] => Array
+                (
+                    [name] => Swarovski_-Image_01.jpg
+                    [type] => application/octet-stream
+                    [tmp_name] => C:\xampp\tmp\php8094.tmp
+                    [error] => 0
+                    [size] => 46161
+                )
+
+        )
+
+)
+
+---

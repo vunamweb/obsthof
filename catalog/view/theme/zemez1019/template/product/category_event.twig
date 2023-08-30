@@ -1,0 +1,329 @@
+{{ header }}
+<div id="product-category" class="container">
+	<ul class="breadcrumb">
+		{% for breadcrumb in breadcrumbs %}
+			<li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+		{% endfor %}
+	</ul>
+	<h2>{{ heading_title }}</h2>
+		{% if thumb or description %}
+			<div class="row">
+				{% if thumb %}
+					<div class="col-sm-2 img-category">
+						<img src="{{ thumb }}" alt="{{ heading_title }}" title="{{ heading_title }}" class="img-thumbnail" />
+					</div>
+				{% endif %}
+				{% if description %}
+					<div class="col-sm-10">{{ description }}</div>
+				{% endif %}
+			</div>
+			<hr>
+		{% endif %}
+		{% if (categories) %}
+				<h3 style="display: none">{{ text_refine }}</h3>
+				<div class="row">
+					<ul class="box-subcat">
+						{% for category in categories %}
+							<li class="col-sm-2">
+								<div class="thumb">
+									{% if (category['thumb']) %}
+										<div class="image">
+											<a href="{{ category['href'] }}">
+												<img width="{{ thumb_width }}" height="{{ thumb_height }}" src="{{ category['thumb'] }}" alt="{{ category['name'] }}" />
+											</a>
+										</div>
+									{% endif %}
+									<div class="name subcatname">
+										<a href="{{ category['href'] }}">{{ category['name'] }}</a>
+									</div>
+								</div>
+							</li>
+						{% endfor %}
+					</ul>
+				</div>
+			{% endif %}
+	<div class="row">
+		{{ column_left }}
+		{% if column_left and column_right %}
+			{%set class = 'col-sm-6' %}
+		{% elseif column_left or column_right %}
+			{%set class = 'col-sm-9' %}
+		{% else %}
+			{%set class = 'col-sm-12' %}
+		{% endif %}
+		<div id="content" class="{{ class }}">
+			{{ content_top }}
+			{% if products %}
+				<div class="product-filter clearfix">
+					<div class="product-filter_elem">
+						<div class="button-view">
+							<button type="button" id="grid-view" data-toggle="tooltip" title="{{ button_grid }}">
+								<i class="material-design-two375"></i>
+							</button>
+							<button type="button" id="list-view" data-toggle="tooltip" title="{{ button_list }}">
+								<i class="material-design-view12"></i>
+							</button>
+						</div>
+					</div>
+					<div class="product-filter_elem sort">
+						<label class="control-label" for="input-sort">
+							{{ text_sort }}
+						</label>
+						<select id="input-sort" onchange="location = this.value;">
+							{% for sorts in sorts %}
+								{% if sorts.value == '%s-%s'|format(sort, order) %}
+									<option value="{{ sorts['href'] }}" selected="selected">
+										{{ sorts['text'] }}
+									</option>
+								{% else %}
+									<option value="{{ sorts['href'] }}">
+										{{ sorts['text'] }}
+									</option>
+								{% endif %}
+							{% endfor %}
+						</select>
+					</div>
+					<div class="product-filter_elem show pull-right">
+						<label class="control-label" for="input-limit">
+							{{ text_limit }}
+						</label>
+						<select id="input-limit" onchange="location = this.value;">
+							{% for limits in limits %}
+								{% if (limits['value'] == limit) %}
+									<option value="{{ limits['href'] }}" selected="selected">
+										{{ limits['text'] }}
+									</option>
+								{% else %}
+									<option value="{{ limits['href'] }}">
+										{{ limits['text'] }}
+									</option>
+								{% endif %}
+							{% endfor %}
+						</select>
+					</div>
+				</div>
+				<div class="row">
+					{%set option_index = 5000 %}
+					{% for product in products %}
+						<div class="product-layout product-list">
+							<div class="product-thumb transition {% if product.options and product.options|length <= 3 %} {{ 'options' }} {% endif %}">
+								{% if product.options and product.options|length <= 3 %}
+									<div class="product-option-wrap">
+										<div class="product-options form-horizontal">
+											<div class="options">
+												<a class="ajax-overlay_close" href='#'></a>
+												<input type="text" name="product_id" value="{{ product.product_id }}" class="form-control hidden"/>
+												<h3>{{ text_option }}</h3>
+												{% for option in product.options %}
+													{% if option.type == 'select' %}
+														<div class="form-group{% if option.required %} required {% endif %}">
+															<label class="control-label" for="input-option{{ option.product_option_id ~ module ~ option_index }}">
+																{{ option.name }}
+															</label>
+															<select name="option[{{ option.product_option_id }}]" id="input-option{{ option.product_option_id ~ module ~ option_index }}" class="form-control">
+																<option value="">{{ text_select }}</option>
+																{% for option_value in option.product_option_value %}
+																	<option value="{{ option_value.product_option_value_id }}">{{ option_value.name }}
+																		{% if option_value.price %}
+																			({{ option_value.price_prefix }}{{ option_value.price }})
+																		{% endif %}
+																	</option>
+																{% endfor %}
+															</select>
+														</div>
+													{% endif %}
+													{% if option.type == 'radio' %}
+														<div class="form-group{% if option.required %} required {% endif %}">
+															<label class="control-label">{{ option.name }}</label>
+															<div id="input-option{{ option.product_option_id ~ module ~ option_index }}">
+																{% for option_value in option.product_option_value %}
+																	<div class="radio">
+																		<label>
+																			<input type="radio" name="option[{{ option.product_option_id }}]" value="{{ option_value.product_option_value_id }}" />
+																			{% if option_value.image %}
+																				<img src="{{ option_value.image }}" alt="{{ option_value.name }} {% if option_value.price %} {{ option_value.price_prefix }} {{ option_value.price }} {% endif %}" class="img-thumbnail" />
+																			{% endif %}
+																			{{ option_value.name }}
+																			{% if option_value.price %}
+																				({{ option_value.price_prefix }}{{ option_value.price }})
+																			{% endif %}
+																		</label>
+																	</div>
+																{% endfor %}
+															</div>
+														</div>
+													{% endif %}
+													{% if option.type == 'checkbox' %}
+														<div class="form-group{% if option.required %} required {% endif %}">
+															<label class="control-label">{{ option.name }}</label>
+															<div id="input-option{{ option.product_option_id ~ module ~ option_index }}">
+																{% for option_value in option.product_option_value %}
+																	<div class="checkbox">
+																		<label>
+																			<input type="checkbox" name="option[{{ option.product_option_id }}][]" value="{{ option_value.product_option_value_id }}" />
+																			{% if option_value.image %}
+																				<img src="{{ option_value.image }}" alt="{{ option_value.name }} {% if option_value.price %} {{ option_value.price_prefix }} {{ option_value.price }} {% endif %}" class="img-thumbnail" />
+																			{% endif %}
+																			{{ option_value.name }}
+																			{% if option_value.price %}
+																				({{ option_value.price_prefix }}{{ option_value.price }})
+																			{% endif %}
+																		</label>
+																	</div>
+																{% endfor %}
+															</div>
+														</div>
+													{% endif %}
+													{% if option.type == 'text' %}
+														<div class="form-group{% if option.required %} required {% endif %}">
+															<label class="control-label" for="input-option{{ option.product_option_id ~ module ~ option_index }}">
+																{{ option.name }}
+															</label>
+															<input type="text" name="option[{{ option.product_option_id }}]" value="{{ option.value }}" placeholder="{{ option.name }}" id="input-option{{ option.product_option_id ~ module ~ option_index }}" class="form-control" />
+														</div>
+													{% endif %}
+													{% if option.type == 'textarea' %}
+														<div class="form-group{% if option.required %} required {% endif %}">
+															<label class="control-label" for="input-option{{ option.product_option_id ~ module ~ option_index }}">{{ option.name }}</label>
+															<textarea name="option[{{ option.product_option_id }}]" rows="5" placeholder="{{ option.name }}" id="input-option{{ option.product_option_id ~ module ~ option_index }}" class="form-control">{{ option.value }}</textarea>
+														</div>
+													{% endif %}
+													{% if option.type == 'file' %}
+														<div class="form-group{% if option.required %} required {% endif %}">
+															<label class="control-label">{{ option.name }}</label>
+															<button type="button" id="button-upload{{ option.product_option_id }}" data-loading-text="{{ text_loading }}" class="btn btn-default btn-block"><i class="fa fa-upload"></i> {{ button_upload }}</button>
+															<input type="hidden" name="option[{{ option.product_option_id }}]" value="" id="input-option{{ option.product_option_id ~ module ~ option_index }}" />
+														</div>
+													{% endif %}
+													{% if option.type == 'date' %}
+														<div class="form-group{% if option.required %} required {% endif %}">
+															<label class="control-label" for="input-option{{ option.product_option_id ~ module ~ option_index }}">{{ option.name }}</label>
+															<div class="input-group date">
+																<input type="text" name="option[{{ option.product_option_id }}]" value="{{ option.value }}" data-date-format="YYYY-MM-DD" id="input-option{{ option.product_option_id ~ module ~ option_index }}" class="form-control" />
+																<span class="input-group-btn">
+																	<button class="btn btn-default" type="button"><i class="fa fa-calendar"></i></button>
+																</span>
+															</div>
+														</div>
+													{% endif %}
+													{% if option.type == 'datetime' %}
+														<div class="form-group{% if option.required %} required {% endif %}">
+															<label class="control-label" for="input-option{{ option.product_option_id ~ module ~ option_index }}">{{ option.name }}</label>
+															<div class="input-group datetime">
+																<input type="text" name="option[{{ option.product_option_id }}]" value="{{ option.value }}" data-date-format="YYYY-MM-DD HH:mm" id="input-option{{ option.product_option_id ~ module ~ option_index }}" class="form-control" />
+																<span class="input-group-btn">
+																	<button type="button" class="btn btn-default"><i class="fa fa-calendar"></i></button>
+																</span>
+															</div>
+														</div>
+													{% endif %}
+													{% if option.type == 'time' %}
+														<div class="form-group{% if option.required %} required {% endif %}">
+															<label class="control-label" for="input-option{{ option.product_option_id ~ module ~ option_index }}">{{ option.name }}</label>
+															<div class="input-group time">
+																<input type="text" name="option[{{ option.product_option_id }}]" value="{{ option.value }}" data-date-format="HH:mm" id="input-option{{ option.product_option_id ~ module ~ option_index }}" class="form-control" />
+																<span class="input-group-btn">
+																	<button type="button" class="btn btn-default"><i class="fa fa-calendar"></i></button>
+																</span>
+															</div>
+														</div>
+													{% endif %}
+												{% endfor %}
+												<button type="button" class="btn-primary" onclick="cart.addPopup($(this), {{ product.product_id }});"><span>{{ button_cart }}</span></button>
+											</div>
+										</div>
+									</div>
+								{% endif %}
+								
+								<div class="image">
+									{% if product.price %}
+										{% if product.special %}
+											{% if (label_sale) %}
+												<div class="sale">
+													<span>{{ text_sale }}</span>
+												</div>
+											{% endif %}
+											{% if (label_discount) %}
+												<div class="discount">
+													<span>{{ product.label_discount }}</span>
+												</div>
+											{% endif %}
+										{% endif %}
+									{% endif %}
+									{% if (product.label_new) %}
+										<div class="new-pr"><span>{{ text_new }}</span></div>
+									{% endif %}									
+									<a class="lazy" href="{{ product.href }}" style="padding-bottom: {{ product['img-height'] / product['img-width'] * 100 ~ '%' }}">
+										{% if product.additional_thumb %}
+											<img width="{{ product['img-width'] }}" height="{{ product['img-height'] }}" alt="{{ product['name'] }}" title="{{ product['name'] }}" class="img-primary" data-src="{{ product['thumb'] }}" src="#"/>
+											<img width="{{ product['img-width'] }}" height="{{ product['img-height'] }}" alt="{{ product['name'] }}" title="{{ product['name'] }}" class="img-secondary" data-src="{{ product['additional_thumb'] }}" src="#"/>
+										{% else %}
+											<img width="{{ product['img-width'] }}" height="{{ product['img-height'] }}" alt="{{ product['name'] }}" title="{{ product['name'] }}" class="img" data-src="{{ product['thumb'] }}" src="#"/>
+										{% endif %}
+									</a>									
+									{% if product.rating %}
+										<div class="rating">
+											<span>
+											{% for i in 1..5 %}
+												{% if product.rating < i %}
+													<span class="fa fa-stack"><i class="linearicons-star"></i></span>
+												{% else %}
+													<span class="fa fa-stack"><i class="linearicons-star star"></i></span>
+												{% endif %}
+											{% endfor %}
+											</span>
+										</div>
+									{% endif %}
+									<div class="button-wrap">
+										<button class="btn-primary"><a href="{{ product.href }}">Detail</a></button>
+										<button class="btn-primary quickview" type="button" data-rel="details" data-optionID="{{ product['optionID'] }}" data-product="{{ product['product_id'] }}">{{text_quick}}</button>
+										<button type="button" class="btn-primary" {% if (product.options|length > 3) %} onclick="cart.add('{{ product.product_id }}');" {% else %} onclick="ajaxAdd($(this),{{ product.product_id }});" {% endif %}>{{button_cart}}</button>
+									</div>
+								</div>								
+								<div class="content">
+									<div class="caption">
+										<h4 class="name"><a href="{{ product.href }}">{{ product.name }}</a></h4>
+										<p class="description">{{ product.description }}</p>
+										{% if product.price %}
+											<p class="price">
+												{% if not product.special %}
+													{{ product.price }}
+												{% else %}
+													 <span class="price-new">{{ product.special }}</span> <span class="price-old">{{ product.price }}</span>
+												{% endif %}
+												{% if product.tax %}
+													<span class="price-tax">{{ text_tax }} {{ product.tax }}</span>
+												{% endif %}
+											</p>
+										{% endif %}
+										<div class="button-wrap-list">
+											<button type="button" class="btn-primary" onclick="wishlist.add('{{ product.product_id }}');">{{button_wishlist}}</button>
+											<button type="button" class="btn-primary" onclick="compare.add('{{ product.product_id }}');">{{button_compare}}</button>
+											<button class="btn-primary quickview" type="button" data-rel="details" data-product="{{ product['product_id'] }}">{{text_quick}}</button>
+											<button type="button" class="btn-primary" {% if (product.options|length > 3) %} onclick="cart.add('{{ product.product_id }}');" {% else %} onclick="ajaxAdd($(this),{{ product.product_id }});" {% endif %}>{{button_cart}}</button>
+										</div>
+									</div>									
+								</div>								
+							
+							</div>
+						</div>
+						{%set option_index = option_index + 1 %}
+					{% endfor %}
+				</div>
+				<div class="row">
+					<div class="col-sm-6 text-left">{{ pagination }}</div>
+					<div class="col-sm-6 text-right">{{ results }}</div>
+				</div>
+			{% endif %}
+			{% if not categories and not products %}
+				<p>{{ text_empty }}</p>
+				<div class="buttons">
+					<div class="pull-right"><a href="{{ continue }}" class="btn btn">{{ button_continue }}</a></div>
+				</div>
+			{% endif %}
+			{{ content_bottom }}
+		</div>
+		{{ column_right }}
+	</div>
+</div>
+{{ footer }}

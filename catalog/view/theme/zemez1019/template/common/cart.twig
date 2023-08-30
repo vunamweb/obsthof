@@ -1,0 +1,74 @@
+<div class="box-cart pull-right">
+	<div id="cart" class="cart toggle-wrap">
+		<button type="button" data-loading-text="{{ text_loading }}" class="toggle">
+			<i class="linearicons-cart"></i>
+			<strong>{{ text_shopping_cart }}</strong>
+			<span id="cart-total" class="cart-total">{{ text_items }}</span>
+			<span id="cart-total2" class="cart-total2">{{ text_items2 }}</span>
+		</button>
+		<ul class="pull-right toggle_cont">
+			{% if (products or vouchers) %}
+				{% for product in products %}
+					<li class="product">
+						<div class="buttons">
+							<button type="button" onclick="cart.removeAndSave('{{ product.href|split('product_id=')[1] }}', '{{ product['cart_id'] }}');" class="link">
+								<i class="linearicons-heart"></i>
+							</button>
+							<button type="button" onclick="cart.remove('{{ product['cart_id'] }}');" class="link">
+								<i class="linearicons-trash"></i>
+							</button>
+						</div>
+						<div class="pull-left image">
+							{% if (product['thumb']) %}
+								<a href="{{ product['href'] }}">
+									<img src="{{ product['thumb'] }}" alt="{{ product['name'] }}" title="{{ product['name'] }}" class="img-thumbnail" />
+								</a>
+							{% endif %}
+						</div>
+						<div class="pull-left name">
+							<a href="{{ product['href'] }}">{{ product['name'] }}</a>
+							<div>&#215; {{ product['quantity'] }} <br> <span class="price-cart">{{ product['total'] }}</span></div>
+						</div>
+					</li>
+				{% endfor %}
+				{% for voucher in vouchers %}
+					<li>
+						<div class="text-center"></div>
+						<div class="text-left">{{ voucher['description'] }}</div>
+						<div class="text-right">x&nbsp;1</div>
+						<div class="text-right">{{ voucher['amount'] }}</div>
+						<div class="text-center text-danger">
+							<button type="button" onclick="voucher.remove('{{ voucher['key'] }}');" title="{{ button_remove }}" class="btn btn-danger btn-xs">
+								<i class="material-design-close47"></i>
+							</button>
+						</div>
+					</li>
+				{% endfor %}
+				<li>
+					<div class="total">
+						{% for total in totals %}
+							<div class="t-row">
+								<div class="text-left">
+									{{ total['title'] }}
+								</div>
+								<div class="text-right">
+									{{ total['text'] }}
+								</div>
+							</div>
+						{% endfor %}
+					</div>
+				</li>
+				<li class="btns">
+					<div class="text-center">
+						<a class="btn btn-l" href="{{ cart }}">{{ text_cart }}</a>
+						<a class="btn-primary btn-r" href="{{ checkout }}">{{ text_checkout }} <i class="linearicons-arrow-right"></i></a>
+					</div>
+				</li>
+			{% else %}
+				<li>
+					<p class="text-center">{{ text_empty }}</p>
+				</li>
+			{% endif %}
+		</ul>
+	</div>
+</div>
