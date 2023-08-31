@@ -27,8 +27,8 @@ $morpheus["design"]			= array(
 $morpheus["template"]		= array(
 
 									1=>"Content<br>",
-									2 => "Mehr Spalten Container",
 									6=>"Text / Bild Container<br>",
+									2 => "Mehr Spalten Container<br>",
 									// 5=> "Produkt Icons gelb (Startseite)<br>",
 #									4=> "Persönlichkeiten<br>",
 #									5=>"Lesetipps<br>",

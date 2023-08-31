@@ -25,7 +25,7 @@ if($lastUsedTemplateID && $lastUsedTemplateID != $fileID && !$templateIsClosed) 
 
 
 if($tref == 1 || !$tref) $template = '
-<section'.($anker ? ' id="'.$anker.'"' : '').' class="section '.$klasse.' '.($tabstand ? ' pt0 ' : '').($tabstand_bottom? ' pb0 ' : '').($class ? $class.' bg-color' : '').'"'.($farbe ? ' style="background:#'.$farbe.'"' : $video_special).'>
+<section'.($anker ? ' id="'.$anker.'"' : '').' class="obsthof '.$klasse.' '.($tabstand ? ' pt0 ' : '').($tabstand_bottom? ' pb0 ' : '').($class ? $class.' bg-color' : '').'"'.($farbe ? ' style="background:#'.$farbe.'"' : $video_special).'>
 
 '.$date_box.'
 
@@ -43,7 +43,7 @@ if($tref == 1 || !$tref) $template = '
 </section>
 ';
 elseif($tref == 2) $template = '
-<section'.($anker ? ' id="'.$anker.'"' : '').' class="section '.$klasse.' '.($tabstand ? ' pt0 ' : '').($tabstand_bottom? ' pb0 ' : '').($class ? $class.' bg-color' : '').'"'.($farbe ? ' style="background:#'.$farbe.'"' : $video_special).'>
+<section'.($anker ? ' id="'.$anker.'"' : '').' class="obsthof '.$klasse.' '.($tabstand ? ' pt0 ' : '').($tabstand_bottom? ' pb0 ' : '').($class ? $class.' bg-color' : '').'"'.($farbe ? ' style="background:#'.$farbe.'"' : $video_special).'>
 	<div class="'.$edit_mode_class.'container '.($tabstand ? ' pt0 ' : '').''.($tabstand_bottom? ' pb0 ' : '').'"'.($bgIMG ? ' style="background:url('.$bgIMG.') no-repeat fixed; background-size: cover; padding-top:2em; padding-bottom:2em;"' : '').'>
         <div class="row">
             <div class="col-12 text-center'.($linkbox ? ' linkbox' : '').'"'.($linkbox ? ' id="lb'.$content_id.'" ref="'.$linkbox.'"'.($extLink ? ' data-extern="1"' : '') : '').($farbe_inner ? ' style="background:#'.$farbe_inner.'"' : '').'>
@@ -55,7 +55,7 @@ elseif($tref == 2) $template = '
 </section>
 ';
 elseif($tref == 3) $template = '
-<section'.($anker ? ' id="'.$anker.'"' : '').' class="section balken text-center '.$klasse.' '.($tabstand ? ' pt0 ' : '').($tabstand_bottom? ' pb0 ' : '').($class ? $class.' bg-color' : '').'"'.($farbe ? ' style="background:#'.$farbe.'"' : $video_special).'>
+<section'.($anker ? ' id="'.$anker.'"' : '').' class="obsthof balken text-center '.$klasse.' '.($tabstand ? ' pt0 ' : '').($tabstand_bottom? ' pb0 ' : '').($class ? $class.' bg-color' : '').'"'.($farbe ? ' style="background:#'.$farbe.'"' : $video_special).'>
 	<div class="'.$edit_mode_class.'container-fluid fs '.($tabstand ? ' pt0 ' : '').''.($tabstand_bottom? ' pb0 ' : '').'"'.($bgIMG ? ' style="background:url('.$bgIMG.') no-repeat; background-size: cover; padding-top:2em; padding-bottom:2em;"' : '').'>
         <div class="row">
             <div class="col-12'.($linkbox ? ' linkbox' : '').'"'.($linkbox ? ' id="lb'.$content_id.'" ref="'.$linkbox.'"'.($extLink ? ' data-extern="1"' : '') : '').($farbe_inner ? ' style="background:#'.$farbe_inner.'"' : '').'>
@@ -110,7 +110,7 @@ elseif($tref == 8) $template = '
 </section>
 ';
 elseif($tref == 6) $template = '
-<section'.($anker ? ' id="'.$anker.'"' : '').' class="section team '.$klasse.' '.($tabstand ? ' pt0 ' : '').($tabstand_bottom? ' pb0 ' : '').($class ? $class.' bg-color' : '').'"'.($farbe ? ' style="background:#'.$farbe.'"' : $video_special).'>
+<section'.($anker ? ' id="'.$anker.'"' : '').' class="obsthof team '.$klasse.' '.($tabstand ? ' pt0 ' : '').($tabstand_bottom? ' pb0 ' : '').($class ? $class.' bg-color' : '').'"'.($farbe ? ' style="background:#'.$farbe.'"' : $video_special).'>
 	<div class="'.$edit_mode_class.'container '.($tabstand ? ' pt0 ' : '').''.($tabstand_bottom? ' pb0 ' : '').'"'.($bgIMG ? ' style="background:url('.$bgIMG.') no-repeat fixed; background-size: cover; padding-top:2em; padding-bottom:2em;"' : '').'>
 		<div class="row">
 			<div class="col-12 '.($linkbox ? ' linkbox' : '').'"'.($linkbox ? ' id="lb'.$content_id.'" ref="'.$linkbox.'"'.($extLink ? ' data-extern="1"' : '') : '').($farbe_inner ? ' style="background:#'.$farbe_inner.'"' : '').'>
@@ -124,7 +124,7 @@ elseif($tref == 6) $template = '
 </section>
 ';
 else if($tref == 7) $template = '
-<section'.($anker ? ' id="'.$anker.'"' : '').' class="section '.$klasse.' '.($tabstand ? ' pt0 ' : '').($tabstand_bottom? ' pb0 ' : '').($tclass ? $tclass.' bg-color' : '').'"'.($farbe ? ' style="background:#'.$farbe.'"' : $video_special).'>
+<section'.($anker ? ' id="'.$anker.'"' : '').' class="obsthof '.$klasse.' '.($tabstand ? ' pt0 ' : '').($tabstand_bottom? ' pb0 ' : '').($tclass ? $tclass.' bg-color' : '').'"'.($farbe ? ' style="background:#'.$farbe.'"' : $video_special).'>
 <div class="'.$edit_mode_class.'container '.($class_inner ? $class_inner.' col-inner ' : '').($tabstand ? ' pt0 ' : '').''.($tabstand_bottom? ' pb0 ' : '').'"'.($bgIMG ? ' style="background:url('.$bgIMG.') no-repeat fixed; background-size: cover; padding-top:2em; padding-bottom:2em;"' : '').'>
         <div class="row" style="position:relative">
         <div class="rahmen-team">

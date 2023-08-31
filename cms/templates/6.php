@@ -8,9 +8,9 @@ $lastUsedTemplateID = $fileID;
 $templateIsClosed=1;
 
 $template = '
-<section'.($anker ? ' id="'.$anker.'"' : '').' class="'.($tref == 3 ? 'pt0 pb0 ' : '').($tabstand ? ' pt0 ' : '').($tabstand_bottom? ' pb0 ' : '').($class ? $class.' bg-color' : '').'"'.($farbe ? ' style="background:#'.$farbe.'"' : '').'>
+<section'.($anker ? ' id="'.$anker.'"' : '').' class="obsthof '.($tref == 3 ? 'pt0 pb0 ' : '').($tabstand ? ' pt0 ' : '').($tabstand_bottom? ' pb0 ' : '').($class ? $class.' bg-color' : '').'"'.($farbe ? ' style="background:#'.$farbe.'"' : '').'>
     <div class="container bildtext bildtext'.($klasse ? ' '.$klasse : '').'">
-   		<div class="row">
+   		<div class="row vertical-align">
 ';
 
 
@@ -21,37 +21,37 @@ $template = '
 
 
 if($tref == 1 || !$tref) $template .= '
-            <div class="col-md-6 order-1 order-md-1">
+            <div class="col-md-6 order-1 order-md-1 imgColL">
 '.$grIMG.'
             </div>
-            <div class="col-md-6 order-2 order-md-2">
+            <div class="col-md-6 order-2 order-md-2 contentPad">
 <div id="'.$uniqueID.'" class="directeditmode">#cont#</div>
             </div>
 ';
 
 else if($tref == 2) $template .= '
-            <div class="col-md-6 order-2 order-md-1 imgPaddingR">
+            <div class="col-md-6 order-2 order-md-1 contentPad">
 <div id="'.$uniqueID.'" class="directeditmode">#cont#</div>
             </div>
-            <div class="col-md-6 order-1 order-md-2">
+            <div class="col-md-6 order-1 order-md-2 imgColR">
 '.$grIMG.'
             </div>
 ';
 
 else if($tref == 3) $template .= '
-			<div class="col-md-6 order-2 order-md-1 imgPaddingR pt6 pb4">
+			<div class="col-md-6 order-2 order-md-1 contentPad">
 <div id="'.$uniqueID.'" class="directeditmode">#cont#</div>
 			</div>
-			<div class="col-md-6 order-1 order-md-2">
+			<div class="col-md-6 order-1 order-md-2 imgColR">
 '.$grIMG.'
 			</div>
 ';
 
 else if($tref == 4) $template .= '
-      	  		<div class="col-md-5 bild2">
+      	  		<div class="col-md-5 bild2 imgColL">
 '.$grIMG.'
 				</div>
-      	  		<div class="col-md-6 offset-md-1 bordertop">
+      	  		<div class="col-md-6 offset-md-1 contentPad">
 <div id="'.$uniqueID.'" class="directeditmode">#cont#</div>					
 				</div>
 ';

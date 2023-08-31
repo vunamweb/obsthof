@@ -47,7 +47,7 @@ if($lastUsedTemplateID && $lastUsedTemplateID != $fileID && !$templateIsClosed) 
 
 
 if($template2count == 1 || $templateIsClosed) { $template .= '
-<section class="section_multi '.($tref == 6 ? ' ' : '').($klasse ? $klasse : '').($tclass ? $tclass.' ' : '').($class ? $class.' bg-color' : '').($tabstand ? ' pt0 ' : '').($tabstand_bottom? ' pb0 ' : '').'"'.($farbe ? ' style="background:#'.$farbe.';"' : '').($anker ? ' id="'.$anker.'"' : '').'>
+<section class="obsthof '.($tref == 6 ? ' ' : '').($klasse ? $klasse : '').($tclass ? $tclass.' ' : '').($class ? $class.' bg-color' : '').($tabstand ? ' pt0 ' : '').($tabstand_bottom? ' pb0 ' : '').'"'.($farbe ? ' style="background:#'.$farbe.';"' : '').($anker ? ' id="'.$anker.'"' : '').'>
 '.($parallax ? '<div class="parallax " style="background: url('.$parallax.') no-repeat center center; -webkit-background-size: cover; background-size: cover;">' : '').'
     <div class="container'.($tref == 5 ? ' d-flex align-items-stretch' : '').'">
         <div class="row'.($tref == 6 ? ' row-eq-height' : '').'">';

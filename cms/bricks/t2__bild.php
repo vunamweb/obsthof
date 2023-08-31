@@ -3,9 +3,9 @@ global $img_pfad, $ausrichtung, $ausrichtungArray, $dir, $imgGal, $imageFolder, 
 
 $data = explode("|", $text); $imgid = $data[0]; $ausrichtung = $data[1]; if(!$ausrichtung) $ausrichtung = 1;
 
-$w = 600;
-if($tref == 1) $w = 600;
-else $w=370;
+$w = 800;
+if($tref == 1) $w = 800;
+else $w=400;
 
 if($text) {
 	$que  	= "SELECT `longtext`, itext, imgname, name FROM `morp_cms_image` i, `morp_cms_img_group` g WHERE g.gid=i.gid AND imgid=$imgid";
