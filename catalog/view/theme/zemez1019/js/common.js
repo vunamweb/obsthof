@@ -24,6 +24,13 @@ function getURLVar(key) {
 
 $(document).ready(function() {
 	// Highlight any found errors
+	$('.datetimepicker').datetimepicker();
+
+	$('.show_date_event').click(function() {
+		//$(this).prev('input.datetimepicker').data('DateTimePicker').toggle();
+		$('.datetimepicker').click();
+	});
+
 	$('.text-danger').each(function() {
 		var element = $(this).parent().parent();
 

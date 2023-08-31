@@ -102,6 +102,8 @@
 						</select>
 					</div>
 				</div>
+				<input type='text' value="{{ value_start_event }}" class="form-control datetimepicker hide" />
+				<div class="start_end_event">{{ start_event }} - {{ end_event }} <a class="fa fa-angle-right show_date_event"></a></div>
 				<div class="row">
 					{%set option_index = 5000 %}
 					{% for product in products %}
