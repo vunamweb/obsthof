@@ -21,28 +21,28 @@ $template = '
 
 
 if($tref == 1 || !$tref) $template .= '
-            <div class="col-md-6 order-1 order-md-1 imgColL">
+            <div class="col-xs-12 col-sm-6 col-md-6 order-1 order-md-1 imgColL">
 '.$grIMG.'
             </div>
-            <div class="col-md-6 order-2 order-md-2 contentPad">
+            <div class="col-xs-12 col-sm-6 col-md-6 order-2 order-md-2 contentPad">
 <div id="'.$uniqueID.'" class="directeditmode">#cont#</div>
             </div>
 ';
 
 else if($tref == 2) $template .= '
-            <div class="col-md-6 order-2 order-md-1 contentPad">
+            <div class="col-xs-12 col-sm-6 col-md-6 order-2 order-md-1 contentPad">
 <div id="'.$uniqueID.'" class="directeditmode">#cont#</div>
             </div>
-            <div class="col-md-6 order-1 order-md-2 imgColR">
+            <div class="col-xs-12 col-sm-6 col-md-6 order-1 order-md-2 imgColR">
 '.$grIMG.'
             </div>
 ';
 
 else if($tref == 3) $template .= '
-			<div class="col-md-6 order-2 order-md-1 contentPad">
+			<div class="col-xs-12 col-sm-6 col-md-6 order-2 order-md-1 contentPad">
 <div id="'.$uniqueID.'" class="directeditmode">#cont#</div>
 			</div>
-			<div class="col-md-6 order-1 order-md-2 imgColR">
+			<div class="col-xs-12 col-sm-6 col-md-6 order-1 order-md-2 imgColR">
 '.$grIMG.'
 			</div>
 ';
@@ -51,7 +51,7 @@ else if($tref == 4) $template .= '
       	  		<div class="col-md-5 bild2 imgColL">
 '.$grIMG.'
 				</div>
-      	  		<div class="col-md-6 offset-md-1 contentPad">
+      	  		<div class="col-xs-12 col-sm-6 col-md-6 offset-md-1 contentPad">
 <div id="'.$uniqueID.'" class="directeditmode">#cont#</div>					
 				</div>
 ';
