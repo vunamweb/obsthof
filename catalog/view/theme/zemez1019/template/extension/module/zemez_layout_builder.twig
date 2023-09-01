@@ -28,7 +28,7 @@
 				<div class="row row-level-{{ row.level }} {{ row.sfxcls }}">
 					<div class="row-inner {{ row.cls }} clearfix">
 					   {% for col in row.cols %}
-							<div class="col-lg-{{ col.lgcol }} col-md-{{ col.mdcol }} col-sm-{{ col.smcol }} col-xs-{{ col.xscol }} {{ col.sfxcls }}">
+							<div class="col-lg-{{ col.lgcol }} col-xs-{{ col.xscol }} {{ col.sfxcls }}">
 								<div class="col-inner {{ col.cls }}">
 									{% for widget in col.widgets %}
 										{% if ( widget.content is defined ) %}

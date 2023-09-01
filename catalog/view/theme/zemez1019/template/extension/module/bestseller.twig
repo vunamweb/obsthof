@@ -182,7 +182,7 @@
 						<div class="caption">
 							<h4 class="name"><a href="{{ product.href }}">{{ product.name }}<br><p class="date_event">{{ product.date_event }}</p></a></h4>
 							
-							<div class="description_1">{{ product.description }}</div>
+							<div class="description_1"><a href="{{ product.href }}">{{ product.description }}</a></div>
 							<div class="button-wrap-list">
 								<button type="button" class="btn-primary" onclick="wishlist.add('{{ product.product_id }}');">{{button_wishlist}}</button>
 								<button type="button" class="btn-primary" onclick="compare.add('{{ product.product_id }}');">{{button_compare}}</button>
