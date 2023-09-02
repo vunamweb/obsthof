@@ -180,7 +180,8 @@
 }
 
 .top-right .fa { font-size: 1.5em; line-height: 37px; color:#fff; }
-.class-1 {
+.class-1,
+.social-list li a {
   background-color: var(--red);
   color: #fff;
   margin-bottom: 3px;
@@ -189,9 +190,11 @@
   text-align: center;
   transition: 1s;
 }
-.class-1:hover {
+.class-1:hover,
+.social-list li:hover a {
   background-color: var(--red-dark);
   transition: 1s;
+  color: #fff !important;
 }
 .top-left {
   position: absolute;
@@ -449,7 +452,7 @@ input[type="text"] {
 
 .container > .alert,
 .breadcrumb + .alert {
-  position: fixed;
+  position: fixed; padding-left: 80px;
   z-index: 10004;
   top: 0;
   left: 0;
@@ -3775,8 +3778,9 @@ aside .box .product-layout + .product-layout {
 }
 
 .social-list li a {
-  font-size: 16px;
-  line-height: 1.2em;
+  font-size: 1.5em;
+  line-height: 23px;
+  color: #fff;
 }
 
 .social-list li a, .social-list li a:visited, .social-list li a:focus {
@@ -6342,7 +6346,7 @@ html[dir="rtl"] .sf-menu .sf-mega_section {
 }
 
 .box-payments {
-  margin-top: 8px;
+  margin-top: 14px;
   margin-bottom: 2px;
 }
 
@@ -10183,9 +10187,14 @@ input#input-coupon {
                          Footer
 =========================================================*/
 footer {
-  background: #f7f7f7;
+  /* background: #f7f7f7; */
+  background: rgb(108,0,0);
+  background: linear-gradient(90deg, rgba(108,0,0,1) 0%, rgba(98, 0, 0, 1) 50%, rgba(108,0,0,1) 100%);
   margin-top: 30px;
+  color: #fff;
 }
+footer a { color: #fff !important; }
+footer li a { text-transform: uppercase; padding: .25em 0; }
 
 footer .box-heading {
   margin-bottom: 0;
@@ -10196,7 +10205,7 @@ footer .box-heading {
 }
 
 footer .bg-copyright .html-block {
-  line-height: 1.2em;
+  line-height: 1.2em; width: 48%; text-align: center;
 }
 
 footer .box-logo .img-responsive {
@@ -10328,34 +10337,28 @@ footer p + p {
 .bg-footer > div {
   position: relative;
 }
-
 .bg-copyright {
-  color: #fff;
-  background: #000;
+  color: var(--red-dark);
+  background: #fff;
   padding-top: 8px;
-  padding-bottom: 3px;
+  padding-bottom: 12px;
 }
-
 .bg-copyright a, .bg-copyright a:visited, .bg-copyright a:focus {
   color: #fff;
 }
-
 .bg-copyright a:hover {
   color: var(--green);
 }
-
 .bg-copyright > div > div {
   vertical-align: top;
 }
-
 .copyright br {
   display: none;
 }
-
 .copyright {
   font-family: "Meta Cn", sans-serif;
   margin-top: 12px;
-  vertical-align: top;
+  text-align: center; padding: 0 0 1em; text-transform: uppercase;
 }
 
 .copyright span {
@@ -10381,36 +10384,28 @@ footer p + p {
     display: inline-block;
   }
   .bg-copyright .html-block {
-    margin-left: 14%;
     vertical-align: top;
   }
   [dir="rtl"] .bg-copyright .html-block {
     margin-left: 0;
-    margin-right: 14%;
   }
   .bg-copyright > .container > div:first-child {
     float: left;
     margin-left: 0;
-    margin-right: 15px;
+    text-align: left; width: 48%;
   }
   [dir="rtl"] .bg-copyright > .container > div:first-child {
     float: right;
     margin-right: 0;
-    margin-left: 15px;
   }
   .bg-copyright .copyright {
-    margin-left: 13.5%;
-    vertical-align: top;
   }
   [lang="de"] .bg-copyright .copyright {
-    margin-left: 8%;
+	  width: 30%; text-align: right;
   }
   [lang="ru"] .bg-copyright .copyright {
-    margin-left: 7%;
   }
   [dir="rtl"] .bg-copyright .copyright {
-    margin-left: .5%;
-    margin-right: 7%;
   }
 }
 
@@ -10871,6 +10866,7 @@ p + h2 { margin-top: 1em; }
 .zitat { font-size: 4em; color: #fff; font-weight: 700; padding: 3em 3em 1em; line-height: 1.1em; }
 
 section.obsthof { padding: 3em 0; }
+.common-home .obsthof { text-align: center; }
 table colgroup { display: none; 
 }
 table td:first-child { white-space: nowrap; }
