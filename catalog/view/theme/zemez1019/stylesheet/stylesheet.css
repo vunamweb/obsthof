@@ -1230,7 +1230,10 @@ div.required .control-label:after {
     text-align: center;
   }
   .top-center {
-    top: 0;
+    top: 20px;
+  }
+  .top-left {
+  	top: 85px;
   }
 }
 
@@ -1840,13 +1843,14 @@ html[dir="rtl"] .box-language .toggle:after, html[dir="rtl"]
 }
 
 @media (max-width: 767px) {
-  header {
-    margin-bottom: 30px;
-    position: absolute;
-	background: yellow
+  header,
+  .common-home header {
+    margin-bottom: 42px;
+    /* position: absolute; */
+	/* background: yellow */
   }
   .common-home header {
-    margin-bottom: 0;
+    /* margin-bottom: 0; */
   }
   header nav .toggle_cont {
     top: 100%;
@@ -1871,14 +1875,14 @@ html[dir="rtl"] .box-language .toggle:after, html[dir="rtl"]
   }
   header .logo {
     float: none;
-    width: 100%;
+    width: 60px;
     text-align: left;
     margin: 20px 0 0;
     position: absolute;
-    top: -78px;
+    top: -20px;
     left: 20px;
     z-index: 99999999999;
-    width: 30px;
+    /* width: 30px; */
   }
   header .logo img {
     display: inline-block;
@@ -2694,7 +2698,7 @@ html[dir="rtl"] .box-language .toggle:after, html[dir="rtl"]
 
 @media (max-width: 767px) {
   .cart {
-    position: fixed;
+    position: absolute;
     top: 0;
     margin: 0;
     z-index: 10000;
@@ -2941,12 +2945,12 @@ html[dir="rtl"] .box-language .toggle:after, html[dir="rtl"]
 }
 
 /* ==================    Product List, Product Grid    =================== */
+  .button-wrap-list {
+    display: none;
+  }
 @media (min-width: 768px) {
   aside .product-thumb {
     margin-right: 1px;
-  }
-  .button-wrap-list {
-    display: none;
   }
   .product-list .name {
     text-overflow: clip;
@@ -5746,7 +5750,7 @@ html[dir="rtl"] .sf-menu .sf-mega_section {
   /*position: fixed;*/
   width: 60px;
   height: 60px;
-  margin-top: 3px;
+  margin-top: 6px;
 }
 
 .rd-mobilepanel_toggle::-moz-focus-inner {
@@ -5835,7 +5839,7 @@ html[dir="rtl"] .sf-menu .sf-mega_section {
 
 @media (max-width: 767px) {
   body {
-    padding-top: 70px;
+    padding-top: 0;
   }
   .box-nav > * + *:before {
     display: none;
@@ -5852,8 +5856,8 @@ html[dir="rtl"] .sf-menu .sf-mega_section {
     padding-right: 0;
   }
   .cart {
-    right: 40px;
-    height: 56px;
+    right: 70px; top: 17px;
+    height: 40px;
     z-index: 10001;
   }
   .cart > button {
@@ -7506,7 +7510,7 @@ html[lang="de"] .newsletter-popup .zemez-login-form input {
 }
 
 div.swiper-viewport {
-  margin-bottom: 30px;
+  margin-bottom: 30px; position: relative;
 }
 
 @media (min-width: 768px) {
@@ -8312,11 +8316,11 @@ button.swiper-pagination-bullet {
   }
   .swiper-slider .btn, .swiper-slider .btn-primary {
     display: block;
-    width: 40%;
-    margin-left: 28%;
+    width: 80%;
+    margin-left: 10%;
   }
   .bestseller_1 .swiper-slide {
-    width: 100% !important;
+    /* width: 100% !important; */
   }
   .swiper-slide .content_1 {
     width: 60%;
@@ -8330,8 +8334,11 @@ button.swiper-pagination-bullet {
 
 @media (max-width: 480px) {
   .swiper-slider.swiper-container {
-    height: 260px !important;
+	height: 80vh !important;
   }
+  .tm-container .swiper-slider.swiper-container {
+	  height: 300px !important;
+	}
   .swiper-slider h2 {
     font-size: 23px;
   }
@@ -10983,14 +10990,25 @@ video { width: 100%; }
 
 }
 @media (max-width: 1200px) {
-
+	.swiper-slide .content_1 {
+		top: 0%;
+		margin: 20% 20%;
+		padding: 20px;
+	}
 }
 @media (max-width: 1050px) {
 
 }
 @media (max-width: 992px) {
 	.contentPad { padding: 1em; }
-
+	.zitat {
+		  font-size: 3em;
+		  padding: 2em 1em 1em;
+	}
+	.swiper-slide .content_1 {
+		margin: 10% 10%;
+		padding: 20px;
+	}
 }
 @media (max-width: 768px) {
 	.clearmobile { display: block; clear: both; width: 100%; height: 3em; }
@@ -11004,12 +11022,19 @@ video { width: 100%; }
 	/* display: inline-block !important; */
 	margin-left: -30px; margin-right: 0;
   }
+  header .logo img {
+	margin: 6px 15px 0 10px;
+  }
+
   .imgColL { padding-right: 0; }
   .imgColR { padding-left: 0; }
   .swiper-slide .content_1 {
 	  top: 0;
-	  margin: 10% 10%;
+	  margin: 10%;
 	  padding: 20px;
+	  height: 80%;
+	  width: 80%;
+	  left: inherit;
   }
   .zitat {
 	  font-size: 3em;
@@ -11022,7 +11047,25 @@ video { width: 100%; }
 		display: inherit;
 		margin-left: -15px; margin-right: 0;
 	}
-
+	.imgColR {
+		padding-left: 15px;
+		padding-right: 0;
+		margin-bottom: 2em;
+	}
+	.bestseller_1 .swiper-slide {
+		width: 100% !important;
+	}
+	.zitat {
+		font-size: 2em;
+		padding: 3em 1em 3em;
+	}
 }
+@media (max-width: 400px) {
+	:root {
+		--navwidth: calc(100vw - 60px);
+		--navwidthminus: -100vw;
+	}
+}
+
 
 .mt0 { margin-top: 0px !important; } .mt1 { margin-top: 10px; } .mt2 { margin-top: 20px; } .mt3 { margin-top: 30px; } .mt4 { margin-top: 40px; } .mt5 { margin-top: 50px; } .mt6 { margin-top: 60px; } .mt7 { margin-top: 70px; } .mt8 { margin-top: 80px; } .mt9 { margin-top: 90px; } .mt10 { margin-top: 100px; }  .mb0 { margin-bottom: 0px; }  .mb1 { margin-bottom: 10px; }  .mb2 { margin-bottom: 20px; }  .mb3 { margin-bottom: 30px; }  .mb4 { margin-bottom: 40px; }  .mb5 { margin-bottom: 50px; }  .mb6 { margin-bottom: 60px; }  .mb7 { margin-bottom: 70px; }  .mb8 { margin-bottom: 80px; }  .mb9 { margin-bottom: 90px; }  .mb10 { margin-bottom: 100px; }  .pad0 { padding: 0px !important; }  .pad1 { padding: 10px; }  .pad2 { padding: 20px; }  .pad3 { padding: 30px; }  .pad4 { padding: 40px; }  .pad5 { padding: 50px; }  .pad6 { padding: 60px; }  .pad7 { padding: 70px; }  .pad8 { padding: 80px; }  .pad9 { padding: 90px; }  .pad10 { padding: 100px; }  .pt0 { padding-top: 0px !important; }  .pt1 { padding-top: 10px; }  .pt2 { padding-top: 20px; }  .pt3 { padding-top: 30px; }  .pt4 { padding-top: 40px; }  .pt5 { padding-top: 50px; }  .pt6 { padding-top: 60px; }  .pt7 { padding-top: 70px; }  .pt8 { padding-top: 80px; }  .pt9 { padding-top: 90px; }  .pt10 { padding-top: 100px; }  .pb0 { padding-bottom: 0px !important; }  .pb1 { padding-bottom: 10px; }  .pb2 { padding-bottom: 20px; }  .pb3 { padding-bottom: 30px; }  .pb4 { padding-bottom: 40px; }  .pb5 { padding-bottom: 50px; }  .pb6 { padding-bottom: 60px; }  .pb7 { padding-bottom: 70px; }  .pb8 { padding-bottom: 80px; }  .pb9 { padding-bottom: 90px; }  .pb10 { padding-bottom: 100px; }
