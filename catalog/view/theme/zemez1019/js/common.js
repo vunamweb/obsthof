@@ -623,3 +623,15 @@ $(document).delegate('.agree', 'click', function(e) {
 		});
 	}
 })(window.jQuery);
+
+$(window).on("scroll", function() {
+	setNavbar();
+})
+function setNavbar() {
+	if($(window).scrollTop() > 100) {
+		$('body').addClass('black');
+	}
+	else {
+		$('body').removeClass('black');
+	}
+}

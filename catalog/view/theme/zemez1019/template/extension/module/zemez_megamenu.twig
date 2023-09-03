@@ -1,7 +1,6 @@
 {% if (menu_items) %}
 	<div class="megamenu">
 		<ul class="sf-menu">
-		{{ menu_morpheus }}
 		{% for menu_item in menu_items %}
 				<li {{ menu_item['mega'] is not empty ? ' class="' ~ menu_item['mega'] ~ '"' : '' }}>
 					{% if (menu_item['href'] is empty) %}
@@ -47,6 +46,7 @@
 				{% endif %}
 			</li>
 		{% endfor %}
+		{{ menu_morpheus }}
 	</ul>
 </div>
 <script>

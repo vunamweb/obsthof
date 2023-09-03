@@ -1,4 +1,4 @@
-<div class="box bestseller bestseller_1">
+<div class="box bestseller bestseller_1" id="bestseller">
 	<div class="box-heading">
 		<div id="nav_bestseller-{{ module }}"></div>
 	</div>
@@ -180,7 +180,9 @@
 					</div>
 					<div class="content content_1">
 						<div class="caption">
-							<h4 class="name"><a href="{{ product.href }}">{{ product.name }}<br><p class="date_event">{{ product.date_event }}</p></a></h4>
+							<p class="event">Veranstaltung</p>
+							<h4 class="name"><a href="{{ product.href }}">{{ product.name }}</a></h4>
+								<p class="date_event">Am&nbsp; {{ product.date_event }}</p>
 							
 							<div class="description_1"><a href="{{ product.href }}">{{ product.description }}</a></div>
 							<div class="button-wrap-list">
