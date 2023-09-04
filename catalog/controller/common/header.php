@@ -26,7 +26,7 @@ class ControllerCommonHeader extends Controller {
 
 		$data['title'] = $this->document->getTitle();
 
-		$data['base'] = $server;
+		$data['base'] = 'yyy'.$server;
 		$data['description'] = $this->document->getDescription();
 		$data['keywords'] = $this->document->getKeywords();
 		$data['links'] = $this->document->getLinks();
