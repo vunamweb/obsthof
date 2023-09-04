@@ -1468,9 +1468,9 @@ class ControllerSaleOrder extends Controller {
 		$data['title'] = $this->language->get('text_invoice');
 
 		if ($this->request->server['HTTPS']) {
-			$data['base'] = HTTPS_SERVER;
+			// $data['base'] = HTTPS_SERVER;
 		} else {
-			$data['base'] = HTTP_SERVER;
+			// $data['base'] = HTTP_SERVER;
 		}
 
 		$data['direction'] = $this->language->get('direction');
