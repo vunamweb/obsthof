@@ -232,6 +232,10 @@
   color: #95C11F;
   font-size: 15px;
 }
+
+.input-group-btn {
+  font-size: small;
+}
 /* END */
 /*========================================================
                    Bootstrap Reset
