@@ -242,9 +242,17 @@ class Cart {
 				$valueTime = $timeOption->rows[0];
 				$valueTime = $valueTime['value'];
 				$valueTime = explode(';', $valueTime);
-				$valueTime = 'Time: ' . $valueTime[1] . '-' . $valueTime[2];
+				if($valueTime[1] != '')
+				  $valueTime = 'Time: ' . $valueTime[1] . '-' . $valueTime[2];
+				else 
+				  $valueTime = '';  
 
-				$child = ($cart['child'] == 1) ? 'Kind: Child' : 'Kind: Adult';
+				
+				if($valueTime[1] != '')
+				  $child = ($cart['child'] == 1) ? 'Kind: Child' : 'Kind: Adult';
+				else 
+				  $child = '';
+				    
 				$price = ($cart['child'] == 1) ? round(($price + $option_price)/2, 2) : ($price + $option_price);
 				$price_1 = ($cart['child'] == 1) ? round($product_query->row['price_1']/2, 2) : $product_query->row['price_1'];
 				
