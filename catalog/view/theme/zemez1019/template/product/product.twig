@@ -82,6 +82,26 @@
 									<span class="price-new">{{ special }}</span> <span class="price-old">{{ price }}</span>
 									<p class="price_lit">({{ price_lit }} / l)</p>
 								{% endif %}
+								<br>
+								<div class="tab-pane" id="tab-specification">
+							<table class="table table-bordered">
+								{% for attribute_group in attribute_groups %}
+									<thead>
+										<tr>
+											<td colspan="2"><strong>{{ attribute_group.name }}</strong></td>
+										</tr>
+									</thead>
+									<tbody>
+										{% for attribute in attribute_group.attribute %}
+											<tr>
+												<td>{{ attribute.name }}</td>
+												<td>{{ attribute.text }}</td>
+											</tr>
+										{% endfor %}
+									</tbody>
+								{% endfor %}
+							</table>
+						</div>
 								{% if tax %}
 									<span class="price-tax"><small>{{ text_tax }} {{ tax }}</small></span>
 								{% endif %}
@@ -300,18 +320,23 @@
 						</a>
 					</li>
 					{% if (attribute_groups) %}
-						<li>
+						<li class="hide">
 							<a href="#tab-specification" data-toggle="tab">
 								{{ tab_attribute }}
 							</a>
 						</li>
 					{% endif %} 
 					{% if (review_status) %}
-						<li>
+						<li class="hide">
 							<a href="#tab-review" data-toggle="tab">
 								{{ tab_review }}
 							</a>
 						</li>
+						{% if customtabs %}
+			{% for key, customtab in customtabs %}
+				<li><a href="#tabcustom{{ key }}" data-toggle="tab">{{ customtab.title }}</a></li>
+            {% endfor %}
+            {% endif %}
 					{% endif %}
 					{% if (video) %}
 						<li>
@@ -322,6 +347,13 @@
 					{% endif %}
 				</ul>
 				<div class="tab-content">
+				{% if customtabs %}
+            {% for key, customtab in customtabs %}
+				<div class="tab-pane"id="tabcustom{{ key }}">
+					{{ customtab.description }}
+				</div>
+			{% endfor %}
+			{% endif %}
 					<div class="tab-pane active" id="tab-description">
 						{{ description }}
 					</div>
