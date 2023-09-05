@@ -652,6 +652,14 @@ class ControllerCatalogProduct extends Controller {
             $data[ 'product_description' ] = array();
         }
 
+        if ( isset( $this->request->post[ 'price_lit' ] ) ) {
+            $data[ 'price_lit' ] = $this->request->post[ 'price_lit' ];
+        } elseif ( !empty( $product_info ) ) {
+            $data[ 'price_lit' ] = $product_info[ 'price_lit' ];
+        } else {
+            $data[ 'price_lit' ] = '';
+        }
+
         if ( isset( $this->request->post[ 'model' ] ) ) {
             $data[ 'model' ] = $this->request->post[ 'model' ];
         } elseif ( !empty( $product_info ) ) {

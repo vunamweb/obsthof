@@ -227,6 +227,11 @@
 .level_2 {
   padding-left: 40px !important;
 }
+
+.price_lit {
+  color: #95C11F;
+  font-size: 15px;
+}
 /* END */
 /*========================================================
                    Bootstrap Reset
@@ -8598,7 +8603,7 @@ html[dir="rtl"] .product-options .radio input[type="radio"] + label:after {
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
   border-radius: 3px;
-  display: none;
+  /*display: none;*/
 }
 
 .product_tabs:before, .product_tabs:after {
@@ -10954,7 +10959,8 @@ video { width: 100%; }
 	border: none !important;
 }
 a.list-group-item {
-	border: none !important;
+  border: none !important;
+  font-size: 15px;
 }
 .list-group a.fa:before {
 	display: none;
