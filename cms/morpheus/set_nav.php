@@ -173,7 +173,8 @@ foreach ($lang_arr as $lan_id=>$lan) {
 
 			elseif ($ebene == 2 && $par > 1 && in_array($par, $menu_r1)) {
 				// platzhalter aus hauptnav beim ersten durchlauf loeschen
-				if (!$sub_on2) $footer_set = str_replace(array('xx'.$par.'xx', 'SPAN', 'DPD', $lasturl), array('dropdown', '', ' data-bs-toggle="collapse" aria-expanded="false" class="nav-link n'.$par.'" ', '#l'.$nid), $footer_set);
+				// if (!$sub_on2) $footer_set = str_replace(array('xx'.$par.'xx', 'SPAN', 'DPD', $lasturl), array('dropdown', '', ' data-bs-toggle="collapse" aria-expanded="false" class="nav-link n'.$par.'" ', '#l'.$nid), $footer_set);
+				if (!$sub_on2) $footer_set = str_replace(array('xx'.$par.'xx', 'SPAN', 'DPD', ), array('dropdown', '', ' data-bs-toggle="collapse" aria-expanded="false" class="nav-link n'.$par.'" ', ), $footer_set);
 				$lasturl = 0;
 
 				$footer_set .=
