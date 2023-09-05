@@ -8694,7 +8694,7 @@ html[dir="rtl"] .product-options .radio input[type="radio"] + label:after {
 }
 
 .tab-pane table { border: none; }
-.tab-pane table thead { display: none; }
+.tab-pane table thead { display: none;  }
 .tab-pane table td { width: 100%; display: block; padding: 0 !important; border: none !important; }
 .tab-pane table td:first-child { font-weight: 600; margin: 1em 0 .5em; }
 
