@@ -1535,7 +1535,7 @@ html[dir="rtl"] .box-nav > * + * {
   margin-right: 24px;
 }
 
-.logo {
+.home .logo {
   margin: 0; opacity: 0;
 }
 .black .logo { opacity: 1; transition: 1s; }
@@ -10827,12 +10827,12 @@ p + h2 { margin-top: 1em; }
 .bildtext .inner { padding: 3em 5em; text-align: center; }
 .imgColL { padding-right: 0; }
 .imgColR { padding-left: 0; }
-.contentPad { padding: 5em; }
+.contentPad { padding: 0 5em; text-align: center; }
 
 .vertical-align { display: flex; flex-direction: row; }
 .vertical-align > [class^="col-"],
 .vertical-align > [class*=" col-"] 
-	{ display: flex; align-items: center; justify-content: center; }
+	{ display: flex; align-items: center; justify-content: center; text-align: center; }
 .zitat { font-size: 4em; color: #fff; font-weight: 700; padding: 3em 3em 2em; line-height: 1.1em; }
 
 section.obsthof { padding: 3em 0; }
