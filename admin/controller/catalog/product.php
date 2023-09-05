@@ -1110,6 +1110,21 @@ class ControllerCatalogProduct extends Controller {
             );
         }
 
+        // Custom Tabs
+				
+				$data['tab_customtab']=$this->language->get('tab_customtab');
+				$data['entry_title']=$this->language->get('entry_title');
+				$data['entry_description']=$this->language->get('entry_description');
+				$data['button_customtab_add']=$this->language->get('button_customtab_add');
+				
+				if (isset($this->request->post['product_customtab'])) {
+					$data['product_customtabs'] = $this->request->post['product_customtab'];
+				} elseif (isset($this->request->get['product_id'])) {
+					$data['product_customtabs'] = $this->model_catalog_product->getProductcustomtabs($this->request->get['product_id']);
+					
+				} else {
+					$data['product_customtabs'] = array();
+				}
         // Image
         if ( isset( $this->request->post[ 'image' ] ) ) {
             $data[ 'image' ] = $this->request->post[ 'image' ];
