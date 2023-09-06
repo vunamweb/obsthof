@@ -88,6 +88,8 @@
 								{% endif %}
 							</div>
 						{% endif %}
+						<br>
+						{{ description }}
 						<div id="product">
 							{% if recurrings %}
 								<hr>
@@ -241,7 +243,7 @@
 			</div>
 			<div class="product_tabs">
 				<ul class="nav nav-tabs">
-					<li class="active">
+					<li class="active hide">
 						<a href="#tab-description" data-toggle="tab">
 							{{ tab_description }}
 						</a>
@@ -254,11 +256,16 @@
 						</li>
 					{% endif %} 
 					{% if (review_status) %}
-						<li>
+						<li class="hide">
 							<a href="#tab-review" data-toggle="tab">
 								{{ tab_review }}
 							</a>
 						</li>
+						{% if customtabs %}
+			{% for key, customtab in customtabs %}
+				<li><a href="#tabcustom{{ key }}" data-toggle="tab">{{ customtab.title }}</a></li>
+            {% endfor %}
+            {% endif %}
 					{% endif %}
 					{% if (video) %}
 						<li>
@@ -269,7 +276,14 @@
 					{% endif %}
 				</ul>
 				<div class="tab-content">
-					<div class="tab-pane active" id="tab-description">
+				{% if customtabs %}
+            {% for key, customtab in customtabs %}
+				<div class="tab-pane"id="tabcustom{{ key }}">
+					{{ customtab.description }}
+				</div>
+			{% endfor %}
+			{% endif %}
+					<div class="tab-pane hide" id="tab-description">
 						{{ description }}
 					</div>
 					{% if attribute_groups %}
@@ -590,6 +604,10 @@
 <script>
 (function ($) {
 	$(document).ready(function () {
+		$('#tabcustom0').addClass('active');
+setTimeout(function() {
+	$('a[href="#tabcustom0"]').parent().addClass('active');
+}, 1000);
 		$('.review-link a').click(function (e) {
 			e.preventDefault();
 			$('.product_tabs a[href="#tab-review"').tab('show');

@@ -38,6 +38,7 @@
             <li><a href="#tab-reward" data-toggle="tab">{{ tab_reward }}</a></li>
             <li><a href="#tab-seo" data-toggle="tab">{{ tab_seo }}</a></li>
             <li><a href="#tab-design" data-toggle="tab">{{ tab_design }}</a></li>
+            <li><a href="#tab-customtabmain" data-toggle="tab">{{ tab_customtab }}</a></li>
           </ul>
           <div class="tab-content">
             <div class="tab-pane active" id="tab-general">
@@ -1083,6 +1084,74 @@
                 </table>
               </div>
             </div>
+            	<div class="tab-pane" id="tab-customtabmain">
+				 <div class="col-sm-2">
+				  <ul class="nav nav-pills nav-stacked" id="customtab">
+					{% set customtab_row = 0 %}
+					{% for product_customtab in product_customtabs %}
+					<li><a href="#tab-customtab{{ customtab_row }}" data-toggle="tab"><i class="fa fa-minus-circle" onclick="$('a[href=\'#tab-customtab{{ customtab_row }}\']').parent().remove(); $('#tab-customtab{{ customtab_row }}').remove(); $('#customtab a:first').tab('show');"></i> {{ tab_customtab }} {{ customtab_row }}</a></li>
+					{% set customtab_row = customtab_row + 1 %}
+					{% endfor %}
+					<li id="customtab-add"><a onclick="addCustomtab();"><i class="fa fa-plus-circle"></i> {{ button_customtab_add }}</a></li>
+				  </ul>
+				</div>
+			<div class="col-sm-10">
+              <div class="tab-content tab-content2">
+                {% set customtab_row = 0 %}
+				{% for product_customtab in product_customtabs %}
+                <div class="tab-pane" id="tab-customtab{{ customtab_row }}">
+                  <ul class="nav nav-tabs" id="clanguage{{ customtab_row }}">
+                    {% for language in languages %}
+                    <li><a href="#tab-customtab{{customtab_row }}-language{{ language.language_id }}" data-toggle="tab"><img src="language/{{ language.code }}/{{ language.code }}.png" title="{{ language.name }}" />  {{ language.name }}</a></li>
+                    {% endfor %}
+                  </ul>
+                  <div class="tab-content">
+                    {% for language in languages %}
+                    <div class="tab-pane" id="tab-customtab{{customtab_row }}-language{{ language.language_id }}">
+                      <div class="form-group">
+                        <label class="col-sm-2 control-label" for="input-heading{{customtab_row }}-language{{ language.language_id }}">{{ entry_title }}</label>
+                        <div class="col-sm-10">
+                          <input type="text" name="product_customtab[{{customtab_row }}][product_customtab_description][{{ language.language_id }}][title]" value="{{ product_customtab.product_customtab_description[language.language_id] ? product_customtab.product_customtab_description[language.language_id].title }}" class="form-control"/>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="col-sm-2 control-label" for="input-description{{customtab_row }}-language{{ language.language_id }}">{{ entry_description }}</label>
+                        <div class="col-sm-10">
+                          <textarea class="show_texteditor" name="product_customtab[{{customtab_row }}][product_customtab_description][{{ language.language_id }}][description]" placeholder="{{ entry_description }}" id="input-description{{customtab_row }}-language{{ language.language_id }}" class="form-control">{{ product_customtab.product_customtab_description[language.language_id] ? product_customtab.product_customtab_description[language.language_id].description }}</textarea>
+                        </div>
+                      </div>
+                    </div>
+                    {% endfor %}
+                  </div>
+					<div class="form-group">
+                        <label class="col-sm-2 control-label" for="input-sort_order{{ customtab_row }}">{{ entry_sort_order }}</label>
+                        <div class="col-sm-10">
+                         <input type="text" name="product_customtab[{{ customtab_row }}][sort_order]" value="{{ product_customtab.sort_order }}" placeholder="{{ entry_sort_order }}" class="form-control" />
+                        </div>
+					</div>
+					<div class="form-group">
+                        <label class="col-sm-2 control-label" for="input-status{{ customtab_row }}">{{ entry_status }}</label>
+                        <div class="col-sm-10">
+                        <select name="product_customtab[{{ customtab_row }}][status]" id="input-status" class="form-control">
+						{% if product_customtab.status %}
+						<option value="1" selected="selected">{{ text_enabled }}</option>
+						<option value="0">{{ text_disabled }}</option>
+						{% else %}
+						<option value="1">{{ text_enabled }}</option>
+						<option value="0" selected="selected">{{ text_disabled }}</option>
+						{% endif %}
+					  </select>
+                        </div>
+					</div>
+					
+					
+				  
+                </div>
+				{% set customtab_row = customtab_row + 1 %}
+                {% endfor %}
+              </div>
+            </div>
+			</div>
             <div class="tab-pane" id="tab-design">
               <div class="table-responsive">
                 <table class="table table-bordered table-hover">
@@ -1639,4 +1708,85 @@
   $('#option a:first').tab('show');
   //--></script>
 </div>
+<script type="text/javascript"><!--
+{% set customtab_row = 0 %}
+{% for product_customtab in product_customtabs %}
+{% for language in languages %}
+$('#input-description{{ customtab_row }}-language{{ language.language_id }}').summernote({
+	height: 300
+});
+{% endfor %}
+{% set customtab_row = customtab_row + 1 %}
+{% endfor %}
+
+
+//--></script> 
+
+<script type="text/javascript"><!--
+$('.show_texteditor').summernote({
+		height: 300
+});
+var customtab_row = {{ customtab_row }};
+
+function addCustomtab() {	
+	html  = '<div id="tab-customtab' + customtab_row + '" class="tab-pane">';
+	html += '  <ul class="nav nav-tabs" id="clanguage' + customtab_row + '">';
+    {% for language in languages %}
+     html += '    <li><a href="#tab-customtab' + customtab_row + '-language{{ language.language_id }}" data-toggle="tab"><img src="language/{{ language.code }}/{{ language.code }}.png" title="{{ language.name }}" /> {{ language.name }}</a></li>';
+    {% endfor %}
+	html += '  </ul>';
+
+	html += '  <div class="tab-content">';
+	{% for language in languages %}
+	html += '    <div class="tab-pane" id="tab-customtab' + customtab_row + '-language{{ language.language_id }}">';
+	html += '      <div class="form-group">';
+	html += '        <label class="col-sm-2 control-label" for="input-title' + customtab_row + '-language{{ language.language_id }}">{{ entry_title }}</label>';
+	html += '        <div class="col-sm-10"><input type="text" name="product_customtab[' + customtab_row + '][product_customtab_description][{{ language.language_id }}][title]" placeholder="{{ entry_title }}" id="input-title' + customtab_row + '-language{{ language.language_id }}" value="" class="form-control"/></div>';
+	html += '      </div>';
+	html += '      <div class="form-group">';
+	html += '        <label class="col-sm-2 control-label" for="input-description' + customtab_row + '-language{{ language.language_id }}">{{ entry_description }}</label>';
+	html += '        <div class="col-sm-10"><textarea name="product_customtab[' + customtab_row + '][product_customtab_description][{{ language.language_id }}][description]" id="input-description' + customtab_row + '-language{{ language.language_id }}"></textarea></div>';
+	html += '      </div>';
+	html += '    </div>';
+	{% endfor %}
+	html += '  </div>';
+	html += '      <div class="form-group">';
+	html += '        <label class="col-sm-2 control-label" for="input-status' + customtab_row +'">{{ entry_status }}</label>';
+	html += '        <div class="col-sm-10"><select name="product_customtab[' + customtab_row + '][status]" class="form-control"><option value="1">{{ text_enabled }}</option><option value="0">{{ text_disabled }}</option></select></div>';
+	html += '      </div>';
+	html += '  <div class="form-group">';
+	html += '<label class="col-sm-2 control-label" for="input-sort_order' + customtab_row +'">{{ entry_sort_order }}</label>';
+	html += ' <div class="col-sm-10"><input type="text" name="product_customtab[' + customtab_row + '][sort_order]" value="" class="form-control" /></div>';
+	html += '</div>';
+	html += '</div>';
+	
+	$('#tab-customtabmain .tab-content2').append(html);
+	
+	{% for language in languages %}
+	$('#input-description' + customtab_row + '-language{{ language.language_id }}').summernote({
+		height: 300
+	});
+	{% endfor %}
+	
+	$('#customtab a[href=\'#tab-customtab' + customtab_row + '\']').tab('show');
+	
+	$('#clanguage' + customtab_row + ' li:first-child a').tab('show');
+	
+	$('#customtab-add').before('<li><a href="#tab-customtab' + customtab_row + '" data-toggle="tab"><i class="fa fa-minus-circle" onclick="$(\'a[href=\\\'#tab-customtab' + customtab_row + '\\\']\').parent().remove(); $(\'#tab-customtab' + customtab_row + '\').remove(); $(\'#customtab li a:first\').tab(\'show\');"></i> {{ tab_customtab }} ' + customtab_row + '</a></li>');
+	
+	
+	$('#customtab-' + customtab_row).trigger('click');
+	
+	customtab_row++;
+}
+//--></script> 
+
+<script type="text/javascript"><!--
+$('#customtab li:first-child a').tab('show');
+{% set customtab_row = 0 %}
+{% for product_customtab in product_customtabs %}
+$('#clanguage{{ customtab_row }} li:first-child a').tab('show');
+{% set customtab_row = customtab_row + 1 %}
+{% endfor %} 
+//--></script> 
 {{ footer }} 
