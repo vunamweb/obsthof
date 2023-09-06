@@ -232,6 +232,25 @@
 .input-group-btn {
   font-size: small;
 }
+
+.product_tabs {
+  border-top: none !important;
+}
+.product_tabs li.active {
+  border-top: 2px solid var(--green);
+}
+.product_tabs .nav-tabs > li {
+  display: inline-block;
+}
+.product_tabs .nav-tabs {
+  width: 100% !important;
+}
+.col-2-tab {
+  padding-left: 100px;
+}
+.col-1-tab {
+  width: min-content;
+}
 /* END */
 /*========================================================
                    Bootstrap Reset
