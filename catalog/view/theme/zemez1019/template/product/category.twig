@@ -276,7 +276,7 @@
 									{% endif %}
 									<div class="button-wrap">
 										<button class="btn-primary"><a href="{{ product.href }}">Detail</a></button>
-										<button class="btn-primary quickview hide" type="button" data-rel="details" data-product="{{ product['product_id'] }}">{{text_quick}}</button>
+										<button class="btn-primary quickview " type="button" data-rel="details" data-product="{{ product['product_id'] }}">{{text_quick}}</button>
 										<button type="button" class="btn-primary" {% if (product.options|length > 3) %} onclick="cart.add('{{ product.product_id }}');" {% else %} onclick="ajaxAdd($(this),{{ product.product_id }});" {% endif %}>{{button_cart}}</button>
 									</div>
 								</div>								
