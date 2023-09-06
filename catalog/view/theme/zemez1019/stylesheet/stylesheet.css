@@ -34,6 +34,7 @@
 	--red: #dc0a2e;
 	--red-dark: #6C0000;
 	--green: #95C11F;
+	--light: #f7f7f7;
 	--btn-bg: rgba(0,0,0,.4);
 	--navwidth: 400px;
 	--navwidthminus: -400px;
@@ -226,7 +227,7 @@
 }
 .price_lit {
   color: #95C11F;
-  font-size: 15px;
+  font-size: .8em;
 }
 
 .input-group-btn {
@@ -1194,7 +1195,7 @@ label {
 }
 
 .nav-tabs {
-  margin-bottom: 15px;
+  /* margin-bottom: 15px; */
 }
 
 div.required .control-label:after {
@@ -3134,7 +3135,6 @@ html[dir="rtl"] .box-language .toggle:after, html[dir="rtl"]
 /* ===================   Product Price    =================== */
 .price-new, .price-old, .price {
   display: inline-block;
-  font: 300 18px/22px "Meta Cn", sans-serif;
   line-height: 1.2em;
   color: var(--red-dark);
 }
@@ -4310,7 +4310,7 @@ aside .row {
   font: 400 14px/16px "Meta Cn", sans-serif;
   font-size: 1em;
   line-height: 1.2em;
-  padding: 15px 29px;
+  padding: 10px 20px;
   border: none !important;
   text-align: center;
   text-shadow: none;
@@ -8700,9 +8700,11 @@ html[dir="rtl"] .product-options .radio input[type="radio"] + label:after {
 }
 
 .product_tabs .tab-content {
-  width: 70%;
+  width: 100%;
+  font-size: .8em;
   float: left;
-  padding: 40px 40px 10px 40px;
+  padding: 20px 20px 10px 20px;
+  background: var(--light);
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
@@ -11007,6 +11009,7 @@ a.list-group-item.level_2:before { content:''; display: inline-block; width: 10p
 .product-thumb .date_event 
 	{ font-size: 1em; letter-spacing: 0; }
 
+.offer { position: absolute; background: var(--green); padding: 6px 12px; top: -60px; transform: rotate(10deg); font-size: .8em; text-transform: uppercase; color: #fff; }
 @media (max-width: 1500px) {
 	.swiper-slide .content_1 { margin: 5% 10%; }
 }

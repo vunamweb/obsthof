@@ -282,6 +282,11 @@
 								</div>								
 								<div class="content">
 									<div class="caption">
+										{% if product.price %}
+											{% if product.special %}
+												 <span class="offer">Angebot</span>
+											{% endif %}
+										{% endif %}
 										<h4 class="name"><a href="{{ product.href }}">{{ product.name }}</a></h4>
 										<p class="description">{{ product.description }}</p>
 										{% if product.price %}
@@ -290,7 +295,8 @@
 													{{ product.price }}
 													<p class="price_lit">({{ product.price_lit }} / l)</p>
 												{% else %}
-													 <span class="price-new">{{ product.special }}</span> <span class="price-old">{{ product.price }}</span>
+													 <span class="price-new">{{ product.special }}</span> 
+													 <span class="price-old">{{ product.price }}</span>
 													 <p class="price_lit">({{ product.price_lit }} / l)</p>
 												{% endif %}
 												{% if product.tax %}
