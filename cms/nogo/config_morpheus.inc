@@ -15,7 +15,7 @@ $morpheus["layout"]			= array("","Dreispaltig");
 /* DESIGNS BENENNUNG */
 $morpheus["design"]			= array(
 									1=>"Standard",
-									2=>"Ohne Header Image",
+									// 2=>"Ohne Header Image",
 #									3=>"Design 3",
 #									1=>"Startseite",
 #									3=>"Unterseiten mit Hintergrund-Bild",
@@ -35,7 +35,7 @@ $morpheus["template"]		= array(
 
 									7=> "Header Bild / Logo Slider<br>",
 #									3=> "Text Slider<br>",
-#									12=>"Galerie 4 Bilder",
+									12=>"Galerie 4 Bilder",
 #									11=> "Startseite Slider",
 									// 8=> "Vorteile -> Icons plus Text<br>",
 #									9=> "Video",

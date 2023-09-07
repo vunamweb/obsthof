@@ -54,7 +54,7 @@ if ($_REQUEST["sprache"]) {
 */
 include("cms_include.inc");
 // include("editor_css_edit.php");
-// include("editor_edit.php");
+include("_tinymce.php");
 
 $ngid = $_REQUEST["ngid"];
 if (!$ngid) $db   = "morp_cms_news_group";
@@ -90,7 +90,7 @@ echo "<div>";
 
 if ($del) {
 	echo '<p>&nbsp;</p><p><font color=#ff0000><b>Sind Sie sich sicher, dass sie den Datensatz l&ouml;schen wollen?</b></font></p>
-		<p>&nbsp; &nbsp; &nbsp; <a href="news.php?del_=' .$del .'">Ja</a> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="news.php">Nein</a></p></body></html>';
+		<p>&nbsp; &nbsp; &nbsp; <a href="news.php?del_=' .$del .'&ngid='.$ngid.'">Ja</a> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="news.php?ngid='.$ngid.'">Nein</a></p></body></html>';
 	die();
 }
 
@@ -147,6 +147,7 @@ elseif ($save && $ngid) {
 	$icon 		= $_POST["icon"];
 	$sichtbar	= $_POST["sichtbar"];
 	$nmovie 	= $_POST["nmovie"];
+	$nlinkbez	= $_POST["nlinkbez"];
 	
 	$kat1	= $_POST["kat1"] ? $_POST["kat1"] : 0;
 	$kat2	= $_POST["kat2"] ? $_POST["kat2"] : 0;
@@ -158,7 +159,7 @@ elseif ($save && $ngid) {
 	if ($nabstr == "") {
 		$na = explode(" ", strip_tags($ntext));
 		for($i=0; $i<25;$i++) {
-			$nabstr .= $na[$i]." ";
+			$nabstr .= trim($na[$i])." ";
 		}
 	}
 	
@@ -168,24 +169,24 @@ elseif ($save && $ngid) {
 	if(!$hid) $hid=0;
 	if(!$pid) $pid=0;
 	
-	$set = "ntitle='$ntitle', nvon='$nvon', nbis='$nbis', icon='$icon', nmovie='$nmovie', hid='$hid', nlink='$nlink', nsubtitle='$nsubtitle', nabstr='$nabstr', nerstellt='$nerstellt', sichtbar=$sichtbar, ngid=$ngid, pid='$pid', nautor='$naut', style='$style', nMetaTitle='$nMetaTitle', nMetaDesc='$nMetaDesc', kat1=$kat1, kat2=$kat2, kat3=$kat3, jahr=".$datum[0].", monat=".$datum[1];
+	$set = "ntitle='$ntitle', nvon='$nvon', nbis='$nbis', icon='$icon', nlinkbez='$nlinkbez', nmovie='$nmovie', hid='$hid', nlink='$nlink', nsubtitle='$nsubtitle', nabstr='$nabstr', nerstellt='$nerstellt', sichtbar=$sichtbar, ngid=$ngid, pid='$pid', nautor='$naut', style='$style', nMetaTitle='$nMetaTitle', nMetaDesc='$nMetaDesc', kat1=$kat1, kat2=$kat2, kat3=$kat3, jahr=".$datum[0].", monat=".$datum[1];
 	# $set = "ntitle='$ntitle', nlink='$nlink', nsubtitle='$nsubtitle', nabstr='$nabstr', nerstellt='$nerstellt', aktuell=$aktuell, ngid=$ngid, pid='$pid', nautor='$naut', style='$style'";
-	if ($format <= 3) $set .= ", ntext='$ntext'";
+	if ($format <= 3) $set .= ", ntext='".addslashes($ntext)."'";
 
 	if (!$neu) 	$query = "UPDATE `morp_cms_news` SET $set, edit=1 WHERE `nid`=$edit";
 	else  		$query = "INSERT `morp_cms_news` SET $set";
 
-	#echo "<br><br>";
-	#echo $query;
+	// echo $query;
+	// echo "<br><br>";
 	$result = safe_query($query);
 
 	if (!$neu) {
-		protokoll($uid, "news", $edit, "edit");
+		// protokoll($uid, "news", $edit, "edit");
 //		unset($edit);
 	}
 	else {
 		$c = mysqli_insert_id($mylink);
-		protokoll($uid, "news", $c, "neu");
+		// protokoll($uid, "news", $c, "neu");
 		$edit = $c;
 		unset($neu);
 	}
@@ -251,66 +252,66 @@ if (($edit || $neu) && $ngid) {
 
 		// $tagSelect = '<tr><td># Hashtags</td><td><select multiple id="tags'.$edit.'" name="tags[]" class="tags form-control" ref="'.$edit.'" placeholder="Tags / Kategorien"></select></td></tr>';
 
-		$sql = "SELECT * FROM morp_tags WHERE 1 ORDER BY tag";
-		$res = safe_query($sql);
-		$tag_list = '';
-		while ($row = mysqli_fetch_object($res)) {
-			$tag_list .= '{value:'.$row->tagID.' , title: "'.$row->tag_long.'" },
-		';
-		}
+		// $sql = "SELECT * FROM morp_tags WHERE 1 ORDER BY tag";
+		// $res = safe_query($sql);
+		// $tag_list = '';
+		// while ($row = mysqli_fetch_object($res)) {
+		// 	$tag_list .= '{value:'.$row->tagID.' , title: "'.$row->tag_long.'" },
+		// ';
+		// }
 
-		$jsList = '
-<script>
-
-	function setOptions(data, value) {
-		'.$setOptions.'
-	}
-
-	var options = [
-	 {id:\'\' , title: \'All\' },
-'.$tag_list.'
-	];
-
-	var $select = $(\'#tags'.$edit.'\').selectize({
-		plugins: [\'remove_button\'],
-	    labelField: \'title\',
-	    searchField: \'title\',
-	    sortField: \'title\',
-		options: options,
-	    create:  function(value, callback) {
-			 console.log(value);
-		    request = $.ajax({
-		        url: "UpdateTag.php",
-		        type: "post",
-		        data: "add=1&table=morp_cms_news&art=news&data="+value+"&id='.$edit.'&feld=nid",
-		        success: function(data) {
-					 console.log(data);
-					 callback({ value: data, title: value });
-					 setOptions(data, value);
-
-				}
-		    });
-	    },
-	    onChange: function(value) {
-	        if (!value.length) return;
-		    request = $.ajax({
-		        url: "UpdateTag.php",
-		        type: "post",
-		        data: "table=morp_cms_news&art=news&data="+value+"&id='.$edit.'&feld=nid",
-		        success: function(data) {
-					 console.log(data);
-				}
-		    });
-	    }
-	});
-
-
-	'.( $tagCount > 0 ? ' $select[0].selectize.setValue(['.$tagList.']);' : '').'
-
-
-
-</script>
-';
+// 		$jsList = '
+// <script>
+// 
+// 	function setOptions(data, value) {
+// 		'.$setOptions.'
+// 	}
+// 
+// 	var options = [
+// 	 {id:\'\' , title: \'All\' },
+// '.$tag_list.'
+// 	];
+// 
+// 	var $select = $(\'#tags'.$edit.'\').selectize({
+// 		plugins: [\'remove_button\'],
+// 	    labelField: \'title\',
+// 	    searchField: \'title\',
+// 	    sortField: \'title\',
+// 		options: options,
+// 	    create:  function(value, callback) {
+// 			 console.log(value);
+// 		    request = $.ajax({
+// 		        url: "UpdateTag.php",
+// 		        type: "post",
+// 		        data: "add=1&table=morp_cms_news&art=news&data="+value+"&id='.$edit.'&feld=nid",
+// 		        success: function(data) {
+// 					 console.log(data);
+// 					 callback({ value: data, title: value });
+// 					 setOptions(data, value);
+// 
+// 				}
+// 		    });
+// 	    },
+// 	    onChange: function(value) {
+// 	        if (!value.length) return;
+// 		    request = $.ajax({
+// 		        url: "UpdateTag.php",
+// 		        type: "post",
+// 		        data: "table=morp_cms_news&art=news&data="+value+"&id='.$edit.'&feld=nid",
+// 		        success: function(data) {
+// 					 console.log(data);
+// 				}
+// 		    });
+// 	    }
+// 	});
+// 
+// 
+// 	'.( $tagCount > 0 ? ' $select[0].selectize.setValue(['.$tagList.']);' : '').'
+// 
+// 
+// 
+// </script>
+// ';
 
 	// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 	// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
@@ -493,6 +494,10 @@ if (($edit || $neu) && $ngid) {
 			<td>Link</td>
 			<td><input type="text" name="nlink"  class="form-control" value="' .$nlink .'"> &nbsp; <a href="link.php?nid='.$edit.'&ngid='.$ngid.'">'  .$bittew .'</a>'.$dellink .'
 			<p>Internen Link w&auml;hlen oder externen Link einsetzen</p>
+			
+			<label>Bezeichnung Link</label>
+			<input type="text" name="nlinkbez"  class="form-control" value="' .$row->nlinkbez .'">
+			
 			</td>
 		</tr>
 		';

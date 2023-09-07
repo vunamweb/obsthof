@@ -216,7 +216,7 @@
 .swiper-slide .content_1 {
   position: absolute;
   top:0;
-  margin: 10% 20%;
+  margin: 10% 10%;
   padding: 1em 1em 3em;
   background: #fff;
   opacity: 0.8;
@@ -8268,19 +8268,20 @@ button.swiper-pagination-bullet {
   background-position: center top;
 }
 .bestseller_1 .swiper-slide {
-  width: 50% !important;
-  margin-right: 0 !important;
+  width: 40% !important;
+  margin-right: 40px !important;
 }
 
 .swiper-slide__link {
   display: block;
   height: 100%;
 }
-
 .swiper-slide .container {
   position: relative;
   height: 100%;
 }
+.news-slide h3 { display: block; height: 70px; }
+.section_news { margin-bottom: 2em; }
 
 @media (min-width: 1200px) and (max-width: 1479px) {
   .swiper-slider.swiper-container {
