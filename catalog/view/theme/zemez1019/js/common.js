@@ -24,6 +24,7 @@ function getURLVar(key) {
 
 $(document).ready(function() {
 	// Highlight any found errors
+	$('.form_calculation').parent().parent().css('width', '100%');
 	$('.datetimepicker').datetimepicker();
 
 	$('.show_date_event').click(function() {
