@@ -8252,7 +8252,6 @@ button.swiper-pagination-bullet {
   padding-left: 40px;
 }
 
-.btn-abs .btn-info,
 .swiper-slider .btn, .swiper-slider .btn-primary {
   margin-top: 18px;
   background: rgba(0,0,0,.3);
@@ -11009,8 +11008,8 @@ a.list-group-item.level_2:before { content:''; display: inline-block; width: 10p
 
 .sortenliste { margin-bottom: 3em; text-align: left; margin-top: 3em; }
 .sortenliste img { max-height: 160px; width: auto; }
-h2.liste { display: inline-block; width: auto; }
-.btn-info.active { background: var(--green); }
+.btn.small { font-size: .8em; margin: .5em; }
+.btn-info.active { background: var(--red-dark); }
 
 .product-thumb .event, 
 .product-thumb h4.name, 

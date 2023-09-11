@@ -35,7 +35,7 @@ if($sorte) {
 	while ($row = mysqli_fetch_object($res)) {
 		$linkname = $row->$nameField;	
 		$url = getUrl($targetID).eliminiere($linkname).'--'.$row->$tid.'/';
-		$liste .= '<h2 class="small liste"><a href="'.$url.'" class="btn btn-info'.($sorte==$row->$tid ? ' active' : '').'">'.$linkname.'</a></h2>';
+		$liste .= '<a href="'.$url.'" class="small btn btn-info'.($sorte==$row->$tid ? ' active' : '').'">'.$linkname.'</a>';
 	}	
 
 	$output = '
@@ -49,7 +49,7 @@ if($sorte) {
 				</div>
 			</div>
 			<div class="col-xs-12 col-sm-6 col-md-6 order-1 order-md-2 imgColR btn-abs">
-				<img src="'.$dir.'images/sorten/'.$img.'" alt="'.$name.'" class="img-fluid">
+				<img src="'.$dir.'images/sorten/'.urlencode($img).'" alt="'.$name.'" class="img-fluid">
 			</div>	
 		</div>
 		
