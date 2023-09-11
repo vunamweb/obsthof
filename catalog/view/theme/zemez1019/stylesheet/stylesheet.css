@@ -3895,6 +3895,8 @@ html[dir="rtl"] .box [id*="nav_"] {
   border-color: #f2f2f2;
   background-color: #f2f2f2;
 }
+/* .swiper-button-next:hover { right: -60px !important; }
+.swiper-button-prev:hover { left: -60px !important; } */
 
 .box [id*="nav_"] .swiper-button-next.swiper-button-disabled,
 .box [id*="nav_"] .swiper-button-prev.swiper-button-disabled {
@@ -7483,7 +7485,7 @@ html[lang="de"] .newsletter-popup .zemez-login-form input {
   overflow: hidden;
   z-index: 1;
 }
-
+/* #bestseller .swiper-container { overflow: inherit; } */
 .box-carousel .swiper-slide a {
   position: relative;
 }
@@ -7757,8 +7759,8 @@ div.swiper-button-next.swiper-button-disabled {
 
 div.swiper-button-prev {
   background-image: none !important;
-  left: 2px;
-  right: auto;
+  /* left: -60px; */
+  right: inherit;
 }
 
 div.swiper-button-prev:before {
@@ -7775,8 +7777,8 @@ div.swiper-button-prev.swiper-button-white:before {
 
 div.swiper-button-next {
   background-image: none !important;
-  right: 2px;
-  left: auto;
+  /* right: -60px; */
+  left: inherit;
 }
 
 div.swiper-button-next:before {
@@ -8321,7 +8323,7 @@ button.swiper-pagination-bullet {
     margin-bottom: 30px;
   }
   .swiper-slider.swiper-container {
-    height: 246px !important;
+    height: 50vh !important;
   }
   .swiper-slider h2 {
     font-size: 30px;
@@ -11032,6 +11034,7 @@ a.list-group-item.level_2:before { content:''; display: inline-block; width: 10p
 
 }
 @media (max-width: 992px) {
+	body { font: 400 18px "Meta Cn", "Courier", sans-serif; }
 	.contentPad { padding: 1em; }
 	.zitat {
 		  font-size: 3em;
@@ -11085,6 +11088,7 @@ a.list-group-item.level_2:before { content:''; display: inline-block; width: 10p
   }
 }
 @media (max-width: 600px) {
+	body { font: 400 16px "Meta Cn", "Courier", sans-serif; }
 	.vertical-align {
 		display: inherit;
 		margin-left: -15px; margin-right: 0;

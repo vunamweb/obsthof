@@ -44,14 +44,17 @@ if($tref == 1 || $tref == 4 || !$tref) $template = '
 		prevButton: \'.swiper-button-prev\',
 		loop: true,
 		breakpoints: {
-			479: {
+			600: {
 				slidesPerView: 1
 			},
 			767: {
 				slidesPerView: 2
 			},
-			1199: {
-				slidesPerView: 4
+			992: {
+				slidesPerView: 2
+			},
+			1400: {
+				slidesPerView: 3
 			}
 		}
 	});
