@@ -9,13 +9,13 @@
 # # # # # # # # # # # # # # # # # # # # # # # # # # #
 // error_reporting(E_ALL);
 
-use PHPMailer\PHPMailer\PHPMailer;
-// use PHPMailer\PHPMailer\SMTP;
-// use PHPMailer\PHPMailer\Exception;
-$root = $_SERVER['DOCUMENT_ROOT'].$morpheus["subFolder"];
-require ($root.'page/PHPMailer.php');
-require ($root.'page/SMTP.php');
-require ($root.'page/Exception.php');
+// use PHPMailer\PHPMailer\PHPMailer;
+// // use PHPMailer\PHPMailer\SMTP;
+// // use PHPMailer\PHPMailer\Exception;
+// $root = $_SERVER['DOCUMENT_ROOT'].$morpheus["subFolder"];
+// require ($root.'page/PHPMailer.php');
+// require ($root.'page/SMTP.php');
+// require ($root.'page/Exception.php');
 
 global $jumpIDProdukt, $jumpIDWG, $jumpIDAnwendung, $jumpIDHersteller, $hersteller_nm, $produkte_nm, $anwendungen_nm, $lang, $anw_privat, $anw_smart, $anw_handel, $anw_werte, $anw_beh, $anwendung_arr, $anwendungID, $anwendung_col;
 
@@ -1567,18 +1567,18 @@ function getUrl($id, $lan = "de", $setLang = 0) {
 
 	if ($multilang) {
 		if ($morpheus["home_ID"][$lan] == $id && $lan == "de") {
-			$ziel = $dir;
+			$ziel = $morpheus["shopurl"];
 		} elseif ($morpheus["home_ID"][$lan] == $id) {
-			$ziel = $dir . $lan . '/';
+			$ziel = $morpheus["shopurl"] . $lan . '/';
 		} else {
-			$ziel = $dir . $lan . '/' . $navID[$id];
+			$ziel = $morpheus["shopurl"] . $lan . '/' . $navID[$id];
 		}
 
 	} else {
 		if ($morpheus["home_ID"][$lan] == $id) {
-			$ziel = $dir;
+			$ziel = $morpheus["shopurl"];
 		} else {
-			$ziel = $dir . $navID[$id];
+			$ziel = $morpheus["shopurl"] . $navID[$id];
 		}
 
 	}

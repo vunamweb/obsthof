@@ -8,6 +8,7 @@ $morpheus = array();
 include("#*Z-z9xX/fingerweg.php");
 $morpheus["code"]			= "pd?xVx!";
 $morpheus["url"]			= "http://localhost/obsthof/cms/";
+$morpheus["shopurl"]		= "https://www.morpheus-cms.de/shop/";
 $morpheus["subFolder"] 		= '/obsthof/cms/';
 $morpheus["dfile"]			= "morpheus_db.sql";
 $morpheus["search_ID"]		= array("de"=>52, "en"=>"200" );
