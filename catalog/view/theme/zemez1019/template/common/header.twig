@@ -61,7 +61,9 @@
 		{{ seo1 }}
 		{{ seo2 }}
 		{{ seo3 }}
+		{% if seo4 != null %}
 		{{ seo4 }}
+		{% endif %}
 	</head>
 	<body class="{{ url }} body_class">
 		<p id="gl_path" class="hidden">{{ theme_path }}</p>

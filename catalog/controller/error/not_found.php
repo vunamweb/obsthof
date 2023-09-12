@@ -54,7 +54,7 @@ class ControllerErrorNotFound extends Controller {
 		$data['header'] = $this->load->controller('common/header');
 		$data['content_morpheus'] = $contentMorpheus;
 
-		$this->response->addHeader($this->request->server['SERVER_PROTOCOL'] . ' 404 Not Found');
+		//$this->response->addHeader($this->request->server['SERVER_PROTOCOL'] . ' 404 Not Found');
 
 		$this->response->setOutput($this->load->view('common/morpheus', $data));
 	}
