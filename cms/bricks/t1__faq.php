@@ -36,7 +36,7 @@ while ($row = mysqli_fetch_object($res)) {
   "mainEntity": {
 	"@type": "Question",
 	"name": "'.$row->name.'",
-	"text": "'.$row->faq.'",
+	"text": "'.$row->faq.'"
   }
 }
 </script>
