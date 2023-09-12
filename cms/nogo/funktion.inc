@@ -9,13 +9,14 @@
 # # # # # # # # # # # # # # # # # # # # # # # # # # #
 // error_reporting(E_ALL);
 
-// use PHPMailer\PHPMailer\PHPMailer;
-// // use PHPMailer\PHPMailer\SMTP;
-// // use PHPMailer\PHPMailer\Exception;
-// $root = $_SERVER['DOCUMENT_ROOT'].$morpheus["subFolder"];
-// require ($root.'page/PHPMailer.php');
-// require ($root.'page/SMTP.php');
-// require ($root.'page/Exception.php');
+ use PHPMailer\PHPMailer\PHPMailer;
+ //use PHPMailer\PHPMailer\SMTP;
+ //use PHPMailer\PHPMailer\Exception;
+$root = $_SERVER['DOCUMENT_ROOT'].$morpheus["subFolder"];
+//echo $root; die();
+ require ($root.'page/PHPMailer.php');
+ require ($root.'page/SMTP.php');
+ require ($root.'page/Exception.php');
 
 global $jumpIDProdukt, $jumpIDWG, $jumpIDAnwendung, $jumpIDHersteller, $hersteller_nm, $produkte_nm, $anwendungen_nm, $lang, $anw_privat, $anw_smart, $anw_handel, $anw_werte, $anw_beh, $anwendung_arr, $anwendungID, $anwendung_col;
 
@@ -62,17 +63,17 @@ function sendMailSMTP($to, $subject, $message, $file='', $display_sent=1) {
 	global $morpheus;
 	$to = trim($to);
     $mail = new PHPMailer();
-    // $mail->IsSMTP();
-    // $mail->SMTPDebug = 0; 	// enables SMTP debug information (for testing)
+    $mail->IsSMTP();
+    $mail->SMTPDebug = 0; 	// enables SMTP debug information (for testing)
     						// 1 = errors and messages
     						// 2 = messages only
-    // $mail->SMTPAuth = true; 
-    // $mail->SMTPSecure = "ssl";
-    // $mail->Host = $morpheus["Host"]; 
-    // $mail->Port = $morpheus["Port"];
-    // $mail->Username = $morpheus["Username"];
-    // $mail->Password = $morpheus["Password"];
-    // $mail->addBcc("b@7sc.eu");
+    $mail->SMTPAuth = true; 
+    $mail->SMTPSecure = "ssl";
+    $mail->Host = "w019bb56.kasserver.com"; // sets GMAIL as the SMTP server
+	$mail->Port = 465; // set the SMTP port for the GMAIL server
+	$mail->Username = "shop@yourplate.de"; // GMAIL username
+	$mail->Password = "PovgWK7pNyt7zkg3Dtzw";
+    $mail->addBcc("b@7sc.eu");
 	// $mail->AddAddress($to);
 	
 	//Attachments
@@ -81,8 +82,8 @@ function sendMailSMTP($to, $subject, $message, $file='', $display_sent=1) {
 
     $mail->AddAddress($to);
     $mail->Subject = $subject;
-    $mail->FromName = $morpheus["FromName"];
-    $mail->From = $morpheus["From"];
+    $mail->FromName = 'obsthof'; //$morpheus["FromName"];
+    $mail->From = 'info@yourplate.de'; //$morpheus["From"];
     $mail->IsHTML(true);
     $mail->Body = $message;
 

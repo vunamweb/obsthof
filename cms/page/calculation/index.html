@@ -28,6 +28,12 @@ body{--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: 
 .wpcf7-not-valid-tip_1, .wpcf7-not-valid-tip_2, .wpcf7-not-valid-tip_3, .wpcf7-not-valid-tip_4, .wpcf7-not-valid-tip_5 {
 	color: red;
 }
+.success {
+	color: green !important;
+}
+.error {
+	color: red
+}
 #text_capcha {
 	font-style: italic;
 	font-weight: 700;
@@ -39,6 +45,7 @@ body{--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: 
 <script type="text/javascript" src="./calculation_form/jquery-migrate.min.js" id="jquery-migrate-js"></script>
 <script type="text/javascript" src="./calculation_form/jquery.validate.min.js" id="validate-js"></script>
 <script type="text/javascript" src="./calculation_form/jquery-ui.js" id="jquery-ui-1.12.0.custom_js-js"></script>
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 <script type="text/javascript" src="./calculation_form/custom.js" id="custom_js-js"></script>
 <script type="text/javascript" src="./calculation_form/accounting.min.js" id="accounting_js-js"></script>
 <script type="text/javascript" id="wpstg-global-js-extra">
@@ -371,10 +378,11 @@ Mehr Informationen zu <span class="ar-opener va-info">Apfel-Raclette</span> und 
 	<p>
 	
 	</p>
-	<p id="submit"><input style="display: none" class="wpcf7-form-control wpcf7-submit wpcf7-submit_root has-spinner" type="submit" value="Unverbindliche Anfrage senden"><span class="wpcf7-spinner"></span>
-	<p id="submit"><input class="wpcf7-form-control wpcf7-submit wpcf7-submit_1 has-spinner" type="button" value="Unverbindliche Anfrage senden"><span class="wpcf7-spinner"></span>
+	<p id="submit"><input style="display: none" class="wpcf7-form-control wpcf7-submit wpcf7-submit_root has-spinner" type="submit" value="Unverbindliche Anfrage senden">
+	<p id="submit"><input class="wpcf7-form-control wpcf7-submit wpcf7-submit_1 has-spinner" type="button" value="Unverbindliche Anfrage senden">
 	</p>
-</div><div class="wpcf7-response-output" aria-hidden="true"></div>
+	<div class="message" aria-hidden="true"></div>
+</div>
 </form>
 </div>
 
@@ -467,8 +475,16 @@ Mehr Informationen zu <span class="ar-opener va-info">Apfel-Raclette</span> und 
                   $('.wpcf7-not-valid-tip_5').removeClass('hide');
 				}
 
-				if(check)
-				  $('.wpcf7-submit_root').click()
+				if(check) {
+					$('.wpcf7-submit_root').click();
+					$('.message').addClass('success');
+					$('.message').html('Vielen Dank für deine Mitteilung. Sie wurde versandt');
+
+				} else {
+					$('.message').addClass('error');
+					$('.message').html('Ein oder mehrere Felder sind fehlerhaft. Bitte überprüfe sie und versuche es noch einmal.');
+				}
+				  
 			})
 
 			window.RS_MODULES = window.RS_MODULES || {};

@@ -75,21 +75,11 @@
 }
 
 .wpcf7-spinner {
-	visibility: hidden;
-	display: inline-block;
-	background-color: #23282d; /* Dark Gray 800 */
-	opacity: 0.75;
-	width: 24px;
-	height: 24px;
-	border: none;
-	border-radius: 100%;
-	padding: 0;
-	margin: 0 24px;
-	position: relative;
+	display: none !important;
 }
 
 form.submitting .wpcf7-spinner {
-	visibility: visible;
+	display: none !important;
 }
 
 .wpcf7-spinner::before {
