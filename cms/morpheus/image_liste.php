@@ -117,26 +117,6 @@ elseif($txtedit) {
 	$wgID = $row->wgID;
 	$pcID = $row->pcID;
 
-	$table 		= 'morp_product_wg';
-	$tid 		= 'wgID';
-	$nameField 	= "wg";
-	$sql = "SELECT * FROM $table WHERE 1 ORDER BY $nameField";
-	$res = safe_query($sql);
-	$produktListe = '<select name="wgID"><option value="0">Warengruppe wählen</option>';
-	while($rw = mysqli_fetch_object($res)) {
-		$produktListe .= '<option value="'.$rw->$tid.'"'.($rw->$tid == $wgID ? ' selected' : '').'>'.$rw->$nameField .'</option>' ;
-	}
-	$produktListe .= '</select> &nbsp; ';
-	$produktListe .= '<select name="pcID"><option value="0">Hersteller wählen</option>';
-	$table 		= 'morp_product_company';
-	$tid 		= 'pcID';
-	$nameField 	= "company";
-	$sql = "SELECT * FROM $table WHERE 1 ORDER BY $nameField";
-	$res = safe_query($sql);
-	while($rw = mysqli_fetch_object($res)) {
-		$produktListe .= '<option value="'.$rw->$tid.'"'.($rw->$tid == $pcID ? ' selected' : '').'>'.$rw->$nameField .'</option>' ;
-	}
-	$produktListe .= '</select>';
 	
 //	if (!$tx) $tx = "Bitte hier den beschreibenden Text einf&uuml;gen";
 	$warnung = '<form action="image_liste.php" method="post"  class="form-inline">'."
@@ -162,12 +142,12 @@ elseif($txtedit) {
 elseif ($newtext || $ltext || $pcID || $wgID || $filename != $filenameORG) {
 	if($filename != $filenameORG) {
 		if(rename("../images/userfiles/image/".$filenameORG, "../images/userfiles/image/".$filename)) {
-			$query = "UPDATE `morp_cms_image` SET itext='$newtext', `longtext`='$ltext', imgname='$filename', wgID=$wgID, pcID=$pcID  WHERE imgid=$inr";
+			$query = "UPDATE `morp_cms_image` SET itext='$newtext', `longtext`='$ltext', imgname='$filename' WHERE imgid=$inr";
 			safe_query($query);
 		}
 	}
 	else {
-		$query = "UPDATE `morp_cms_image` SET itext='$newtext', `longtext`='$ltext', wgID=$wgID, pcID=$pcID WHERE imgid=$inr";
+		$query = "UPDATE `morp_cms_image` SET itext='$newtext', `longtext`='$ltext' WHERE imgid=$inr";
 		safe_query($query);
 	}
 

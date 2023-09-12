@@ -94,6 +94,7 @@ $auths_arr = array(
 				<?php if(in_array(21,$auths) || $admin) { ?>
 				 	<li><a href="formular.php" title="Formulare verwalten"><i class="fa fa-tasks "></i> Formulare</a></li>
 					 <li><a href="morp_sortenlexikon.php" title="Sortenlexikon verwalten"><i class="fa fa-tasks "></i> Sortenlexikon</a></li>
+					 <li><a href="morp_faq.php" title="FAQ"><i class="fa fa-tasks "></i> FAQ</a></li>
 				<?php	} ?>
 
 

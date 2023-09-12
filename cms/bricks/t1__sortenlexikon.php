@@ -43,9 +43,9 @@ if($sorte) {
 			<div class="col-xs-12 col-sm-6 col-md-6 order-2 order-md-1 contentPad">
 				<div>
 					<h1>'.$name.'</h1>
-					<p><b>'.$status.'</b></p>
+					<p><b>'.$status.' </b></p>
 					<p>Weitere Namen:<br/><b>'.nl2br($weitere).'</b></p>
-					<p>Herkunft:<br/><b>'.nl2br($herkunft).'</b></p>
+					'.($herkunft ? '<p>Herkunft:<br/><b>'.nl2br($herkunft).'</b></p>' : '').'
 				</div>
 			</div>
 			<div class="col-xs-12 col-sm-6 col-md-6 order-1 order-md-2 imgColR btn-abs">
@@ -63,9 +63,9 @@ if($sorte) {
 			</div>
 			<div class="col-xs-12 col-sm-6 col-md-6 order-1 order-md-2 imgColR btn-abs">
 				<div>
-					<h3>Beurteilung:</h3>
+					'.($beurteilung ? '<h3>Beurteilung:</h3>
 					<p>'.nl2br($beurteilung).'</p>	
-					<hr>
+					<hr>' : '').'
 					'.$liste.'						
 				</div>
 			</div>	

@@ -11017,7 +11017,8 @@ a.list-group-item.level_2:before { content:''; display: inline-block; width: 10p
 	{ font-size: 1em; letter-spacing: 0; }
 
 .offer { position: absolute; background: var(--green); padding: 6px 12px; top: -60px; transform: rotate(10deg); font-size: .8em; text-transform: uppercase; color: #fff; }
-
+.FAQ h2 { font-size: 1em; }
+.FAQ { border-bottom: solid 1px var(--red-dark); padding-bottom: 1em; margin-bottom: 1em; }
 .text-center { text-align: center !important; }
 
 @media (max-width: 1500px) {
