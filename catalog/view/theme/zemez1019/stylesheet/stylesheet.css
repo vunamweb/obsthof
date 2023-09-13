@@ -2459,6 +2459,10 @@ html[dir="rtl"] .box-language .toggle:after, html[dir="rtl"]
   width: 26px; height: 26px; margin-top: 3px; margin-right: 10px;
 }
 
+.cart > button.cart_2 {
+  background-image: url(../../../../../img/cart_fill.png );
+}
+
 .cart > button i, .cart > button strong, .cart > button span {
   vertical-align: middle;
   font-size: 1em; 
