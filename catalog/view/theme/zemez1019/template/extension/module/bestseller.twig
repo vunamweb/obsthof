@@ -178,13 +178,14 @@
 						{% endif %}
 						
 					</div>
-					<div class="content content_1">
-						<div class="caption">
-							<p class="event">Veranstaltung</p>
+					<div class="content content_1 linkbox" ref="{{ product.href }}">
+						<div class="caption event-start">
+							<!--<p class="event">Veranstaltung</p>-->
 							<h4 class="name"><a href="{{ product.href }}">{{ product.name }}</a></h4>
-								<p class="date_event">Am&nbsp; {{ product.date_event }}</p>
+							<p class="date_event">Am&nbsp; {{ product.date_event }}</p>
 							
-							<div class="description_1"><a href="{{ product.href }}">{{ product.description }}</a></div>
+							<div class="description_1">{{ product.description }}</div>
+							<div class="mt4"><a href="{{ product.href }}" class="btn btn-info">Mehr</a></div>
 							<div class="button-wrap-list">
 								<button type="button" class="btn-primary" onclick="wishlist.add('{{ product.product_id }}');">{{button_wishlist}}</button>
 								<button type="button" class="btn-primary" onclick="compare.add('{{ product.product_id }}');">{{button_compare}}</button>

@@ -54,7 +54,7 @@ if ($_REQUEST["sprache"]) {
 */
 include("cms_include.inc");
 // include("editor_css_edit.php");
-include("_tinymce.php");
+// include("_tinymce.php");
 
 $ngid = $_REQUEST["ngid"];
 if (!$ngid) $db   = "morp_cms_news_group";

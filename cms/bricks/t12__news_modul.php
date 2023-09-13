@@ -92,10 +92,13 @@ else {
 		$n++;
 		$news  .= '
 		  <div class="swiper-slide news-slide text-center">
-				<h3>'.($row->ntitle) .'</h3>		
+			<div class="news-inner">
+				<h3>'.($row->ntitle) .'<br />
+				<span>'.($row->nsubtitle) .'</span></h3>		
 				'.($row->ntext).'
 				'.$pdf.'
 				'.($url ? '<a href="'.$url.'"'.$target.'>Weitere Informationen ></a>' : '').'
+			</div>
 		  </div>';
 		
 	}
