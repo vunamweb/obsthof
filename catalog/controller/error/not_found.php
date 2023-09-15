@@ -7,14 +7,20 @@ class ControllerErrorNotFound extends Controller {
 		$urlMorpheus = $this->request->get['_route_'];
 		$urlMorpheus = HTTP_SERVER . 'cms/' . $language . $urlMorpheus;
 
-		 // echo $urlMorpheus;
-		
-		$contentMorpheus = file_get_contents($urlMorpheus);
+		$response = file_get_contents($urlMorpheus);
+		$response = str_replace(array('</body>', '</html>'), '', $response);
+
+		$response = json_decode($response);
+
+		$contentMorpheus = $response->message;
+		$title = $response->title;
+		$des = $response->des;
 		// END
 
 		$this->load->language('error/not_found');
 
-		$this->document->setTitle($this->language->get('heading_title'));
+		$this->document->setTitle($title);
+		$this->document->setDescription($des);
 
 		$data['breadcrumbs'] = array();
 

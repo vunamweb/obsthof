@@ -62,7 +62,8 @@ $multilang = $morpheus["multilang"];
 
 # # # pfad ermitteln
 # $out = print_r($_REQUEST, 1);
-// print_r($_GET);
+ // print_r($_GET);
+ // die();
 # print_r($_POST);
 // print_r($_SESSION);
 $url  	 = $_SERVER["HTTP_HOST"];
@@ -1042,8 +1043,18 @@ $zufall=rand(0,999);
 
 //include("design/header_inc.php");
 //include("design/top.php");
-if ($design) 	include("design/design-".$design.".php");
-else 			include("design/design-1.php");
+//echo $title . '///' . $desc; die();
+//echo $design; die();
+if ($design) {
+	$response = new \stdClass;
+	$response->title = $title;
+	$response->des = $desc;
+	$response->message = $output ;
+	echo json_encode($response);
+}	
+else {
+	include("design/design-1.php");
+}			
 //include("design/footer_inc.php");
 // include("design/footer-tracking.php");
 ?>
