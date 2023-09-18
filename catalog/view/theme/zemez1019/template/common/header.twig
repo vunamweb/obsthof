@@ -11,6 +11,11 @@
 	<head>
 		<meta charset="UTF-8"/>
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+		{% if (noindex) %}
+		<meta name="robots" content="noindex">
+		{% else %}
+		<meta name="robots" content="canonical">
+		{% endif %}
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<title>{{ title }}</title>
 		<base href="{{ base }}"/>
@@ -47,6 +52,8 @@
 		{% for link in links %}
 			<link href="{{ link.href }}" rel="{{ link.rel }}"/>
 		{% endfor %}
+
+		{{ canonical_product_link }}
 
 		<script src="catalog/view/javascript/jquery/jquery-2.1.1.min.js" type="text/javascript"></script>
 		<script src="catalog/view/javascript/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
