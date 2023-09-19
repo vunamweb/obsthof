@@ -32,6 +32,12 @@ $(document).ready(function() {
 		$('.datetimepicker').click();
 	});
 
+	$('#news').click(function() {
+	   var height = $('#bestseller').offset().top;
+	   $("html, body").animate({scrollTop:height}, 1000);  
+	   //$(window).scrollTop(height);
+	});
+
 	$('.text-danger').each(function() {
 		var element = $(this).parent().parent();
 
