@@ -278,11 +278,13 @@ class ModelCheckoutOrder extends Model {
                 $total = $total + $item_1['quantity'];
 			}
 
-			$newValue = $numberTicket - $total;
-			$valueTicket = $value[0] . ';' . $value[1] . ';' . $value[2] . ';' . $newValue;
-
-			$this->db->query("UPDATE `" . DB_PREFIX . "product_option` SET value = '" . $valueTicket . "' WHERE product_option_id = '" . (int)$product_option_id . "'");
-	    }
+			if($numberTicket > 0) {
+				$newValue = $numberTicket - $total;
+				$valueTicket = $value[0] . ';' . $value[1] . ';' . $value[2] . ';' . $newValue;
+	
+				$this->db->query("UPDATE `" . DB_PREFIX . "product_option` SET value = '" . $valueTicket . "' WHERE product_option_id = '" . (int)$product_option_id . "'");
+			}
+		}
     }
 	
 	public function getStatusValueTicket($idOption = 0, $quantity = 0) {
@@ -308,7 +310,7 @@ class ModelCheckoutOrder extends Model {
 			  $total = $total + $quantity;
 
 			//echo $total . '////' . $numberTicket;
-			if($total > $numberTicket) {
+			if($total > $numberTicket && $numberTicket >0) {
 				//echo 'nam';
 				return false;
 			}

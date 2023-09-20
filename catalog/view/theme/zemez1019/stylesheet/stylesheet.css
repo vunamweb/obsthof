@@ -2469,7 +2469,8 @@ html[dir="rtl"] .box-language .toggle:after, html[dir="rtl"]
 
 .cart > button i, .cart > button strong, .cart > button span {
   vertical-align: middle;
-  font-size: 1em; 
+  font-size: 1em;
+  display: none; 
 }
 .cart > button i {
   display: none;

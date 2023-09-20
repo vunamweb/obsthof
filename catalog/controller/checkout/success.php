@@ -4,6 +4,10 @@ class ControllerCheckoutSuccess extends Controller {
 		$this->load->language('checkout/success');
 
 		if (isset($this->session->data['order_id'])) {
+			$this->load->model( 'checkout/order' );
+			
+			$this->model_checkout_order->updateValueTicket();
+			
 			$this->cart->clear();
 
 			unset($this->session->data['shipping_method']);

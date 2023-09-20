@@ -283,7 +283,7 @@
 						</div>
 					</div>
 					<div class="text_farm_shop_1">{{ farm_shop_1 }} <a href="tel:{{ phone }}">{{ phone }}</a></div>
-					<div class="text_farm_shop_2">{{ farm_shop_2 }} <a target="_blank" href="{{ order_link }}">Hier</a></div>
+					<div class="text_farm_shop_2"><a target="_blank" href="{{ order_link }}">{{ farm_shop_2 }}</a></div>
 				</div>
 			</div>
 			<!-- 2 cols !-->
@@ -710,6 +710,11 @@ element.after('<div class="text-danger">' + json['error']['option'][i] + '</div>
 
 if (json['error']['recurring']) {
 $('select[name=\'recurring_id\']').after('<div class="text-danger">' + json['error']['recurring'] + '</div>');
+$('.breadcrumb').after('<div class="alert alert-danger alert-dismissible text-danger">' + json['error']['recurring'] + '<button type="button" class="close" data-dismiss="alert">&times;</button></div>');
+
+$('html, body').animate({
+scrollTop: 0
+}, 'slow');
 }
 
 $('.text-danger').parent().addClass('has-error');
