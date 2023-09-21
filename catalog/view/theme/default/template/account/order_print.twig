@@ -1,10 +1,16 @@
-{{ header }}
+<!DOCTYPE html>
+<html dir="{{ direction }}" lang="{{ lang }}">
+<head>
+<meta charset="UTF-8" />
+<title>{{ title }}</title>
+<base href="{{ base }}" />
+<link href="admin/view/javascript/bootstrap/css/bootstrap.css" rel="stylesheet" media="all" />
+<script type="text/javascript" src="admin/view/javascript/jquery/jquery-2.1.1.min.js"></script>
+<script type="text/javascript" src="admin/view/javascript/bootstrap/js/bootstrap.min.js"></script>
+<link href="admin/view/javascript/font-awesome/css/font-awesome.min.css" type="text/css" rel="stylesheet" />
+<link type="text/css" href="admin/view/stylesheet/stylesheet.css" rel="stylesheet" media="all" />
+</head>
 <div id="account-order" class="container">
-  <ul class="breadcrumb">
-    {% for breadcrumb in breadcrumbs %}
-    <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
-    {% endfor %}
-  </ul>
   {% if success %}
   <div class="alert alert-success alert-dismissible"><i class="fa fa-check-circle"></i> {{ success }}
     <button type="button" class="close" data-dismiss="alert">&times;</button>
@@ -118,11 +124,5 @@
           
         </table>
       </div>
-      <div class="buttons clearfix">
-        <div class="pull-right"><a href="{{ continue }}" class="btn btn-primary">{{ button_continue }}</a></div>
-        <div class="pull-right"><a target="_blank" href="{{ print }}" class="btn btn-primary">Rechnungsdruck</a></div>
-      </div>
-      {{ content_bottom }}</div>
     {{ column_right }}</div>
 </div>
-{{ footer }}

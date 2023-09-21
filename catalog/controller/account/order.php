@@ -2,9 +2,9 @@
 class ControllerAccountOrder extends Controller {
 	public function index() {
 		if (!$this->customer->isLogged()) {
-			$this->session->data['redirect'] = $this->url->link('account/order', '', true);
+			//$this->session->data['redirect'] = $this->url->link('account/order', '', true);
 
-			$this->response->redirect($this->url->link('account/login', '', true));
+			//$this->response->redirect($this->url->link('account/login', '', true));
 		}
 
 		$this->load->language('account/order');
@@ -44,7 +44,7 @@ class ControllerAccountOrder extends Controller {
 
 		$this->load->model('account/order');
 
-		$order_total = $this->model_account_order->getTotalOrders();
+		$order_total = 0; //$this->model_account_order->getTotalOrders();
 
 		$results = $this->model_account_order->getOrders(($page - 1) * 10, 10);
 
@@ -52,16 +52,20 @@ class ControllerAccountOrder extends Controller {
 			$product_total = $this->model_account_order->getTotalOrderProductsByOrderId($result['order_id']);
 			$voucher_total = $this->model_account_order->getTotalOrderVouchersByOrderId($result['order_id']);
 
-			$data['orders'][] = array(
-				'order_id'   => $result['order_id'],
-				'name'       => $result['firstname'] . ' ' . $result['lastname'],
-				'status'     => $result['status'],
-				'date_added' => date($this->language->get('date_format_short'), strtotime($result['date_added'])),
-				'products'   => ($product_total + $voucher_total),
-				'total'      => $this->currency->format($result['total'], $result['currency_code'], $result['currency_value']),
-				'view'       => $this->url->link('account/order/info', 'order_id=' . $result['order_id'], true),
-			);
-		}
+			if($this->model_account_order->isOrderEvent($result['order_id'])) {
+				$data['orders'][] = array(
+					'order_id'   => $result['order_id'],
+					'name'       => $result['firstname'] . ' ' . $result['lastname'],
+					'status'     => $result['status'],
+					'date_added' => date($this->language->get('date_format_short'), strtotime($result['date_added'])),
+					'products'   => ($product_total + $voucher_total),
+					'total'      => $this->currency->format($result['total'], $result['currency_code'], $result['currency_value']),
+					'view'       => $this->url->link('account/order/info', 'order_id=' . $result['order_id'], true),
+				);
+
+				$order_total++;
+			}
+        }
 
 		$pagination = new Pagination();
 		$pagination->total = $order_total;
@@ -95,9 +99,9 @@ class ControllerAccountOrder extends Controller {
 		}
 
 		if (!$this->customer->isLogged()) {
-			$this->session->data['redirect'] = $this->url->link('account/order/info', 'order_id=' . $order_id, true);
+			//$this->session->data['redirect'] = $this->url->link('account/order/info', 'order_id=' . $order_id, true);
 
-			$this->response->redirect($this->url->link('account/login', '', true));
+			//$this->response->redirect($this->url->link('account/login', '', true));
 		}
 
 		$this->load->model('account/order');
@@ -234,13 +238,24 @@ class ControllerAccountOrder extends Controller {
 
 			$this->load->model('catalog/product');
 			$this->load->model('tool/upload');
-
-			// Products
+			
+            // Products
 			$data['products'] = array();
 
 			$products = $this->model_account_order->getOrderProducts($this->request->get['order_id']);
 
+			$sum_tax_1 = 0;
+            $sum_tax_2 = 0;
+
 			foreach ($products as $product) {
+				$product_info_ = $this->model_catalog_product->getProduct($product['product_id']);
+
+				$productType = $product_info_['type'];
+				$price_1 = $product_info_['price_1'];
+
+				$product['type'] = $productType;
+				$product[ 'price_1' ] = $price_1;
+				
 				$option_data = array();
 
 				$options = $this->model_account_order->getOrderOptions($this->request->get['order_id'], $product['order_product_id']);
@@ -272,6 +287,36 @@ class ControllerAccountOrder extends Controller {
 					$reorder = '';
 				}
 
+				// VU show tax
+                $resultTax_1 = 0;
+				$resultTax_2 = 0;
+				
+				$this->load->model( 'checkout/order' );
+                $taxs = $this->model_checkout_order->getTaxs();
+                //print_r($taxs);
+                $tax_1 = (int) $taxs[0]['rate'];  
+                $tax_2 = (int) $taxs[1]['rate'];
+
+                // if normal product
+                if ( $product[ 'type' ] == 0 ) {
+                    $total_1 = $product[ 'price' ] * $product[ 'quantity' ];
+                    $resultTax_1 = round( ( $total_1 ) - ( $total_1 ) / ( 1 + $tax_1/100 ), 2 );
+
+                    $sum_tax_1 = $sum_tax_1 + $resultTax_1;
+                } else {
+                    // if event
+                    $total_1 = ( $product[ 'price' ] - $product[ 'price_1' ] ) * $product[ 'quantity' ];
+                    $resultTax_1 = round( ( $total_1 ) - ( $total_1 ) / ( 1 + $tax_1/100 ), 2 );
+
+                    $total_2 = ( $product[ 'price_1' ] ) * $product[ 'quantity' ];
+                    $resultTax_2 = round( ( $total_2 ) - ( $total_2 ) / ( 1 + $tax_2/100 ), 2 );
+
+                    $sum_tax_1 = $sum_tax_1 + $resultTax_1;
+                    $sum_tax_2 = $sum_tax_2 + $resultTax_2;
+                }
+
+                // END
+
 				$data['products'][] = array(
 					'name'     => $product['name'],
 					'model'    => $product['model'],
@@ -279,7 +324,15 @@ class ControllerAccountOrder extends Controller {
 					'quantity' => $product['quantity'],
 					'price'    => $this->currency->format($product['price'] + ($this->config->get('config_tax') ? $product['tax'] : 0), $order_info['currency_code'], $order_info['currency_value']),
 					'total'    => $this->currency->format($product['total'] + ($this->config->get('config_tax') ? ($product['tax'] * $product['quantity']) : 0), $order_info['currency_code'], $order_info['currency_value']),
-					'reorder'  => $reorder,
+					'price_number' => $product[ 'price' ],
+                    'price_1'   => $product[ 'price_1' ],
+                    'price_2'   => $product[ 'price' ] - $product[ 'price_1' ] ,
+                    'type'      => $product[ 'type' ],
+                    'tax_1'     => $resultTax_1,
+                    'tax_2'     => $resultTax_2,
+                    'text_tax_1' => $tax_1 . '% of ', //$this->language->get( 'tax_1' ),
+                    'text_tax_2' => $tax_2 . '% of ', //$this->language->get( 'tax_2' ),
+                    'reorder'  => $reorder,
 					'return'   => $this->url->link('account/return/add', 'order_id=' . $order_info['order_id'] . '&product_id=' . $product['product_id'], true)
 				);
 			}
@@ -300,6 +353,7 @@ class ControllerAccountOrder extends Controller {
 			$data['totals'] = array();
 
 			$totals = $this->model_account_order->getOrderTotals($this->request->get['order_id']);
+			$this->document->displayOrder( $totals, $sum_tax_1, $sum_tax_2 );
 
 			foreach ($totals as $total) {
 				$data['totals'][] = array(
@@ -324,6 +378,7 @@ class ControllerAccountOrder extends Controller {
 			}
 
 			$data['continue'] = $this->url->link('account/order', '', true);
+			$data['print'] = $this->url->link('account/order/info&print=1&order_id='.$this->request->get['order_id'].'', '', true);
 
 			$data['column_left'] = $this->load->controller('common/column_left');
 			$data['column_right'] = $this->load->controller('common/column_right');
@@ -332,7 +387,10 @@ class ControllerAccountOrder extends Controller {
 			$data['footer'] = $this->load->controller('common/footer');
 			$data['header'] = $this->load->controller('common/header');
 
-			$this->response->setOutput($this->load->view('account/order_info', $data));
+			if($this->request->get['print'])
+			  $this->response->setOutput($this->load->view('account/order_print', $data));
+			else 
+			  $this->response->setOutput($this->load->view('account/order_info', $data));
 		} else {
 			return new Action('error/not_found');
 		}
