@@ -68,7 +68,7 @@
 						{{ date_event}}
 						{% if price %}
 							<div class="price">
-								<p class="type_event">Adult</p>
+								<p class="type_event">{{ adult }}</p>
 								{% if not special %}
 									<span>{{ price }}</span>
 								{% else %}
@@ -167,7 +167,7 @@
 					<div class="general_info product-info">
 						{% if price %}
 							<div class="price">
-								<p class="type_event">Kid</p>
+								<p class="type_event">{{ kid }}</p>
 								{% if not special %}
 									<span>{{ price_1 }}</span>
 								{% else %}

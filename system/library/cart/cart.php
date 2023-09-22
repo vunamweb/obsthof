@@ -10,6 +10,8 @@ class Cart {
 		$this->db = $registry->get('db');
 		$this->tax = $registry->get('tax');
 		$this->weight = $registry->get('weight');
+		$this->language = $registry->get('language');
+		//$this->load->language('product/product');
 
 		// Remove all the expired carts with no customer ID
 		$this->db->query("DELETE FROM " . DB_PREFIX . "cart WHERE (api_id > '0' OR customer_id = '0') AND date_added < DATE_SUB(NOW(), INTERVAL 1 HOUR)");
@@ -247,12 +249,13 @@ class Cart {
 				else 
 				  $valueTime = '';  
 
+				$this->language->load('product/product');
 				
 				if($valueTime[1] != '')
-				  $child = ($cart['child'] == 1) ? 'Kind: Child' : 'Kind: Adult';
+				  $child = ($cart['child'] == 1) ? $this->language->get('kind_kid') : $this->language->get('kind_adult');
 				else 
 				  $child = '';
-				    
+				
 				$price = ($cart['child'] == 1) ? round(($price + $option_price)/2, 2) : ($price + $option_price);
 				$price_1 = ($cart['child'] == 1) ? round($product_query->row['price_1']/2, 2) : $product_query->row['price_1'];
 				
