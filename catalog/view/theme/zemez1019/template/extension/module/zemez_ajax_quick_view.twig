@@ -43,6 +43,7 @@
 						<span class="price-new">{{ product['special'] }}</span> <span class="price-old">{{ product['price'] }}</span>
 						
 					{% endif %}
+					<br><p>({{ product['capacity'] }} ml) ({{ product['price_lit'] }} / ltr)</p>
 					{% if (product['tax']) %}
 						<span class="price-tax">{{ text_tax }}{{ product['tax'] }}</span>
 					{% endif %}
@@ -56,6 +57,8 @@
 				{{ text_manufacturer }}
 				{{ product['manufacturer'] }}
 			</div>
+			<br>
+			<div>{{ product['des'] }}</div>
 			{% if (product['rating']) %}
 				<div class="rating">
 					{% set i = 1 %}{% for i in i..5 %}

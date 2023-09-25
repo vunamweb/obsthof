@@ -293,11 +293,11 @@
 											<p class="price">
 												{% if not product.special %}
 													{{ product.price }}
-													<p class="price_lit">({{ product.price_lit }} ml)</p>
+													<p class="price_lit">({{ product.price_lit }} ml) ({{ product.price_per_lit }} / ltr)</p>
 												{% else %}
 													 <span class="price-new">{{ product.special }}</span> 
 													 <span class="price-old">{{ product.price }}</span>
-													 <p class="price_lit">({{ product.price_lit }} ml)</p>
+													 <p class="price_lit">({{ product.price_lit }} ml) ({{ product.price_per_lit }} / ltr)</p>
 												{% endif %}
 												{% if product.tax %}
 													<span class="price-tax">{{ text_tax }} {{ product.tax }}</span>

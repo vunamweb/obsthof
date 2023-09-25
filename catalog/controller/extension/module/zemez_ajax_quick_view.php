@@ -115,10 +115,21 @@ class ControllerExtensionModuleZemezAjaxQuickView extends Controller {
 			}
 		}
 
+		//print_r($product_info);
+		if($product_info['special'])
+		  $price_lit = round($product_info['special']/ $product_info['price_lit'] * 1000, 2);
+		else 
+		  $price_lit = round($product_info['price']/ $product_info['price_lit'] * 1000, 2);
+
+		//echo $price_lit;  
+		  
 		$data['product'] = array(
 			'product_id'        => $product_id,
 			'name'              => $product_info['name'],
 			'model'             => $product_info['model'],
+			'des'                => html_entity_decode($product_info['description']),
+			'capacity'            => $product_info['price_lit'],
+			'price_lit'            => $this->currency->format($this->tax->calculate($price_lit, $product_info['tax_class_id'], $this->config->get('config_tax')), $this->session->data['currency']),
 			'manufacturer'      => $product_info['manufacturer'],
 			'thumb'             => $image,
 			'thumb_width'       => $image_width,
