@@ -11,11 +11,20 @@ class ControllerCheckoutShippingMethod extends Controller {
 
 			$results = $this->model_setting_extension->getExtensions('shipping');
 
+			$totalNormalProduct = 0;
+			$products = $this->cart->getProducts();
+
+			foreach ($products as $product)
+			  if($product['type'] == 0) 
+				 $totalNormalProduct = $totalNormalProduct + $product['quantity'] * $product['price'];
+			
+		    //echo $totalNormalProduct; die(); 		 
+
 			foreach ($results as $result) {
 				if ($this->config->get('shipping_' . $result['code'] . '_status')) {
 					$this->load->model('extension/shipping/' . $result['code']);
 
-					$quote = $this->{'model_extension_shipping_' . $result['code']}->getQuote($this->session->data['shipping_address']);
+					$quote = $this->{'model_extension_shipping_' . $result['code']}->getQuote($this->session->data['shipping_address'], $totalNormalProduct);
 
 					if ($quote) {
 						$method_data[$result['code']] = array(

@@ -1,6 +1,6 @@
 <?php
 class ModelExtensionShippingFlat extends Model {
-	function getQuote($address) {
+	function getQuote($address, $total = 0) {
 		$this->load->language('extension/shipping/flat');
 
 		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "zone_to_geo_zone WHERE geo_zone_id = '" . (int)$this->config->get('shipping_flat_geo_zone_id') . "' AND country_id = '" . (int)$address['country_id'] . "' AND (zone_id = '" . (int)$address['zone_id'] . "' OR zone_id = '0')");
@@ -15,6 +15,12 @@ class ModelExtensionShippingFlat extends Model {
 
 		$method_data = array();
 
+		$cost = $this->config->get('shipping_flat_cost');
+		if($total >= $this->config->get('config_login_attempts') || $total == 0)
+		   $cost = 0;
+		
+		//echo $this->config->get('shipping_flat_cost'); die();   
+
 		if ($status) {
 			$quote_data = array();
 
@@ -23,7 +29,7 @@ class ModelExtensionShippingFlat extends Model {
 				'title'        => $this->language->get('text_description'),
 				'cost'         => $this->config->get('shipping_flat_cost'),
 				'tax_class_id' => $this->config->get('shipping_flat_tax_class_id'),
-				'text'         => $this->currency->format($this->tax->calculate($this->config->get('shipping_flat_cost'), $this->config->get('shipping_flat_tax_class_id'), $this->config->get('config_tax')), $this->session->data['currency'])
+				'text'         => $this->currency->format($this->tax->calculate($cost, $this->config->get('shipping_flat_tax_class_id'), $this->config->get('config_tax')), $this->session->data['currency'])
 			);
 
 			$method_data = array(
