@@ -7728,6 +7728,13 @@ div.swiper-button-next {
   transition: 0.3s all ease;
   background-image: none !important;
 }
+div.swiper-button-next {
+  right: -50px !important;
+}
+div.swiper-button-prev {
+  left: -50px !important;
+}
+
 
 @media (min-width: 768px) {
   .top div.swiper-button-prev, .top
