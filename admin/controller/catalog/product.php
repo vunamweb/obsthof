@@ -3,6 +3,50 @@
 class ControllerCatalogProduct extends Controller {
     private $error = array();
 
+    public function print() {
+		$setMainHeader = null;
+		$setData = null;
+	
+		$setMainHeader .= "Name" . "\t";
+		$setMainHeader .= "Number Places" . "\t";
+		$setMainHeader .= "Phone number" . "\t";
+		$setMainHeader .= "Email" . "\t";
+        $setMainHeader .= "Payment" . "\t";
+
+        $option = $this->request->get['option'];
+
+        $this->load->model( 'catalog/product' );
+
+        $result = $this->model_catalog_product->getInformationEvent($option);
+        
+        foreach($result as $item) {
+                $rowLine = '';
+                
+                $name = str_replace('<br>', ' ', $item["name"]);
+	
+				$rowLine .= $name . ' Uhr' . "\t";
+				$rowLine .= $item["quantity"] . "\t";
+				$rowLine .= $item["telephone"] . "\t";
+				$rowLine .= $item["email"] . "\t";
+                $rowLine .= $item["payment_method"] . "\t";
+                
+				$setData .= trim($rowLine) . "\n";
+			
+		}
+	
+		$setData = str_replace("\r", "", $setData);
+	
+		//Download headers
+		header("Content-type: application/octet-stream;charset=UTF-8");
+		header("Content-Disposition: attachment; filename=export_order.xls");
+		header("Pragma: no-cache");
+		header("Expires: 0");
+		//Print the table rows as an Excel row with the column name as a header
+		echo ucwords($setMainHeader) . "\n" . $setData . "\n";
+	
+		ob_end_flush();
+	}
+
     public function index() {
         $this->load->language( 'catalog/product' );
 

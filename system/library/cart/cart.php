@@ -261,6 +261,7 @@ class Cart {
 				
                 $product_data[] = array(
 					'cart_id'         => $cart['cart_id'],
+					'idOption'         => $cart['idOption'],
 					'product_id'      => $product_query->row['product_id'],
 					'name'            => $product_query->row['name'] . '<br>'. $child. '  ' . $valueTime,
 					'model'           => $product_query->row['model'],

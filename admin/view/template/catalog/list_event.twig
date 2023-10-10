@@ -1,0 +1,89 @@
+{{ header }}
+<div id="product-category" class="container">
+<br><br>
+		{% if thumb or description %}
+			<div class="row">
+				{% if thumb %}
+					<div class="col-sm-2 img-category">
+						<img src="{{ thumb }}" alt="{{ heading_title }}" title="{{ heading_title }}" class="img-thumbnail" />
+					</div>
+				{% endif %}
+				{% if description %}
+					<div class="col-sm-10">{{ description }}</div>
+				{% endif %}
+			</div>
+			<hr>
+		{% endif %}
+		{% if (categories) %}
+				<h3 style="display: none">{{ text_refine }}</h3>
+				<div class="row">
+					<ul class="box-subcat">
+						{% for category in categories %}
+							<li class="col-sm-2">
+								<div class="thumb">
+									<div class="name subcatname">
+										<a href="{{ category['href'] }}">{{ category['name'] }}</a>
+									</div>
+								</div>
+							</li>
+						{% endfor %}
+					</ul>
+				</div>
+			{% endif %}
+	<div class="row">
+		{{ column_left }}
+		{% if column_left and column_right %}
+			{%set class = 'col-sm-6' %}
+		{% elseif column_left or column_right %}
+			{%set class = 'col-sm-9' %}
+		{% else %}
+			{%set class = 'col-sm-12' %}
+		{% endif %}
+		<div id="content" class="{{ class }}">
+			{{ content_top }}
+			{% if products %}
+				<div class="row">
+					{%set option_index = 5000 %}
+					{% for product in products %}
+						<div class="product-layout product-list">
+							<div class="product-thumb transition {% if product.options and product.options|length <= 3 %} {{ 'options' }} {% endif %}">
+								<div class="content">
+									<div class="caption">
+										<h4 class="name"><a href="{{ product.href }}">{{ product.name }}</a></h4>
+										{% if product.price %}
+											<p class="price">
+												{% if not product.special %}
+													{{ product.price }}
+												{% else %}
+													 <span class="price-new">{{ product.special }}</span> <span class="price-old">{{ product.price }}</span>
+												{% endif %}
+												{% if product.tax %}
+													<span class="price-tax">{{ text_tax }} {{ product.tax }}</span>
+												{% endif %}
+											</p>
+										{% endif %}
+									</div>									
+								</div>								
+							
+							</div>
+						</div>
+						{%set option_index = option_index + 1 %}
+					{% endfor %}
+				</div>
+				<div class="row">
+					<div class="col-sm-6 text-left">{{ pagination }}</div>
+					<div class="col-sm-6 text-right">{{ results }}</div>
+				</div>
+			{% endif %}
+			{% if not categories and not products %}
+				<p>{{ text_empty }}</p>
+				<div class="buttons">
+					<div class="pull-right"><a href="{{ continue }}" class="btn btn">{{ button_continue }}</a></div>
+				</div>
+			{% endif %}
+			{{ content_bottom }}
+		</div>
+		{{ column_right }}
+	</div>
+</div>
+{{ footer }}
