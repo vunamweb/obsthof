@@ -66,7 +66,8 @@ if ($nid) {
 
 else {
 	$news = '';
-	$query 	= "SELECT * FROM morp_cms_news n, morp_cms_news_group ng WHERE n.ngid=ng.ngid AND n.ngid=$text ORDER BY nerstellt DESC, nid DESC";
+	$heute = date("Y-m-d");
+	$query 	= "SELECT * FROM morp_cms_news n, morp_cms_news_group ng WHERE n.ngid=ng.ngid AND n.ngid=$text AND sichtbar=1 ORDER BY nerstellt DESC, nid DESC";
 	$result = safe_query($query);
 	$x 		= mysqli_num_rows($result);
 	$n 		= 0;
@@ -89,17 +90,31 @@ else {
 			$pdf = '<br><a class="btn btn-info" href="'.$go.'" target="_blank" title="' .$rw->pdesc .'">'.($rw->pdesc ? $rw->pdesc : 'PDF').'</a></p>';
 		}
 		
-		$n++;
-		$news  .= '
-		  <div class="swiper-slide news-slide text-center">
-			<div class="news-inner">
-				<h3>'.($row->ntitle) .'<br />
-				<span>'.($row->nsubtitle) .'</span></h3>		
-				'.($row->ntext).'
-				'.$pdf.'
-				'.($url ? '<a href="'.$url.'"'.$target.'>Weitere Informationen ></a>' : '').'
-			</div>
-		  </div>';
+		$nvon = $row->nvon;
+		$nbis = $row->nbis;
+		
+		$display_news = 1;
+		
+		if($nvon != '1999-01-01') {
+			if (strtotime($nvon) > strtotime($heute)) $display_news = 0;
+			else if (strtotime($nbis) < strtotime($heute)) $display_news = 0;
+			// if($nvon <= $heute && $nbis >= $heute) { }
+		}
+		
+
+		if($display_news) {			
+			$n++;
+			$news  .= '
+		  	<div class="swiper-slide news-slide text-center">
+				<div class="news-inner">
+					<h3>'.($row->ntitle) .'<br />
+					<span>'.($row->nsubtitle) .'</span></h3>		
+					'.($row->ntext).'
+					'.$pdf.'
+					'.($url ? '<a href="'.$url.'"'.$target.'>Weitere Informationen ></a>' : '').'
+				</div>
+		  	</div>';
+		}
 		
 	}
 	

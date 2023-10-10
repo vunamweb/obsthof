@@ -1129,7 +1129,7 @@ h4 {
   font-size: 1.25em;
   text-transform: uppercase;
 }
-.event { font-size: 1.5em; font-weight: 400; letter-spacing: .1em; padding: 1.5em 0; text-transform: uppercase; }
+/* .event { font-size: 1.5em; font-weight: 400; letter-spacing: .1em; padding: 1.5em 0; text-transform: uppercase; } */
 h4.name { font-weight: 700; font-size: 1.5em; letter-spacing: .1em; margin-bottom: 0; }
 .date_event { font-size: 1.5em; }
 h5 {
@@ -7158,7 +7158,7 @@ div.fancybox-skin {
 
 .newsletter input {
   width: 191px;
-  height: 57px;
+  height: 53px;
   line-height: 16px;
   display: inline-block;
   max-width: 100%;
@@ -10260,7 +10260,7 @@ footer {
   background: rgb(108,0,0);
   background: linear-gradient(90deg, rgba(108,0,0,1) 0%, rgba(98, 0, 0, 1) 50%, rgba(108,0,0,1) 100%);
   margin-top: 30px;
-  color: #fff;
+  color: #fff; font-size: .85em;
 }
 footer a { color: #fff !important; }
 footer li a { text-transform: uppercase; padding: .25em 0; }

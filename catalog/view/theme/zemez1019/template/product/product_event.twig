@@ -65,7 +65,10 @@
 				<div class="{{ class }} product_page-right">
 					<div class="general_info product-info">
 						<h2 class="product-title">{{ heading_title }}</h2>
+						
 						{{ date_event}}
+						{{ description }}
+						
 						{% if price %}
 							<div class="price">
 								<p class="type_event">{{ adult }}</p>
@@ -99,8 +102,7 @@
 								{% endif %}
 							</div>
 						{% endif %}
-						<br>
-						{{ description }}
+						
 						<div id="product">
 							{% if recurrings %}
 								<hr>
