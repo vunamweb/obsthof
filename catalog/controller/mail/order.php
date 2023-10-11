@@ -1,4 +1,12 @@
 <?php
+include "./dompdf/autoload.inc.php";
+use Dompdf\Dompdf;
+use PHPMailer\PHPMailer\PHPMailer;
+
+require "PHPMailer.php";
+require "SMTP.php";
+require "Exception.php";
+
 class ControllerMailOrder extends Controller {
 	public function index(&$route, &$args) {
 		if (isset($args[0])) {
@@ -258,6 +266,17 @@ class ControllerMailOrder extends Controller {
 		if (!$from) {
 			$from = $this->config->get('config_email');
 		}
+
+		//create pdf
+		$dompdf = new Dompdf();
+		$dompdf->set_option('enable_html5_parser', TRUE);
+		$dompdf->loadHtml($this->load->view('mail/order_pdf', $data));
+		$dompdf->setPaper('A4', 'Horizontal');
+		$dompdf->render();
+		$pdf = $dompdf->output();
+		$file_location = "./pdf/order.pdf";
+		file_put_contents($file_location, $pdf);
+		//end
 		
 		$mail = new Mail($this->config->get('config_mail_engine'));
 		$mail->parameter = $this->config->get('config_mail_parameter');
@@ -272,8 +291,40 @@ class ControllerMailOrder extends Controller {
 		$mail->setSender(html_entity_decode($order_info['store_name'], ENT_QUOTES, 'UTF-8'));
 		$mail->setSubject(html_entity_decode(sprintf($language->get('text_subject'), $order_info['store_name'], $order_info['order_id']), ENT_QUOTES, 'UTF-8'));
 		$mail->setHtml($this->load->view('mail/order_add', $data));
-		$mail->send();
+		//$mail->send();
+		$subject = html_entity_decode(sprintf($language->get('text_subject'), $order_info['store_name'], $order_info['order_id']), ENT_QUOTES, 'UTF-8');
+		$fromName = html_entity_decode($order_info['store_name'], ENT_QUOTES, 'UTF-8');
+		$this->sendMailSMTP($order_info['email'], $subject, 'info@yourplate.de', $fromName, $this->load->view('mail/order_add', $data));
+	
 	}
+
+	function sendMailSMTP($to, $subject, $from, $fromName, $message)
+   {
+	    $files1 = str_replace("index.php", "", $_SERVER['SCRIPT_FILENAME']) . "pdf/order.pdf";
+			
+	    $mail = new PHPMailer();
+		$mail->IsSMTP(); // telling the class to use SMTP
+		$mail->SMTPDebug = 0; // enables SMTP debug information (for testing)
+		$mail->SMTPAuth = true; // enable SMTP authentication
+		$mail->SMTPSecure = "ssl"; // sets the prefix to the servier
+		$mail->Host = "w019bb56.kasserver.com"; // sets GMAIL as the SMTP server
+		$mail->Port = 465; // set the SMTP port for the GMAIL server
+		$mail->Username = "shop@yourplate.de"; // GMAIL username
+		$mail->Password = "PovgWK7pNyt7zkg3Dtzw";
+		$mail->AddAddress($to);
+		$mail->Subject = $subject;
+		$mail->FromName = $fromName;
+		$mail->From = $from;
+		$mail->IsHTML(true);
+		$mail->Body = $message;
+		$mail->addAttachment($files1);
+
+		if (!$mail->Send()) {
+			//echo "Mailer Error: " . $mail->ErrorInfo;
+		} else {
+			//echo "Message sent!";
+		}
+  }
 	
 	public function edit($order_info, $order_status_id, $comment) {
 		$language = new Language($order_info['language_code']);
