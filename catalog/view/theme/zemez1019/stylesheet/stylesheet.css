@@ -2620,7 +2620,8 @@ html[dir="rtl"] .box-language .toggle:after, html[dir="rtl"]
   min-width: 260px;
   width: 320px;
   padding: 15px 20px;
-  max-height: 434px;
+  /* max-height: 434px; */
+  max-height: 80vh;
   line-height: 1.4em;
   right: 0;
   left: auto;
@@ -2630,6 +2631,8 @@ html[dir="rtl"] .box-language .toggle:after, html[dir="rtl"]
   overflow-y: auto;
   overflow-x: hidden;
   text-align: left;
+  -webkit-box-shadow: 2px 2px 15px 0px rgba(0,0,0,0.61); 
+  box-shadow: 2px 2px 15px 0px rgba(0,0,0,0.61);
 }
 
 @media (min-width: 768px) {
@@ -2660,7 +2663,7 @@ html[dir="rtl"] .box-language .toggle:after, html[dir="rtl"]
 
 .box-cart .toggle_cont li.product .name {
   width: 165px;
-  padding-left: 20px;
+  padding-left: 20px; font-size: .8em;
 }
 
 [dir="rtl"] .box-cart .toggle_cont li.product .name {
@@ -2703,7 +2706,7 @@ html[dir="rtl"] .box-language .toggle:after, html[dir="rtl"]
   width: 60%;
   float: left;
   line-height: 1.6em;
-  vertical-align: middle;
+  vertical-align: middle; font-size:.75em;
 }
 
 [dir="rtl"] .box-cart .toggle_cont .total > .t-row > div {

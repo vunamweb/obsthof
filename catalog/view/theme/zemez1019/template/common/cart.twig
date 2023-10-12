@@ -10,10 +10,10 @@
 			{% if (products or vouchers) %}
 				{% for product in products %}
 					<li class="product">
-						<div class="buttons">
-							<button type="button" onclick="cart.removeAndSave('{{ product.href|split('product_id=')[1] }}', '{{ product['cart_id'] }}');" class="link">
+						<div class="buttons hide">
+							<!--<button type="button" onclick="cart.removeAndSave('{{ product.href|split('product_id=')[1] }}', '{{ product['cart_id'] }}');" class="link">
 								<i class="linearicons-heart"></i>
-							</button>
+							</button>-->
 							<button type="button" onclick="cart.remove('{{ product['cart_id'] }}');" class="link">
 								<i class="linearicons-trash"></i>
 							</button>
@@ -24,6 +24,9 @@
 									<img src="{{ product['thumb'] }}" alt="{{ product['name'] }}" title="{{ product['name'] }}" class="img-thumbnail" />
 								</a>
 							{% endif %}
+							<button type="button" onclick="cart.remove('{{ product['cart_id'] }}');" class="link" style="padding-top:5px;">
+								<i class="linearicons-trash"></i>
+							</button>
 						</div>
 						<div class="pull-left name">
 							<a href="{{ product['href'] }}">{{ product['name'] }}</a>

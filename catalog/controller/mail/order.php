@@ -307,11 +307,15 @@ class ControllerMailOrder extends Controller {
 		$mail->SMTPDebug = 0; // enables SMTP debug information (for testing)
 		$mail->SMTPAuth = true; // enable SMTP authentication
 		$mail->SMTPSecure = "ssl"; // sets the prefix to the servier
-		$mail->Host = "w019bb56.kasserver.com"; // sets GMAIL as the SMTP server
+		// $mail->SMTPSecure = "STARTTLS";
+		$mail->Host = "w0118b8d.kasserver.com"; // sets GMAIL as the SMTP server
 		$mail->Port = 465; // set the SMTP port for the GMAIL server
-		$mail->Username = "shop@yourplate.de"; // GMAIL username
-		$mail->Password = "PovgWK7pNyt7zkg3Dtzw";
+		$mail->Username = "test@7sc.eu"; // GMAIL username
+		$mail->Password = "FKEUcsvv2HtgtWvJ";
+		$mail->CharSet = 'UTF-8';
+		// $mail->Encoding = 'base64';
 		$mail->AddAddress($to);
+		// $mail->addBcc("b@7sc.eu");
 		$mail->Subject = $subject;
 		$mail->FromName = $fromName;
 		$mail->From = $from;
