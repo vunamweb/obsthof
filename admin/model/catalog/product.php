@@ -1,5 +1,17 @@
 <?php
 class ModelCatalogProduct extends Model {
+	public function getDateEvent( $option_id ) {
+        $query = $this->db->query( 'SELECT * FROM ' . DB_PREFIX . "product_option WHERE product_option_id = '" . ( int )$option_id . "'" );
+
+        $value = $query->rows[ 0 ][ 'value' ];
+        $value = explode( ';', $value );
+
+        $date1 = explode('-', $value[0]);
+		$date1 = $date1[2] . '.' . $date1[1] . '.' . $date1[0];
+		
+		return $date1;
+    }
+
 	public function getInformationEvent($option) {
 		$query = $this->db->query('select * from '.DB_PREFIX.'order o, '.DB_PREFIX.'order_product op where o.order_id = 
 		op.order_id and op.idOption = '.$option.'');

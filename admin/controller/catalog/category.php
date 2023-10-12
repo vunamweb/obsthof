@@ -231,7 +231,7 @@ class ControllerCatalogCategory extends Controller {
 								'tax'         => $tax,
 								'minimum'     => $result['minimum'] > 0 ? $result['minimum'] : 1,
 								'rating'      => $result['rating'],
-								'href'        => $this->url->link('catalog/product/print', '&option='.$optionID.'' . '&user_token=' . $this->session->data['user_token'])
+								'href'        => $this->url->link('catalog/product/print', '&product_id= '.$result['product_id'].'&option='.$optionID.'' . '&user_token=' . $this->session->data['user_token'])
 			
 							,
 							'options'     => $options

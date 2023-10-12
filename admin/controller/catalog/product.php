@@ -14,8 +14,16 @@ class ControllerCatalogProduct extends Controller {
         $setMainHeader .= "Payment" . "\t";
 
         $option = $this->request->get['option'];
-
+        $product_id = $this->request->get['product_id'];
+        
         $this->load->model( 'catalog/product' );
+
+        $information_product = $this->model_catalog_product->getProduct($product_id);
+        $nameEvent = $information_product['name'];
+
+        $dateEvent = $this->model_catalog_product->getDateEvent($option);
+        
+        $nameExcel = $dateEvent . '_' . $nameEvent;
 
         $result = $this->model_catalog_product->getInformationEvent($option);
         
@@ -38,11 +46,14 @@ class ControllerCatalogProduct extends Controller {
 	
 		//Download headers
 		header("Content-type: application/octet-stream;charset=UTF-8");
-		header("Content-Disposition: attachment; filename=export_order.xls");
+		header("Content-Disposition: attachment; filename=".$nameExcel.".xls");
 		header("Pragma: no-cache");
 		header("Expires: 0");
-		//Print the table rows as an Excel row with the column name as a header
-		echo ucwords($setMainHeader) . "\n" . $setData . "\n";
+        //Print the table rows as an Excel row with the column name as a header
+        if($setData != null)
+          echo ucwords($setMainHeader) . "\n" . $setData . "\n";
+        else 
+          echo 'No Data';  
 	
 		ob_end_flush();
 	}
