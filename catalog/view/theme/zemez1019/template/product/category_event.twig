@@ -299,10 +299,9 @@
 											</p>
 										{% endif %}
 										<div class="button-wrap-list">
-											<button type="button" class="btn-primary" onclick="wishlist.add('{{ product.product_id }}');">{{button_wishlist}}</button>
-											<button type="button" class="btn-primary" onclick="compare.add('{{ product.product_id }}');">{{button_compare}}</button>
-											<button class="btn-primary quickview" type="button" data-rel="details" data-product="{{ product['product_id'] }}">{{text_quick}}</button>
-											<button type="button" class="btn-primary" {% if (product.options|length > 3) %} onclick="cart.add('{{ product.product_id }}');" {% else %} onclick="ajaxAdd($(this),{{ product.product_id }});" {% endif %}>{{button_cart}}</button>
+											<button type="button" class="btn-primary">
+											<a href="{{ product.href }}">Detail</a>
+											</button>
 										</div>
 									</div>									
 								</div>								
