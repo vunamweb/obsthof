@@ -517,15 +517,74 @@ class ControllerSaleOrder extends Controller {
 			$products = $this->model_sale_order->getOrderProducts($this->request->get['order_id']);
 
 			foreach ($products as $product) {
-				$data['order_products'][] = array(
-					'product_id' => $product['product_id'],
-					'name'       => $product['name'],
-					'model'      => $product['model'],
-					'option'     => $this->model_sale_order->getOrderOptions($this->request->get['order_id'], $product['order_product_id']),
-					'quantity'   => $product['quantity'],
-					'price'      => $product['price'],
-					'total'      => $product['total'],
-					'reward'     => $product['reward']
+				$option_data = array();
+
+				$options = $this->model_sale_order->getOrderOptions($this->request->get['order_id'], $product['order_product_id']);
+
+				foreach ($options as $option) {
+					if ($option['type'] != 'file') {
+						$option_data[] = array(
+							'name'  => $option['name'],
+							'value' => $option['value'],
+							'type'  => $option['type']
+						);
+					} else {
+						$upload_info = $this->model_tool_upload->getUploadByCode($option['value']);
+
+						if ($upload_info) {
+							$option_data[] = array(
+								'name'  => $option['name'],
+								'value' => $upload_info['name'],
+								'type'  => $option['type'],
+								'href'  => $this->url->link('tool/upload/download', 'user_token=' . $this->session->data['user_token'] . '&code=' . $upload_info['code'], true)
+							);
+						}
+					}
+				}
+
+				// VU show tax
+			$resultTax_1 = 0; $resultTax_2 = 0;
+			$tax_1 = 19; $tax_2 = 7;
+
+			// if normal product
+			if($product['type'] == 0) {
+			   $total_1 = $product['price'] * $product['quantity'];
+			   $totalNormalProduct = $totalNormalProduct + $total_1;
+
+			   $resultTax_1 = round(($total_1) - ($total_1) / (1 + $tax_1/100), 2);
+
+			   $sum_tax_1 = $sum_tax_1 + $resultTax_1;
+			} else { // if event
+				$total_1 = ($product['price'] - $product['price_1']) * $product['quantity'];
+				$resultTax_1 = round(($total_1) - ($total_1) / (1 + $tax_1/100), 2);
+
+				$total_2 = ($product['price_1']) * $product['quantity'];
+				$resultTax_2 = round(($total_2) - ($total_2) / (1 + $tax_2/100), 2);
+
+				$sum_tax_1 = $sum_tax_1 + $resultTax_1;
+				$sum_tax_2 = $sum_tax_2 + $resultTax_2;
+			}
+			 
+			// END
+
+				$data['products'][] = array(
+					'price_number' => $product['price'],
+				    'price_1'   => $product['price_1'],
+				    'price_2'   => $product['price'] - $product['price_1'] ,
+				    'type'      => $product['type'],
+				    'tax_1'     => $resultTax_1,
+				    'tax_2'     => $resultTax_2,
+				    'text_tax_1' => '19% of ',
+				    'text_tax_2' => '7% of ',
+					'order_product_id' => $product['order_product_id'],
+					'product_id'       => $product['product_id'],
+					'name'    	 	   => $product['name'],
+					'model'    		   => $product['model'],
+					'option'   		   => $option_data,
+					'quantity'		   => $product['quantity'],
+					'price'    		   => $this->currency->format($product['price'] + ($this->config->get('config_tax') ? $product['tax'] : 0), $order_info['currency_code'], $order_info['currency_value']),
+					'total'    		   => $this->currency->format($product['total'] + ($this->config->get('config_tax') ? ($product['tax'] * $product['quantity']) : 0), $order_info['currency_code'], $order_info['currency_value']),
+					'href'     		   => $this->url->link('catalog/product/edit', 'user_token=' . $this->session->data['user_token'] . '&product_id=' . $product['product_id'], true)
 				);
 			}
 
@@ -964,6 +1023,8 @@ class ControllerSaleOrder extends Controller {
 			$data['totals'] = array();
 
 			$totals = $this->model_sale_order->getOrderTotals($this->request->get['order_id']);
+			$this->document->displayOrder($totals, $sum_tax_1, $sum_tax_2, $this->session->data['shipping_address']['country_id'], $totalNormalProduct);
+
 
 			foreach ($totals as $total) {
 				$data['totals'][] = array(
