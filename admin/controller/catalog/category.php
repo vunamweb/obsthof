@@ -12,6 +12,21 @@ class ControllerCatalogCategory extends Controller {
 		$this->getList();
 	}
 
+	public function shortByDate($data) {
+		//print_r($data); die();
+		for($i = 0; $i < count($data) - 1; $i++) {
+			//echo $data[$i]['short_date'] . '////';
+			for($j = $i + 1; $j < count($data); $j++)
+		    if(strtotime($data[$i]['short_date']) > strtotime($data[$j]['short_date'])) {
+				$temp = $data[$i];
+				$data[$i] = $data[$j];
+				$data[$j] = $temp;
+			}
+		} 
+		  
+
+		return $data;	
+	}  
 	public function event() {
 		$this->load->language('/product/category');
 
@@ -77,7 +92,7 @@ class ControllerCatalogCategory extends Controller {
 				'limit'              => $limit
 			);
 
-			$product_total = $this->model_catalog_product->getTotalEvents($filter_data);
+			//$product_total = $this->model_catalog_product->getTotalEvents($filter_data);
 			$results = $this->model_catalog_product->getEvents($filter_data);
 
 			$startDate = 0; $endDate = 0;
@@ -185,6 +200,7 @@ class ControllerCatalogCategory extends Controller {
 						$date1 = explode('-', $date[0]);
 
 						$date1 = $date1[2] . '-' . $date1[1] . '-' . $date1[0];
+						$short_date = $date1 . ' ' . $date[1] . ':' . $date[2];
 						//echo $date1 . '//';
 						$format = "day month date";
 						
@@ -212,6 +228,7 @@ class ControllerCatalogCategory extends Controller {
 								'product_id'  => $result['product_id'],
 								'optionID'  => $optionID,
 								'thumb'       => $image,
+								'short_date' => $short_date,
 			
 							'additional_thumb' => $additional_image,
 							
@@ -242,6 +259,10 @@ class ControllerCatalogCategory extends Controller {
 				// if not is event
 				}
 			}
+
+			$product_total = count($data['products']);
+			//$data['products'] = $this->shortByDate($data['products']);
+			//print_r($data['products']);die();
 
 			$data['start_event'] = $this->document->formatDate($startDate, $format);
 			$data['end_event'] = $this->document->formatDate($endDate, $format);
