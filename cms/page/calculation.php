@@ -10,7 +10,7 @@ if($_POST) {
     include("../nogo/funktion.inc");
 
     $subject = "calculation form";
-    $to = "vukynamkhtn@gmail.com";
+    $to = "jan@skibicki.biz";
 
     $header = $morpheus["mail_start"];
     
