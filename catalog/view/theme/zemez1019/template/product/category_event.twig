@@ -102,8 +102,14 @@
 						</select>
 					</div>
 				</div>
-				<input type='text' value="{{ value_start_event }}" class="form-control datetimepicker hide" />
-				<div class="start_end_event">{{ start_event }} - {{ end_event }} <a class="fa fa-angle-right show_date_event"></a></div>
+				<div class="start_end_event">{{ start_event }} - {{ end_event }} 
+				<div class='input-group date'>
+					<input type='text' class="form-control datetimepicker hide" value="{{ value_start_event }}"/>
+					<span class="input-group-addon datetimepicker-addon">
+						<span class="glyphicon glyphicon-calendar"></span>
+					</span>
+                </div>
+				</div>
 				<div class="row">
 					{%set option_index = 5000 %}
 					{% for product in products %}
@@ -285,6 +291,7 @@
 								<div class="content">
 									<div class="caption">
 										<h4 class="name"><a href="{{ product.href }}">{{ product.name }}</a></h4>
+										<input type="hidden" class="date_event" value="{{ product.date }}"/>
 										<p class="description">{{ product.description }}</p>
 										{% if product.price %}
 											<p class="price">

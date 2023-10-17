@@ -25,11 +25,31 @@ function getURLVar(key) {
 $(document).ready(function() {
 	// Highlight any found errors
 	$('.form_calculation').parent().parent().css('width', '100%');
-	$('.datetimepicker').datetimepicker();
+
+	$('.input-group').datetimepicker({
+		format: 'YYYY-MM-DD'
+	});
+	
+    $('.input-group').datetimepicker().on('dp.change', function(e){
+		if(e.date){
+			var searchDate = $('.datetimepicker').val();
+
+			$('.product-grid').each(function(){
+				var dateEvent = $(this).find('.date_event').val();
+
+				if(new Date(searchDate) > new Date(dateEvent))
+				  $(this).hide();
+				else 
+				  $(this).show();  
+			})
+
+			
+			console.log('Date chosen: ' + $('.datetimepicker').val());
+		}
+	  });
 
 	$('.show_date_event').click(function() {
-		//$(this).prev('input.datetimepicker').data('DateTimePicker').toggle();
-		$('.datetimepicker').click();
+		$('.datetimepicker-addon').click();
 	});
 
 	$('#news').click(function() {

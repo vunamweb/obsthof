@@ -256,6 +256,16 @@
 .text_farm_shop_1 {
   margin-bottom: 10px;
 }
+
+.datetimepicker-addon {
+  border: none;
+  background: none;
+}
+
+.input-group.date {
+  width: 100px;
+  display: inline-block;
+}
 /* END */
 /*========================================================
                    Bootstrap Reset
