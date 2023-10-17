@@ -253,6 +253,14 @@
 									{% if (product.label_new) %}
 										<div class="new-pr"><span>{{ text_new }}</span></div>
 									{% endif %}									
+									<a class="lazy" href="{{ product.href }}" style="padding-bottom: {{ product['img-height'] / product['img-width'] * 100 ~ '%' }}">
+										{% if product.additional_thumb %}
+											<img width="{{ product['img-width'] }}" height="{{ product['img-height'] }}" alt="{{ product['name'] }}" title="{{ product['name'] }}" class="img-primary" data-src="{{ product['thumb'] }}" src="#"/>
+											<img width="{{ product['img-width'] }}" height="{{ product['img-height'] }}" alt="{{ product['name'] }}" title="{{ product['name'] }}" class="img-secondary" data-src="{{ product['additional_thumb'] }}" src="#"/>
+										{% else %}
+											<img width="{{ product['img-width'] }}" height="{{ product['img-height'] }}" alt="{{ product['name'] }}" title="{{ product['name'] }}" class="img" data-src="{{ product['thumb'] }}" src="#"/>
+										{% endif %}
+									</a>									
 									{% if product.rating %}
 										<div class="rating">
 											<span>
