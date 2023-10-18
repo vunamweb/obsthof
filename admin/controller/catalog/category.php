@@ -26,7 +26,8 @@ class ControllerCatalogCategory extends Controller {
 		  
 
 		return $data;	
-	}  
+	}
+	  
 	public function event() {
 		$this->load->language('/product/category');
 
@@ -261,7 +262,7 @@ class ControllerCatalogCategory extends Controller {
 			}
 
 			$product_total = count($data['products']);
-			//$data['products'] = $this->shortByDate($data['products']);
+			$data['products'] = $this->shortByDate($data['products']);
 			//print_r($data['products']);die();
 
 			$data['start_event'] = $this->document->formatDate($startDate, $format);
