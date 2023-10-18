@@ -7741,7 +7741,7 @@ div.swiper-button-next {
   -moz-border-radius: 3px;
   border-radius: 3px;
   margin-top: -15px;
-  z-index: 10;
+  z-index: 1;
   cursor: pointer;
   -moz-transition: 0.3s all ease;
   -o-transition: 0.3s all ease;
@@ -10912,6 +10912,8 @@ p + h2 { margin-top: 1em; }
 .vertical-align > [class^="col-"],
 .vertical-align > [class*=" col-"] 
 	{ display: flex; align-items: center; justify-content: center; text-align: center; }
+.vertical-align .btn { display: block; }
+
 .zitat { font-size: 4em; color: #fff; font-weight: 700; padding: 3em 3em 2em; line-height: 1.1em; }
 
 section.obsthof { padding: 3em 0; }

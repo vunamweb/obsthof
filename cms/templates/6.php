@@ -21,19 +21,19 @@ $template = '
 
 
 if($tref == 1 || !$tref) $template .= '
-            <div class="col-xs-12 col-sm-6 col-md-6 order-1 order-md-1 imgColL btn-abs col-md-push-6">
-'.$grIMG.'<div class="btn-container">'.$linkButton.'</div>
-            </div>
-            <div class="col-xs-12 col-sm-6 col-md-6 order-2 order-md-2 contentPad col-md-pull-6">
+            <div class="col-xs-12 col-sm-6 col-md-6 order-2 order-md-2 contentPad col-sm-push-6">
 <div id="'.$uniqueID.'" class="directeditmode">#cont#</div>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-6 order-1 order-md-1 imgColL btn-abs col-sm-pull-6">
+'.$grIMG.'<div class="btn-container">'.$linkButton.'</div>
             </div>
 ';
 
 else if($tref == 2) $template .= '
-            <div class="col-xs-12 col-sm-6 col-md-6 order-2 order-md-1 contentPad col-md-pull-6">
+            <div class="col-xs-12 col-sm-6 col-md-6 order-2 order-md-1 contentPad">
 <div id="'.$uniqueID.'" class="directeditmode">#cont#</div>
             </div>
-            <div class="col-xs-12 col-sm-6 col-md-6 order-1 order-md-2 imgColR btn-abs col-md-push-6">
+            <div class="col-xs-12 col-sm-6 col-md-6 order-1 order-md-2 imgColR btn-abs">
 '.$grIMG.'<div class="btn-container">'.$linkButton.'</div>
             </div>
 ';
