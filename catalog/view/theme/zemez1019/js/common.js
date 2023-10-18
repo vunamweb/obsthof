@@ -27,24 +27,32 @@ $(document).ready(function() {
 	$('.form_calculation').parent().parent().css('width', '100%');
 
 	$('.input-group').datetimepicker({
-		format: 'YYYY-MM-DD'
+		format: "MM-YYYY",
+	viewMode: "months", 
+	//startView: "year", 
+	minViewMode: "months",
+	language: 'de'
 	});
-	
-    $('.input-group').datetimepicker().on('dp.change', function(e){
-		if(e.date){
+
+	var start_filter = false;
+
+	$('.input-group').datetimepicker().on('dp.change', function(e){
+		if(e.date && start_filter){
 			var searchDate = $('.datetimepicker').val();
 
 			$('.product-grid').each(function(){
 				var dateEvent = $(this).find('.date_event').val();
 
-				if(new Date(searchDate) > new Date(dateEvent))
-				  $(this).hide();
+				if(searchDate == dateEvent)
+				  $(this).show();
 				else 
-				  $(this).show();  
+				  $(this).hide();  
 			})
 
 			
 			console.log('Date chosen: ' + $('.datetimepicker').val());
+		} else {
+			start_filter = true;
 		}
 	  });
 

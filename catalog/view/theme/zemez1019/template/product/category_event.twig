@@ -103,8 +103,9 @@
 					</div>
 				</div>
 				<div class="start_end_event">{{ start_event }} - {{ end_event }} 
-				<div class='input-group date'>
-					<input type='text' class="form-control datetimepicker hide" value="{{ value_start_event }}"/>
+				<div class='input-group date' data-date="02-2012" 
+     data-date-format="mm-yyyy">
+					<input style="width: 200px" type='text' class="form-control datetimepicker hide"/>
 					<span class="input-group-addon datetimepicker-addon">
 						<span class="glyphicon glyphicon-calendar"></span>
 					</span>
