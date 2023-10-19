@@ -49,8 +49,53 @@ $(document).ready(function() {
 					filter_date: $('.datetimepicker').val()
 				},
 				success: function (msg) {
-					$('#main_content').html(msg);;
-					$('#grid-view').click()
+					$('#main_content').html(msg);
+					$('#grid-view').click();
+
+					var searchDate = $('.datetimepicker').val();
+					searchDate = searchDate.split('-');
+
+					switch(searchDate[0]) {
+						case '02':
+							searchDate[0] = 'Februar';
+							break;
+							case '03':
+							searchDate[0] = 'März';
+							break;
+							case '04':
+							searchDate[0] = 'April';
+							break;
+							case '05':
+							searchDate[0] = 'Mai';
+							break;
+							case '06':
+							searchDate[0] = 'Juni';
+							break;
+							case '07':
+							searchDate[0] = 'Juli';
+							break;
+							case '08':
+							searchDate[0] = 'August';
+							break;
+							case '09':
+							searchDate[0] = 'September';
+							break;
+							case '10':
+							searchDate[0] = 'Oktober';
+							break;
+							case '11':
+							searchDate[0] = 'November';
+							break;
+							case '12':
+							searchDate[0] = 'Dezember';
+							break;
+						default:  
+						searchDate[0] = 'Januar';		
+					}
+
+					var value_date = searchDate[0] + ' ' + searchDate[1];
+
+					$('.date_event').html(value_date);
 
 					/*var searchDate = $('.datetimepicker').val();
 
