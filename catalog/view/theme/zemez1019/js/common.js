@@ -31,14 +31,27 @@ $(document).ready(function() {
 	viewMode: "months", 
 	//startView: "year", 
 	minViewMode: "months",
-	language: 'de'
+	isRTL: false,
+	autoclose:true,
+    language: 'de'
 	});
 
 	var start_filter = false;
 
 	$('.input-group').datetimepicker().on('dp.change', function(e){
 		if(e.date && start_filter){
-			var searchDate = $('.datetimepicker').val();
+
+			jQuery.ajax({
+				url: window.location.href,
+				type: 'POST',
+				data: {
+					filter_event: "filter"
+				},
+				success: function (msg) {
+					$('#main_content').html(msg);;
+					$('#grid-view').click()
+
+					var searchDate = $('.datetimepicker').val();
 
 			$('.product-grid').each(function(){
 				var dateEvent = $(this).find('.date_event').val();
@@ -49,9 +62,11 @@ $(document).ready(function() {
 				  $(this).hide();  
 			})
 
-			
-			console.log('Date chosen: ' + $('.datetimepicker').val());
-		} else {
+			//console.log('Date chosen: ' + $('.datetimepicker').val());
+
+				}
+			});
+        } else {
 			start_filter = true;
 		}
 	  });

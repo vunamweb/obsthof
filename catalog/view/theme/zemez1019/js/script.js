@@ -595,13 +595,14 @@ $(window).resize(function () {
 /* Quick View
 ========================================================*/
 ;(function ($) {
-	var selector = $('.quickview'),
+	var selector = $('.quickview'),//
 	selector2 = $('#productZoom');
 	if (selector.length > 0 || selector2.length > 0) {
 		include('js/jquery.selectbox-0.2.min.js');
 		include('js/fancybox/jquery.fancybox.js');
-		document.write('<script src="catalog/view/javascript/jquery/datetimepicker/moment/moment.min.js"><\/script>');
-		document.write('<script src="catalog/view/javascript/jquery/datetimepicker/bootstrap-datetimepicker.min.js"><\/script>');
+		//document.write('<script src="catalog/view/javascript/jquery/datetimepicker/moment/moment.min.js"><\/script>');
+		//document.write('<script src="catalog/view/javascript/jquery/datetimepicker/bootstrap-datetimepicker.min.js"><\/script>');
+		//document.write('<script src="catalog/view/javascript/jquery/datetimepicker/bootstrap-datepicker.de.min.js"><\/script>');
 		document.write('<link href="catalog/view/javascript/jquery/datetimepicker/bootstrap-datetimepicker.min.css" rel="stylesheet">');
 	}
 

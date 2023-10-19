@@ -269,9 +269,14 @@
 
 .bootstrap-datetimepicker-widget {
   top: 300px !important;
-  left: 0 !important;
+  left: 25% !important;
   inset: none;
-  width: 100% !important;
+  width: 50% !important;
+  background: #ccc;
+}
+
+.picker-switch.accordion-toggle {
+  display: none;
 }
 /* END */
 /*========================================================
