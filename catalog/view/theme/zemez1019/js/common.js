@@ -26,17 +26,18 @@ $(document).ready(function() {
 	// Highlight any found errors
 	$('.form_calculation').parent().parent().css('width', '100%');
 
-	$('.input-group').datetimepicker({
-		format: "MM-YYYY",
-	viewMode: "months", 
-	//startView: "year", 
-	minViewMode: "months",
-	isRTL: false,
-	autoclose:true,
-    language: 'de'
-	});
+	if($('.input-group').length > 0) {
+		$('.input-group').datetimepicker({
+			format: "MM-YYYY",
+		viewMode: "months", 
+		//startView: "year", 
+		minViewMode: "months",
+		isRTL: false,
+		autoclose:true,
+		language: 'de'
+		});
 
-	var start_filter = false;
+		var start_filter = false;
 
 	$('.input-group').datetimepicker().on('dp.change', function(e){
 		if(e.date && start_filter){
@@ -113,6 +114,7 @@ $(document).ready(function() {
 			start_filter = true;
 		}
 	  });
+	}
 
 	$('.show_date_event').click(function() {
 		$('.datetimepicker-addon').click();
