@@ -1,5 +1,6 @@
 {% if products %}
 				{%set option_index = 5000 %}
+<div class="row">
 					{% for product in products %}
 						<div class="product-layout product-list">
 							<div class="product-thumb transition {% if product.options and product.options|length <= 3 %} {{ 'options' }} {% endif %}">
@@ -205,5 +206,37 @@
 						</div>
 						{%set option_index = option_index + 1 %}
 					{% endfor %}
+					</div>
 			{% endif %}
+			<div class="row">
+					<div class="col-sm-6 text-left">{{ pagination }}</div>
+					<div class="col-sm-6 text-right">{{ results }}</div>
+				</div>
+<script>
+(function ($) {
+	var o = $('.lazy img');
+	if (o.length > 0) {
+		include('js/jquery.unveil.min.js');
+		$(document).ready(function () {
+			$(o).unveil(0, function () {
+				$(this).load(function () {
+					$(this).parent().addClass("lazy-loaded");
+				});
+			});
+		});
+		$(window).load(function () {
+			$(window).trigger('lookup.unveil');
+			if ($('.nav-tabs').length) {
+				$('.nav-tabs').find('a[data-toggle="tab"]').click(function () {
+					setTimeout(function () {
+						$(window).trigger('lookup.unveil');
+					}, 400);
+				});
+			}
+		});
+	}
+})(jQuery);
+</script>
+
+				
 

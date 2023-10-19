@@ -45,13 +45,14 @@ $(document).ready(function() {
 				url: window.location.href,
 				type: 'POST',
 				data: {
-					filter_event: "filter"
+					filter_event: "filter",
+					filter_date: $('.datetimepicker').val()
 				},
 				success: function (msg) {
 					$('#main_content').html(msg);;
 					$('#grid-view').click()
 
-					var searchDate = $('.datetimepicker').val();
+					/*var searchDate = $('.datetimepicker').val();
 
 			$('.product-grid').each(function(){
 				var dateEvent = $(this).find('.date_event').val();
@@ -60,11 +61,8 @@ $(document).ready(function() {
 				  $(this).show();
 				else 
 				  $(this).hide();  
-			})
-
-			//console.log('Date chosen: ' + $('.datetimepicker').val());
-
-				}
+			})*/
+}
 			});
         } else {
 			start_filter = true;

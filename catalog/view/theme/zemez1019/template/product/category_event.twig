@@ -111,7 +111,8 @@
 					</span>
                 </div>
 				</div>
-				<div class="row" id="main_content">
+				<div id="main_content">
+				<div class="row">
 					{%set option_index = 5000 %}
 					{% for product in products %}
 						<div class="product-layout product-list">
@@ -323,6 +324,7 @@
 					<div class="col-sm-6 text-left">{{ pagination }}</div>
 					<div class="col-sm-6 text-right">{{ results }}</div>
 				</div>
+		        </div>
 			{% endif %}
 			{% if not categories and not products %}
 				<p>{{ text_empty }}</p>
