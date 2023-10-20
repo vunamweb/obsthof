@@ -278,6 +278,23 @@
 .picker-switch.accordion-toggle {
   display: none;
 }
+
+.datetimepicker-addon {
+  width: auto !important;
+  margin-top: -6px;
+  display: inline-block;
+}
+.glyphicon-calendar.glyphicon {
+  display: inline-block !important;
+}
+.clear_date {
+  display: inline-block;
+  display: none;
+}
+
+.date_event_1 {
+  display: none;
+}
 /* END */
 /*========================================================
                    Bootstrap Reset
@@ -1153,7 +1170,7 @@ h4 {
 }
 /* .event { font-size: 1.5em; font-weight: 400; letter-spacing: .1em; padding: 1.5em 0; text-transform: uppercase; } */
 h4.name { font-weight: 700; font-size: 1.5em; letter-spacing: .1em; margin-bottom: 0; }
-.date_event { font-size: 1.5em; }
+.date_event, .date_event_1 { font-size: 1.5em; }
 h5 {
   font-size: 1em;
   text-transform: uppercase;

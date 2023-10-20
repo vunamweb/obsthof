@@ -102,14 +102,17 @@
 						</select>
 					</div>
 				</div>
-				<div class="start_end_event"><span class="date_event">{{ start_event }} - {{ end_event }}</span> 
+				<div class="start_end_event">
+				<span class="date_event">{{ start_event }} - {{ end_event }}</span>
+				<span class="date_event_1">{{ start_event }} - {{ end_event }}</span> 
 				<div class='input-group date' data-date="02-2012" 
      data-date-format="mm-yyyy">
 					<input style="width: 200px" type='text' class="form-control datetimepicker hide"/>
 					<span class="input-group-addon datetimepicker-addon">
 						<span class="glyphicon glyphicon-calendar"></span>
 					</span>
-                </div>
+					<a href="javascript:void(0)" class="clear_date"><i class="fa fa-close"></i></a>
+				</div>
 				</div>
 				<div id="main_content">
 				<div class="row">

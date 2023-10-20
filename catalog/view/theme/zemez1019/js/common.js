@@ -27,6 +27,24 @@ $(document).ready(function() {
 	$('.form_calculation').parent().parent().css('width', '100%');
 
 	if($('.input-group').length > 0) {
+        $('.clear_date').click(function(){
+			jQuery.ajax({
+				url: window.location.href,
+				type: 'POST',
+				data: {
+					filter_event: "filter",
+					filter_date: '0-0'
+				},
+				success: function (msg) {
+					$('#main_content').html(msg);
+					$('#grid-view').click();
+					$('.clear_date').hide();
+					$('.date_event').hide();
+					$('.date_event_1').show();
+				}
+			});
+		})
+
 		$('.input-group').datetimepicker({
 			format: "MM-YYYY",
 		viewMode: "months", 
@@ -52,6 +70,9 @@ $(document).ready(function() {
 				success: function (msg) {
 					$('#main_content').html(msg);
 					$('#grid-view').click();
+					$('.clear_date').show();
+					$('.date_event').show();
+					$('.date_event_1').hide();
 
 					var searchDate = $('.datetimepicker').val();
 					searchDate = searchDate.split('-');
