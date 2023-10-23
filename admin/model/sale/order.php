@@ -254,6 +254,26 @@ class ModelSaleOrder extends Model {
 		return $query->rows;
 	}
 
+	public function getDateEvent( $option_id ) {
+        $query = $this->db->query( 'SELECT * FROM ' . DB_PREFIX . "product_option WHERE product_option_id = '" . ( int )$option_id . "'" );
+
+        $value = $query->rows[ 0 ][ 'value' ];
+        $value = explode( ';', $value );
+
+        $date1 = explode('-', $value[0]);
+        $date1 = $date1[2] . '-' . $date1[1] . '-' . $date1[0];
+
+        $format = "day month date";
+
+        $date1_ = $this->document->formatDate($date1, $format); 
+
+
+        //return $date1_ . '   ' . $value[1] . '-' .$value[2] . ' Uhr';
+        return $date1_ . ', ' . $value[ 1 ] . '-' . $value[ 2 ] . ' Uhr';
+
+        //return $value[ 1 ] . '-' . $value[ 2 ] . ' Uhr' . '<br><p class="lead">'.$value[ 3 ].' tickets in stock</p>';
+    }
+
 	public function getOrderVouchers($order_id) {
 		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "order_voucher WHERE order_id = '" . (int)$order_id . "'");
 

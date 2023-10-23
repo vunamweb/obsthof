@@ -975,6 +975,7 @@ class ControllerSaleOrder extends Controller {
 				$options = $this->model_sale_order->getOrderOptions($this->request->get['order_id'], $product['order_product_id']);
 
 				foreach ($options as $option) {
+					print_r($option);
 					if ($option['type'] != 'file') {
 						$option_data[] = array(
 							'name'  => $option['name'],
@@ -995,10 +996,21 @@ class ControllerSaleOrder extends Controller {
 					}
 				}
 
+				$option = $product['idOption'];
+
+				$dateEvent = $this->model_sale_order->getDateEvent($product['idOption']);
+
+				$product_name = explode(':', $product['name']);
+				//print_r($product_name);
+				$product_name = $product_name[0] . $product_name[1];
+				$product_name = str_replace('Time', '', $product_name);
+				$product_name .= '<br>' . $dateEvent;
+				//echo ($dateEvent) . '///';
+
 				$data['products'][] = array(
 					'order_product_id' => $product['order_product_id'],
 					'product_id'       => $product['product_id'],
-					'name'    	 	   => $product['name'],
+					'name'    	 	   => ($option == 0) ? $product['name'] : $product_name,
 					'model'    		   => $product['model'],
 					'option'   		   => $option_data,
 					'quantity'		   => $product['quantity'],
