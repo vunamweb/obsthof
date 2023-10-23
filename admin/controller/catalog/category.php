@@ -84,6 +84,8 @@ class ControllerCatalogCategory extends Controller {
 				
 			$data['products'] = array();
 
+			$limit = 100;
+
 			$filter_data = array(
 				'filter_category_id' => '', //$category_id,
 				'filter_filter'      => $filter,
@@ -192,6 +194,31 @@ class ControllerCatalogCategory extends Controller {
 					$optionProduct = $this->model_catalog_product->getProductOptions($result['product_id']);
 
 					foreach($optionProduct as $item) {
+						$information = '';
+
+						$result_ = $this->model_catalog_product->getInformationEvent($item['product_option_id']);
+
+						/*if($item['product_option_id'] == 447)
+						  print_r($result_);*/
+
+						foreach($result_ as $item_) {
+							$name = explode('<br>', $item_["name"]);
+							//print_r($name);
+							$name = $name[1];
+
+							$name = explode(' ', $name);
+							//print_r($name);
+							$name = $name[0] . ' ' . $name[1];
+
+							//echo $name;
+
+							$information .= explode(' ', $item_['date_added'])[0] . '|' . $name . '|' . 'Anzahl: ' . $item_['quantity'] . '<br>';
+							//echo $information;
+						}
+
+					    $information = ($information != '') ? '<div class="label-success">' . $information . '</div>' : '<div class="label-success">' . 'No Booked' . '</div>';
+						  
+						
 						$date = $item['value'];
 						$date = explode(';', $date);
 
@@ -201,16 +228,17 @@ class ControllerCatalogCategory extends Controller {
 						$date1 = explode('-', $date[0]);
 
 						$date1 = $date1[2] . '-' . $date1[1] . '-' . $date1[0];
-						$short_date = $date1 . ' ' . $date[1] . ':' . $date[2];
+						$short_date = $date1 . ' ' . explode(':', $date[1])[0] . ':' . explode(':', $date[2])[0] ;
 						//echo $date1 . '//';
 						$format = "day month date";
 						
 						$date1_ = $this->document->formatDate($date1, $format);
-	
-						$dateEvent = ($date[3] > 0 ) ? $date1_ . '   ' . $date[1] . '-' .$date[2] . ' Uhr' . '<br>' . $date[3] . ' ' . $this->language->get('event_in_stock') : 
-						$date1_ . '   ' . $date[1] . '-' .$date[2] . ' Uhr';
 
-                        $optionID = $item['product_option_id']; 
+						$date[3] = ($date[3] != '') ? $date[3] : 0;
+	
+						$dateEvent = $date1_ . '   ' . $date[1] . '-' .$date[2] . ' Uhr' . '<br>' . $date[3] . ' ' . 'Plätze verfügbar';
+
+	                    $optionID = $item['product_option_id']; 
 
 	
 						//echo time() - strtotime($date1) . '//';
@@ -237,7 +265,7 @@ class ControllerCatalogCategory extends Controller {
 							'img-width'  => $this->config->get('theme_' . $this->config->get('config_theme') . '_image_related_width'),
 							'img-height' => $this->config->get('theme_' . $this->config->get('config_theme') . '_image_related_height'),
 							
-								'name'        => $result['name'] . '<br>' . $dateEvent,
+								'name'        => $result['name'] . '<br>' . $dateEvent . '<br><br>' . $information,
 			                'reviews' => sprintf($this->language->get('text_reviews'), (int)$result['reviews']), 
 								'description' => utf8_substr(trim(strip_tags(html_entity_decode($result['description'], ENT_QUOTES, 'UTF-8'))), 0, $this->config->get('theme_' . $this->config->get('config_theme') . '_product_description_length')) . '..',
 								'price'       => $price,

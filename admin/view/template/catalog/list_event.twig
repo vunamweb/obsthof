@@ -50,19 +50,8 @@
 								<div class="content">
 									<div class="caption">
 										<h4 class="name"><a href="{{ product.href }}">{{ product.name }}</a></h4>
-										{% if product.price %}
-											<p class="price">
-												{% if not product.special %}
-													{{ product.price }}
-												{% else %}
-													 <span class="price-new">{{ product.special }}</span> <span class="price-old">{{ product.price }}</span>
-												{% endif %}
-												{% if product.tax %}
-													<span class="price-tax">{{ text_tax }} {{ product.tax }}</span>
-												{% endif %}
-											</p>
-										{% endif %}
-									</div>									
+									</div>
+									<hr>									
 								</div>								
 							
 							</div>
