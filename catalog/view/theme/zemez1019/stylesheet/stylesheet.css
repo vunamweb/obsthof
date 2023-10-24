@@ -735,6 +735,7 @@ input[type="text"] {
   -o-transition: 1s all cubic-bezier(1, -0.01, 0, 0.99);
   -webkit-transition: 1s all cubic-bezier(1, -0.01, 0, 0.99);
   transition: 1s all cubic-bezier(1, -0.01, 0, 0.99);
+  padding-left: 75px;
 }
 
 .alert i {
