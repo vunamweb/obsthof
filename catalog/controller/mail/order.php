@@ -294,7 +294,7 @@ class ControllerMailOrder extends Controller {
 		//$mail->send();
 		$subject = html_entity_decode(sprintf($language->get('text_subject'), $order_info['store_name'], $order_info['order_id']), ENT_QUOTES, 'UTF-8');
 		$fromName = html_entity_decode($order_info['store_name'], ENT_QUOTES, 'UTF-8');
-		$this->sendMailSMTP($order_info['email'], $subject, 'info@yourplate.de', $fromName, $this->load->view('mail/order_add', $data));
+		$this->sendMailSMTP($order_info['email'], $subject, 'test@7sc.eu', $fromName, $this->load->view('mail/order_add', $data));
 	
 	}
 
