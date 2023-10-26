@@ -284,7 +284,9 @@ class ControllerCatalogProduct extends Controller {
                 $url .= '&page=' . $this->request->get[ 'page' ];
             }
 
-            $this->response->redirect( $this->url->link( 'catalog/product', 'user_token=' . $this->session->data[ 'user_token' ] . $url, true ) );
+            $type = ($this->request->get[ 'type' ]) ? 1 : 0;
+
+            $this->response->redirect( $this->url->link( 'catalog/product', 'type='.$type.'&user_token=' . $this->session->data[ 'user_token' ] . $url, true ) );
         }
 
         $this->getList();
@@ -388,7 +390,7 @@ class ControllerCatalogProduct extends Controller {
         else
         $data[ 'add' ] = $this->url->link( 'catalog/product/add', 'user_token=' . $this->session->data[ 'user_token' ] . $url, true );
 
-        $data[ 'copy' ] = $this->url->link( 'catalog/product/copy', 'user_token=' . $this->session->data[ 'user_token' ] . $url, true );
+        $data[ 'copy' ] = $this->url->link( 'catalog/product/copy', 'user_token=' . $this->session->data[ 'user_token' ] . $url . '&type='.$type.'', true );
         $data[ 'delete' ] = $this->url->link( 'catalog/product/delete', 'user_token=' . $this->session->data[ 'user_token' ] . $url . '&type='.$type.'', true );
 
         $data[ 'products' ] = array();
@@ -568,11 +570,13 @@ class ControllerCatalogProduct extends Controller {
             $url .= '&order=' . $this->request->get[ 'order' ];
         }
 
+        $type = ($this->request->get[ 'type' ]) ? 1 : 0;
+
         $pagination = new Pagination();
         $pagination->total = $product_total;
         $pagination->page = $page;
         $pagination->limit = $this->config->get( 'config_limit_admin' );
-        $pagination->url = $this->url->link( 'catalog/product', 'user_token=' . $this->session->data[ 'user_token' ] . $url . '&page={page}', true );
+        $pagination->url = $this->url->link( 'catalog/product', 'type='.$type.'&user_token=' . $this->session->data[ 'user_token' ] . $url . '&page={page}', true );
 
         $data[ 'pagination' ] = $pagination->render();
 

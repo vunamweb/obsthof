@@ -512,6 +512,8 @@ class ModelCatalogProduct extends Model {
 			$data['product_store'] = $this->getProductStores($product_id);
 			$data['product_recurrings'] = $this->getRecurrings($product_id);
 
+			$data['product_description'][3]['type'] = $data['type'];
+			
 			$this->addProduct($data);
 		}
 	}
@@ -860,6 +862,8 @@ class ModelCatalogProduct extends Model {
 	}
 
 	public function getTotalProducts($data = array()) {
+		$type = ($this->request->get[ 'type' ]) ? 1 : 0;
+
 		$sql = "SELECT COUNT(DISTINCT p.product_id) AS total FROM " . DB_PREFIX . "product p LEFT JOIN " . DB_PREFIX . "product_description pd ON (p.product_id = pd.product_id)";
 
 		$sql .= " WHERE pd.language_id = '" . (int)$this->config->get('config_language_id') . "'";
@@ -883,6 +887,8 @@ class ModelCatalogProduct extends Model {
 		if (isset($data['filter_status']) && $data['filter_status'] !== '') {
 			$sql .= " AND p.status = '" . (int)$data['filter_status'] . "'";
 		}
+
+		$sql .= " AND type=".$type."";
 
 		$query = $this->db->query($sql);
 
