@@ -199,7 +199,7 @@ class ControllerCheckoutGuest extends Controller {
 			}
 
 			if (!isset($this->request->post['zone_id']) || $this->request->post['zone_id'] == '' || !is_numeric($this->request->post['zone_id'])) {
-				$json['error']['zone'] = $this->language->get('error_zone');
+				//$json['error']['zone'] = $this->language->get('error_zone');
 			}
 
 			// Customer Group
