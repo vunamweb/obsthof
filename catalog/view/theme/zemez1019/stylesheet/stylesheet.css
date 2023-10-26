@@ -10811,11 +10811,25 @@ footer p + p {
 }
 
 @media (max-width: 600px) {
+  .start_end_event {
+    margin-top: 10px;
+  }
+
+  .bootstrap-datetimepicker-widget {
+    left: 2% !important;
+    width: 95% !important;
+  }
+  .bootstrap-datetimepicker-widget td span {
+    display: inline !important;
+    margin: 2px 4.5px !important;
+  }
+
   .product-filter {
     background: none;
     width: 100%;
     margin-left: auto;
     margin-right: auto;
+    display: none;
   }
   .product-filter .sort, .product-filter .show {
     width: 100%;
