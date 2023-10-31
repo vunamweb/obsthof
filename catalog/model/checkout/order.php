@@ -238,7 +238,7 @@ class ModelCheckoutOrder extends Model {
 	}
 	
 	public function getOrderProducts($order_id) {
-		$query = $this->db->query("SELECT op.order_product_id, op.order_id,op.product_id, op.name, op.model, op.quantity, op.price, op.total, op.tax, op.reward, p.type, p.price_1  FROM " . DB_PREFIX . "order_product op, " . DB_PREFIX . "product p  WHERE p.product_id = op.product_id AND op.order_id = '" . (int)$order_id . "'");
+		$query = $this->db->query("SELECT op.order_product_id, op.idOption, op.order_id,op.product_id, op.name, op.model, op.quantity, op.price, op.total, op.tax, op.reward, p.type, p.price_1  FROM " . DB_PREFIX . "order_product op, " . DB_PREFIX . "product p  WHERE p.product_id = op.product_id AND op.order_id = '" . (int)$order_id . "'");
 		
 		return $query->rows;
 	}
@@ -261,7 +261,25 @@ class ModelCheckoutOrder extends Model {
 		return $query->rows;
 	} 
 	
-	public function updateValueTicket() {
+	public function updateStockOption($product_option_id, $quantity, $type) {
+		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "product_option WHERE product_option_id = ".$product_option_id."");
+		$item = $query->rows[0];
+
+		$value = $item['value'];
+		$value = explode(';', $value);
+		$numberTicket = $value[3];
+
+		//echo $type; die();
+		$newValue = ($type == 'plus') ? $numberTicket + $quantity : $numberTicket - $quantity;
+		
+		$valueTicket = $value[0] . ';' . $value[1] . ';' . $value[2] . ';' . $newValue;
+
+		//echo $valueTicket; die();
+
+        $this->db->query("UPDATE `" . DB_PREFIX . "product_option` SET value = '" . $valueTicket . "' WHERE product_option_id = '" . (int)$product_option_id . "'");
+    }
+
+	/*public function updateValueTicket() {
 		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "product_option WHERE 1");
 
 		foreach($query->rows as $item) {
@@ -272,11 +290,14 @@ class ModelCheckoutOrder extends Model {
 			$numberTicket = $value[3];
 			
 			$query_1 = $this->db->query("SELECT * FROM " . DB_PREFIX . "cart WHERE idOption = ".$product_option_id."");
+			//echo $product_option_id; die();
 
 			$total = 0;
 			foreach($query_1->rows as $item_1) {
                 $total = $total + $item_1['quantity'];
 			}
+
+			echo $total; die();
 
 			if($numberTicket > 0) {
 				$newValue = $numberTicket - $total;
@@ -285,7 +306,7 @@ class ModelCheckoutOrder extends Model {
 				$this->db->query("UPDATE `" . DB_PREFIX . "product_option` SET value = '" . $valueTicket . "' WHERE product_option_id = '" . (int)$product_option_id . "'");
 			}
 		}
-    }
+    }*/
 	
 	public function getStatusValueTicket($idOption = 0, $quantity = 0) {
 		$query = ($idOption == 0) ? $this->db->query("SELECT * FROM " . DB_PREFIX . "product_option WHERE 1")
@@ -393,6 +414,7 @@ class ModelCheckoutOrder extends Model {
 				$order_products = $this->getOrderProducts($order_id);
 
 				foreach ($order_products as $order_product) {
+					//print_r($order_product); die();
 					$this->db->query("UPDATE " . DB_PREFIX . "product SET quantity = (quantity - " . (int)$order_product['quantity'] . ") WHERE product_id = '" . (int)$order_product['product_id'] . "' AND subtract = '1'");
 
 					$order_options = $this->getOrderOptions($order_id, $order_product['order_product_id']);
@@ -400,6 +422,11 @@ class ModelCheckoutOrder extends Model {
 					foreach ($order_options as $order_option) {
 						$this->db->query("UPDATE " . DB_PREFIX . "product_option_value SET quantity = (quantity - " . (int)$order_product['quantity'] . ") WHERE product_option_value_id = '" . (int)$order_option['product_option_value_id'] . "' AND subtract = '1'");
 					}
+
+					$product_option_id = (int)$order_product['idOption'];
+					$quantity = (int)$order_product['quantity'];
+
+					$this->updateStockOption($product_option_id, $quantity, 'minutes');
 				}
 				
 				// Add commission if sale is linked to affiliate referral.
@@ -423,6 +450,7 @@ class ModelCheckoutOrder extends Model {
 				$order_products = $this->getOrderProducts($order_id);
 
 				foreach($order_products as $order_product) {
+					//print_r($order_product); die();
 					$this->db->query("UPDATE `" . DB_PREFIX . "product` SET quantity = (quantity + " . (int)$order_product['quantity'] . ") WHERE product_id = '" . (int)$order_product['product_id'] . "' AND subtract = '1'");
 
 					$order_options = $this->getOrderOptions($order_id, $order_product['order_product_id']);
@@ -430,6 +458,11 @@ class ModelCheckoutOrder extends Model {
 					foreach ($order_options as $order_option) {
 						$this->db->query("UPDATE " . DB_PREFIX . "product_option_value SET quantity = (quantity + " . (int)$order_product['quantity'] . ") WHERE product_option_value_id = '" . (int)$order_option['product_option_value_id'] . "' AND subtract = '1'");
 					}
+
+					$product_option_id = (int)$order_product['idOption'];
+					$quantity = (int)$order_product['quantity'];
+
+					$this->updateStockOption($product_option_id, $quantity, 'plus');
 				}
 
 				// Remove coupon, vouchers and reward points history

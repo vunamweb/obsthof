@@ -6,7 +6,7 @@ class ControllerCheckoutSuccess extends Controller {
 		if (isset($this->session->data['order_id'])) {
 			$this->load->model( 'checkout/order' );
 			
-			$this->model_checkout_order->updateValueTicket();
+			//$this->model_checkout_order->updateValueTicket();
 			
 			$this->cart->clear();
 
