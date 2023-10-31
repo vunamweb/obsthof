@@ -2511,7 +2511,7 @@ html[dir="rtl"] .box-language .toggle:after, html[dir="rtl"]
 .cart > button i, .cart > button strong, .cart > button span {
   vertical-align: middle;
   font-size: 1em;
-  display: none; 
+  /*display: none;*/ 
 }
 .cart > button i {
   display: none;
@@ -2521,21 +2521,16 @@ html[dir="rtl"] .box-language .toggle:after, html[dir="rtl"]
 }
 
 .cart > button .cart-total2 {
-  display: none;
-  color: #fff;
-  background: #222;
-  -webkit-border-radius: 50%;
-  -moz-border-radius: 50%;
-  border-radius: 50%;
-  font-size: .9em;
-  width: 24px;
-  height: 24px;
-  line-height: 24px;
-  text-align: center;
-  -moz-transition: 0.3s background-color ease;
-  -o-transition: 0.3s background-color ease;
-  -webkit-transition: 0.3s background-color ease;
-  transition: 0.3s background-color ease;
+  position: absolute;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    top: 5px;
+    left: 3px;
+    background-color: #000;
+    color: #fff;
+    text-align: center;
+    font-size: 15px;
 }
 
 .cart > button i {
