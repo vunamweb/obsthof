@@ -69,8 +69,8 @@
 						{{ date_event}}
 						{{ description }}
 						
-						{% if price %}
-							<div class="price">
+						{% if (price) %}
+							<div class="price {{ class_event }}">
 								<p class="type_event">{{ adult }}</p>
 								{% if not special %}
 									<span>{{ price }}</span>
@@ -103,7 +103,7 @@
 							</div>
 						{% endif %}
 						
-						<div id="product">
+						<div id="product" class="{{ class_event }}">
 							{% if recurrings %}
 								<hr>
 								<h3>{{ text_payment_recurring }}</h3>
@@ -156,7 +156,7 @@
 								</div>
 							{% endif %}
 						{% endif %}
-						<hr>
+						<hr class="{{ class_event }}">
 						<div
 							class="product-share">
 							<!-- AddThis Button BEGIN -->
@@ -168,7 +168,7 @@
 					</div>
 					<div class="general_info product-info">
 						{% if price %}
-							<div class="price">
+							<div class="price {{ class_event }}">
 								<p class="type_event">{{ kid }}</p>
 								{% if not special %}
 									<span>{{ price_1 }}</span>
@@ -200,7 +200,7 @@
 								{% endif %}
 							</div>
 						{% endif %}
-						<div id="product">
+						<div id="product" class="{{ class_event }}">
 							{% if recurrings %}
 								<hr>
 								<h3>{{ text_payment_recurring }}</h3>
@@ -274,7 +274,7 @@
 								</span>
 							</div>
 						{% endif %}
-						<hr>
+						<hr class="{{ class_event }}">
 						<div
 							class="product-share">
 							<!-- AddThis Button BEGIN -->
@@ -284,8 +284,8 @@
 							<!-- AddThis Button END -->
 						</div>
 					</div>
-					<div class="text_farm_shop_1">{{ farm_shop_1 }} <a href="tel:{{ phone }}">{{ phone }}</a></div>
-					<div class="text_farm_shop_2"><a target="_blank" href="{{ order_link }}">{{ farm_shop_2 }}</a></div>
+					<div class="text_farm_shop_1 {{ class_event }}">{{ farm_shop_1 }} <a href="tel:{{ phone }}">{{ phone }}</a></div>
+					<div class="text_farm_shop_2 {{ class_event }}"><a target="_blank" href="{{ order_link }}">{{ farm_shop_2 }}</a></div>
 				</div>
 			</div>
 			<!-- 2 cols !-->
