@@ -273,6 +273,8 @@ class ControllerExtensionModuleZemezMegaMenu extends Controller
 			}
 		}
 
+		//print_r($data['menu_items']); die();
+		$data['menu_items'][0]['column'][0]['list'] .= '<li><a href="index.php?route=account/account">Mein Konto</a></li>';
 		// add menu of morpheus
 		$data['menu_morpheus'] = '<li><a href="index.php?route=account/order" class="nav-link"><i class="square rotate-0" id="rotate-square"></i>Veranstaltung verwalten</a></li>';
 		//$data['menu_morpheus'] .= '<li><a href="index.php?route=product/category/event" class="nav-link"><i class="square rotate-0" id="rotate-square"></i>Events Management</a></li>';
@@ -280,9 +282,6 @@ class ControllerExtensionModuleZemezMegaMenu extends Controller
 		$data['menu_morpheus'] = str_replace(array("<?php", "?>", "nav = '", "$", 'cms/', "';"), '', $data['menu_morpheus']);
 		// end
 
-		// add menu login/profile
-		$data['menu_morpheus'] .= '<li><a href="index.php?route=account/account" class="nav-link"><i class="square rotate-0" id="rotate-square"></i>Mein Konto</a></li>';
-		// end 
 		return $this->load->view('extension/module/zemez_megamenu', $data);
 	}
 
