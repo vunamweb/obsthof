@@ -272,7 +272,7 @@
   left: 25% !important;
   inset: none;
   width: 50% !important;
-  background: #ccc;
+  background: #f7f7f7;
 }
 
 .picker-switch.accordion-toggle {
