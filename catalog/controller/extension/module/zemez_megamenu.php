@@ -276,7 +276,7 @@ class ControllerExtensionModuleZemezMegaMenu extends Controller
 		//print_r($data['menu_items']); die();
 		$data['menu_items'][0]['column'][0]['list'] .= '<li><a href="index.php?route=account/account">Mein Konto</a></li>';
 		// add menu of morpheus
-		$data['menu_morpheus'] = '<li><a href="index.php?route=account/order" class="nav-link"><i class="square rotate-0" id="rotate-square"></i>Veranstaltung verwalten</a></li>';
+		//$data['menu_morpheus'] = '<li><a href="index.php?route=account/order" class="nav-link"><i class="square rotate-0" id="rotate-square"></i>Veranstaltung verwalten</a></li>';
 		//$data['menu_morpheus'] .= '<li><a href="index.php?route=product/category/event" class="nav-link"><i class="square rotate-0" id="rotate-square"></i>Events Management</a></li>';
 		$data['menu_morpheus'] .= file_get_contents('cms/nogo/nav_de.inc');
 		$data['menu_morpheus'] = str_replace(array("<?php", "?>", "nav = '", "$", 'cms/', "';"), '', $data['menu_morpheus']);
