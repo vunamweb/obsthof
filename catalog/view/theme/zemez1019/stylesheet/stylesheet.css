@@ -291,9 +291,13 @@
   display: inline-block;
   display: none;
 }
-
+ 
 .date_event_1 {
   display: none;
+}
+
+.event-start .description_1 {
+  font-size: 18px;
 }
 /* END */
 /*========================================================
