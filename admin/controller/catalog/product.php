@@ -596,6 +596,7 @@ class ControllerCatalogProduct extends Controller {
         $data[ 'footer' ] = $this->load->controller( 'common/footer' );
 
         $type = ( isset( $_REQUEST[ 'type' ] ) ) ? $_REQUEST[ 'type' ] : 0;
+        $data['type_product'] = $type;
 
         if ( $type )
         $this->response->setOutput( $this->load->view( 'catalog/product_list_event', $data ) );
