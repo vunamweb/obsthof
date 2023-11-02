@@ -1,10 +1,10 @@
 <div class="box-cart pull-right">
 	<div id="cart" class="cart toggle-wrap">
-		<button type="button" data-loading-text="{{ text_loading }}" class="toggle {{ class_cart }}">
+		<button type="button" data-loading-text="{{ text_loading }}" class="toggle">
 			<i class="linearicons-cart"></i>
 			<strong>{{ text_shopping_cart }}</strong>
 			<span id="cart-total hide" class="cart-total">{{ text_items }}</span>
-			<span id="cart-total2" class="cart-total2">{{ text_items2 }}</span>
+			<span id="cart-total2" class="cart-total2 {{ class_cart }}">{{ text_items2 }}</span>
 		</button>
 		<ul class="pull-right toggle_cont">
 			{% if (products or vouchers) %}
