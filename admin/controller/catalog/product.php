@@ -683,7 +683,7 @@ class ControllerCatalogProduct extends Controller {
 
         $data[ 'breadcrumbs' ][] = array(
             'text' => $this->language->get( 'heading_title' ),
-            'href' => $this->url->link( 'catalog/product', 'user_token=' . $this->session->data[ 'user_token' ] . $url, true )
+            'href' => $this->url->link( 'catalog/product', 'user_token=' . $this->session->data[ 'user_token' ] . $url . '&type='.$type.'', true )
         );
 
         if ( !isset( $this->request->get[ 'product_id' ] ) ) {
