@@ -1965,15 +1965,12 @@ customtab_row++;
 //-->
 </script>
 
-<script
-	type="text/javascript">
-<!--
+<script type="text/javascript"><!--
 $('#customtab li:first-child a').tab('show');
 {% set customtab_row = 0 %}
 {% for product_customtab in product_customtabs %}
-$('#clanguage {{ customtab_row }}li:first-child a').tab('show');
+$('#clanguage{{ customtab_row }} li:first-child a').tab('show');
 {% set customtab_row = customtab_row + 1 %}
-{% endfor %}
-//-->
-</script>
+{% endfor %} 
+//--></script> 
 {{ footer }}
