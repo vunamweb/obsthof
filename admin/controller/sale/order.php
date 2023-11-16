@@ -1686,7 +1686,40 @@ class ControllerSaleOrder extends Controller {
 						);
 					}
 
+						// VU show tax
+			$resultTax_1 = 0; $resultTax_2 = 0;
+			$tax_1 = 19; $tax_2 = 7;
+
+			// if normal product
+			if($product['type'] == 0) {
+			   $total_1 = $product['price'] * $product['quantity'];
+			   $totalNormalProduct = $totalNormalProduct + $total_1;
+
+			   $resultTax_1 = round(($total_1) - ($total_1) / (1 + $tax_1/100), 2);
+
+			   $sum_tax_1 = $sum_tax_1 + $resultTax_1;
+			} else { // if event
+				$total_1 = ($product['price'] - $product['price_1']) * $product['quantity'];
+				$resultTax_1 = round(($total_1) - ($total_1) / (1 + $tax_1/100), 2);
+
+				$total_2 = ($product['price_1']) * $product['quantity'];
+				$resultTax_2 = round(($total_2) - ($total_2) / (1 + $tax_2/100), 2);
+
+				$sum_tax_1 = $sum_tax_1 + $resultTax_1;
+				$sum_tax_2 = $sum_tax_2 + $resultTax_2;
+			}
+			 
+			// END
+
 					$product_data[] = array(
+						'price_number' => $product['price'],
+				    'price_1'   => $product['price_1'],
+				    'price_2'   => $product['price'] - $product['price_1'] ,
+				    'type'      => $product['type'],
+				    'tax_1'     => $resultTax_1,
+				    'tax_2'     => $resultTax_2,
+				    'text_tax_1' => '19% of ',
+				    'text_tax_2' => '7% of ',
 						'name'     => $product['name'],
 						'model'    => $product['model'],
 						'option'   => $option_data,
@@ -1708,10 +1741,11 @@ class ControllerSaleOrder extends Controller {
 				}
 
 				$total_data = array();
-
+  
 				$totals = $this->model_sale_order->getOrderTotals($order_id);
+				$this->document->displayOrder($totals, $sum_tax_1, $sum_tax_2, $this->session->data['shipping_address']['country_id'], $totalNormalProduct);
 
-				foreach ($totals as $total) {
+                foreach ($totals as $total) {
 					$total_data[] = array(
 						'title' => $total['title'],
 						'text'  => $this->currency->format($total['value'], $order_info['currency_code'], $order_info['currency_value'])
