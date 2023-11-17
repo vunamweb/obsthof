@@ -404,7 +404,10 @@ var cart = {
 				if (json['success']) {
 					$('#content').parent().before('<div class="alert alert-success"><i class="material-design-verification24"></i> ' + json['success'] + '<button type="button" class="close material-design-close47"></button></div>');
 					$('#cart-total').html(json['total']);
-					$('#cart-total2').html(json['total2']);
+
+					$('#cart-total2').html(json['total']);
+					$('#cart-total2').removeClass('hide');
+
 					$('#cart-total3').html(json['total3']);
 
 					$('#cart > ul').load('index.php?route=common/cart/info ul li');
@@ -454,7 +457,7 @@ var cart = {
 				clearTimeout(timer);
 
 				$('#cart-total').html(json['total']);
-				$('#cart-total2').html(json['total2']);
+				$('#cart-total2').html(json['total']);
 				$('#cart-total3').html(json['total3']);
 
 				if (getURLVar('route') == 'checkout/cart' || getURLVar('route') == 'checkout/checkout') {
