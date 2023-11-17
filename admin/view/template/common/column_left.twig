@@ -1,7 +1,8 @@
 <nav id="column-left">
   <div id="navigation"><span class="fa fa-bars"></span> {{ text_navigation }}</div>
   <ul id="menu">
-    {% set i = 0 %}
+	<li><a href="../cms/morpheus/navigation.php?token={{ userToken }}"><i class="fa fa-pencil"></i> <span>CMS Morpheus</span></a></li>
+  {% set i = 0 %}
     {% for menu in menus %}
     <li id="{{ menu.id }}">{% if menu.href %}<a href="{{ menu.href }}"><i class="fa {{ menu.icon }} fw"></i> {{ menu.name }}</a>{% else %}<a href="#collapse{{ i }}" data-toggle="collapse" class="parent collapsed"><i class="fa {{ menu.icon }} fw"></i> {{ menu.name }}</a>{% endif %}
       {% if menu.children %}
