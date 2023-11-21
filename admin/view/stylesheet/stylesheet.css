@@ -3,6 +3,10 @@
 .hide {
 	display: none;
 }
+
+#button-resend {
+	margin: 10px
+}
 /* END */
 html, body {
 	height: 100%;

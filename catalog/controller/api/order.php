@@ -758,6 +758,10 @@ class ControllerApiOrder extends Controller {
 		$this->response->setOutput(json_encode($json));
 	}
 
+	public function history_() {
+		$this->load->controller('mail/order/resend');
+    }
+
 	public function history() {
 		$this->load->language('api/order');
 
