@@ -299,6 +299,14 @@
 .event-start .description_1 {
   font-size: 18px;
 }
+
+.date_event_text {
+  font-weight: 300 !important;
+}
+
+.legal-price-info, .delivery-time-info {
+  font-size: .8em;
+}
 /* END */
 /*========================================================
                    Bootstrap Reset
