@@ -1,11 +1,58 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/1999/REC-html401-19991224/strict.dtd">
-<html>
+<!DOCTYPE html>
+<html dir="{{ direction }}" lang="{{ lang }}">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta charset="UTF-8" />
 <title>{{ title }}</title>
+<base href="{{ store_url }}admin" />
+<style>
+	table, tr, td { border: none !important; }
+	.table thead td {
+		font-weight: 400;
+	}
+	span { font-size: .8em; }
+	.inv { font-size: 1.5em; font-weight:600; text-transform: uppercase; color:#000; }
+	.table-bordered td { border-bottom: solid 1px #999 !important; }
+	.table.top thead > tr > td, .table tbody > tr > td {
+		vertical-align: top; margin-top:3em !important; font-size:.8em;
+	}
+	body, html { margin-bottom: 0; padding-bottom: 0; }
+	hr { margin: 0; }
+</style>
 </head>
+
 <body style="font-family: Arial, Helvetica, sans-serif; font-size: 12px; color: #000000;">
-<div style="width: 680px;"><a href="{{ store_url }}" title="{{ store_name }}"><img src="{{ logo }}" alt="{{ store_name }}" style="margin-bottom: 20px; border: none;" /></a>
+
+{{ store_url }} 
+<br>
+{{ store_name }}
+
+<div class="container">
+  <table class="table">
+	  <thead>
+		  <tr>
+			<td></td>	  
+			<td align="right"><img src="{{ store_url }}image/catalog/obsthof-basics/Obsthof-am-Steinberg-Logo.png"></td>
+		</tr>
+		<tr>
+			<td>
+				<span>Obsthof am Steinberg – Am Steinberg 24 – 60437 Frankfurt</span>
+					<br/>
+					<br/>
+			</td>
+			<td align="right"><p>Obsthof am Steinberg<br />
+				Inh.: Andreas Schneider<br />
+				Am Steinberg 24<br />
+				60437 Frankfurt/Niedererlenbach<br />
+				Tel.: 06101 – 41522<br />
+				Fax: 06101 – 497484<br />
+				info@obsthof-am-steinberg</p></td>
+		</tr>
+	  </thead>
+	</table>
+</div>
+
+
+<div style="width: 680px;"><a href="{{ store_url }}" title="{{ store_name }}"><img src="{{ store_url }}image/catalog/obsthof-basics/Obsthof-am-Steinberg-Logo.png" alt="{{ store_name }}" style="margin-bottom: 20px; border: none;" /></a>
   <p style="margin-top: 0px; margin-bottom: 20px;">{{ text_greeting }}</p>
   {% if customer_id %}
   <p style="margin-top: 0px; margin-bottom: 20px;">{{ text_link }}</p>
@@ -69,7 +116,6 @@
     <thead>
       <tr>
         <td style="font-size: 12px; border-right: 1px solid #DDDDDD; border-bottom: 1px solid #DDDDDD; background-color: #EFEFEF; font-weight: bold; text-align: left; padding: 7px; color: #222222;">{{ text_product }}</td>
-        <td style="font-size: 12px; border-right: 1px solid #DDDDDD; border-bottom: 1px solid #DDDDDD; background-color: #EFEFEF; font-weight: bold; text-align: left; padding: 7px; color: #222222;">{{ text_model }}</td>
         <td style="font-size: 12px; border-right: 1px solid #DDDDDD; border-bottom: 1px solid #DDDDDD; background-color: #EFEFEF; font-weight: bold; text-align: right; padding: 7px; color: #222222;">{{ text_quantity }}</td>
         <td style="font-size: 12px; border-right: 1px solid #DDDDDD; border-bottom: 1px solid #DDDDDD; background-color: #EFEFEF; font-weight: bold; text-align: right; padding: 7px; color: #222222;">{{ text_price }}</td>
         <td style="font-size: 12px; border-right: 1px solid #DDDDDD; border-bottom: 1px solid #DDDDDD; background-color: #EFEFEF; font-weight: bold; text-align: right; padding: 7px; color: #222222;">{{ text_total }}</td>
@@ -82,26 +128,24 @@
       <td style="font-size: 12px; border-right: 1px solid #DDDDDD; border-bottom: 1px solid #DDDDDD; text-align: left; padding: 7px;">{{ product.name }}
         {% for option in product.option %}<br/>
         &nbsp;<small> - {{ option.name }}: {{ option.value }}</small>{% endfor %}</td>
-      <td style="font-size: 12px; border-right: 1px solid #DDDDDD; border-bottom: 1px solid #DDDDDD; text-align: left; padding: 7px;">{{ product.model }}</td>
       <td style="font-size: 12px;	border-right: 1px solid #DDDDDD; border-bottom: 1px solid #DDDDDD; text-align: right; padding: 7px;">{{ product.quantity }}</td>
       <td style="font-size: 12px;	border-right: 1px solid #DDDDDD; border-bottom: 1px solid #DDDDDD; text-align: right; padding: 7px;">{{ product.price }}</td>
       <td style="font-size: 12px;	border-right: 1px solid #DDDDDD; border-bottom: 1px solid #DDDDDD; text-align: right; padding: 7px;">
-      {{ product.total }}<br>
+      {{ product.total }}
       {% if product.type == 0 %}
-              {{ product.text_tax_1 }} {{ product.price_number }}: <b>{{ product.tax_1 }}</b>
-               {% else %}
-               {{ product.text_tax_1 }} {{ product.price_2 }}: <b> {{ product.tax_1 }}</b>
-              {% endif %}
-              <br>
-              {% if product.type == 1 %}{{ product.text_tax_2 }} {{ product.price_1 }}: <b>{{ product.tax_2 }} 
-              {% endif %}
+        {{ product.text_tax_1 }} {{ product.price_number }}
+      {% else %}
+        {{ product.text_tax_1 }} {{ product.price_2 }}
+      {% endif %}
+            
+      {% if product.type == 1 %}{{ product.text_tax_2 }} {{ product.price_1 }}: {{ product.tax_2 }} 
+      {% endif %}
       </td>
     </tr>
     {% endfor %}
     {% for voucher in vouchers %}
     <tr>
       <td style="font-size: 12px;	border-right: 1px solid #DDDDDD; border-bottom: 1px solid #DDDDDD; text-align: left; padding: 7px;">{{ voucher.description }}</td>
-      <td style="font-size: 12px;	border-right: 1px solid #DDDDDD; border-bottom: 1px solid #DDDDDD; text-align: left; padding: 7px;"></td>
       <td style="font-size: 12px;	border-right: 1px solid #DDDDDD; border-bottom: 1px solid #DDDDDD; text-align: right; padding: 7px;">1</td>
       <td style="font-size: 12px;	border-right: 1px solid #DDDDDD; border-bottom: 1px solid #DDDDDD; text-align: right; padding: 7px;">{{ voucher.amount }}</td>
       <td style="font-size: 12px;	border-right: 1px solid #DDDDDD; border-bottom: 1px solid #DDDDDD; text-align: right; padding: 7px;">{{ voucher.amount }}</td>
@@ -113,7 +157,7 @@
     
     {% for total in totals %}
     <tr>
-      <td style="font-size: 12px;	border-right: 1px solid #DDDDDD; border-bottom: 1px solid #DDDDDD; text-align: right; padding: 7px;" colspan="4"><b>{{ total.title }}:</b></td>
+      <td style="font-size: 12px;	border-right: 1px solid #DDDDDD; border-bottom: 1px solid #DDDDDD; text-align: left; padding: 7px;" colspan="3"><b>{{ total.title }}:</b></td>
       <td style="font-size: 12px;	border-right: 1px solid #DDDDDD; border-bottom: 1px solid #DDDDDD; text-align: right; padding: 7px;">{{ total.text }}</td>
     </tr>
     {% endfor %}
@@ -121,6 +165,32 @@
     
   </table>
   <p style="margin-top: 0px; margin-bottom: 20px;">{{ text_footer }}</p>
+  <table class="table top">
+			<tr>
+				<td colspan="3">
+					<hr>							  
+				</td>
+			</tr>
+		<tr>
+		  <td valign="top">Obsthof am Steinberg<br>
+			  Inh.: Andreas Schneider<br>
+			  Am Steinberg 24<br>
+			  60437 Frankfurt/Nieder-Erlenbach
+		  </td>
+		  <td valign="top">
+			  Deutsche Kreditbank<br>
+			  Kto.: 1020 4280 64 / BLZ: 120 300 00<br>
+			  IBAN: DE40 1203 0000 1020 4280 64<br>
+			  BIC: BYLADEM1001<br>
+			  USt-IdNr.: DE216963084
+		  </td>
+		  <td valign="top">
+			  Tel.: 06101 – 41522<br>
+			  Fax: 06101 – 497484<br>
+			  info@obsthof-am-steinberg.de
+		  </td>
+		</tr>
+	</table>
 </div>
 </body>
 </html>

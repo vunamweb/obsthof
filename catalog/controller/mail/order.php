@@ -1,6 +1,7 @@
 <?php
 include "./dompdf/autoload.inc.php";
 use Dompdf\Dompdf;
+use Dompdf\Options;
 use PHPMailer\PHPMailer\PHPMailer;
 
 require "PHPMailer.php";
@@ -201,6 +202,8 @@ class ControllerMailOrder extends Controller {
 		// Products
 		$data['products'] = array();
 
+		$sum_tax_1 = 0; $sum_tax_2 = 0; $totalNormalProduct = 0;
+
 		foreach ($order_products as $order_product) {
 			$option_data = array();
 
@@ -225,13 +228,48 @@ class ControllerMailOrder extends Controller {
 				);
 			}
 
+			// VU show tax
+			$resultTax_1 = 0; $resultTax_2 = 0;
+
+			$taxs = $this->model_checkout_order->getTaxs();
+			$tax_1 = (int) $taxs[0]['rate']; $tax_2 = (int) $taxs[1]['rate'];
+
+			// if normal product
+			if($order_product['type'] == 0) {
+			   $total_1 = $order_product['price'] * $order_product['quantity'];
+			   $totalNormalProduct = $totalNormalProduct + $total_1;
+
+			   $resultTax_1 = round(($total_1) - ($total_1) / (1 + $tax_1/100), 2);
+
+			   $sum_tax_1 = $sum_tax_1 + $resultTax_1;
+			} else { // if event
+				$total_1 = ($order_product['price'] - $order_product['price_1']) * $order_product['quantity'];
+				$resultTax_1 = round(($total_1) - ($total_1) / (1 + $tax_1/100), 2);
+
+				$total_2 = ($product['price_1']) * $product['quantity'];
+				$resultTax_2 = round(($total_2) - ($total_2) / (1 + $tax_2/100), 2);
+
+				$sum_tax_1 = $sum_tax_1 + $resultTax_1;
+				$sum_tax_2 = $sum_tax_2 + $resultTax_2;
+			}
+			 
+			// END
+
 			$data['products'][] = array(
 				'name'     => $order_product['name'],
 				'model'    => $order_product['model'],
 				'option'   => $option_data,
 				'quantity' => $order_product['quantity'],
 				'price'    => $this->currency->format($order_product['price'] + ($this->config->get('config_tax') ? $order_product['tax'] : 0), $order_info['currency_code'], $order_info['currency_value']),
-				'total'    => $this->currency->format($order_product['total'] + ($this->config->get('config_tax') ? ($order_product['tax'] * $order_product['quantity']) : 0), $order_info['currency_code'], $order_info['currency_value'])
+				'total'    => $this->currency->format($order_product['total'] + ($this->config->get('config_tax') ? ($order_product['tax'] * $order_product['quantity']) : 0), $order_info['currency_code'], $order_info['currency_value']),
+				'price_number' => $product['price'],
+				'price_1'   => $product['price_1'],
+				'price_2'   => $product['price'] - $product['price_1'] ,
+				'type'      => $product['type'],
+				'tax_1'     => $resultTax_1,
+				'tax_2'     => $resultTax_2,
+				'text_tax_1' => $tax_1 . '% of ',//$this->language->get('tax_1'),
+				'text_tax_2' => $tax_2 . '% of ', //$this->language->get('tax_2'),
 			);
 		}
 
@@ -249,8 +287,10 @@ class ControllerMailOrder extends Controller {
 
 		// Order Totals
 		$data['totals'] = array();
-		
+
 		$order_totals = $this->model_checkout_order->getOrderTotals($order_info['order_id']);
+
+		$this->document->displayOrder($order_totals, $sum_tax_1, $sum_tax_2, $this->session->data['shipping_address']['country_id'], $totalNormalProduct, $this->config->get('config_login_attempts'));
 
 		foreach ($order_totals as $order_total) {
 			$data['totals'][] = array(
@@ -258,7 +298,7 @@ class ControllerMailOrder extends Controller {
 				'text'  => $this->currency->format($order_total['value'], $order_info['currency_code'], $order_info['currency_value']),
 			);
 		}
-	
+
 		$this->load->model('setting/setting');
 		
 		$from = $this->model_setting_setting->getSettingValue('config_email', $order_info['store_id']);
@@ -268,8 +308,18 @@ class ControllerMailOrder extends Controller {
 		}
 
 		//create pdf
-		$dompdf = new Dompdf();
-		$dompdf->set_option('enable_html5_parser', TRUE);
+		$options = new Options();
+		$options->set('tempDir', '/tmp');
+		$options->set('chroot', __DIR__);    
+		$options->set('isRemoteEnabled', TRUE);
+
+		$dompdf = new Dompdf($options);
+		
+		//$dompdf = new Dompdf();
+		//$dompdf->set_option('enable_html5_parser', TRUE);
+		//$dompdf->set_option('isRemoteEnabled', TRUE);
+		
+		//$dompdf->loadHtml($this->load->view('mail/order_pdf', $data));
 		$dompdf->loadHtml($this->load->view('mail/order_pdf', $data));
 		$dompdf->setPaper('A4', 'Horizontal');
 		$dompdf->render();
