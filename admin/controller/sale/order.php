@@ -969,13 +969,24 @@ class ControllerSaleOrder extends Controller {
 
 			$products = $this->model_sale_order->getOrderProducts($this->request->get['order_id']);
 
-			foreach ($products as $product) {
-				$option_data = array();
+			//print_r($products); die();
+
+			$sum_tax_1 = 0; $sum_tax_2 = 0; $totalNormalProduct = 0;
+			
+            foreach ($products as $product) {
+				$product_id = $product['product_id'];
+
+				$product_ = $this->model_sale_order->getProduct($product_id);
+
+				$product['type'] = $product_['type'];
+				$product['price_1'] = $product_['price_1'];
+				
+                $option_data = array();
 
 				$options = $this->model_sale_order->getOrderOptions($this->request->get['order_id'], $product['order_product_id']);
 
 				foreach ($options as $option) {
-					print_r($option);
+					//print_r($option);
 					if ($option['type'] != 'file') {
 						$option_data[] = array(
 							'name'  => $option['name'],
@@ -1007,7 +1018,33 @@ class ControllerSaleOrder extends Controller {
 				$product_name .= '<br>' . $dateEvent;
 				//echo ($dateEvent) . '///';
 
-				$data['products'][] = array(
+				// VU show tax
+			$resultTax_1 = 0; $resultTax_2 = 0;
+			$tax_1 = 19; $tax_2 = 7;
+
+			// if normal product
+			if($product['type'] == 0) {
+			   //echo $type . '//';
+			   $total_1 = $product['price'] * $product['quantity'];
+			   $totalNormalProduct = $totalNormalProduct + $total_1;
+
+			   $resultTax_1 = round(($total_1) - ($total_1) / (1 + $tax_1/100), 2);
+
+			   $sum_tax_1 = $sum_tax_1 + $resultTax_1;
+			} else { // if event
+				$total_1 = ($product['price'] - $product['price_1']) * $product['quantity'];
+				$resultTax_1 = round(($total_1) - ($total_1) / (1 + $tax_1/100), 2);
+
+				$total_2 = ($product['price_1']) * $product['quantity'];
+				$resultTax_2 = round(($total_2) - ($total_2) / (1 + $tax_2/100), 2);
+
+				$sum_tax_1 = $sum_tax_1 + $resultTax_1;
+				$sum_tax_2 = $sum_tax_2 + $resultTax_2;
+			}
+			 
+			// END
+
+	        $data['products'][] = array(
 					'order_product_id' => $product['order_product_id'],
 					'product_id'       => $product['product_id'],
 					'name'    	 	   => ($option == 0) ? $product['name'] : $product_name,
@@ -1034,8 +1071,10 @@ class ControllerSaleOrder extends Controller {
 
 			$data['totals'] = array();
 
+			//echo $totalNormalProduct; die();
+
 			$totals = $this->model_sale_order->getOrderTotals($this->request->get['order_id']);
-			$this->document->displayOrder($totals, $sum_tax_1, $sum_tax_2, $this->session->data['shipping_address']['country_id'], $totalNormalProduct);
+			$this->document->displayOrder($totals, $sum_tax_1, $sum_tax_2, $this->session->data['shipping_address']['country_id'], $totalNormalProduct, $this->config->get('config_login_attempts'));
 
 
 			foreach ($totals as $total) {
@@ -1663,6 +1702,13 @@ class ControllerSaleOrder extends Controller {
 				$products = $this->model_sale_order->getOrderProducts($order_id);
 
 				foreach ($products as $product) {
+				  $product_id = $product['product_id'];
+
+				  $product_ = $this->model_sale_order->getProduct($product_id);
+
+				  $product['type'] = $product_['type'];
+				  $product['price_1'] = $product_['price_1'];
+
 					$option_data = array();
 
 					$options = $this->model_sale_order->getOrderOptions($order_id, $product['order_product_id']);
@@ -1743,7 +1789,7 @@ class ControllerSaleOrder extends Controller {
 				$total_data = array();
   
 				$totals = $this->model_sale_order->getOrderTotals($order_id);
-				$this->document->displayOrder($totals, $sum_tax_1, $sum_tax_2, $this->session->data['shipping_address']['country_id'], $totalNormalProduct);
+				$this->document->displayOrder($totals, $sum_tax_1, $sum_tax_2, $this->session->data['shipping_address']['country_id'], $totalNormalProduct, $this->config->get('config_login_attempts'));
 
                 foreach ($totals as $total) {
 					$total_data[] = array(

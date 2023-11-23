@@ -246,7 +246,7 @@ class ControllerMailOrder extends Controller {
 				$total_1 = ($order_product['price'] - $order_product['price_1']) * $order_product['quantity'];
 				$resultTax_1 = round(($total_1) - ($total_1) / (1 + $tax_1/100), 2);
 
-				$total_2 = ($product['price_1']) * $product['quantity'];
+				$total_2 = ($order_product['price_1']) * $order_product['quantity'];
 				$resultTax_2 = round(($total_2) - ($total_2) / (1 + $tax_2/100), 2);
 
 				$sum_tax_1 = $sum_tax_1 + $resultTax_1;
@@ -263,9 +263,9 @@ class ControllerMailOrder extends Controller {
 				'price'    => $this->currency->format($order_product['price'] + ($this->config->get('config_tax') ? $order_product['tax'] : 0), $order_info['currency_code'], $order_info['currency_value']),
 				'total'    => $this->currency->format($order_product['total'] + ($this->config->get('config_tax') ? ($order_product['tax'] * $order_product['quantity']) : 0), $order_info['currency_code'], $order_info['currency_value']),
 				'price_number' => $product['price'],
-				'price_1'   => $product['price_1'],
-				'price_2'   => $product['price'] - $product['price_1'] ,
-				'type'      => $product['type'],
+				'price_1'   => $order_product['price_1'],
+				'price_2'   => $order_product['price'] - $order_product['price_1'] ,
+				'type'      => $order_product['type'],
 				'tax_1'     => $resultTax_1,
 				'tax_2'     => $resultTax_2,
 				'text_tax_1' => $tax_1 . '% of ',//$this->language->get('tax_1'),
@@ -345,7 +345,8 @@ class ControllerMailOrder extends Controller {
 		$subject = html_entity_decode(sprintf($language->get('text_subject'), $order_info['store_name'], $order_info['order_id']), ENT_QUOTES, 'UTF-8');
 		$fromName = html_entity_decode($order_info['store_name'], ENT_QUOTES, 'UTF-8');
 		$this->sendMailSMTP($order_info['email'], $subject, 'test@7sc.eu', $fromName, $this->load->view('mail/order_add', $data));
-	    //$this->sendMailSMTP($this->config->get('config_email'), $subject, 'test@7sc.eu', $fromName, $this->load->view('mail/order_add', $data));
+		//$this->sendMailSMTP("vukynamkhtn@gmail.com", $subject, 'test@7sc.eu', $fromName, $this->load->view('mail/order_add', $data));
+		//$this->sendMailSMTP($this->config->get('config_email'), $subject, 'test@7sc.eu', $fromName, $this->load->view('mail/order_add', $data));
 	}
 
 	function sendMailSMTP($to, $subject, $from, $fromName, $message, $senMail=true)

@@ -248,6 +248,15 @@ class ModelSaleOrder extends Model {
 		return $query->rows;
 	}
 
+	public function getProduct($product_id) {
+		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "product WHERE product_id = '" . (int)$product_id . "'");
+
+		$result = $query->rows;
+		$result = $result[0];
+
+		return $result;
+    }
+
 	public function getOrderOptions($order_id, $order_product_id) {
 		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "order_option WHERE order_id = '" . (int)$order_id . "' AND order_product_id = '" . (int)$order_product_id . "'");
 
