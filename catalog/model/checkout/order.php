@@ -279,7 +279,7 @@ class ModelCheckoutOrder extends Model {
         $this->db->query("UPDATE `" . DB_PREFIX . "product_option` SET value = '" . $valueTicket . "' WHERE product_option_id = '" . (int)$product_option_id . "'");
     }
 
-	/*public function updateValueTicket() {
+	public function updateValueTicket() {
 		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "product_option WHERE 1");
 
 		foreach($query->rows as $item) {
@@ -297,7 +297,7 @@ class ModelCheckoutOrder extends Model {
                 $total = $total + $item_1['quantity'];
 			}
 
-			echo $total; die();
+			//echo $total; die();
 
 			if($numberTicket > 0) {
 				$newValue = $numberTicket - $total;
@@ -306,7 +306,7 @@ class ModelCheckoutOrder extends Model {
 				$this->db->query("UPDATE `" . DB_PREFIX . "product_option` SET value = '" . $valueTicket . "' WHERE product_option_id = '" . (int)$product_option_id . "'");
 			}
 		}
-    }*/
+    }
 	
 	public function getStatusValueTicket($idOption = 0, $quantity = 0) {
 		$query = ($idOption == 0) ? $this->db->query("SELECT * FROM " . DB_PREFIX . "product_option WHERE 1")

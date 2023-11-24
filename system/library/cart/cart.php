@@ -404,7 +404,7 @@ class Cart {
 
 	public function hasStock() {
 		foreach ($this->getProducts() as $product) {
-			if (!$product['stock']) {
+			if (!$product['stock'] && $product['type'] == 0) {
 				return false;
 			}
 		}
