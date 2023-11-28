@@ -756,18 +756,20 @@ $(window).resize(function () {
 				settings.items = settings.slides479 = settings.slides767 = settings.slides1199 = "1";
 			}
 
+			selector.parent().append('<div class="swiper-button-next">');
+			selector.parent().append('<div class="swiper-button-prev">');
 			selector.addClass('swiper-container').removeClass(wrapperClass)
 			.children().addClass('swiper-slide').removeClass(slideClass)
 			.parent().wrapInner('<div class="swiper-wrapper"><\/div>');
-			selector.append('<div class="swiper-button-next"><\/div><div class="swiper-button-prev"><\/div>');
+			//selector.append('<div class="swiper-button-next"><\/div><div class="swiper-button-prev"><\/div>');
 
 			slider = new Swiper(selector, {
 				effect              : settings.effect || 'slide',
 				slidesPerView       : parseInt(settings.items) || 4,
 				spaceBetween        : parseInt(settings.space) || 0,
 				paginationClickable : true,
-				nextButton          : selector.find('.swiper-button-next').length ? selector.find('.swiper-button-next')[0] : null,
-				prevButton          : selector.find('.swiper-button-prev').length ? selector.find('.swiper-button-prev')[0] : null,
+				nextButton          : selector.parent().find('.swiper-button-next').length ? selector.parent().find('.swiper-button-next')[0] : null,
+				prevButton          : selector.parent().find('.swiper-button-prev').length ? selector.parent().find('.swiper-button-prev')[0] : null,
 				pagination          : selector.find('.swiper-pagination').length  ? selector.find('.swiper-pagination')[0]  : null,
 				scrollbar           : selector.find('.swiper-scrollbar').length   ? selector.find('.swiper-scrollbar')[0]   : null,
 				breakpoints: {

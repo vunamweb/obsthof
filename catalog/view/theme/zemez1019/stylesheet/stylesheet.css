@@ -307,6 +307,10 @@
 .legal-price-info, .delivery-time-info {
   font-size: .8em;
 }
+
+.bestseller_1 {
+  position: relative;
+}
 /* END */
 /*========================================================
                    Bootstrap Reset
@@ -4410,7 +4414,11 @@ aside .row {
   color: #fff;
   background: var(--green);
 }
-
+footer .btn-info { background: transparent !important; padding: 6px 0; }
+footer .btn-info:hover { text-decoration: underline; }
+footer .fa + .button { margin-top: .5em; }
+footer .fa { margin-right: 10px; }
+footer img { margin-bottom: 1em; }
 .btn:hover, .btn:focus, .btn:active, .btn-default:hover, .btn-default:focus, .btn-default:active, .btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-success:hover, .btn-success:focus, .btn-success:active, .btn-info:hover, .btn-info:focus, .btn-info:active, .btn-warning:hover, .btn-warning:focus, .btn-warning:active, .btn-danger:hover, .btn-danger:focus, .btn-danger:active {
   color: #fff;
   background: var(--red-dark);
