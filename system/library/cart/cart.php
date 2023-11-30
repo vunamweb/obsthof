@@ -245,7 +245,7 @@ class Cart {
 				$valueTime = $valueTime['value'];
 				$valueTime = explode(';', $valueTime);
 				if($valueTime[1] != '')
-				  $valueTime = 'Time: ' . $valueTime[1] . '-' . $valueTime[2];
+				  $valueTime = ', ' . str_replace('-', '.', $valueTime[0]) . ', ' . $valueTime[1] . '-' . $valueTime[2] . ' Uhr';
 				else 
 				  $valueTime = '';  
 
@@ -263,7 +263,7 @@ class Cart {
 					'cart_id'         => $cart['cart_id'],
 					'idOption'         => $cart['idOption'],
 					'product_id'      => $product_query->row['product_id'],
-					'name'            => $product_query->row['name'] . '<br>'. $child. '  ' . $valueTime,
+					'name'            => $product_query->row['name'] . '<br>'. $child. '' . $valueTime,
 					'model'           => $product_query->row['model'],
 					'shipping'        => $product_query->row['shipping'],
 					'image'           => $product_query->row['image'],
