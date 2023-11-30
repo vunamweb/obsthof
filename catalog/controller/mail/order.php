@@ -352,9 +352,10 @@ class ControllerMailOrder extends Controller {
 		//$this->sendMailSMTP($this->config->get('config_email'), $subject, 'test@7sc.eu', $fromName, $this->load->view('mail/order_add', $data));
 	}
 
-	function sendMailSMTP($to, $subject, $from, $fromName, $message, $senMail=true)
+	function sendMailSMTP($to, $subject, $from, $fromName, $message, $senMail=1)
    {
-	    $files1 = str_replace("index.php", "", $_SERVER['SCRIPT_FILENAME']) . "pdf/order.pdf";
+		$files1 = str_replace("index.php", "", $_SERVER['SCRIPT_FILENAME']) . "pdf/order.pdf";
+		$files2 = str_replace("index.php", "", $_SERVER['SCRIPT_FILENAME']) . "pdf/order_event.pdf";
 			
 	    $mail = new PHPMailer();
 		$mail->IsSMTP(); // telling the class to use SMTP
@@ -375,10 +376,13 @@ class ControllerMailOrder extends Controller {
 		$mail->From = $from;
 		$mail->IsHTML(true);
 		$mail->Body = $message;
-		if($senMail)
-		  $mail->addAttachment($files1);
 
-		if (!$mail->Send()) {
+		if($senMail == 1)
+		  $mail->addAttachment($files1);
+		else if($senMail == 2)
+		  $mail->addAttachment($files2);
+		    
+        if (!$mail->Send()) {
 			//echo "Mailer Error: " . $mail->ErrorInfo;
 		} else {
 			//echo "Message sent!";
@@ -433,6 +437,7 @@ class ControllerMailOrder extends Controller {
 	$data['logo'] = $order_info['store_url'] . 'image/' . $this->config->get('config_logo');
 	$data['store_name'] = $order_info['store_name'];
 	$data['store_url'] = $order_info['store_url'];
+	$data_1['store_url'] = $order_info['store_url'];
 	$data['customer_id'] = $order_info['customer_id'];
 	$data['link'] = $order_info['store_url'] . 'index.php?route=account/order/info&order_id=' . $order_info['order_id'];
 
@@ -536,8 +541,9 @@ class ControllerMailOrder extends Controller {
 
 	// Products
 	$data['products'] = array();
-
-	foreach ($order_products as $order_product) {
+	$data_1['products'] = array();
+	
+    foreach ($order_products as $order_product) {
 		$option_data = array();
 
 		$order_options = $this->model_checkout_order->getOrderOptions($order_info['order_id'], $order_product['order_product_id']);
@@ -560,6 +566,19 @@ class ControllerMailOrder extends Controller {
 				'value' => (utf8_strlen($value) > 20 ? utf8_substr($value, 0, 20) . '..' : $value)
 			);
 		}
+
+		// if product is event
+		if($order_product['type'] == 1) {
+			$data_1['products'][] = array(
+				'name'     => $order_product['name'],
+				'model'    => $order_product['model'],
+				'option'   => $option_data,
+				'quantity' => $order_product['quantity'],
+				'price'    => $this->currency->format($order_product['price'] + ($this->config->get('config_tax') ? $order_product['tax'] : 0), $order_info['currency_code'], $order_info['currency_value']),
+				'total'    => $this->currency->format($order_product['total'] + ($this->config->get('config_tax') ? ($order_product['tax'] * $order_product['quantity']) : 0), $order_info['currency_code'], $order_info['currency_value'])
+			);
+		}
+		// end
 
 		$data['products'][] = array(
 			'name'     => $order_product['name'],
@@ -612,8 +631,13 @@ class ControllerMailOrder extends Controller {
 	}
 
 	//create pdf
-	$dompdf = new Dompdf();
-	$dompdf->set_option('enable_html5_parser', TRUE);
+	$options = new Options();
+	$options->set('tempDir', '/tmp');
+	$options->set('chroot', __DIR__);    
+	$options->set('isRemoteEnabled', TRUE);
+
+	$dompdf = new Dompdf($options);
+
 	$dompdf->loadHtml($this->load->view('mail/order_pdf', $data));
 	$dompdf->setPaper('A4', 'Horizontal');
 	$dompdf->render();
@@ -621,6 +645,22 @@ class ControllerMailOrder extends Controller {
 	$file_location = "./pdf/order.pdf";
 	file_put_contents($file_location, $pdf);
 	//end
+
+	// if order has event, then create pdf only for event
+	if(count($data_1['products'])) {
+	$dompdf = new Dompdf($options);
+
+	$dompdf->loadHtml($this->load->view('mail/order_event_pdf', $data_1));
+	$dompdf->setPaper('A4', 'Horizontal');
+	$dompdf->render();
+	$pdf = $dompdf->output();
+	$file_location = "./pdf/order_event.pdf";
+	file_put_contents($file_location, $pdf);
+
+	return true;
+	}
+
+	return false;
 }
 	
 	public function resend() {
@@ -632,7 +672,7 @@ class ControllerMailOrder extends Controller {
 	}
 
    public function edit($order_info, $order_status_id, $comment) {
-		$language = new Language($order_info['language_code']);
+	    $language = new Language($order_info['language_code']);
 		$language->load($order_info['language_code']);
 		$language->load('mail/order_edit');
 
@@ -643,7 +683,7 @@ class ControllerMailOrder extends Controller {
 		$data['text_comment'] = $language->get('text_comment');
 		$data['text_footer'] = $language->get('text_footer');
 
-		$data['order_id'] = $order_info['order_id'];
+		$data['order_id'] = ($order_info['invoice_no'] == 0) ? $order_info['order_id'] : $order_info['invoice_prefix'] . $order_info['invoice_no'];
 		$data['date_added'] = date($language->get('date_format_short'), strtotime($order_info['date_added']));
 		
 		$order_status_query = $this->db->query("SELECT * FROM " . DB_PREFIX . "order_status WHERE order_status_id = '" . (int)$order_status_id . "' AND language_id = '" . (int)$order_info['language_id'] . "'");
@@ -671,7 +711,7 @@ class ControllerMailOrder extends Controller {
 		}
 
 		//create pdf
-		$this->createPDFInvoice($order_info, $order_status_id);
+		$type = $this->createPDFInvoice($order_info, $order_status_id);
 		//end
 		
 		$mail = new Mail($this->config->get('config_mail_engine'));
@@ -690,8 +730,12 @@ class ControllerMailOrder extends Controller {
 		$mail->setSubject(html_entity_decode(sprintf($language->get('text_subject'), $order_info['store_name'], $order_info['order_id']), ENT_QUOTES, 'UTF-8'));
 		$mail->setText($this->load->view('mail/order_edit', $data));
 		//$mail->send();
-		$this->sendMailSMTP($order_info['email'], $subject, 'test@7sc.eu', $from, $this->load->view('mail/order_edit', $data), false);
-		$this->sendMailSMTP($this->config->get('config_email'), $subject, 'test@7sc.eu', $from, $this->load->view('mail/order_edit', $data));
+		if($type) // if order has event, then send mail with attach pdf of event
+		$this->sendMailSMTP($order_info['email'], $subject, 'test@7sc.eu', $from, $this->load->view('mail/order_edit', $data), 2);
+		else // if not, just send invoice
+		$this->sendMailSMTP($order_info['email'], $subject, 'test@7sc.eu', $from, $this->load->view('mail/order_edit', $data), 3);
+		 
+		$this->sendMailSMTP($this->config->get('config_email'), $subject, 'test@7sc.eu', $from, $this->load->view('mail/order_edit', $data), 1);
 	}
 	
 	// Admin Alert Mail
