@@ -11258,7 +11258,11 @@ a.list-group-item.level_2:before { content:''; display: inline-block; width: 10p
 	:root {
 		--navwidth: calc(100vw);
 		--navwidthminus: -100vw;
-	}
+  }
+  
+  tr {
+    font-size: 12px;
+  } 
 	
 	.col-lg-6 .video_wrapper .video_trigger {
 		padding: 10%;
@@ -11275,7 +11279,7 @@ a.list-group-item.level_2:before { content:''; display: inline-block; width: 10p
 }
 @media (max-width: 600px) {
 	.top-right {
-		position: absolute;
+		/*position: absolute;*/
 	}
 	div.swiper-button-next {
 		right: -5px !important;
