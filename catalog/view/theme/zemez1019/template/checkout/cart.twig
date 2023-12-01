@@ -69,14 +69,7 @@
                   </span></div></td>
               <td class="text-right">{{ product.price }}</td>
               <td class="text-right">{{ product.total }}<br>
-              {% if product.type == 0 %}
-              {{ product.text_tax_1 }} {{ product.price_number }}: <b>{{ product.tax_1 }}</b>
-               {% else %}
-               {{ product.text_tax_1 }} {{ product.price_2 }}: <b>{{ product.tax_1 }}</b>
-              {% endif %}
               <br>
-              {% if product.type == 1 %}{{ product.text_tax_2 }} {{ product.price_1 }}: <b>{{ product.tax_2 }} 
-              {% endif %}
               </td>
             </tr>
             {% endfor %}
