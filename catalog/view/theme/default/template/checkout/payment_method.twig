@@ -24,15 +24,24 @@
 </p>
 {% if text_agree %}
 <div class="buttons">
-  <div class="pull-right">{{ text_agree }}
+<div class="pull-right">
+ {{ text_agree_1 }}
+ <input type="checkbox" name="agree_" value="1" id="agree_1">
+ <label class="agree_1" for="agree_1"></label>    &nbsp;
+</div>
+<br>
+
+<div class="pull-right">{{ text_agree }}
     {% if agree %}
     <input type="checkbox" name="agree" value="1" checked="checked" />
     {% else %}
     <input type="checkbox" name="agree" value="1" />
     {% endif %}
     &nbsp;
-    <input type="button" value="{{ button_continue }}" id="button-payment-method" data-loading-text="{{ text_loading }}" class="btn btn-primary" />
   </div>
+</div>
+<div class="pull-right">
+  <input type="button" value="{{ button_continue }}" id="button-payment-method" data-loading-text="{{ text_loading }}" class="btn btn-primary" />
 </div>
 {% else %}
 <div class="buttons">

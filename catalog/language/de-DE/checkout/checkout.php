@@ -32,6 +32,7 @@ $_['text_your_details']					= 'Persönliche Angaben';
 $_['text_your_address']					= 'Meine Adresse';
 $_['text_your_password']				= 'Passwort';
 $_['text_agree']						= '<a href="%s" class="agree"><b>%s</b></a> habe ich gelesen und bin einverstanden.';
+$_['text_agree_1']                      = 'Ich bin 18 Jahre alt';
 $_['text_address_new']					= 'Neue/andere Rechnungs-/Lieferadresse anlegen/verwenden.';
 $_['text_address_existing']				= 'Bereits vorhandene Rechnungs-/Lieferadresse verwenden.';
 $_['text_shipping_method']				= 'Bitte die gewünschte Versandart für diesen Auftrag wählen.';
