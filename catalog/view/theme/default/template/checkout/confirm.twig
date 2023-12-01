@@ -4,7 +4,7 @@
     <thead>
       <tr>
         <td class="text-left">{{ column_name }}</td>
-        <td class="text-left">{{ column_model }}</td>
+        <td class="text-left hide">{{ column_model }}</td>
         <td class="text-right">{{ column_quantity }}</td>
         <td class="text-right">{{ column_price }}</td>
         <td class="text-right">{{ column_total }}</td>
@@ -18,18 +18,18 @@
         &nbsp;<small> - {{ option.name }}: {{ option.value }}</small> {% endfor %}
         {% if product.recurring %} <br/>
         <span class="label label-info">{{ text_recurring_item }}</span> <small>{{ product.recurring }}</small> {% endif %}</td>
-      <td class="text-left">{{ product.model }}</td>
+      <td class="text-left hide">{{ product.model }}</td>
       <td class="text-right">{{ product.quantity }}</td>
       <td class="text-right">{{ product.price }}</td>
       <td class="text-right">{{ product.total }}<br>
-      {% if product.type == 0 %}
+      <!--{% if product.type == 0 %}
               {{ product.text_tax_1 }} {{ product.price_number }}: <b>{{ product.tax_1 }}</b>
                {% else %}
                {{ product.text_tax_1 }} {{ product.price_2 }}: <b> {{ product.tax_1 }}</b>
               {% endif %}
               <br>
               {% if product.type == 1 %}{{ product.text_tax_2 }} {{ product.price_1 }}: <b>{{ product.tax_2 }} 
-              {% endif %}
+              {% endif %} !-->
       </td>
     </tr>
     {% endfor %}
@@ -48,7 +48,7 @@
     
     {% for total in totals %}
     <tr>
-      <td colspan="4" class="text-right"><strong>{{ total.title }}:</strong></td>
+      <td colspan="3" class="text-right"><strong>{{ total.title }}:</strong></td>
       <td class="text-right">{{ total.text }}</td>
     </tr>
     {% endfor %}
