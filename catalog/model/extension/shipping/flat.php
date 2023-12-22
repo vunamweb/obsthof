@@ -16,7 +16,7 @@ class ModelExtensionShippingFlat extends Model {
 		$method_data = array();
 
 		$cost = $this->config->get('shipping_flat_cost');
-		if($total >= $this->config->get('config_login_attempts') || $total == 0)
+		if($total > $this->config->get('config_login_attempts') || $total == 0)
 		   $cost = 0;
 		
 		//echo $this->config->get('shipping_flat_cost'); die();   
