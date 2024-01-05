@@ -26,6 +26,6 @@ $_['text_more']         = 'Weitere Möglichkeiten zum Einkaufen';
 $_['text_store']        = 'Einen Store finden';
 $_['text_gift_cards']   = 'Geschenkkarten';
 $_['text_wishlist']     = 'Eine Wunschliste finden';
-$_['text_address']      = 'Adresse:';
+$_['text_address']      = 'Adresse';
 $_['text_open']         = 'Wir sind offen:';
 $_['text_phones']       = 'Telefone:';
