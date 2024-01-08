@@ -1,24 +1,24 @@
 <?php
 // Text
 $_['text_paypal']							= 'PayPal';
-$_['text_paypal_title']						= 'PayPal (Bezahlen Sie mit PayPal, Karte)';
+$_['text_paypal_title']						= 'PayPal (PayPal, Kreditkarte, Sofortüberweisung)';
 $_['text_paypal_paylater_title']			= 'Jetzt kaufen, später bezahlen mit PayPal';
 $_['text_paypal_googlepay_title']			= 'Google Pay';
 $_['text_paypal_applepay_title']			= 'Apple Pay';
-$_['text_checkout_payment_address']  		= 'Billing Details';
-$_['text_checkout_shipping_address'] 		= 'Delivery Details';
-$_['text_checkout_shipping_method']  		= 'Delivery Method';
+$_['text_checkout_payment_address']  		= 'Details zur Rechnungsstellung';
+$_['text_checkout_shipping_address'] 		= 'Details zur Lieferung';
+$_['text_checkout_shipping_method']  		= 'Liefermethode';
 $_['text_checkout_payment_method']  		= 'Payment Method';
-$_['text_your_details']              		= 'Your Personal Details';
-$_['text_your_address']              		= 'Your Address';
-$_['text_cart']               				= 'Shopping Cart';
-$_['text_shipping_updated']   				= 'Shipping service updated';
+$_['text_your_details']              		= 'Ihre persönlichen Daten';
+$_['text_your_address']              		= 'Ihre Adresse';
+$_['text_cart']               				= 'Einkaufswagen';
+$_['text_shipping_updated']   				= 'Versanddienst aktualisiert';
 $_['text_order_message']					= 'PayPal Seller Protection - %s';
-$_['text_day']                 				= 'day';
-$_['text_week']                				= 'week';
-$_['text_semi_month']          				= 'half-month';
-$_['text_month']               				= 'month';
-$_['text_year']                				= 'year';
+$_['text_day']                 				= 'Tag';
+$_['text_week']                				= 'Woche';
+$_['text_semi_month']          				= 'Halber Monat';
+$_['text_month']               				= 'Monat';
+$_['text_year']                				= 'Jahr';
 $_['text_trial']               				= '%s every %s %s for %s payments then ';
 $_['text_recurring']          				= '%s every %s %s';
 $_['text_recurring_item']      				= 'Recurring Item';
@@ -27,31 +27,31 @@ $_['text_trial_description']   				= '%s every %d %s(s) for %d payment(s) then';
 $_['text_payment_description'] 				= '%s every %d %s(s) for %d payment(s)';
 $_['text_payment_cancel']      				= '%s every %d %s(s) until canceled';
 $_['text_order_message']					= 'PayPal Seller Protection - %s';
-$_['text_wait']								= 'Please wait!';
+$_['text_wait']								= 'Bitte warten!';
 $_['text_loading']          				= 'Loading...';
 
 // Column
-$_['column_image']             				= 'Image';
-$_['column_name']              				= 'Product Name';
+$_['column_image']             				= 'Bild';
+$_['column_name']              				= 'Produkt';
 $_['column_model']             				= 'Model';
-$_['column_quantity']          				= 'Quantity';
-$_['column_price']             				= 'Unit Price';
-$_['column_total']             				= 'Total';
+$_['column_quantity']          				= 'Menge';
+$_['column_price']             				= 'Einzelpreis';
+$_['column_total']             				= 'Summe';
 
 // Entry
 $_['entry_email']                    		= 'E-Mail';
-$_['entry_firstname']                		= 'First Name';
-$_['entry_lastname']                 		= 'Last Name';
-$_['entry_telephone']               		= 'Telephone';
-$_['entry_company']                  		= 'Company';
-$_['entry_address_1']                		= 'Address 1';
-$_['entry_address_2']                		= 'Address 2';
-$_['entry_postcode']                 		= 'Post Code';
-$_['entry_city']                     		= 'City';
-$_['entry_country']                  		= 'Country';
-$_['entry_zone']                    		= 'Region / State';
-$_['entry_card_number']						= 'Card Number';
-$_['entry_expiration_date']					= 'Expiration Date';
+$_['entry_firstname']                		= 'Vorname';
+$_['entry_lastname']                 		= 'Nachname';
+$_['entry_telephone']               		= 'Telefon';
+$_['entry_company']                  		= 'Unternehmen';
+$_['entry_address_1']                		= 'Addresse 1';
+$_['entry_address_2']                		= 'Addresse 2';
+$_['entry_postcode']                 		= 'PLZ';
+$_['entry_city']                     		= 'Stadt';
+$_['entry_country']                  		= 'Land';
+$_['entry_zone']                    		= 'Region';
+$_['entry_card_number']						= 'Kartennummer';
+$_['entry_expiration_date']					= 'Ablaufdatum';
 $_['entry_cvv']								= 'CVV';
 
 // Button

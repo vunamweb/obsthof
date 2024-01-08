@@ -2,7 +2,6 @@
 <div class="alert alert-warning alert-dismissible"><i class="fa fa-exclamation-circle"></i> {{ error_warning }}</div>
 {% endif %}
 {% if shipping_methods %}
-<p>{{ text_shipping_method }}</p>
 {% for shipping_method in shipping_methods %}
 <p><strong>{{ shipping_method.title }}</strong></p>
 {% if not shipping_method.error %}
