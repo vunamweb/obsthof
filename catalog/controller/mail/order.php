@@ -356,17 +356,18 @@ class ControllerMailOrder extends Controller {
    {
 		$files1 = str_replace("index.php", "", $_SERVER['SCRIPT_FILENAME']) . "pdf/order.pdf";
 		$files2 = str_replace("index.php", "", $_SERVER['SCRIPT_FILENAME']) . "pdf/order_event.pdf";
-			
+		$from = "shop@obsthofamsteinberg.de";
+		
 	    $mail = new PHPMailer();
 		$mail->IsSMTP(); // telling the class to use SMTP
 		$mail->SMTPDebug = 0; // enables SMTP debug information (for testing)
 		$mail->SMTPAuth = true; // enable SMTP authentication
-		$mail->SMTPSecure = "ssl"; // sets the prefix to the servier
+		$mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS; // Implizite TLS-Verschlüsselung aktivieren
 		// $mail->SMTPSecure = "STARTTLS";
-		$mail->Host = "w0118b8d.kasserver.com"; // sets GMAIL as the SMTP server
+		$mail->Host = "smtp.ionos.de"; // sets GMAIL as the SMTP server
 		$mail->Port = 465; // set the SMTP port for the GMAIL server
-		$mail->Username = "test@7sc.eu"; // GMAIL username
-		$mail->Password = "FKEUcsvv2HtgtWvJ";
+		$mail->Username = $from; // GMAIL username
+		$mail->Password = "!wEr4!hZtvB";
 		$mail->CharSet = 'UTF-8';
 		// $mail->Encoding = 'base64';
 		$mail->AddAddress($to);
@@ -675,7 +676,9 @@ class ControllerMailOrder extends Controller {
 	    $language = new Language($order_info['language_code']);
 		$language->load($order_info['language_code']);
 		$language->load('mail/order_edit');
-
+		
+		$data['store_url'] = $order_info['store_url'];
+		
 		$data['text_order_id'] = $language->get('text_order_id');
 		$data['text_date_added'] = $language->get('text_date_added');
 		$data['text_order_status'] = $language->get('text_order_status');
@@ -684,6 +687,8 @@ class ControllerMailOrder extends Controller {
 		$data['text_footer'] = $language->get('text_footer');
 
 		$data['order_id'] = ($order_info['invoice_no'] == 0) ? $order_info['order_id'] : $order_info['invoice_prefix'] . $order_info['invoice_no'];
+		$data['invoice_number'] = ($order_info['invoice_no'] == 0) ? false : true;
+
 		$data['date_added'] = date($language->get('date_format_short'), strtotime($order_info['date_added']));
 		
 		$order_status_query = $this->db->query("SELECT * FROM " . DB_PREFIX . "order_status WHERE order_status_id = '" . (int)$order_status_id . "' AND language_id = '" . (int)$order_info['language_id'] . "'");
@@ -700,7 +705,7 @@ class ControllerMailOrder extends Controller {
 			$data['link'] = '';
 		}
 
-		$data['comment'] = strip_tags($comment);
+		$data['comment'] = strip_tags(nl2br($comment));
 
 		$this->load->model('setting/setting');
 		
@@ -730,12 +735,14 @@ class ControllerMailOrder extends Controller {
 		$mail->setSubject(html_entity_decode(sprintf($language->get('text_subject'), $order_info['store_name'], $order_info['order_id']), ENT_QUOTES, 'UTF-8'));
 		$mail->setText($this->load->view('mail/order_edit', $data));
 		//$mail->send();
+		$template = $data['invoice_number'] ? $this->load->view('mail/order_edit_invoice', $data) : $this->load->view('mail/order_edit', $data);
+
 		if($type) // if order has event, then send mail with attach pdf of event
-		$this->sendMailSMTP($order_info['email'], $subject, 'test@7sc.eu', $from, $this->load->view('mail/order_edit', $data), 2);
+			$this->sendMailSMTP($order_info['email'], $subject, 'shop@obsthofamsteinberg.de', $from, $template, 2);
 		else // if not, just send invoice
-		$this->sendMailSMTP($order_info['email'], $subject, 'test@7sc.eu', $from, $this->load->view('mail/order_edit', $data), 3);
+			$this->sendMailSMTP($order_info['email'], $subject, 'shop@obsthofamsteinberg.de', $from, $template, 3);
 		 
-		$this->sendMailSMTP($this->config->get('config_email'), $subject, 'test@7sc.eu', $from, $this->load->view('mail/order_edit', $data), 1);
+		$this->sendMailSMTP($this->config->get('config_email'), $subject, 'shop@obsthofamsteinberg.de', $from, $template, 1);
 	}
 	
 	// Admin Alert Mail
