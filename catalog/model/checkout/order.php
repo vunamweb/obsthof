@@ -280,13 +280,36 @@ class ModelCheckoutOrder extends Model {
     }
 
 	public function updateValueTicket() {
-		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "product_option WHERE 1");
+		$listOption = array();
+		$listOptionIn = '(';
+
+		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "cart WHERE idOption <> 0");
+
+		foreach($query->rows as $item) {
+			$optionID = $item['idOption'];
+
+			if(!in_array($optionID, $listOption))
+			$listOption[] = $optionID;
+		}
+
+		for($i = 0; $i < count($listOption); $i++)
+		  if($i < count($listOption) - 1)
+			$listOptionIn .= $listOption[$i] . ',';
+		  else 	
+			$listOptionIn .= $listOption[$i];
+			
+	    $listOptionIn .= ')';  		
+
+		//print_r($listOptionIn); die();  
+		  
+		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "product_option WHERE product_option_id in ".$listOptionIn."");
 
 		foreach($query->rows as $item) {
 			$product_option_id = $item['product_option_id'];
 
 			$value = $item['value'];
 			$value = explode(';', $value);
+			//print_r($value); die();
 			$numberTicket = $value[3];
 			
 			$query_1 = $this->db->query("SELECT * FROM " . DB_PREFIX . "cart WHERE idOption = ".$product_option_id."");
@@ -297,12 +320,13 @@ class ModelCheckoutOrder extends Model {
                 $total = $total + $item_1['quantity'];
 			}
 
-			//echo $total; die();
+			//echo $numberTicket; die();
 
 			if($numberTicket > 0) {
 				$newValue = $numberTicket - $total;
+				//echo 'dd'; die();
 				$valueTicket = $value[0] . ';' . $value[1] . ';' . $value[2] . ';' . $newValue;
-	
+				
 				$this->db->query("UPDATE `" . DB_PREFIX . "product_option` SET value = '" . $valueTicket . "' WHERE product_option_id = '" . (int)$product_option_id . "'");
 			}
 		}
