@@ -70,7 +70,7 @@ $(document).ready(function () {
 					$(this).parent().addClass("lazy-loaded");
 				});
 			});
-		});
+    });
 		$(window).load(function () {
 			$(window).trigger('lookup.unveil');
 			if ($('.nav-tabs').length) {
