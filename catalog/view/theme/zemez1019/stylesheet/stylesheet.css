@@ -123,6 +123,9 @@
 }
 
 /* VU */
+.box-carousel .swiper-desc {
+  width: 100% !important;
+}
 .agree_1 {
   padding-top: 12px;
 }
@@ -1167,6 +1170,7 @@ h2 {
   letter-spacing: .02em;
   text-transform: uppercase;
 }
+#checkout-checkout h2 { font-size: 1.2em; }
 
 h3 {
   font-size: 1.5em;
@@ -7602,18 +7606,20 @@ html[lang="de"] .newsletter-popup .zemez-login-form input {
 
 .box-carousel .swiper-desc {
   position: absolute;
-  bottom: 13.8%;
-  left: 50%;
+  /* bottom: 13.8%; */
+  bottom: 0;
+  left: 0;
   text-transform: uppercase;
-  -moz-transform: translateX(-50%);
+  /* -moz-transform: translateX(-50%);
   -ms-transform: translateX(-50%);
   -o-transform: translateX(-50%);
   -webkit-transform: translateX(-50%);
-  transform: translateX(-50%);
+  transform: translateX(-50%); */
   color: #fff;
   font-size: 1.1em;
   line-height: 1.2em;
   width: 172px;
+  width: 100%;
   max-width: 100%;
   font-weight: 300;
   padding: 18px 15px;
@@ -11305,6 +11311,32 @@ a.list-group-item.level_2:before { content:''; display: inline-block; width: 10p
 		left: 6px; */
 	}
 	.header-slide { max-width: 80%; }
+	
+	.top-right {
+		top: 72px;
+		top: inherit;
+		bottom: 6px; 
+		text-align: center;
+		right: inherit;
+		width: 100%;
+		height: 40px; 
+		display: flex; 
+		justify-content: center;
+	}
+	.class-1, .social-list li a {
+		background-color: var(--red);
+		color: #fff;
+		margin-bottom: 0px;
+		display: block;
+		width: 53px;
+		height: 40px;
+		text-align: center;
+		transition: 1s;
+		float: left;
+		margin: 0 2px;
+	}
+	footer { padding-bottom: 3em; }
+	h1 { font-size: 1.8em; }
 }
 
 
@@ -11316,14 +11348,14 @@ a.list-group-item.level_2:before { content:''; display: inline-block; width: 10p
 .btn-lexikon
 	{ margin: 0 10px 10px 0; }
 
-.btn-lexikon:before {
+/* .btn-lexikon:before {
 	content: '';
 	background: url(../../../../../cms/images/userfiles/image/obsthof-am-steinberg.svg) no-repeat;
 	position: absolute;
 	width: 20px;
 	height: 20px;
 	margin-left: -30px;
-}
+} */
 
 .Warenkorb .btn + .btn { margin: 0; margin-left: 1em;; }
 .Warenkorb .btn-block input { margin-right: 1em;; }
