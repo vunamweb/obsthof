@@ -631,6 +631,19 @@ class ControllerMailOrder extends Controller {
 		$from = $this->config->get('config_email');
 	}
 
+	if(in_array($order_status_id, $this->config->get('config_processing_status')))
+	  $data['status'] = 'ORDER';
+	else if(in_array($order_status_id, $this->config->get('config_complete_status')))
+	  $data['status'] = 'INVOICE';
+	else 
+	  $data['status'] = 'STORNO';
+
+	$data_1['status'] = $data['status'];
+	
+	$data['order_id'] = ($order_info['invoice_no'] > 0) ? $order_info['invoice_prefix'] . $order_info['invoice_no'] : $order_info['order_id'];
+
+	$data_1['order_id'] = $data['order_id'];
+
 	//create pdf
 	$options = new Options();
 	$options->set('tempDir', '/tmp');

@@ -9,65 +9,82 @@
 <script type="text/javascript" src="view/javascript/bootstrap/js/bootstrap.min.js"></script>
 <link href="view/javascript/font-awesome/css/font-awesome.min.css" type="text/css" rel="stylesheet" />
 <link type="text/css" href="view/stylesheet/stylesheet.css" rel="stylesheet" media="all" />
+<style>
+	table, tr, td { border: none !important; }
+	.table thead td {
+		font-weight: 400;
+	}
+	span { font-size: .8em; }
+	.inv { font-size: 1.5em; font-weight:600; text-transform: uppercase; color:#000; }
+	.table-bordered td { border-bottom: solid 1px #999 !important; }
+	.table.top thead > tr > td, .table tbody > tr > td {
+		vertical-align: top; margin-top:3em !important; font-size:.8em;
+	}
+	body, html { margin-bottom: 0; padding-bottom: 0; }
+	hr { margin: 0; }
+</style>
 </head>
-<body>
-<div class="container">
-  {% for order in orders %}
+<body style="display: block;">
+<div class="container" style="width:800px;height:100%;">
   <div style="page-break-after: always;">
-    <h1>{{ text_invoice }} #{{ order.order_id }}</h1>
-    <table class="table table-bordered">
+    <table class="table" style="width:800px;">
       <thead>
-        <tr>
-          <td colspan="2">{{ text_order_detail }}</td>
-        </tr>
+	  	<tr>
+			<td></td>	  
+			<td align="right"><img src="/image/catalog/obsthof-basics/Obsthof-am-Steinberg-Logo.png" style="width:200px;"></td>
+		</tr>
+		<tr>
+			<td>
+				<span>Obsthof am Steinberg – Am Steinberg 24 – 60437 Frankfurt</span>
+					<br/>
+          	  	<br/>
+{% for order in orders %}
+				{{ order.payment_address }}
+			</td>
+			<td align="right"><p>Obsthof am Steinberg<br />
+				Inh.: Andreas Schneider<br />
+				Am Steinberg 24<br />
+				60437 Frankfurt/Niedererlenbach<br />
+				Tel.: 06101 – 41522<br />
+				Fax: 06101 – 497484<br />
+				info@obsthof-am-steinberg</p></td>
+		</tr>
       </thead>
+	  
       <tbody>
+  	  	<tr><td></td></tr>
+    		<tr>
+				<td><h1 class="inv">{{ text_invoice }} #{{ invoice_number }}</h1></td>
+				<td align="right"><p>Datum:&nbsp; {{ order.date_added }}</p></td>
+			</tr>
         <tr>
-          <td style="width: 50%;"><address>
-            <strong>{{ order.store_name }}</strong><br />
-            {{ order.store_address }}
-            </address>
-            <b>{{ text_telephone }}</b> {{ order.store_telephone }}<br />
-            {% if order.store_fax %}
-            <b>{{ text_fax }}</b> {{ order.store_fax }}<br />
+          <td colspan="2">
+			{% if order.invoice_no %}
+            {{ text_invoice_no }}:&nbsp; {{ order.invoice_no }}<br />
             {% endif %}
-            <b>{{ text_email }}</b> {{ order.store_email }}<br />
-            <b>{{ text_website }}</b> <a href="{{ order.store_url }}">{{ order.store_url }}</a></td>
-          <td style="width: 50%;"><b>{{ text_date_added }}</b> {{ order.date_added }}<br />
-            {% if order.invoice_no %}
-            <b>{{ text_invoice_no }}</b> {{ order.invoice_no }}<br />
-            {% endif %}
-            <b>{{ text_order_id }}</b> {{ order.order_id }}<br />
-            <b>{{ text_payment_method }}</b> {{ order.payment_method }}<br />
+            {{ text_order_id }}:&nbsp; {{ order.order_id }}<br />
+            {{ text_payment_method }}:&nbsp; {{ order.payment_method }}<br />
             {% if order.shipping_method %}
-            <b>{{ text_shipping_method }}</b> {{ order.shipping_method }}<br />
-            {% endif %}</td>
+            {{ text_shipping_method }}:&nbsp; {{ order.shipping_method }}<br />
+            {% endif %}		  	
+		  </td>
+        </tr>
+        <tr>
+          <td style="width: 50%;">
+		  
+		  </td>
+          <td style="width: 50%;">
+		
+		
+		</td>
         </tr>
       </tbody>
     </table>
+
     <table class="table table-bordered">
       <thead>
         <tr>
-          <td style="width: 50%;"><b>{{ text_payment_address }}</b></td>
-          <td style="width: 50%;"><b>{{ text_shipping_address }}</b></td>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><address>
-            {{ order.payment_address }}
-            </address></td>
-          <td><address>
-            {{ order.shipping_address }}
-            </address></td>
-        </tr>
-      </tbody>
-    </table>
-    <table class="table table-bordered">
-      <thead>
-        <tr>
-          <td><b>{{ column_product }}</b></td>
-          <td><b>{{ column_model }}</b></td>
+          <td><b>Bezeichnung</b></td>
           <td class="text-right"><b>{{ column_quantity }}</b></td>
           <td class="text-right"><b>{{ column_price }}</b></td>
           <td class="text-right"><b>{{ column_total }}</b></td>
@@ -81,7 +98,6 @@
             <br />
             &nbsp;<small> - {{ option.name }}: {{ option.value }}</small>
             {% endfor %}</td>
-          <td>{{ product.model }}</td>
           <td class="text-right">{{ product.quantity }}</td>
           <td class="text-right">{{ product.price }}</td>
           <td class="text-right">{{ product.total }}</td>
@@ -96,14 +112,16 @@
           <td class="text-right">{{ voucher.amount }}</td>
         </tr>
         {% endfor %}
+      </tbody>
+    </table>
+	<table style="float:right; margin-right:10px;line-height: 1.5em">
         {% for total in order.total %}
         <tr>
-          <td class="text-right" colspan="4"><b>{{ total.title }}</b></td>
+          <td class="text-right" colspan="3"><b>{{ total.title }}</b>: &nbsp;</td>
           <td class="text-right">{{ total.text }}</td>
         </tr>
         {% endfor %}
-      </tbody>
-    </table>
+	</table>
     {% if order.comment %}
     <table class="table table-bordered">
       <thead>
@@ -118,8 +136,37 @@
       </tbody>
     </table>
     {% endif %}
+  
+  			<table class="table top" style="position: fixed; bottom:-20px">
+	  				<tr>
+						  <td colspan="3">
+  							<hr>							  
+						  </td>
+					  </tr>
+				  <tr>
+					<td valign="top">Obsthof am Steinberg<br>
+						Inh.: Andreas Schneider<br>
+						Am Steinberg 24<br>
+						60437 Frankfurt/Nieder-Erlenbach
+					</td>
+					<td valign="top">
+						Deutsche Kreditbank<br>
+						Kto.: 1020 4280 64 / BLZ: 120 300 00<br>
+						IBAN: DE40 1203 0000 1020 4280 64<br>
+						BIC: BYLADEM1001<br>
+						USt-IdNr.: DE216963084
+					</td>
+					<td valign="top">
+						Tel.: 06101 – 41522<br>
+						Fax: 06101 – 497484<br>
+						info@obsthof-am-steinberg.de
+					</td>
+	  			</tr>
+  			</table>
+
   </div>
   {% endfor %}
 </div>
+  
 </body>
 </html>

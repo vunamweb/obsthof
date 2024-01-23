@@ -224,13 +224,16 @@ class ControllerSaleOrder extends Controller {
 
 		$results = $this->model_sale_order->getOrders($filter_data);
 
+		//print_r($results[0]); die();
+
 		foreach ($results as $result) {
+			$totalOrder = (in_array($result['order_status_id'], array_merge($this->config->get('config_processing_status'), $this->config->get('config_complete_status')))) ? $result['total'] : $result['total'] * -1; 
 			$data['orders'][] = array(
 				'order_id'      => $result['order_id'],
 				'type'          => $this->model_sale_order->isOrderEvent($result['order_id']) ? 'Event' : 'Product', 
 				'customer'      => $result['customer'],
 				'order_status'  => $result['order_status'] ? $result['order_status'] : $this->language->get('text_missing'),
-				'total'         => $this->currency->format($result['total'], $result['currency_code'], $result['currency_value']),
+				'total'         => $this->currency->format($totalOrder, $result['currency_code'], $result['currency_value']),
 				'date_added'    => date($this->language->get('date_format_short'), strtotime($result['date_added'])),
 				'date_modified' => date($this->language->get('date_format_short'), strtotime($result['date_modified'])),
 				'shipping_code' => $result['shipping_code'],
@@ -1787,8 +1790,21 @@ class ControllerSaleOrder extends Controller {
 				}
 
 				$total_data = array();
-  
-				$totals = $this->model_sale_order->getOrderTotals($order_id);
+
+				//print_r($order_info); die();
+
+				$order_status_id = $order_info['order_status_id'];
+
+				if(in_array($order_status_id, $this->config->get('config_processing_status')))
+				   $data['text_invoice'] = 'ORDER';
+				else if(in_array($order_status_id, $this->config->get('config_complete_status')))
+				   $data['text_invoice'] = 'INVOICE';
+				else 
+				   $data['text_invoice'] = 'STORNO';
+
+				$data['invoice_number'] = ($order_info['invoice_no'] > 0) ? $order_info['invoice_prefix'] . $order_info['invoice_no'] : $order_id;
+
+	            $totals = $this->model_sale_order->getOrderTotals($order_id);
 				$this->document->displayOrder($totals, $sum_tax_1, $sum_tax_2, $this->session->data['shipping_address']['country_id'], $totalNormalProduct, $this->config->get('config_login_attempts'));
 
                 foreach ($totals as $total) {

@@ -55,7 +55,10 @@
 
 <div style="width: 680px;">
 	<!--<a href="{{ store_url }}" title="{{ store_name }}"><img src="{{ store_url }}image/catalog/obsthof-basics/Obsthof-am-Steinberg-Logo.png" alt="{{ store_name }}" style="margin-bottom: 20px; border: none;" /></a-->
-  <p style="margin-top: 0px; margin-bottom: 20px; margin-top: 40px;">{{ text_greeting }}</p>
+	
+	<h2>{{ status }}</h2>
+	<p style="margin-top: 0px; margin-bottom: 20px; margin-top: 40px;">{{ text_greeting }}</p>
+	
   {% if customer_id %}
   <p style="margin-top: 0px; margin-bottom: 20px;">{{ text_link }}</p>
   <p style="margin-top: 0px; margin-bottom: 20px;"><a href="{{ link }}">{{ link }}</a></p>
@@ -67,7 +70,9 @@
   <table style="border-collapse: collapse; width: 100%; border-top: 1px solid #DDDDDD; border-left: 1px solid #DDDDDD; margin-bottom: 20px;">
     <thead>
       <tr>
-        <td style="font-size: 12px; border-right: 1px solid #DDDDDD; border-bottom: 1px solid #DDDDDD; background-color: #EFEFEF; font-weight: bold; text-align: left; padding: 7px; color: #222222;" colspan="2">{{ text_order_detail }}</td>
+        <td style="font-size: 12px; border-right: 1px solid #DDDDDD; border-bottom: 1px solid #DDDDDD; background-color: #EFEFEF; font-weight: bold; text-align: left; padding: 7px; color: #222222;" colspan="2">
+			{{ text_order_detail }}
+		</td>
       </tr>
     </thead>
     <tbody>
