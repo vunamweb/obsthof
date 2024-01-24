@@ -793,12 +793,16 @@ class ControllerApiOrder extends Controller {
 			}
 
 			$order_info = $this->model_checkout_order->getOrder($order_id);
+			//print_r($order_info); die();
 
-			if ($order_info) {
+			if ($order_info && $order_info['order_status_id'] != $this->request->post['order_status_id']) {
 				$this->model_checkout_order->addOrderHistory($order_id, $this->request->post['order_status_id'], $this->request->post['comment'], $this->request->post['notify'], $this->request->post['override']);
 
 				$json['success'] = $this->language->get('text_success');
-			} else {
+			} else if($order_info) {
+				$json['success'] = $this->language->get('text_success');
+			} 
+			else {
 				$json['error'] = $this->language->get('error_not_found');
 			}
 		}

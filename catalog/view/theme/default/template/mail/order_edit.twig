@@ -1,9 +1,51 @@
-{{ text_order_id }} {{ order_id }}
-{{ text_date_added }} {{ date_added }}
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/1999/REC-html401-19991224/strict.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<body>
 
-{{ text_order_status }}
+<style Type="text/css">
+body { background-color: #ffffff; } p, h1, h2, h3, td, a { font-family:	Arial, Verdana; font-size:	12px; line-height: 	16px; color: #666666; margin: 0 0 1px 0; padding: 0; } p.small, p.small a { font-size: 10px; line-height: 14px; color: #888888; } td { padding:6px 6px 6px 0;	margin:0; border:none !important; } h1, h2  { font-weight: 	bold; margin: 0 0 10px 0; } h1  { font-size: 16px; font-weight: normal; line-height: 20px; margin: 0 0 12px 0; } table { width: 100%; border:none !important; margin-bottom:20px;} table td table td table td table { width:auto !important; } table td table td table td table td { width:auto !important; padding:6px 6px 0 0; } colgroup { display: none; }
+</style>
 
-{{ order_status }}
+<table align="center" border="0" cellpadding="0" cellspacing="0" width="100%"><tr><td align="center">
+	<table align="center" border="0" cellpadding="0" cellspacing="0" style="max-width: 600px">
+		<tr>
+			<td align="center" style="background: #fff;" colspan="2">
+			<img src="{{ store_url }}image/catalog/obsthof-basics/Obsthof-am-Steinberg-Logo.png" alt="Obsthof am Steinberg" width="160" style="width:160px;height:auto;margin:0 auto 10px;" />
+			</td>
+		</tr>
+		<tr><td>
+			<table>
+				<tr><td>{{ text_order_id }}</td><td> {{ order_id }}</td></tr>
+				<tr><td>{{ text_date_added }}</td><td>{{ date_added }}</td></tr>
+				<tr><td nowrap>{{ text_order_status }}</td><td>{{ order_status }}</td></tr>
+			</table>
+
+
+<table>
+{% for product in products %}													
+				<tr>
+					<td style="border:solid #E4E4E4 1px;padding:5px 10px 5px 10px">
+						<p class="MsoNormal" style="font-size:10px;font-family:'Arial';color:#878787">{{ product.name }}
+							{% for option in product.option %}<br/>
+							&nbsp;<small> - {{ option.name }}: {{ option.value }}</small>{% endfor %}
+						</p>
+					</td>
+					<td align="right" style="border:solid #E4E4E4 1px;padding:5px 10px 5px 10px">
+						<p class="MsoNormal" style="font-size:10px;font-family:'Arial';color:#878787">{{ product.quantity }}</p>
+					</td>
+					<td align="right" style="border:solid #E4E4E4 1px;padding:5px 10px 5px 10px">
+						<p class="MsoNormal" style="font-size:10px;font-family:'Arial';color:#878787">
+						{{ product.total }}
+						</p>
+					</td>
+				</tr>
+{% endfor %}
+</table>
+
+
 
 {% if link %}
 {{ text_link }}
@@ -11,11 +53,38 @@
 {{ link }}
 {% endif %}
 {% if comment %}
-
-{{ text_comment }}
-
+{{ text_comment }}:<br/>
 {{ comment }}
+<br/>
 {{ text_footer }}
 {% else %} 
 {{ text_footer }}
 {% endif %}
+
+
+</td></tr>
+<tr><td> 
+<br/><br/>
+<hr>
+<br/><br/>
+<p class="small">
+Obsthof am Steinberg<br  />
+Am Steinberg 24<br  />
+60437 Frankfurt / Nieder-Erlenbach<br  />
+<br  />
+Telefon<br  />
+Hofladen u. Schoppenwirtschaft<br  />
+06101 - 41 522<br  />
+<br  />
+Büro<br  />
+06101 - 98 75 725
+</p>
+<p>&nbsp;</p>
+<p class="small">
+	<a href="{{ store_url }}agb-waren/">AGB Waren</a> | <a href="{{ store_url }}agb-veranstaltungen/">AGB Veranstaltungen</a> | <a href="{{ store_url }}widerrufsbelehrung/">Widerrufsbestimmungen</a>
+</p>
+</td></tr>
+</table></td></tr></table>
+
+</body>
+</html>

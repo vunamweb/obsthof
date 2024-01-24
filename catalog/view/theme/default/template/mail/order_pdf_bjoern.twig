@@ -4,6 +4,9 @@
 <meta charset="UTF-8" />
 <title>{{ title }}</title>
 <base href="{{ store_url }}admin" />
+<link href="{{ store_url }}admin/view/javascript/bootstrap/css/bootstrap.css" rel="stylesheet" media="all" />
+<link href="{{ store_url }}admin/view/javascript/font-awesome/css/font-awesome.min.css" type="text/css" rel="stylesheet" />
+<link type="text/css" href="{{ store_url }}admin/view/stylesheet/stylesheet.css" rel="stylesheet" media="all" />
 <style>
 	table, tr, td { border: none !important; }
 	.table thead td {
@@ -21,24 +24,24 @@
 </head>
 
 <body style="font-family: Arial, Helvetica, sans-serif; font-size: 12px; color: #000000;">
-<!--
+
 {{ store_url }} 
 <br>
 {{ store_name }}
--->
-<div class="container">
-  <table class="table" style="width: 680px;">
+
+<div class="container" style="width:1200px;height:100%;">
+  <div style="page-break-after: always;">
+	<table class="table">
 	  <thead>
 		  <tr>
 			<td></td>	  
-			<td align="right"><img src="{{ store_url }}image/catalog/obsthof-basics/Obsthof-am-Steinberg-Logo.png" style="width:150px;"></td>
+			<td align="right"><img src="{{ store_url }}image/catalog/obsthof-basics/Obsthof-am-Steinberg-Logo.png" width="200" style="width:200px;"></td>
 		</tr>
 		<tr>
 			<td>
 				<span>Obsthof am Steinberg – Am Steinberg 24 – 60437 Frankfurt</span>
 					<br/>
 					<br/>
-					<p style="font-size: 12px;">{{ payment_address }}</p>
 			</td>
 			<td align="right"><p>Obsthof am Steinberg<br />
 				Inh.: Andreas Schneider<br />
@@ -50,15 +53,70 @@
 		</tr>
 	  </thead>
 	</table>
+  </div>
 </div>
 
 
-<div style="width: 680px;">
-	<h2>{{ status }}</h2>
-
-	<!--<a href="{{ store_url }}" title="{{ store_name }}"><img src="{{ store_url }}image/catalog/obsthof-basics/Obsthof-am-Steinberg-Logo.png" alt="{{ store_name }}" style="margin-bottom: 20px; border: none;" /></a-->
-  <p style="margin-top: 0px; margin-bottom: 20px; margin-top: 40px;">{{ text_greeting }}</p>
-  
+<div style="width: 680px;"><a href="{{ store_url }}" title="{{ store_name }}"><img src="/image/catalog/obsthof-basics/Obsthof-am-Steinberg-Logo.png" alt="{{ store_name }}" style="margin-bottom: 20px; border: none;" /></a>
+  <p style="margin-top: 0px; margin-bottom: 20px;">{{ text_greeting }}</p>
+  {% if customer_id %}
+  <p style="margin-top: 0px; margin-bottom: 20px;">{{ text_link }}</p>
+  <p style="margin-top: 0px; margin-bottom: 20px;"><a href="{{ link }}">{{ link }}</a></p>
+  {% endif %}
+  {% if download %}
+  <p style="margin-top: 0px; margin-bottom: 20px;">{{ text_download }}</p>
+  <p style="margin-top: 0px; margin-bottom: 20px;"><a href="{{ download }}">{{ download }}</a></p>
+  {% endif %}
+  <table style="border-collapse: collapse; width: 100%; border-top: 1px solid #DDDDDD; border-left: 1px solid #DDDDDD; margin-bottom: 20px;">
+    <thead>
+      <tr>
+        <td style="font-size: 12px; border-right: 1px solid #DDDDDD; border-bottom: 1px solid #DDDDDD; background-color: #EFEFEF; font-weight: bold; text-align: left; padding: 7px; color: #222222;" colspan="2">{{ text_order_detail }}</td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="font-size: 12px;	border-right: 1px solid #DDDDDD; border-bottom: 1px solid #DDDDDD; text-align: left; padding: 7px;"><b>{{ text_order_id }}</b> {{ order_id }}<br/>
+          <b>{{ text_date_added }}</b> {{ date_added }}<br/>
+          <b>{{ text_payment_method }}</b> {{ payment_method }}<br/>
+          {% if shipping_method %} <b>{{ text_shipping_method }}</b> {{ shipping_method }}
+          {% endif %}</td>
+        <td style="font-size: 12px;	border-right: 1px solid #DDDDDD; border-bottom: 1px solid #DDDDDD; text-align: left; padding: 7px;"><b>{{ text_email }}</b> {{ email }}<br/>
+          <b>{{ text_telephone }}</b> {{ telephone }}<br/>
+          <b>{{ text_ip }}</b> {{ ip }}<br/>
+          <b>{{ text_order_status }}</b> {{ order_status }}<br/></td>
+      </tr>
+    </tbody>
+  </table>
+  {% if comment %}
+  <table style="border-collapse: collapse; width: 100%; border-top: 1px solid #DDDDDD; border-left: 1px solid #DDDDDD; margin-bottom: 20px;">
+    <thead>
+      <tr>
+        <td style="font-size: 12px; border-right: 1px solid #DDDDDD; border-bottom: 1px solid #DDDDDD; background-color: #EFEFEF; font-weight: bold; text-align: left; padding: 7px; color: #222222;">{{ text_instruction }}</td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="font-size: 12px;	border-right: 1px solid #DDDDDD; border-bottom: 1px solid #DDDDDD; text-align: left; padding: 7px;">{{ comment }}</td>
+      </tr>
+    </tbody>
+  </table>
+  {% endif %}
+  <table style="border-collapse: collapse; width: 100%; border-top: 1px solid #DDDDDD; border-left: 1px solid #DDDDDD; margin-bottom: 20px;">
+    <thead>
+      <tr>
+        <td style="font-size: 12px; border-right: 1px solid #DDDDDD; border-bottom: 1px solid #DDDDDD; background-color: #EFEFEF; font-weight: bold; text-align: left; padding: 7px; color: #222222;">{{ text_payment_address }}</td>
+        {% if shipping_address %}
+        <td style="font-size: 12px; border-right: 1px solid #DDDDDD; border-bottom: 1px solid #DDDDDD; background-color: #EFEFEF; font-weight: bold; text-align: left; padding: 7px; color: #222222;">{{ text_shipping_address }}</td>
+        {% endif %} </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="font-size: 12px;	border-right: 1px solid #DDDDDD; border-bottom: 1px solid #DDDDDD; text-align: left; padding: 7px;">{{ payment_address }}</td>
+        {% if shipping_address %}
+        <td style="font-size: 12px;	border-right: 1px solid #DDDDDD; border-bottom: 1px solid #DDDDDD; text-align: left; padding: 7px;">{{ shipping_address }}</td>
+        {% endif %} </tr>
+    </tbody>
+  </table>
   <table style="border-collapse: collapse; width: 100%; border-top: 1px solid #DDDDDD; border-left: 1px solid #DDDDDD; margin-bottom: 20px;">
     <thead>
       <tr>
@@ -79,8 +137,6 @@
       <td style="font-size: 12px;	border-right: 1px solid #DDDDDD; border-bottom: 1px solid #DDDDDD; text-align: right; padding: 7px;">{{ product.price }}</td>
       <td style="font-size: 12px;	border-right: 1px solid #DDDDDD; border-bottom: 1px solid #DDDDDD; text-align: right; padding: 7px;">
       {{ product.total }}
-	  
-<!--
       {% if product.type == 0 %}
         {{ product.text_tax_1 }} {{ product.price_number }}
       {% else %}
@@ -89,9 +145,6 @@
             
       {% if product.type == 1 %}{{ product.text_tax_2 }} {{ product.price_1 }}: {{ product.tax_2 }} 
       {% endif %}
--->
-  
-  
       </td>
     </tr>
     {% endfor %}
@@ -116,13 +169,9 @@
       </tfoot>
     
   </table>
+  <p style="margin-top: 0px; margin-bottom: 20px;">{{ text_footer }}</p>
   
-  
-<!--  <p style="margin-top: 0px; margin-bottom: 20px;">### {{ text_footer }}</p>-->
-  
-  
-		  
-  	<table style="border-collapse: collapse; width: 100%;"  class="table top">
+  <table class="table top" style="position: absolute; bottom:-20px">
 			<tr>
 				<td colspan="3">
 					<hr>							  
@@ -148,7 +197,6 @@
 		  </td>
 		</tr>
 	</table>
-	
 </div>
 </body>
 </html>

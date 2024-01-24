@@ -4,113 +4,262 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>{{ title }}</title>
 </head>
-<body style="font-family: Arial, Helvetica, sans-serif; font-size: 12px; color: #000000;">
-<div style="width: 680px;"><a href="{{ store_url }}" title="{{ store_name }}"><img src="{{ logo }}" alt="{{ store_name }}" style="margin-bottom: 20px; border: none;" /></a>
-  <p style="margin-top: 0px; margin-bottom: 20px;">{{ text_greeting }}</p>
-  {% if customer_id %}
-  <p style="margin-top: 0px; margin-bottom: 20px;">{{ text_link }}</p>
-  <p style="margin-top: 0px; margin-bottom: 20px;"><a href="{{ link }}">{{ link }}</a></p>
-  {% endif %}
-  {% if download %}
-  <p style="margin-top: 0px; margin-bottom: 20px;">{{ text_download }}</p>
-  <p style="margin-top: 0px; margin-bottom: 20px;"><a href="{{ download }}">{{ download }}</a></p>
-  <{% endif %}
-  <table style="border-collapse: collapse; width: 100%; border-top: 1px solid #DDDDDD; border-left: 1px solid #DDDDDD; margin-bottom: 20px;">
-    <thead>
-      <tr>
-        <td style="font-size: 12px; border-right: 1px solid #DDDDDD; border-bottom: 1px solid #DDDDDD; background-color: #EFEFEF; font-weight: bold; text-align: left; padding: 7px; color: #222222;" colspan="2">{{ text_order_detail }}</td>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td style="font-size: 12px;	border-right: 1px solid #DDDDDD; border-bottom: 1px solid #DDDDDD; text-align: left; padding: 7px;"><b>{{ text_order_id }}</b> {{ order_id }}<br />
-          <b>{{ text_date_added }}</b> {{ date_added }}<br />
-          <b>{{ text_payment_method }}</b> {{ payment_method }}<br />
-          {% if shipping_method %} <b>{{ text_shipping_method }}</b> {{ shipping_method }}
-          {% endif %}</td>
-        <td style="font-size: 12px;	border-right: 1px solid #DDDDDD; border-bottom: 1px solid #DDDDDD; text-align: left; padding: 7px;"><b>{{ text_email }}</b> {{ email }}<br />
-          <b>{{ text_telephone }}</b> {{ telephone }}<br />
-          <b>{{ text_ip }}</b> {{ ip }}<br />
-          <b>{{ text_order_status }}</b> {{ order_status }}<br /></td>
-      </tr>
-    </tbody>
-  </table>
-  {% if comment %}
-  <table style="border-collapse: collapse; width: 100%; border-top: 1px solid #DDDDDD; border-left: 1px solid #DDDDDD; margin-bottom: 20px;">
-    <thead>
-      <tr>
-        <td style="font-size: 12px; border-right: 1px solid #DDDDDD; border-bottom: 1px solid #DDDDDD; background-color: #EFEFEF; font-weight: bold; text-align: left; padding: 7px; color: #222222;">{{ text_instruction }}</td>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td style="font-size: 12px;	border-right: 1px solid #DDDDDD; border-bottom: 1px solid #DDDDDD; text-align: left; padding: 7px;">{{ comment }}</td>
-      </tr>
-    </tbody>
-  </table>
-  {% endif %}
-  <table style="border-collapse: collapse; width: 100%; border-top: 1px solid #DDDDDD; border-left: 1px solid #DDDDDD; margin-bottom: 20px;">
-    <thead>
-      <tr>
-        <td style="font-size: 12px; border-right: 1px solid #DDDDDD; border-bottom: 1px solid #DDDDDD; background-color: #EFEFEF; font-weight: bold; text-align: left; padding: 7px; color: #222222;">{{ text_payment_address }}</td>
-        {% if shipping_address %}
-        <td style="font-size: 12px; border-right: 1px solid #DDDDDD; border-bottom: 1px solid #DDDDDD; background-color: #EFEFEF; font-weight: bold; text-align: left; padding: 7px; color: #222222;">{{ text_shipping_address }}</td>
-        {% endif %} </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td style="font-size: 12px;	border-right: 1px solid #DDDDDD; border-bottom: 1px solid #DDDDDD; text-align: left; padding: 7px;">{{ payment_address }}</td>
-        {% if shipping_address %}
-        <td style="font-size: 12px;	border-right: 1px solid #DDDDDD; border-bottom: 1px solid #DDDDDD; text-align: left; padding: 7px;">{{ shipping_address }}</td>
-        {% endif %} </tr>
-    </tbody>
-  </table>
-  <table style="border-collapse: collapse; width: 100%; border-top: 1px solid #DDDDDD; border-left: 1px solid #DDDDDD; margin-bottom: 20px;">
-    <thead>
-      <tr>
-        <td style="font-size: 12px; border-right: 1px solid #DDDDDD; border-bottom: 1px solid #DDDDDD; background-color: #EFEFEF; font-weight: bold; text-align: left; padding: 7px; color: #222222;">{{ text_product }}</td>
-        <td style="font-size: 12px; border-right: 1px solid #DDDDDD; border-bottom: 1px solid #DDDDDD; background-color: #EFEFEF; font-weight: bold; text-align: left; padding: 7px; color: #222222;">{{ text_model }}</td>
-        <td style="font-size: 12px; border-right: 1px solid #DDDDDD; border-bottom: 1px solid #DDDDDD; background-color: #EFEFEF; font-weight: bold; text-align: right; padding: 7px; color: #222222;">{{ text_quantity }}</td>
-        <td style="font-size: 12px; border-right: 1px solid #DDDDDD; border-bottom: 1px solid #DDDDDD; background-color: #EFEFEF; font-weight: bold; text-align: right; padding: 7px; color: #222222;">{{ text_price }}</td>
-        <td style="font-size: 12px; border-right: 1px solid #DDDDDD; border-bottom: 1px solid #DDDDDD; background-color: #EFEFEF; font-weight: bold; text-align: right; padding: 7px; color: #222222;">{{ text_total }}</td>
-      </tr>
-    </thead>
-    <tbody>
-    
-    {% for product in products %}
-    <tr>
-      <td style="font-size: 12px; border-right: 1px solid #DDDDDD; border-bottom: 1px solid #DDDDDD; text-align: left; padding: 7px;">{{ product.name }}
-        {% for option in product.option %}<br />
-        &nbsp;<small> - {{ option.name }}: {{ option.value }}</small>{% endfor %}</td>
-      <td style="font-size: 12px; border-right: 1px solid #DDDDDD; border-bottom: 1px solid #DDDDDD; text-align: left; padding: 7px;">{{ product.model }}</td>
-      <td style="font-size: 12px;	border-right: 1px solid #DDDDDD; border-bottom: 1px solid #DDDDDD; text-align: right; padding: 7px;">{{ product.quantity }}</td>
-      <td style="font-size: 12px;	border-right: 1px solid #DDDDDD; border-bottom: 1px solid #DDDDDD; text-align: right; padding: 7px;">{{ product.price }}</td>
-      <td style="font-size: 12px;	border-right: 1px solid #DDDDDD; border-bottom: 1px solid #DDDDDD; text-align: right; padding: 7px;">{{ product.total }}</td>
-    </tr>
-    {% endfor %}
-    {% for voucher in vouchers %}
-    <tr>
-      <td style="font-size: 12px;	border-right: 1px solid #DDDDDD; border-bottom: 1px solid #DDDDDD; text-align: left; padding: 7px;">{{ voucher.description }}</td>
-      <td style="font-size: 12px;	border-right: 1px solid #DDDDDD; border-bottom: 1px solid #DDDDDD; text-align: left; padding: 7px;"></td>
-      <td style="font-size: 12px;	border-right: 1px solid #DDDDDD; border-bottom: 1px solid #DDDDDD; text-align: right; padding: 7px;">1</td>
-      <td style="font-size: 12px;	border-right: 1px solid #DDDDDD; border-bottom: 1px solid #DDDDDD; text-align: right; padding: 7px;">{{ voucher.amount }}</td>
-      <td style="font-size: 12px;	border-right: 1px solid #DDDDDD; border-bottom: 1px solid #DDDDDD; text-align: right; padding: 7px;">{{ voucher.amount }}</td>
-    </tr>
-    {% endfor %}
-      </tbody>
-    
-    <tfoot>
-    
-    {% for total in totals %}
-    <tr>
-      <td style="font-size: 12px;	border-right: 1px solid #DDDDDD; border-bottom: 1px solid #DDDDDD; text-align: right; padding: 7px;" colspan="4"><b>{{ total.title }}:</b></td>
-      <td style="font-size: 12px;	border-right: 1px solid #DDDDDD; border-bottom: 1px solid #DDDDDD; text-align: right; padding: 7px;">{{ total.text }}</td>
-    </tr>
-    {% endfor %}
-      </tfoot>
-    
-  </table>
-  <p style="margin-top: 0px; margin-bottom: 20px;">{{ text_footer }}</p>
+<style>
+	p.MsoNormal { padding: 0; margin:0; }
+</style>
+<body bgcolor="whitesmoke" lang="DE" link="#0563C1" vlink="#954F72" style="word-wrap:break-word">
+<div class="WordSection1">
+<div id="mail-editor-reference-message-container">
+<div>
+<div align="center">
+<table class="MsoNormalTable" border="0" cellpadding="0" width="100%" style="width:100.0%;background:whitesmoke" id="outer_wrapper">
+<tbody>
+<tr>
+<td style="padding:.75pt .75pt .75pt .75pt"></td>
+<td width="600" style="width:450.0pt;padding:.75pt .75pt .75pt .75pt">
+<div id="wrapper">
+<table class="MsoNormalTable" border="0" cellspacing="0" cellpadding="0" width="100%" style="width:100.0%">
+<tbody>
+<tr>
+<td valign="top" style="padding:0cm 0cm 0cm 0cm">
+<div id="template_header_image">
+<p align="center" style="margin-top:0cm;text-align:center"><img style="width:150px;" src="{{ store_url }}image/catalog/obsthof-basics/Obsthof-am-Steinberg-Logo.png" alt="Obsthof am Steinberg">
+
+</p>
 </div>
+<div align="center">
+<table class="MsoNormalTable" border="1" cellspacing="0" cellpadding="0" width="100%" style="width:100.0%;background:#FDFDFD;border:solid gainsboro 1.0pt;box-shadow:0 1px 4px rgba(0,0,0,.1);border-radius:3px" id="template_container">
+<tbody>
+	<tr>
+		<td valign="top" style="border:none;padding:0cm 0cm 0cm 0cm">
+			<div align="center">
+				<table class="MsoNormalTable" border="0" cellspacing="0" cellpadding="0" width="100%" style="width:100.0%;background:#B80229;border-radius:3px 3px 0 0" id="template_header">
+					<tbody>
+						<tr>
+							<td style="padding:13.0pt 36.0pt 13.0pt 36.0pt" id="header_wrapper">
+								<h1 style="margin:0cm;line-height:110%;background-color:inherit"><span style="font-size:16.5pt;line-height:110%;font-family:'Arial';color:white;font-weight:normal">Auftrag Nr. {{ order_id }}</span></h1>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</td>
+	</tr>
+	<tr>
+		<td valign="top" style="border:none;padding:0cm 0cm 0cm 0cm">
+			<div align="center">
+				<table class="MsoNormalTable" border="0" cellspacing="0" cellpadding="0" width="100%" style="width:100.0%" id="template_body">
+					<tbody>
+						<tr>
+							<td valign="top" style="background:#FDFDFD;padding:0cm 0cm 0cm 0cm" id="body_content">
+								<table class="MsoNormalTable" border="0" cellspacing="0" cellpadding="0" width="100%" style="width:100.0%">
+									<tbody>
+										<tr>
+											<td valign="top" style="padding:6.0pt 36.0pt 4.0pt 36.0pt">
+												<p style="mso-margin-top-alt:0cm;margin-right:0cm;margin-bottom:12.0pt;margin-left:0cm;line-height:110%">
+													<span style="font-size:10px;line-height:110%;font-family:'Arial';color:#878787">Hallo&nbsp; {{ first_name }},</span>
+												</p>
+												<p style="mso-margin-top-alt:0cm;margin-right:0cm;margin-bottom:12.0pt;margin-left:0cm;line-height:110%">
+													<span style="font-size:10px;line-height:110%;font-family:'Arial';color:#878787">{{ text_greeting }}
+														
+													</span>
+												</p>
+												<h2 style="mso-margin-top-alt:0cm;margin-right:0cm;margin-bottom:16px;margin-left:0cm;line-height:130%">
+													<span style="font-size:16px;line-height:130%;font-family:'Arial';color:#B80229">{{ text_order_detail }}</span>
+												</h2>																			
+												
+												
+												
+												<div style="margin-bottom:20.0pt">
+													<table class="MsoNormalTable" border="1" cellspacing="0" cellpadding="0" width="100%" style="width:100.0%;border:solid #E4E4E4 1px">
+														<thead>
+															<tr>
+																<td style="border:solid #E4E4E4 1px;padding:5px 10px 5px 10px">
+																	<p class="MsoNormal"><b><span style="font-size:10px;font-family:'Arial';color:#878787">Position</span></b></p>
+																</td>
+																<td style="border:solid #E4E4E4 1px;padding:5px 10px 5px 10px">
+																	<p class="MsoNormal"><b><span style="font-size:10px;font-family:'Arial';color:#878787">Anzahl</span></b></p>
+																</td>
+																<td style="border:solid #E4E4E4 1px;padding:5px 10px 5px 10px">
+																	<p class="MsoNormal"><b><span style="font-size:10px;font-family:'Arial';color:#878787">Gesamt</span></b></p>
+																</td>
+															</tr>
+														</thead>
+														<tbody>
+															
+{% for product in products %}													
+				<tr>
+					<td style="border:solid #E4E4E4 1px;padding:5px 10px 5px 10px">
+						<p class="MsoNormal" style="font-size:10px;font-family:'Arial';color:#878787">{{ product.name }}
+							{% for option in product.option %}<br/>
+							&nbsp;<small> - {{ option.name }}: {{ option.value }}</small>{% endfor %}
+						</p>
+					</td>
+					<td align="right" style="border:solid #E4E4E4 1px;padding:5px 10px 5px 10px">
+						<p class="MsoNormal" style="font-size:10px;font-family:'Arial';color:#878787">{{ product.quantity }}</p>
+					</td>
+					<td align="right" style="border:solid #E4E4E4 1px;padding:5px 10px 5px 10px">
+						<p class="MsoNormal" style="font-size:10px;font-family:'Arial';color:#878787">
+						{{ product.total }}
+						</p>
+					</td>
+				</tr>
+{% endfor %}
+	
+ {% for voucher in vouchers %}
+<tr>
+  <td style="font-size:10px;	border-right: 1px solid #DDDDDD; border-bottom: 1px solid #DDDDDD; text-align: left; padding: 7px;">{{ voucher.description }}</td>
+  <td style="font-size:10px;	border-right: 1px solid #DDDDDD; border-bottom: 1px solid #DDDDDD; text-align: left; padding: 7px;"></td>
+  <td style="font-size:10px;	border-right: 1px solid #DDDDDD; border-bottom: 1px solid #DDDDDD; text-align: right; padding: 7px;">1</td>
+  <td style="font-size:10px;	border-right: 1px solid #DDDDDD; border-bottom: 1px solid #DDDDDD; text-align: right; padding: 7px;">{{ voucher.amount }}</td>
+  <td style="font-size:10px;	border-right: 1px solid #DDDDDD; border-bottom: 1px solid #DDDDDD; text-align: right; padding: 7px;">{{ voucher.amount }}</td>
+</tr>
+{% endfor %}			
+				
+				
+				{% for total in totals %}
+				<tr>
+					<td colspan="2" style="border:solid #E4E4E4 1px;border-top:solid #E4E4E4 1px;padding:5px 10px 5px 10px">
+						<p class="MsoNormal" style="font-size:10px;font-family:'Arial';color:#878787"><b>{{ total.title }}</b></p>
+					</td>
+					<td align="right" style="border:solid #E4E4E4 1px;border-top:solid #E4E4E4 1px;padding:5px 10px 5px 10px">
+						<p class="MsoNormal" style="font-size:10px;font-family:'Arial';color:#878787">{{ total.text }}</p>
+					</td>
+				</tr>															
+				{% endfor %}
+															
+															
+														</tbody>
+													</table>
+												</div>
+												<div style="margin-bottom:30.0pt">
+													<h2 style="mso-margin-top-alt:0cm;margin-right:0cm;margin-bottom:16px;margin-left:0cm;line-height:130%">
+														<span style="font-size:16px;line-height:130%;font-family:'Arial';color:#B80229">Zusammenfassung</span>
+													</h2>
+
+<p style="color:#878787; font-size:10px;font-family:'Arial';">
+{{ text_date_added }}: &nbsp;{{ date_added }}<br/>
+{{ text_payment_method }}: &nbsp;{{ payment_method }}<br/>
+{% if shipping_method %} {{ text_shipping_method }}: &nbsp;{{ shipping_method }}
+{% endif %}
+<br/>
+{{ text_email }}: &nbsp;{{ email }}<br/>
+{{ text_telephone }}: &nbsp;{{ telephone }}<br/>
+</p>
+
+<p>&nbsp;</p>
+
+<table style="border-collapse: collapse; width: 100%; border-top: 1px solid #DDDDDD; border-left: 1px solid #DDDDDD; margin-bottom: 20px;">
+	<thead>
+	<tr>
+		<td style="color:#878787;font-size:10px; border-right: 1px solid #DDDDDD; border-bottom: 1px solid #DDDDDD;  text-align: left; padding: 7px; color: #222222;">{{ text_payment_address }}</td>
+	{% if shipping_address %}
+		<td style="color:#878787;font-size:10px; border-right: 1px solid #DDDDDD; border-bottom: 1px solid #DDDDDD;  text-align: left; padding: 7px; color: #222222;">{{ text_shipping_address }}</td>
+	{% endif %} </tr>
+	</thead>
+	<tbody>
+	<tr>
+		<td style="color:#878787;font-size:10px;	border-right: 1px solid #DDDDDD; border-bottom: 1px solid #DDDDDD; text-align: left; padding: 7px;">{{ payment_address }}</td>
+	{% if shipping_address %}
+		<td style="color:#878787;font-size:10px;	border-right: 1px solid #DDDDDD; border-bottom: 1px solid #DDDDDD; text-align: left; padding: 7px;">{{ shipping_address }}</td>
+	{% endif %} </tr>
+	</tbody>
+</table>
+
+{% if customer_id %}
+<p style="margin-top: 0px; margin-bottom: 20px;">{{ text_link }}</p>
+<p style="margin-top: 0px; margin-bottom: 20px;"><a href="{{ link }}">{{ link }}</a></p>
+{% endif %}
+{% if download %}
+<p style="margin-top: 0px; margin-bottom: 20px;">{{ text_download }}</p>
+<p style="margin-top: 0px; margin-bottom: 20px;"><a href="{{ download }}">{{ download }}</a></p>
+<{% endif %}
+
+{% if comment %}
+<table style="border-collapse: collapse; width: 100%; border-top: 1px solid #DDDDDD; border-left: 1px solid #DDDDDD; margin-bottom: 20px;">
+<thead>
+<tr>
+<td style="font-size:10px; border-right: 1px solid #DDDDDD; border-bottom: 1px solid #DDDDDD;  text-align: left; padding: 7px; color: #222222;">Informationen</td>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="font-size:10px;	border-right: 1px solid #DDDDDD; border-bottom: 1px solid #DDDDDD; text-align: left; padding: 7px;">{{ comment }}</td>
+</tr>
+</tbody>
+</table>
+{% endif %}
+												</div>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</td>
+	</tr>
+</tbody>
+</table>
+</div>
+</td>
+</tr>
+<tr>
+<td valign="top" style="padding:0cm 0cm 0cm 0cm">
+<div align="center">
+<table class="MsoNormalTable" border="0" cellspacing="0" cellpadding="0" width="100%" style="width:100.0%" id="template_footer">
+<tbody>
+	<tr>
+		<td valign="top" style="padding:0cm 0cm 0cm 0cm;border-radius:6px">
+			<table class="MsoNormalTable" border="0" cellspacing="0" cellpadding="0" width="100%" style="width:100.0%">
+				<tbody>
+					<tr>
+						<td style="padding:18.0pt 0cm 18.0pt 0cm;border-radius:6px" id="credit">
+							<p align="center" style="mso-margin-top-alt:0cm;margin-right:0cm;margin-bottom:12.0pt;margin-left:0cm;text-align:center;line-height:110%">
+								<span style="font-size:9px;line-height:110%;font-family:'Arial';color:#A5A5A5">Obsthof am Steinberg • Andreas Schneider • Am Steinberg 24<br>
+									60437 Frankfurt/Nieder-Erlenbach</span>
+							</p>
+							<p align="center" style="mso-margin-top-alt:0cm;margin-right:0cm;margin-bottom:12.0pt;margin-left:0cm;text-align:center;line-height:110%">
+								<span style="font-size:9px;line-height:110%;font-family:'Arial';color:#A5A5A5">Telefon: 06101 9875725<br>
+									Telefon-Hofladen &amp; Schoppenwirtschaft: 06101 41522<br>
+									Telefax: 06101 497484<br>
+									E-Mail: info@obsthof-am-steinberg.de</span>
+							</p>
+							<p align="center" style="mso-margin-top-alt:0cm;margin-right:0cm;margin-bottom:12.0pt;margin-left:0cm;text-align:center;line-height:110%">
+								<span style="font-size:9px;line-height:110%;font-family:'Arial';color:#A5A5A5"><a href="{{ store_url }}agb-waren/">AGB Waren</a> | <a href="{{ store_url }}agb-veranstaltungen/">AGB Veranstaltungen</a> | <a href="{{ store_url }}widerrufsbelehrung/">Widerrufsbestimmungen</a></span>
+							</p>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</td>
+	</tr>
+</tbody>
+</table>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</td>
+<td style="padding:.75pt .75pt .75pt .75pt"></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p class="MsoNormal" style="margin-left:35.4pt"><span style="font-size:10.0pt">
+<o:p>&nbsp;</o:p>
+</span></p>
+</div>
+</div>
+</div>
+
+
+
+
+
 </body>
 </html>

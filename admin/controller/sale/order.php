@@ -864,7 +864,7 @@ class ControllerSaleOrder extends Controller {
 			}
 
 			if ($order_info['invoice_no']) {
-				$data['invoice_no'] = $order_info['invoice_prefix'] . $order_info['invoice_no'];
+				$data['invoice_no'] = $order_info['invoice_prefix'] . '-' . $order_info['invoice_no'];
 			} else {
 				$data['invoice_no'] = '';
 			}

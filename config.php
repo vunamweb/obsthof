@@ -31,4 +31,6 @@ define('DB_PREFIX', 'oc_');
 
 // MORPHEUS
 define('MORPHEUS_HOMEPAGE', ['warum/', 'wie/']);
-// END
+
+// SPECIAL EMAIL
+define('SPECIAL_EMAIL', 'vu@pixeldusche.com');
