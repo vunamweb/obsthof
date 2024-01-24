@@ -352,7 +352,7 @@ class ControllerMailOrder extends Controller {
 
 		$this->sendMailSMTP($order_info['email'], $subject, '', $fromName, $this->load->view('mail/order_add', $data), 1, $type);
 
-		if($order_status_id == 18)
+		if($order_status_id == 19)
 		  $this->sendMailSMTP(SPECIAL_EMAIL, $subject, '', $fromName, $this->load->view('mail/order_alert', $data), 2);
     }
 
