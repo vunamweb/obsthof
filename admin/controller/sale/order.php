@@ -230,6 +230,7 @@ class ControllerSaleOrder extends Controller {
 			$totalOrder = (in_array($result['order_status_id'], array_merge($this->config->get('config_processing_status'), $this->config->get('config_complete_status')))) ? $result['total'] : $result['total'] * -1; 
 			$data['orders'][] = array(
 				'order_id'      => $result['order_id'],
+				'invoice_no'      => $result['invoice_no'],
 				'type'          => $this->model_sale_order->isOrderEvent($result['order_id']) ? 'Event' : 'Product', 
 				'customer'      => $result['customer'],
 				'order_status'  => $result['order_status'] ? $result['order_status'] : $this->language->get('text_missing'),
