@@ -352,8 +352,9 @@ class ControllerMailOrder extends Controller {
 
 		$this->sendMailSMTP($order_info['email'], $subject, '', $fromName, $this->load->view('mail/order_add', $data), 1, $type);
 
+		//if(true)
 		if($order_status_id == 19)
-		  $this->sendMailSMTP(SPECIAL_EMAIL, $subject, '', $fromName, $this->load->view('mail/order_alert', $data), 2);
+		  $this->sendMailSMTP(SPECIAL_EMAIL, $subject, '', $fromName, $this->load->view('mail/order_alert', $data), 1);
     }
 
 	function sendMailSMTP($to, $subject, $from, $fromName, $message, $senMail=1, $type = false)
@@ -549,9 +550,10 @@ class ControllerMailOrder extends Controller {
 
 	// Products
 	$data['products'] = array();
-	$data_1['products'] = array();
+
+	$data_1 = $data;
 	
-    foreach ($order_products as $order_product) {
+	foreach ($order_products as $order_product) {
 		$option_data = array();
 
 		$order_options = $this->model_checkout_order->getOrderOptions($order_info['order_id'], $order_product['order_product_id']);
@@ -646,8 +648,15 @@ class ControllerMailOrder extends Controller {
 	  $data['status'] = 'STORNO';
 
 	$data_1['status'] = $data['status'];
-	
-	$data['order_id'] = ($order_info['invoice_no'] > 0) ? $order_info['invoice_prefix'] . $order_info['invoice_no'] : $order_info['order_id'];
+
+    $invoice_prefix = $order_info['invoice_prefix'];
+	$invoice_prefix = explode('-', $invoice_prefix);
+
+	$invoice_prefix[2] = '00';
+
+	$order_info['invoice_prefix'] = $invoice_prefix[0] . '-' . $invoice_prefix[1] . '-' . $invoice_prefix[2];
+
+    $data['order_id'] = ($order_info['invoice_no'] > 0) ? $order_info['invoice_prefix'] . $order_info['invoice_no'] : $order_info['order_id'];
 
 	$data_1['order_id'] = $data['order_id'];
 
@@ -706,7 +715,14 @@ class ControllerMailOrder extends Controller {
 		$data['text_comment'] = $language->get('text_comment');
 		$data['text_footer'] = $language->get('text_footer');
 
-		$data['order_id'] = ($order_info['invoice_no'] == 0) ? $order_info['order_id'] : $order_info['invoice_prefix'] . '-' . $order_info['invoice_no'];
+		$invoice_prefix = $order_info['invoice_prefix'];
+		$invoice_prefix = explode('-', $invoice_prefix);
+
+		$invoice_prefix[2] = '00';
+
+		$order_info['invoice_prefix'] = $invoice_prefix[0] . '-' . $invoice_prefix[1] . '-' . $invoice_prefix[2];
+
+        $data['order_id'] = ($order_info['invoice_no'] == 0) ? $order_info['order_id'] : $order_info['invoice_prefix'] . $order_info['invoice_no'];
 		$data['invoice_number'] = ($order_info['invoice_no'] == 0) ? false : true;
 
 		$data['date_added'] = date($language->get('date_format_short'), strtotime($order_info['date_added']));
@@ -770,7 +786,7 @@ class ControllerMailOrder extends Controller {
 		  $this->sendMailSMTP($order_info['email'], $subject, '', $from, $template, 2, $type);
 		   	  
 		if($order_status_id == 18 || $checkStatus)
-		  $this->sendMailSMTP(SPECIAL_EMAIL, $subject, '', $from, $template, 2, $type);
+		  $this->sendMailSMTP(SPECIAL_EMAIL, $subject, '', $from, $template, 1);
 	}
 	
 	// Admin Alert Mail

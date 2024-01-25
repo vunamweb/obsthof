@@ -227,7 +227,8 @@ class ControllerSaleOrder extends Controller {
 		//print_r($results[0]); die();
 
 		foreach ($results as $result) {
-			$totalOrder = (in_array($result['order_status_id'], array_merge($this->config->get('config_processing_status'), $this->config->get('config_complete_status')))) ? $result['total'] : $result['total'] * -1; 
+			$totalOrder = (in_array($result['order_status_id'], array(13))) ? $result['total'] * -1 : $result['total']; 
+
 			$data['orders'][] = array(
 				'order_id'      => $result['order_id'],
 				'invoice_no'      => $result['invoice_no'],
@@ -783,6 +784,13 @@ class ControllerSaleOrder extends Controller {
 
 		$order_info = $this->model_sale_order->getOrder($order_id);
 
+		$page = 1;
+		$order_of_history = $this->model_sale_order->getOrderHistories($order_id, ($page - 1) * 10, 50);
+		$count_of_history = count($order_of_history);
+
+		$data['prefill_comment'] = $order_of_history[$count_of_history - 1]['comment'];
+
+
 		if ($order_info) {
 			$this->load->language('sale/order');
 
@@ -864,7 +872,14 @@ class ControllerSaleOrder extends Controller {
 			}
 
 			if ($order_info['invoice_no']) {
-				$data['invoice_no'] = $order_info['invoice_prefix'] . '-' . $order_info['invoice_no'];
+				$invoice_prefix = $order_info['invoice_prefix'];
+				$invoice_prefix = explode('-', $invoice_prefix);
+
+				$invoice_prefix[2] = '00';
+
+				$order_info['invoice_prefix'] = $invoice_prefix[0] . '-' . $invoice_prefix[1] . '-' . $invoice_prefix[2];
+
+                $data['invoice_no'] = $order_info['invoice_prefix'] . $order_info['invoice_no'];
 			} else {
 				$data['invoice_no'] = '';
 			}
@@ -1080,7 +1095,11 @@ class ControllerSaleOrder extends Controller {
 			$totals = $this->model_sale_order->getOrderTotals($this->request->get['order_id']);
 			$this->document->displayOrder($totals, $sum_tax_1, $sum_tax_2, $this->session->data['shipping_address']['country_id'], $totalNormalProduct, $this->config->get('config_login_attempts'));
 
+			$count = count($totals);
 
+			if($order_info['order_status_id'] == 13)
+			  $totals[$count]['value'] = $totals[$count]['value'] * -1;
+			
 			foreach ($totals as $total) {
 				$data['totals'][] = array(
 					'title' => $total['title'],

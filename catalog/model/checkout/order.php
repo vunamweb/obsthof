@@ -67,15 +67,29 @@ class ModelCheckoutOrder extends Model {
 	   return $prefix[0] . '-' . $prefix[1] . '-' . $invoice;
 	}
 
+	public function getInvoiceNumber($data) {
+		$prefix = $data['invoice_prefix'];
+		$prefix = explode('-', $prefix);
+ 
+		return $prefix[1] . '-' . $data['invoice_no'];
+	 }
+
 	public function duplicateOrder($order_id) {
+		$this->load->language('api/order');
+
+		$comment = $this->language->get('original_order') . $order_id; 
+
 		$new_status_id = 13;
 
 		$orderProduct = $this->getOrderProducts($order_id);
 		$orderTotals = $this->getOrderTotals($order_id);
 		
-        $data = $this->getOrder($order_id);
+		$data = $this->getOrder($order_id);
+		
+		$comment .= '\n';
+		$comment .= $this->language->get('original_invoice') . $this->getInvoiceNumber($data);
 
-		$data['invoice_prefix'] = $this->setPrefixOrder($data);
+        $data['invoice_prefix'] = $this->setPrefixOrder($data);
 		//$data['order_status_id'] = 13;
 		$data['products'] = $orderProduct;
 		$data['totals'] = $orderTotals;
@@ -87,7 +101,10 @@ class ModelCheckoutOrder extends Model {
 
 		$order_id = $this->db->getLastId();
 
-		// update status of the new order
+		// add history order
+		$this->db->query("INSERT INTO " . DB_PREFIX . "order_history SET order_id = '" . (int)$order_id . "', order_status_id = '" . (int)$new_status_id . "', notify = '0', comment = '".$comment."', date_added = NOW()");
+
+        // update status of the new order
 		$this->db->query("UPDATE ".DB_PREFIX."order set order_status_id = ".$new_status_id." where order_id=".$order_id."");
 
 		// Products
