@@ -399,11 +399,14 @@ class ControllerMailOrder extends Controller {
   }
 
   public function createPDFInvoice($order_info, $order_status_id) {
+	//print_r($order_info); die();  
+	$invoice_no = $this->model_checkout_order->countInvoiceNumber() + 1;
+
 	// Check for any downloadable products
 	$download_status = false;
 
 	$order_products = $this->model_checkout_order->getOrderProducts($order_info['order_id']);
-	
+
 	foreach ($order_products as $order_product) {
 		// Check if there are any linked downloads
 		$product_download_query = $this->db->query("SELECT COUNT(*) AS total FROM `" . DB_PREFIX . "product_to_download` WHERE product_id = '" . (int)$order_product['product_id'] . "'");
@@ -649,15 +652,20 @@ class ControllerMailOrder extends Controller {
 
 	$data_1['status'] = $data['status'];
 
-    $invoice_prefix = $order_info['invoice_prefix'];
+	$invoice_prefix = $order_info['invoice_prefix'];
 	$invoice_prefix = explode('-', $invoice_prefix);
 
 	$invoice_prefix[2] = '00';
 
 	$order_info['invoice_prefix'] = $invoice_prefix[0] . '-' . $invoice_prefix[1] . '-' . $invoice_prefix[2];
 
-    $data['order_id'] = ($order_info['invoice_no'] > 0) ? $order_info['invoice_prefix'] . $order_info['invoice_no'] : $order_info['order_id'];
-
+	if($data['status'] != 'STORNO') {
+		$data['order_id'] = ($order_info['invoice_no'] > 0) ? $order_info['invoice_prefix'] . $order_info['invoice_no'] : $order_info['order_id'];
+    } else {
+		$data['date_added'] = date("Y-m-d");
+		$data['order_id'] = ($order_info['invoice_no'] > 0) ? $order_info['invoice_prefix'] . $invoice_no : $order_info['order_id'];
+    }
+	 
 	$data_1['order_id'] = $data['order_id'];
 
 	//create pdf
@@ -780,7 +788,7 @@ class ControllerMailOrder extends Controller {
 		 
 		$checkStatus = (!in_array($order_status_id, $this->config->get('config_processing_status')) && !in_array($order_status_id, $this->config->get('config_complete_status'))) ? true : false;
 
-		if($order_status_id == 18 || $checkStatus)
+		if(true || $checkStatus)
 		  $this->sendMailSMTP($order_info['email'], $subject, '', $from, $template, 1, $type);
 		else 
 		  $this->sendMailSMTP($order_info['email'], $subject, '', $from, $template, 2, $type);
