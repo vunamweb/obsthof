@@ -788,7 +788,7 @@ class ControllerMailOrder extends Controller {
 		 
 		$checkStatus = (!in_array($order_status_id, $this->config->get('config_processing_status')) && !in_array($order_status_id, $this->config->get('config_complete_status'))) ? true : false;
 
-		if(true || $checkStatus)
+		if($order_status_id == 18 || $checkStatus)
 		  $this->sendMailSMTP($order_info['email'], $subject, '', $from, $template, 1, $type);
 		else 
 		  $this->sendMailSMTP($order_info['email'], $subject, '', $from, $template, 2, $type);
