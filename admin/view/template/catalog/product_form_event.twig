@@ -605,14 +605,25 @@
 						</div>
 						<div class="tab-pane" id="tab-option">
 							<div class="row">
-								<div class="col-sm-2">
+								<div class="col-sm-4">
 									<ul class="nav nav-pills nav-stacked" id="option">
 										{% set option_row = 0 %}
 										{% for product_option in product_options %}
-											<li>
+											{% set string = product_option.value %}
+											{% set array = string|split(';') %}
+											
+											{% set datum = array[0]|date('Y-m-d') %}
+											{% set heute = "now"|date('Y-m-d') %}
+											
+											
+											{% if datum <= heute %}
+												<li class="hide">													 
+											{% else %}
+												<li>											
+											{% endif %}
 												<a href="#tab-option{{ option_row }}" data-toggle="tab">
-													<i class="fa fa-minus-circle" onclick="$('a[href=\'#tab-option{{ option_row }}\']').parent().remove(); $('#tab-option{{ option_row }}').remove(); $('#option a:first').tab('show');"></i>
-													{{ product_option.name }}</a>
+													<i class="fa fa-minus-circle" onclick="$('a[href=\'#tab-option{{ option_row }}\']').parent().remove(); $('#tab-option{{ option_row }}').remove(); $('#option a:first').tab('show');"></i> &nbsp;
+													{{ array[0] }} / {{ array[1] }}-{{ array[2] }}</a>
 											</li>
 											{% set option_row = option_row + 1 %}
 										{% endfor %}
@@ -621,7 +632,7 @@
 										</li>
 									</ul>
 								</div>
-								<div class="col-sm-10">
+								<div class="col-sm-8">
 									<div class="tab-content">
 										{% set option_row = 0 %}
 										{% set option_value_row = 0 %}

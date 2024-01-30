@@ -4,14 +4,20 @@ class ControllerCatalogProduct extends Controller {
     private $error = array();
 
     public function print() {
-		$setMainHeader = null;
-		$setData = null;
-	
-		$setMainHeader .= "Name" . "\t";
-		$setMainHeader .= "Number Places" . "\t";
-		$setMainHeader .= "Phone number" . "\t";
-		$setMainHeader .= "Email" . "\t";
-        $setMainHeader .= "Payment" . "\t";
+		include('SimpleXLSXGen.php');
+		$excel = array(); 
+		
+	// 	$setMainHeader = null;
+	// 	$setData = null;
+	// 
+	// 	$setMainHeader .= "Name" . "\t";
+	// 	$setMainHeader .= "Number Places" . "\t";
+	// 	$setMainHeader .= "Phone number" . "\t";
+	// 	$setMainHeader .= "Email" . "\t";
+    //     $setMainHeader .= "Payment" . "\t";
+
+		$cols = array("Name", "Anzahl gebuchte Plätze", "Telefonnummer", "E-Mail", "Zahlungsart");
+		$excel[] = $cols;	
 
         $option = $this->request->get['option'];
         $product_id = $this->request->get['product_id'];
@@ -32,30 +38,42 @@ class ControllerCatalogProduct extends Controller {
                 
                 $name = str_replace('<br>', ' ', $item["name"]);
 	
-				$rowLine .= $name . ' Uhr' . "\t";
-				$rowLine .= $item["quantity"] . "\t";
-				$rowLine .= $item["telephone"] . "\t";
-				$rowLine .= $item["email"] . "\t";
-                $rowLine .= $item["payment_method"] . "\t";
+				// $rowLine .= $name . ' Uhr' . "\t";
+				// $rowLine .= $item["quantity"] . "\t";
+				// $rowLine .= $item["telephone"] . "\t";
+				// $rowLine .= $item["email"] . "\t";
+                // $rowLine .= $item["payment_method"] . "\t";
                 
-				$setData .= trim($rowLine) . "\n";
+				$tmp = array();
+				$tmp[] = $name . ' Uhr';
+				$tmp[] = $item["quantity"];
+				$tmp[] = $item["telephone"];
+				$tmp[] = $item["email"];
+				$tmp[] = $item["payment_method"];
+				$excel[] = $tmp;	
+				
+				// $setData .= trim($rowLine) . "\n";
 			
 		}
-	
-		$setData = str_replace("\r", "", $setData);
-	
-		//Download headers
-		header("Content-type: application/octet-stream;charset=UTF-8");
-		header("Content-Disposition: attachment; filename=".$nameExcel.".xls");
-		header("Pragma: no-cache");
-		header("Expires: 0");
-        //Print the table rows as an Excel row with the column name as a header
-        if($setData != null)
-          echo ucwords($setMainHeader) . "\n" . $setData . "\n";
-        else 
-          echo 'No Data';  
-	
-		ob_end_flush();
+		
+		$xlsx = Shuchkin\SimpleXLSXGen::fromArray( $excel );
+		// $xlsx->saveAs('XLSX/'.$nameExcel.'.xlsx'); 
+		$xlsx->downloadAs($nameExcel.'.xlsx'); 
+	// 	
+	// 	$setData = str_replace("\r", "", $setData);
+	// 
+	// 	//Download headers
+	// 	header("Content-type: application/octet-stream;charset=UTF-8");
+	// 	header("Content-Disposition: attachment; filename=".$nameExcel.".xls");
+	// 	header("Pragma: no-cache");
+	// 	header("Expires: 0");
+    //     //Print the table rows as an Excel row with the column name as a header
+    //     if($setData != null)
+    //       echo ucwords($setMainHeader) . "\n" . $setData . "\n";
+    //     else 
+    //       echo 'No Data';  
+	// 
+	// 	ob_end_flush();
 	}
 
     public function index() {
