@@ -453,6 +453,14 @@ class ModelSaleOrder extends Model {
 		return $query->row['total'];
 	}
 	
+	public function getCostShipping() {
+		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "setting" . " where code = 'shipping_flat' ORDER by value DESC");
+		
+		$costObj = $query->rows;
+		$costShiping = $costObj[0]['value'];
+		
+		return $costShiping;
+	}
 	public function createInvoiceNo($order_id) {
 		$order_info = $this->getOrder($order_id);
 

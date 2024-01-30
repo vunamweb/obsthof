@@ -222,11 +222,17 @@ class ControllerSaleOrder extends Controller {
 
 		$order_total = $this->model_sale_order->getTotalOrders($filter_data);
 
+		$costShiping = $this->model_sale_order->getCostShipping();
+
 		$results = $this->model_sale_order->getOrders($filter_data);
 
 		//print_r($results[0]); die();
 
 		foreach ($results as $result) {
+			$setTotal = $result['total'] - $costShiping;
+
+			$result['total'] = ($setTotal <= $this->config->get('config_login_attempts')) ? $result['total'] : $setTotal;
+
 			$totalOrder = (in_array($result['order_status_id'], array(13))) ? $result['total'] * -1 : $result['total']; 
 
 			$data['orders'][] = array(

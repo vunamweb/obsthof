@@ -716,11 +716,18 @@ class ControllerExtensionPaymentPayPal extends Controller {
 		
 					if (isset($this->session->data['shipping_method'])) {
 						$shipping_total = $this->tax->calculate($this->session->data['shipping_method']['cost'], $this->session->data['shipping_method']['tax_class_id'], true);
+						$shipping_total_1 = $this->tax->calculate($this->session->data['shipping_method']['cost'], $this->session->data['shipping_method']['tax_class_id'], true);
+						
 						$shipping_total = number_format($shipping_total * $currency_value, $decimal_place, '.', '');
 					}
 		
-					$order_total = number_format($order_info['total'] * $currency_value, $decimal_place, '.', '');
-		
+					$setTotal = $order_info['total'] - $shipping_total_1;
+
+					if($setTotal <= $this->config->get('config_login_attempts'))
+					 $order_total = number_format($order_info['total'] * $currency_value, $decimal_place, '.', '');
+					else  
+					 $order_total = number_format($setTotal * $currency_value, $decimal_place, '.', '');
+					
 					$rebate = number_format($item_total + $tax_total + $shipping_total - $order_total, $decimal_place, '.', '');
 		
 					if ($rebate > 0) {

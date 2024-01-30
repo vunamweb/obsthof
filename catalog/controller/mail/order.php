@@ -345,7 +345,7 @@ class ControllerMailOrder extends Controller {
 		$mail->setSubject(html_entity_decode(sprintf($language->get('text_subject'), $order_info['store_name'], $order_info['order_id']), ENT_QUOTES, 'UTF-8'));
 		$mail->setHtml($this->load->view('mail/order_add', $data)); */
 		//$mail->send();
-		$type = $this->createPDFInvoice($order_info, $order_status_id);
+		$type = $this->createPDFInvoice($order_info, $order_status_id, $sum_tax_1, $sum_tax_2, $totalNormalProduct);
 		
 		$subject = html_entity_decode(sprintf($language->get('text_subject'), $order_info['store_name'], $order_info['order_id']), ENT_QUOTES, 'UTF-8');
 		$fromName = html_entity_decode($order_info['store_name'], ENT_QUOTES, 'UTF-8');
@@ -398,7 +398,7 @@ class ControllerMailOrder extends Controller {
 		}
   }
 
-  public function createPDFInvoice($order_info, $order_status_id) {
+  public function createPDFInvoice($order_info, $order_status_id, $sum_tax_1 = 0, $sum_tax_2 = 0, $totalNormalProduct = 0) {
 	//print_r($order_info); die();  
 	$invoice_no = $this->model_checkout_order->countInvoiceNumber() + 1;
 
@@ -619,6 +619,7 @@ class ControllerMailOrder extends Controller {
 	$data['totals'] = array();
 	
 	$order_totals = $this->model_checkout_order->getOrderTotals($order_info['order_id']);
+	$this->document->displayOrder($order_totals, $sum_tax_1, $sum_tax_2, $this->session->data['shipping_address']['country_id'], $totalNormalProduct, $this->config->get('config_login_attempts'));
 
 	foreach ($order_totals as $order_total) {
 		$data['totals'][] = array(
