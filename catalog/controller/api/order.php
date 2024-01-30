@@ -796,6 +796,11 @@ class ControllerApiOrder extends Controller {
 			//print_r($order_info); die();
 
 			if ($order_info && $order_info['order_status_id'] != $this->request->post['order_status_id']) {
+				if($this->request->post['order_status_id'] == 18 || $this->request->post['order_status_id'] == 5) {
+					$invoiceNumber = $this->model_checkout_order->countInvoiceNumber() + 1;
+		  
+					$this->model_checkout_order->setInvoiNumber($order_info['order_id'], $invoiceNumber);
+				  }
 				$this->model_checkout_order->addOrderHistory($order_id, $this->request->post['order_status_id'], $this->request->post['comment'], $this->request->post['notify'], $this->request->post['override']);
 
 				$json['success'] = $this->language->get('text_success');

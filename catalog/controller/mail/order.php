@@ -714,6 +714,8 @@ class ControllerMailOrder extends Controller {
 	    $language = new Language($order_info['language_code']);
 		$language->load($order_info['language_code']);
 		$language->load('mail/order_edit');
+
+		$this->load->model('checkout/order');
 		
 		$data['store_url'] = $order_info['store_url'];
 		
@@ -789,12 +791,12 @@ class ControllerMailOrder extends Controller {
 		 
 		$checkStatus = (!in_array($order_status_id, $this->config->get('config_processing_status')) && !in_array($order_status_id, $this->config->get('config_complete_status'))) ? true : false;
 
-		if($order_status_id == 18 || $checkStatus)
+		if($order_status_id == 18 || $order_status_id == 5 || $checkStatus)
 		  $this->sendMailSMTP($order_info['email'], $subject, '', $from, $template, 1, $type);
 		else 
 		  $this->sendMailSMTP($order_info['email'], $subject, '', $from, $template, 2, $type);
 		   	  
-		if($order_status_id == 18 || $checkStatus)
+		if($order_status_id == 18 || $order_status_id == 5 || $checkStatus)
 		  $this->sendMailSMTP(SPECIAL_EMAIL, $subject, '', $from, $template, 1);
 	}
 	
