@@ -652,7 +652,8 @@ class ModelCheckoutOrder extends Model {
 					$this->model_account_customer->deleteTransactionByOrderId($order_id);
 				}
 
-				$this->duplicateOrder($order_id);
+				if(in_array($order_info['order_status_id'], $this->config->get('config_complete_status')))
+				  $this->duplicateOrder($order_id);
 			}
 
 			$this->cache->delete('product');
