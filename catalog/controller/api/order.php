@@ -796,7 +796,7 @@ class ControllerApiOrder extends Controller {
 			//print_r($order_info); die();
 
 			if ($order_info && $order_info['order_status_id'] != $this->request->post['order_status_id']) {
-				if($this->request->post['order_status_id'] == 18 || $this->request->post['order_status_id'] == 5) {
+				if($order_info['invoice_no'] == 0) {
 					$invoiceNumber = $this->model_checkout_order->countInvoiceNumber() + 1;
 		  
 					$this->model_checkout_order->setInvoiNumber($order_info['order_id'], $invoiceNumber);

@@ -345,16 +345,28 @@ class ControllerMailOrder extends Controller {
 		$mail->setSubject(html_entity_decode(sprintf($language->get('text_subject'), $order_info['store_name'], $order_info['order_id']), ENT_QUOTES, 'UTF-8'));
 		$mail->setHtml($this->load->view('mail/order_add', $data)); */
 		//$mail->send();
-		$type = $this->createPDFInvoice($order_info, $order_status_id, $sum_tax_1, $sum_tax_2, $totalNormalProduct);
+
+		$invoice_prefix = $order_info['invoice_prefix'];
+		$invoice_prefix = explode('-', $invoice_prefix);
+
+		$invoice_prefix[2] = '00';
+
+		$order_info['invoice_prefix'] = $invoice_prefix[0] . '-' . $invoice_prefix[1] . '-' . $invoice_prefix[2];
+
+		$invoiceNumber = $order_info['invoice_prefix'] . $order_info['invoice_no'];
+
+		$data['order_id'] = $invoiceNumber;
 		
-		$subject = html_entity_decode(sprintf($language->get('text_subject'), $order_info['store_name'], $order_info['order_id']), ENT_QUOTES, 'UTF-8');
+        $type = $this->createPDFInvoice($order_info, $order_status_id, $sum_tax_1, $sum_tax_2, $totalNormalProduct);
+		
+		$subject = html_entity_decode(sprintf($language->get('text_subject'), $order_info['store_name'], $invoiceNumber), ENT_QUOTES, 'UTF-8');
 		$fromName = html_entity_decode($order_info['store_name'], ENT_QUOTES, 'UTF-8');
 
 		$this->sendMailSMTP($order_info['email'], $subject, '', $fromName, $this->load->view('mail/order_add', $data), 1, $type);
 
 		//if(true)
-		if($order_status_id == 19)
-		  $this->sendMailSMTP(SPECIAL_EMAIL, $subject, '', $fromName, $this->load->view('mail/order_alert', $data), 1);
+		//if($order_status_id == 19)
+		$this->sendMailSMTP(SPECIAL_EMAIL, $subject, '', $fromName, $this->load->view('mail/order_alert', $data), 1);
     }
 
 	function sendMailSMTP($to, $subject, $from, $fromName, $message, $senMail=1, $type = false)
