@@ -385,7 +385,7 @@ class ControllerMailOrder extends Controller {
 		   $this->sendMailSMTP($order_info['email'], $subject, '', $fromName, $this->load->view('mail/order_add', $data), 1);
 		} 
 
-		$this->sendMailSMTP(SPECIAL_EMAIL, $subject, '', $fromName, $this->load->view('mail/order_alert', $data), 1);
+		$this->sendMailSMTP($this->config->get('config_email'), $subject, '', $fromName, $this->load->view('mail/order_alert', $data), 1);
     }
 
 	function sendMailSMTP($to, $subject, $from, $fromName, $message, $senMail=1, $type = false)
