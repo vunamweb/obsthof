@@ -56,6 +56,74 @@
 									<tbody>
 										<tr>
 											<td valign="top" style="padding:6.0pt 36.0pt 4.0pt 36.0pt">
+												<h2 style="mso-margin-top-alt:0cm;margin-right:0cm;margin-bottom:16px;margin-left:0cm;line-height:130%">
+													<span style="font-size:16px;line-height:130%;font-family:'Arial';color:#B80229">{{ text_order_detail }}</span>
+												</h2>																			
+												
+												
+												
+												<div style="margin-bottom:20.0pt">
+													<table class="MsoNormalTable" border="1" cellspacing="0" cellpadding="0" width="100%" style="width:100.0%;border:solid #E4E4E4 1px">
+														<thead>
+															<tr>
+																<td style="border:solid #E4E4E4 1px;padding:5px 10px 5px 10px">
+																	<p class="MsoNormal"><b><span style="font-size:10px;font-family:'Arial';color:#878787">Position</span></b></p>
+																</td>
+																<td style="border:solid #E4E4E4 1px;padding:5px 10px 5px 10px">
+																	<p class="MsoNormal"><b><span style="font-size:10px;font-family:'Arial';color:#878787">Anzahl</span></b></p>
+																</td>
+																<td style="border:solid #E4E4E4 1px;padding:5px 10px 5px 10px">
+																	<p class="MsoNormal"><b><span style="font-size:10px;font-family:'Arial';color:#878787">Gesamt</span></b></p>
+																</td>
+															</tr>
+														</thead>
+														<tbody>
+															
+{% for product in products %}													
+				<tr>
+					<td style="border:solid #E4E4E4 1px;padding:5px 10px 5px 10px">
+						<p class="MsoNormal" style="font-size:10px;font-family:'Arial';color:#878787">{{ product.name }}
+							{% for option in product.option %}<br/>
+							&nbsp;<small> - {{ option.name }}: {{ option.value }}</small>{% endfor %}
+						</p>
+					</td>
+					<td align="right" style="border:solid #E4E4E4 1px;padding:5px 10px 5px 10px">
+						<p class="MsoNormal" style="font-size:10px;font-family:'Arial';color:#878787">{{ product.quantity }}</p>
+					</td>
+					<td align="right" style="border:solid #E4E4E4 1px;padding:5px 10px 5px 10px">
+						<p class="MsoNormal" style="font-size:10px;font-family:'Arial';color:#878787">
+						{{ product.total }}
+						</p>
+					</td>
+				</tr>
+{% endfor %}
+	
+ {% for voucher in vouchers %}
+<tr>
+  <td style="font-size:10px;	border-right: 1px solid #DDDDDD; border-bottom: 1px solid #DDDDDD; text-align: left; padding: 7px;">{{ voucher.description }}</td>
+  <td style="font-size:10px;	border-right: 1px solid #DDDDDD; border-bottom: 1px solid #DDDDDD; text-align: left; padding: 7px;"></td>
+  <td style="font-size:10px;	border-right: 1px solid #DDDDDD; border-bottom: 1px solid #DDDDDD; text-align: right; padding: 7px;">1</td>
+  <td style="font-size:10px;	border-right: 1px solid #DDDDDD; border-bottom: 1px solid #DDDDDD; text-align: right; padding: 7px;">{{ voucher.amount }}</td>
+  <td style="font-size:10px;	border-right: 1px solid #DDDDDD; border-bottom: 1px solid #DDDDDD; text-align: right; padding: 7px;">{{ voucher.amount }}</td>
+</tr>
+{% endfor %}			
+				
+				
+				{% for total in totals %}
+				<tr>
+					<td colspan="2" style="border:solid #E4E4E4 1px;border-top:solid #E4E4E4 1px;padding:5px 10px 5px 10px">
+						<p class="MsoNormal" style="font-size:10px;font-family:'Arial';color:#878787"><b>{{ total.title }}</b></p>
+					</td>
+					<td align="right" style="border:solid #E4E4E4 1px;border-top:solid #E4E4E4 1px;padding:5px 10px 5px 10px">
+						<p class="MsoNormal" style="font-size:10px;font-family:'Arial';color:#878787">{{ total.text }}</p>
+					</td>
+				</tr>															
+				{% endfor %}
+															
+															
+														</tbody>
+													</table>
+												</div>
 												<div style="margin-bottom:30.0pt">
 													<h2 style="mso-margin-top-alt:0cm;margin-right:0cm;margin-bottom:16px;margin-left:0cm;line-height:130%">
 														<span style="font-size:16px;line-height:130%;font-family:'Arial';color:#B80229">Zusammenfassung</span>
@@ -89,7 +157,31 @@
 	{% endif %} </tr>
 	</tbody>
 </table>
-</div>
+
+{% if customer_id %}
+<p style="margin-top: 0px; margin-bottom: 20px;">{{ text_link }}</p>
+<p style="margin-top: 0px; margin-bottom: 20px;"><a href="{{ link }}">{{ link }}</a></p>
+{% endif %}
+{% if download %}
+<p style="margin-top: 0px; margin-bottom: 20px;">{{ text_download }}</p>
+<p style="margin-top: 0px; margin-bottom: 20px;"><a href="{{ download }}">{{ download }}</a></p>
+<{% endif %}
+
+{% if comment %}
+<table style="border-collapse: collapse; width: 100%; border-top: 1px solid #DDDDDD; border-left: 1px solid #DDDDDD; margin-bottom: 20px;">
+<thead>
+<tr>
+<td style="font-size:10px; border-right: 1px solid #DDDDDD; border-bottom: 1px solid #DDDDDD;  text-align: left; padding: 7px; color: #222222;">Informationen</td>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="font-size:10px;	border-right: 1px solid #DDDDDD; border-bottom: 1px solid #DDDDDD; text-align: left; padding: 7px;">{{ comment }}</td>
+</tr>
+</tbody>
+</table>
+{% endif %}
+												</div>
 											</td>
 										</tr>
 									</tbody>
