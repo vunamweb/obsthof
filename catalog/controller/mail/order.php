@@ -123,7 +123,8 @@ class ControllerMailOrder extends Controller {
 			$data['order_status'] = '';
 		}
 
-		if ($comment && $notify) {
+		if(true) {
+		//if ($comment && $notify) {
 			$data['comment'] = nl2br($comment);
 			$data['comment'] .= '<br><br>' . nl2br($order_info['comment']);
 		} else {
@@ -747,6 +748,11 @@ class ControllerMailOrder extends Controller {
 	}
 
    public function edit($order_info, $order_status_id, $comment) {
+		if($order_status_id == $order_info['order_status_id'])
+		 {
+			 return; 
+		 } 
+		 
 	    $language = new Language($order_info['language_code']);
 		$language->load($order_info['language_code']);
 		$language->load('mail/order_edit');
