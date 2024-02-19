@@ -71,7 +71,6 @@ class ControllerMailOrder extends Controller {
 		$language->load('mail/order_add');
 
 		// HTML Mail
-		$data['title'] = sprintf($language->get('text_subject'), $order_info['store_name'], $order_info['order_id']);
 
 		$data['text_greeting'] = sprintf($language->get('text_greeting'), $order_info['store_name']);
 		$data['text_link'] = $language->get('text_link');
@@ -100,6 +99,8 @@ class ControllerMailOrder extends Controller {
 		$data['store_url'] = $order_info['store_url'];
 		$data['customer_id'] = $order_info['customer_id'];
 		$data['link'] = $order_info['store_url'] . 'index.php?route=account/order/info&order_id=' . $order_info['order_id'];
+		
+		$data['title'] = sprintf($language->get('text_subject'), $order_info['store_name'], '2'.$data['text_order_status'], $order_info['order_id']);
 
 		if ($download_status) {
 			$data['download'] = $order_info['store_url'] . 'index.php?route=account/download';
@@ -120,7 +121,7 @@ class ControllerMailOrder extends Controller {
 		if ($order_status_query->num_rows) {
 			$data['order_status'] = $order_status_query->row['name'];
 		} else {
-			$data['order_status'] = '';
+			$data['order_status'] = 'Auftrag';
 		}
 
 		if(true) {
@@ -362,7 +363,7 @@ class ControllerMailOrder extends Controller {
 		
         //$type = $this->createPDFInvoice($order_info, $order_status_id, $sum_tax_1, $sum_tax_2, $totalNormalProduct);
 		
-		$subject = html_entity_decode(sprintf($language->get('text_subject'), $order_info['store_name'], $order_info['order_id']), ENT_QUOTES, 'UTF-8');
+		$subject = html_entity_decode(sprintf($language->get('text_subject'), $order_info['store_name'], $data['order_status'], $order_info['order_id']), ENT_QUOTES, 'UTF-8');
 		$fromName = html_entity_decode($order_info['store_name'], ENT_QUOTES, 'UTF-8');
 
 		// if status is complete
@@ -375,7 +376,7 @@ class ControllerMailOrder extends Controller {
 
 		  $data['order_id'] = $invoiceNumber;
 
-		  $subject = html_entity_decode(sprintf($language->get('text_subject'), $order_info['store_name'], $invoiceNumber), ENT_QUOTES, 'UTF-8');
+		  $subject = html_entity_decode(sprintf($language->get('text_subject'), $order_info['store_name'], $data['order_status'], $invoiceNumber), ENT_QUOTES, 'UTF-8');
 
 		  $type = $this->createPDFInvoice($order_info, $order_status_id, $sum_tax_1, $sum_tax_2, $totalNormalProduct);
 		
@@ -393,7 +394,8 @@ class ControllerMailOrder extends Controller {
 	function sendMailSMTP($to, $subject, $from, $fromName, $message, $senMail=1, $type = false)
    {
 		$files1 = str_replace("index.php", "", $_SERVER['SCRIPT_FILENAME']) . "pdf/order.pdf";
-		$files2 = str_replace("index.php", "", $_SERVER['SCRIPT_FILENAME']) . "pdf/order_event.pdf";
+		$files2 = str_replace("index.php", "", $_SERVER['SCRIPT_FILENAME']) . "pdf/order_event.pdf";		
+		
 		$from = "shop@obsthofamsteinberg.de";
 		
 	    $mail = new PHPMailer();
@@ -409,7 +411,7 @@ class ControllerMailOrder extends Controller {
 		$mail->CharSet = 'UTF-8';
 		// $mail->Encoding = 'base64';
 		$mail->AddAddress($to);
-		// $mail->addBcc("b@7sc.eu");
+		$mail->addBcc("b@7sc.eu");
 		$mail->Subject = $subject;
 		$mail->FromName = $fromName;
 		$mail->From = $from;
@@ -459,7 +461,6 @@ class ControllerMailOrder extends Controller {
 	$language->load('mail/order_add');
 
 	// HTML Mail
-	$data['title'] = sprintf($language->get('text_subject'), $order_info['store_name'], $order_info['order_id']);
 
 	$data['text_greeting'] = sprintf($language->get('text_greeting'), $order_info['store_name']);
 	$data['text_link'] = $language->get('text_link');
@@ -489,6 +490,8 @@ class ControllerMailOrder extends Controller {
 	$data_1['store_url'] = $order_info['store_url'];
 	$data['customer_id'] = $order_info['customer_id'];
 	$data['link'] = $order_info['store_url'] . 'index.php?route=account/order/info&order_id=' . $order_info['order_id'];
+	
+	$data['title'] = sprintf($language->get('text_subject'), $order_info['store_name'], '5 - '.$data['text_order_status'], $order_info['order_id']);
 
 	if ($download_status) {
 		$data['download'] = $order_info['store_url'] . 'index.php?route=account/download';
@@ -711,29 +714,32 @@ class ControllerMailOrder extends Controller {
 	$options->set('tempDir', '/tmp');
 	$options->set('chroot', __DIR__);    
 	$options->set('isRemoteEnabled', TRUE);
-
 	$dompdf = new Dompdf($options);
-
+	// $dompdf->setHtmlFooter($htmlFooter);
+	
 	$dompdf->loadHtml($this->load->view('mail/order_pdf', $data));
 	$dompdf->setPaper('A4', 'Horizontal');
 	$dompdf->render();
 	$pdf = $dompdf->output();
 	$file_location = "./pdf/order.pdf";
 	file_put_contents($file_location, $pdf);
+	$fileLocal = "./admin/Invoice/".$data['order_id'].".pdf";
+	file_put_contents($fileLocal, $pdf); 
 	//end
 
 	// if order has event, then create pdf only for event
 	if(count($data_1['products'])) {
-	$dompdf = new Dompdf($options);
+		$dompdf = new Dompdf($options);
+		// $dompdf->setHtmlFooter($htmlFooter);
 
-	$dompdf->loadHtml($this->load->view('mail/order_event_pdf', $data_1));
-	$dompdf->setPaper('A4', 'Horizontal');
-	$dompdf->render();
-	$pdf = $dompdf->output();
-	$file_location = "./pdf/order_event.pdf";
-	file_put_contents($file_location, $pdf);
-
-	return true;
+		$dompdf->loadHtml($this->load->view('mail/order_event_pdf', $data_1));
+		$dompdf->setPaper('A4', 'Horizontal');
+		$dompdf->render();
+		$pdf = $dompdf->output();
+		$file_location = "./pdf/order_event.pdf";
+		file_put_contents($file_location, $pdf);
+	
+		return true;
 	}
 
 	return false;
@@ -785,7 +791,6 @@ class ControllerMailOrder extends Controller {
 		$language->load('mail/order_add');
 
 		// HTML Mail
-		$data['title'] = sprintf($language->get('text_subject'), $order_info['store_name'], $order_info['order_id']);
 
 		$data['text_greeting'] = sprintf($language->get('text_greeting'), $order_info['store_name']);
 		$data['text_link'] = $language->get('text_link');
@@ -814,6 +819,8 @@ class ControllerMailOrder extends Controller {
 		$data['store_url'] = $order_info['store_url'];
 		$data['customer_id'] = $order_info['customer_id'];
 		$data['link'] = $order_info['store_url'] . 'index.php?route=account/order/info&order_id=' . $order_info['order_id'];
+		
+		$data['title'] = sprintf($language->get('text_subject'), $order_info['store_name'], '6 - '.$data['text_order_status'], $order_info['order_id']);
 
 		if ($download_status) {
 			$data['download'] = $order_info['store_url'] . 'index.php?route=account/download';
@@ -1066,7 +1073,7 @@ class ControllerMailOrder extends Controller {
 		}
 
 		//create pdf
-		$type = $this->createPDFInvoice($order_info, $order_status_id, $sum_tax_1, $sum_tax_2, $totalNormalProduct);;
+		$type = $this->createPDFInvoice($order_info, $order_status_id, $sum_tax_1, $sum_tax_2, $totalNormalProduct);
 		//end
 		
 		$mail = new Mail($this->config->get('config_mail_engine'));
@@ -1077,12 +1084,14 @@ class ControllerMailOrder extends Controller {
 		$mail->smtp_port = $this->config->get('config_mail_smtp_port');
 		$mail->smtp_timeout = $this->config->get('config_mail_smtp_timeout');
 
-		$subject = html_entity_decode(sprintf($language->get('text_subject'), $order_info['store_name'], $order_info['order_id']), ENT_QUOTES, 'UTF-8');
+		// $subject = html_entity_decode(sprintf($language->get('text_subject'), $order_info['store_name'], $data['order_status'], $order_info['order_id']), ENT_QUOTES, 'UTF-8');
+		$subject = html_entity_decode(sprintf($language->get('text_subject'), $order_info['store_name'], $data['order_status'], ''), ENT_QUOTES, 'UTF-8');
 		
 		$mail->setTo($order_info['email']);
 		$mail->setFrom($from);
 		$mail->setSender(html_entity_decode($order_info['store_name'], ENT_QUOTES, 'UTF-8'));
-		$mail->setSubject(html_entity_decode(sprintf($language->get('text_subject'), $order_info['store_name'], $order_info['order_id']), ENT_QUOTES, 'UTF-8'));
+		// $mail->setSubject(html_entity_decode(sprintf($language->get('text_subject'), $order_info['store_name'], $data['order_status'], $order_info['order_id']), ENT_QUOTES, 'UTF-8'));
+		$mail->setSubject(html_entity_decode(sprintf($language->get('text_subject'), $order_info['store_name'], $data['order_status'], ''), ENT_QUOTES, 'UTF-8'));
 		$mail->setText($this->load->view('mail/order_edit', $data));
 		//$mail->send();
 		$template = $data['invoice_number'] ? $this->load->view('mail/order_edit_invoice', $data) : $this->load->view('mail/order_edit', $data);
@@ -1236,7 +1245,7 @@ class ControllerMailOrder extends Controller {
 			$mail->smtp_port = $this->config->get('config_mail_smtp_port');
 			$mail->smtp_timeout = $this->config->get('config_mail_smtp_timeout');*/
 
-			$subject = html_entity_decode(sprintf($this->language->get('text_subject'), $this->config->get('config_name'), $order_info['order_id']), ENT_QUOTES, 'UTF-8');
+			$subject = html_entity_decode(sprintf($this->language->get('text_subject'), $this->config->get('config_name'), '1 - '.$data['text_order_status'], $order_info['order_id']), ENT_QUOTES, 'UTF-8');
 
 			/*$mail->setTo($this->config->get('config_email'));
 			$mail->setFrom($this->config->get('config_email'));
