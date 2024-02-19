@@ -61,6 +61,11 @@ a.list-group-item {
                         {% if child.children %}
                             {% for sub_child in child.children %}
                             <a href="{{ sub_child.href }}" class="list-group-item fa fa-angle-right subcategory level_2 {} {{ sub_child.category_id == current ?' active':''}}"> {{ sub_child.name}}</a>
+                            {% if sub_child.children %}
+                            {% for sub_child_child in sub_child.children %}
+                            <a href="{{ sub_child_child.href }}" class="list-group-item fa fa-angle-right subcategory level_2 level_3 {} {{ sub_child_child.category_id == current ?' active':''}}"> {{ sub_child_child.name}}</a>
+                            {% endfor %}
+                            {% endif %}    
                             {% endfor %}
                         {% endif %}
                 {% endfor %}
