@@ -200,23 +200,28 @@ class ControllerCatalogCategory extends Controller {
 
 						/*if($item['product_option_id'] == 447)
 						  print_r($result_);*/
-
+						
+						$sum = 0;
+						
 						foreach($result_ as $item_) {
 							$name = explode('<br>', $item_["name"]);
 							//print_r($name);
 							$name = $name[1];
 
 							$name = explode(' ', $name);
-							//print_r($name);
-							$name = $name[0] . ' ' . $name[1];
+							// print_r($name);
+							// $name = $name[0] . ' ' . $name[1];
+							$name = str_replace(",", "", $name[0]);
 
 							//echo $name;
 
-							$information .= explode(' ', $item_['date_added'])[0] . '|' . $name . '|' . 'Anzahl: ' . $item_['quantity'] . '<br>';
+							// $information .= explode(' ', '<span>'.$item_['date_added'])[0] . '|' . $name . '|' . 'Anzahl: ' . $item_['quantity'] . '</span>';
+							$information .= '<span>' . $item_['quantity'] . ' ' . $name . '</span>';
+							$sum += $item_['quantity'];
 							//echo $information;
 						}
 
-					    $information = ($information != '') ? '<div class="label-success">' . $information . '</div>' : '<div class="label-success">' . 'No Booked' . '</div>';
+					    $information = ($information != '') ? '<div class="label-success eventClients">' . $information . '<br/><b>Gesamt: '.$sum.'</b></div>' : '<div class="label-success">' . 'Keine Buchungen vorhanden' . '</div>';
 						  
 						
 						$date = $item['value'];
@@ -236,7 +241,7 @@ class ControllerCatalogCategory extends Controller {
 
 						$date[3] = ($date[3] != '') ? $date[3] : 0;
 	
-						$dateEvent = $date1_ . '   ' . $date[1] . '-' .$date[2] . ' Uhr' . '<br>' . $date[3] . ' ' . 'Plätze verfügbar';
+						$dateEvent = $date1_ . '   ' . $date[1] . '-' .$date[2] . ' Uhr' . ' | <b>' . $date[3] . '</b> ' . 'Plätze verfügbar';
 
 	                    $optionID = $item['product_option_id']; 
 
@@ -265,7 +270,7 @@ class ControllerCatalogCategory extends Controller {
 							'img-width'  => $this->config->get('theme_' . $this->config->get('config_theme') . '_image_related_width'),
 							'img-height' => $this->config->get('theme_' . $this->config->get('config_theme') . '_image_related_height'),
 							
-								'name'        => $result['name'] . '<br>' . $dateEvent . '<br><br>' . $information,
+								'name'        => $result['name'] . ' | ' . $dateEvent . '<br>' . $information,
 			                'reviews' => sprintf($this->language->get('text_reviews'), (int)$result['reviews']), 
 								'description' => utf8_substr(trim(strip_tags(html_entity_decode($result['description'], ENT_QUOTES, 'UTF-8'))), 0, $this->config->get('theme_' . $this->config->get('config_theme') . '_product_description_length')) . '..',
 								'price'       => $price,

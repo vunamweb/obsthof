@@ -1,5 +1,5 @@
 {{ header }}
-<div id="product-category" class="container">
+<div id="product-category" class="container eventListe">
 <br><br>
 		{% if thumb or description %}
 			<div class="row">
@@ -49,7 +49,7 @@
 							<div class="product-thumb transition {% if product.options and product.options|length <= 3 %} {{ 'options' }} {% endif %}">
 								<div class="content">
 									<div class="caption">
-										<h4 class="name"><a href="{{ product.href }}">{{ product.name }}</a></h4>
+										<p class="name"><a href="{{ product.href }}">{{ product.name }}</a></p>
 									</div>
 									<hr>									
 								</div>								

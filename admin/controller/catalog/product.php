@@ -16,7 +16,7 @@ class ControllerCatalogProduct extends Controller {
 	// 	$setMainHeader .= "Email" . "\t";
     //     $setMainHeader .= "Payment" . "\t";
 
-		$cols = array("Name", "Anzahl gebuchte Plätze", "Telefonnummer", "E-Mail", "Zahlungsart");
+		$cols = array("Name", "Anzahl Plätze", "Telefonnummer", "E-Mail", "Uhrzeit", "Detail", "Order ID");
 		$excel[] = $cols;	
 
         $option = $this->request->get['option'];
@@ -28,16 +28,20 @@ class ControllerCatalogProduct extends Controller {
         $nameEvent = $information_product['name'];
 
         $dateEvent = $this->model_catalog_product->getDateEvent($option);
+        $dateEvent = full_dat($dateEvent);
         
-        $nameExcel = $dateEvent . '_' . $nameEvent;
+        $nameExcel = $dateEvent . '-' . $nameEvent;
 
         $result = $this->model_catalog_product->getInformationEvent($option);
-        
         foreach($result as $item) {
+				// print_r($item);
                 $rowLine = '';
                 
-                $name = str_replace('<br>', ' ', $item["name"]);
-	
+                // $name = str_replace('<br>', ' ', $item["name"]);
+				$name = explode('<br>', $item["name"]);
+				$time = explode("Time:", $name[1]);
+				$typ = trim($time[0]);
+				$time = trim($time[1]);
 				// $rowLine .= $name . ' Uhr' . "\t";
 				// $rowLine .= $item["quantity"] . "\t";
 				// $rowLine .= $item["telephone"] . "\t";
@@ -45,17 +49,21 @@ class ControllerCatalogProduct extends Controller {
                 // $rowLine .= $item["payment_method"] . "\t";
                 
 				$tmp = array();
-				$tmp[] = $name . ' Uhr';
+				$tmp[] = $item["firstname"].' '.$item["lastname"];
 				$tmp[] = $item["quantity"];
 				$tmp[] = $item["telephone"];
 				$tmp[] = $item["email"];
-				$tmp[] = $item["payment_method"];
+				$tmp[] = $time . ' Uhr';
+				$tmp[] = $typ;
+				$tmp[] = $item["order_id"];
+				
+				// $tmp[] = $item["payment_method"];
 				$excel[] = $tmp;	
 				
 				// $setData .= trim($rowLine) . "\n";
 			
 		}
-		
+		// print_r($excel);
 		$xlsx = Shuchkin\SimpleXLSXGen::fromArray( $excel );
 		// $xlsx->saveAs('XLSX/'.$nameExcel.'.xlsx'); 
 		$xlsx->downloadAs($nameExcel.'.xlsx'); 
@@ -1500,4 +1508,36 @@ class ControllerCatalogProduct extends Controller {
         $this->response->addHeader( 'Content-Type: application/json' );
         $this->response->setOutput( json_encode( $json ) );
     }
+}
+
+
+function full_dat($dat)
+{
+	$dat = explode(".", $dat);
+
+	if (strlen($dat[0]) == 2) {
+		$jahr = "20" . $dat[2];
+		$jahr = date("Y");
+		$jahr = 1999;
+	} else {
+		$jahr = $dat[0];
+	}
+
+	if (strlen($dat[1]) < 1) $monat = "01";
+	else if (strlen($dat[1]) == 1) {
+		$monat = "0" . $dat[1];
+	} else {
+		$monat = $dat[1];
+	}
+
+	if (strlen($dat[2]) < 1) $tag = "01";
+	else if (strlen($dat[2]) == 1) {
+		$tag = "0" . $dat[2];
+	} else {
+		$tag = $dat[2];
+	}
+
+	// $dat = $jahr . "-" . $monat . "-" . $tag;
+	$dat = $tag . "." . $monat . "." . $jahr;
+	return $dat;
 }
