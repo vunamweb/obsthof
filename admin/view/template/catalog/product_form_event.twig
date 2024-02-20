@@ -606,6 +606,7 @@
 						<div class="tab-pane" id="tab-option">
 							<div class="row">
 								<div class="col-sm-4">
+								    <label>Show all</label>&nbsp; &nbsp;<input type="checkbox" id="filter_event"/>
 									<ul class="nav nav-pills nav-stacked" id="option">
 										{% set option_row = 0 %}
 										{% for product_option in product_options %}
@@ -617,7 +618,7 @@
 											
 											
 											{% if datum <= heute %}
-												<li class="hidez">													 
+												<li class="date_old hide">													 
 											{% else %}
 												<li>											
 											{% endif %}
@@ -1485,6 +1486,20 @@ $('#product-category' + item['value']).remove();
 
 $('#product-category').append('<div id="product-category' + item['value'] + '"><i class="fa fa-minus-circle"></i> ' + item['label'] + '<input type="hidden" name="product_category[]" value="' + item['value'] + '" /></div>');
 }
+});
+
+$('#filter_event').change(function() {
+    if (this.checked) {
+      $('.date_old').each(function(){
+		  $(this).removeClass('hide');
+	  })
+      // Do something when checkbox is checked
+    } else {
+      $('.date_old').each(function(){
+		  $(this).addClass('hide');
+	  })
+      // Do something when checkbox is unchecked
+    }
 });
 
 $('#product-category').delegate('.fa-minus-circle', 'click', function () {
