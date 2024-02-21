@@ -4,6 +4,58 @@ class ControllerCheckoutSuccess extends Controller {
 		$this->load->language('checkout/success');
 
 		if (isset($this->session->data['order_id'])) {
+			$collectorders = array();
+
+			$this->load->model('checkout/order');
+			$ts_buyerprotection = $this->model_checkout_order->getOrder($this->session->data['order_id']);
+	  
+				  $collectorders['order_id'] = (int)$ts_buyerprotection['order_id'];
+	  
+				  if ($this->customer->isLogged()) {
+					  $this->load->model('account/customer');
+					  $customer_info = $this->model_account_customer->getCustomer($this->customer->getId());
+					  $collectorders['email'] = $customer_info['email'];
+				  } else {
+					  $collectorders['email'] = $this->session->data['guest']['email'];
+				  }
+	  
+			$collectorders['email'] = html_entity_decode($ts_buyerprotection['email'], ENT_QUOTES, 'UTF-8');
+			$collectorders['total']= $this->currency->format($ts_buyerprotection['total'], $this->session->data['currency'], '', false);
+			$collectorders['currency_code'] = html_entity_decode($ts_buyerprotection['currency_code'], ENT_QUOTES, 'UTF-8');
+			$collectorders['payment_method'] = html_entity_decode($ts_buyerprotection['payment_method'], ENT_QUOTES, 'UTF-8');
+	  
+				  $collectorders['order_products'] = array();
+				  $this->load->model('tool/image');
+				  $this->load->model('catalog/product');
+				  foreach ($this->cart->getProducts() as $product) {
+	  
+					  if ($product['image']) {
+						  $image = $this->model_tool_image->resize($product['image'], $this->config->get('theme_' . $this->config->get('config_theme') . '_image_related_width'), $this->config->get('theme_' . $this->config->get('config_theme') . '_image_related_height'));
+					  } else {
+						  $image = $this->model_tool_image->resize('placeholder.png', $this->config->get('theme_' . $this->config->get('config_theme') . '_image_related_width'), $this->config->get('theme_' . $this->config->get('config_theme') . '_image_related_height'));
+					  }
+	  
+	  
+	  
+					  $product_info = $this->model_catalog_product->getProduct($product['product_id']);
+					  $collectorders['order_products'][] = array(
+						  'product_id' => $product['product_id'],
+						  'name'       => $product['name'],
+						  'image'      => $image,
+						  'model'      => $product['model'],
+						  'sku'      	 => $product_info['sku'],
+						  'ean'      	 => $product_info['ean'],
+						  'mpn'      	 => $product_info['mpn'],
+						  'brand'      => $product_info['manufacturer'],
+						  'quantity'   => $product['quantity'],
+						  'price'      => $product['price'],//$this->currency->format($this->tax->calculate($product['price'], $product['tax_class_id'], $this->config->get('config_tax'))),
+						  'total'      => $product['total'],//$this->currency->format($this->tax->calculate($product['price'], $product['tax_class_id'], $this->config->get('config_tax')) * $product['quantity']),
+						  'href'       => $this->url->link('product/product', 'product_id=' . $product['product_id']),
+					  );
+				  }
+				  //echo '<pre>'.print_r($collectorders, true).'</pre>';
+				  $this->session->data['trustedshop_collectorders'] = $collectorders;
+
 			$this->load->model( 'checkout/order' );
 			
 			$this->model_checkout_order->updateValueTicket();
