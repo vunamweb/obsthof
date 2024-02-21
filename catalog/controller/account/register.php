@@ -18,6 +18,9 @@ class ControllerAccountRegister extends Controller {
 
 		$this->load->model('account/customer');
 
+				$this->load->model('extension/module/zemez_newsletter');
+				
+
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate()) {
 			$customer_id = $this->model_account_customer->addCustomer($this->request->post);
 
@@ -25,6 +28,9 @@ class ControllerAccountRegister extends Controller {
 			$this->model_account_customer->deleteLoginAttempts($this->request->post['email']);
 
 			$this->customer->login($this->request->post['email'], $this->request->post['password']);
+
+				$this->model_extension_module_zemez_newsletter->deleteNewsletter($this->request->post['email']);
+				
 
 			unset($this->session->data['guest']);
 

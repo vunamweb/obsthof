@@ -3,6 +3,9 @@ class ControllerCommonFooter extends Controller {
 	public function index() {
 		$this->load->language('common/footer');
 
+				$data['theme_path'] = $this->config->get('theme_' . $this->config->get('config_theme') . '_directory');
+				
+
 		$this->load->model('catalog/information');
 
 		$data['informations'] = array();
@@ -29,7 +32,27 @@ class ControllerCommonFooter extends Controller {
 		$data['wishlist'] = $this->url->link('account/wishlist', '', true);
 		$data['newsletter'] = $this->url->link('account/newsletter', '', true);
 
+				$data['address']   = nl2br($this->config->get('config_address'));
+				$data['telephone'] = $this->config->get('config_telephone');
+				$data['fax']       = $this->config->get('config_fax');
+				$data['email']     = $this->config->get('config_email');
+				$data['geocode']   = $this->config->get('config_geocode');
+				$data['open']      = $this->config->get('config_open');
+				
+
 		$data['powered'] = sprintf($this->language->get('text_powered'), $this->config->get('config_name'), date('Y', time()));
+
+				if(($this->config->has('theme_' . $this->config->get('config_theme') . '_simple_blog_status')) && ($this->config->get('theme_' . $this->config->get('config_theme') . '_simple_blog_status'))) {
+				$data['simple_blog_found'] = 1;
+				$tmp = $this->config->get('theme_' . $this->config->get('config_theme') . '_simple_blog_footer_heading');
+				if (!empty($tmp)) {
+				$data['simple_blog_footer_heading'] = $this->config->get('theme_' . $this->config->get('config_theme') . '_simple_blog_footer_heading');
+				} else {
+				$data['simple_blog_footer_heading'] = $this->language->get('text_simple_blog');
+				}
+				$data['simple_blog']	= $this->url->link('simple_blog/article');
+				}
+				
 
 		// Whos Online
 		if ($this->config->get('config_customer_online')) {
@@ -56,7 +79,29 @@ class ControllerCommonFooter extends Controller {
 			$this->model_tool_online->addOnline($ip, $this->customer->getId(), $url, $referer);
 		}
 
+
+				$data['footer_1'] = $this->load->controller('common/footer_1');
+				$data['footer_2'] = $this->load->controller('common/footer_2');
+				$data['footer_3'] = $this->load->controller('common/footer_3');
+				$data['footer_4'] = $this->load->controller('common/footer_4');
+				$data['footer_5'] = $this->load->controller('common/footer_5');
+				
 		$data['scripts'] = $this->document->getScripts('footer');
+
+		// GET MORPHEUS'S CONTENT
+		$language = 'de/';
+		$url = 'footer-1';
+
+		$urlMorpheus = HTTP_SERVER . 'cms/' . $language . $url;
+
+		$objectMorpheus = file_get_contents($urlMorpheus);
+		$objectMorpheus = str_replace(array('</body>', '</html>'), '', $objectMorpheus);
+		$objectMorpheus = json_decode($objectMorpheus);
+
+		$contentMorpheus = $objectMorpheus->message;
+
+		$data['content_morpheus'] = $contentMorpheus;
+		// END
 		
 		return $this->load->view('common/footer', $data);
 	}

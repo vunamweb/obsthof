@@ -1,13 +1,26 @@
 <?php
 class ControllerExtensionModuleFeatured extends Controller {
 	public function index($setting) {
+
+				static $module = 0;
+				
 		$this->load->language('extension/module/featured');
 
 		$this->load->model('catalog/product');
 
 		$this->load->model('tool/image');
 
+
+				$this->document->addStyle('catalog/view/javascript/jquery/swiper/css/swiper.min.css');
+				$this->document->addScript('catalog/view/javascript/jquery/swiper/js/swiper.jquery.js');
+				$data['layout_type']  = $setting['layout_type'];
+				
 		$data['products'] = array();
+
+				$data['label_sale']     = $this->config->get('theme_' . $this->config->get('config_theme') . '_label_sale');
+				$data['label_discount'] = $this->config->get('theme_' . $this->config->get('config_theme') . '_label_discount');
+				$data['label_new']      = $this->config->get('theme_' . $this->config->get('config_theme') . '_label_new');
+				
 
 		if (!$setting['limit']) {
 			$setting['limit'] = 4;
@@ -16,8 +29,24 @@ class ControllerExtensionModuleFeatured extends Controller {
 		if (!empty($setting['product'])) {
 			$products = array_slice($setting['product'], 0, (int)$setting['limit']);
 
+				if ($this->config->get('theme_' . $this->config->get('config_theme') . '_label_new')) {
+				$product_new = $this->model_catalog_product->getLatestProducts($this->config->get('theme_' . $this->config->get('config_theme') . '_label_new_limit'));
+				}
+				
+
 			foreach ($products as $product_id) {
 				$product_info = $this->model_catalog_product->getProduct($product_id);
+
+				if ($this->config->get('theme_' . $this->config->get('config_theme') . '_label_new')) {
+				$label_new = 0;
+				foreach ($product_new as $product_new_id => $product) {
+				if ($product_new[$product_new_id]['product_id'] == $product_id) {
+				$label_new = 1;
+				break;
+				}
+				}
+				}
+				
 
 				if ($product_info) {
 					if ($product_info['image']) {
@@ -26,6 +55,14 @@ class ControllerExtensionModuleFeatured extends Controller {
 						$image = $this->model_tool_image->resize('placeholder.png', $setting['width'], $setting['height']);
 					}
 
+
+				$additional_image = $this->model_catalog_product->getProductImages($product_id);
+				if ($additional_image) {
+				$additional_image = $this->model_tool_image->resize($additional_image[0]['image'], $setting['width'], $setting['height']);
+				} else {
+				$additional_image = false;
+				}
+				
 					if ($this->customer->isLogged() || !$this->config->get('config_customer_price')) {
 						$price = $this->currency->format($this->tax->calculate($product_info['price'], $product_info['tax_class_id'], $this->config->get('config_tax')), $this->session->data['currency']);
 					} else {
@@ -34,8 +71,14 @@ class ControllerExtensionModuleFeatured extends Controller {
 
 					if ((float)$product_info['special']) {
 						$special = $this->currency->format($this->tax->calculate($product_info['special'], $product_info['tax_class_id'], $this->config->get('config_tax')), $this->session->data['currency']);
+
+				$label_discount = '-' . (int)(100 - ($product_info['special'] * 100 / $product_info['price'])) . '%';
+				
 					} else {
 						$special = false;
+
+				$label_discount = false;
+				
 					}
 
 					if ($this->config->get('config_tax')) {
@@ -50,22 +93,83 @@ class ControllerExtensionModuleFeatured extends Controller {
 						$rating = false;
 					}
 
+
+				$options = array();
+				foreach ($this->model_catalog_product->getProductOptions($product_id) as $option) {
+				$product_option_value_data = array();
+				foreach ($option['product_option_value'] as $option_value) {
+				if (!$option_value['subtract'] || ($option_value['quantity'] > 0)) {
+				if ((($this->config->get('config_customer_price') && $this->customer->isLogged()) || !$this->config->get('config_customer_price')) && (float)$option_value['price']) {
+				$price_option = $this->currency->format($this->tax->calculate($option_value['price'], $product_info['tax_class_id'], $this->config->get('config_tax') ? 'P' : false), $this->session->data['currency']);
+				} else {
+				$price_option = false;
+				}
+				$product_option_value_data[] = array(
+				'product_option_value_id' => $option_value['product_option_value_id'],
+				'option_value_id'         => $option_value['option_value_id'],
+				'name'                    => $option_value['name'],
+				'image'                   => $this->model_tool_image->resize($option_value['image'], 50, 50),
+				'price'                   => $price_option,
+				'price_prefix'            => $option_value['price_prefix']
+				);
+				}
+				}
+				$options[] = array(
+				'product_option_id'    => $option['product_option_id'],
+				'product_option_value' => $product_option_value_data,
+				'option_id'            => $option['option_id'],
+				'name'                 => $option['name'],
+				'type'                 => $option['type'],
+				'value'                => $option['value'],
+				'required'             => $option['required']
+				);
+				}
+				
+
+				$this->document->addStyle('catalog/view/javascript/jquery/swiper/css/swiper.min.css');
+				$this->document->addScript('catalog/view/javascript/jquery/swiper/js/swiper.jquery.js');
+				$data['layout_type']  = $setting['layout_type'];
+				
 					$data['products'][] = array(
 						'product_id'  => $product_info['product_id'],
 						'thumb'       => $image,
+
+				'additional_thumb' => $additional_image,
+				
+
+				'img-width'  => $setting['width'],
+				'img-height' => $setting['height'],
+				
 						'name'        => $product_info['name'],
+ 'reviews' => sprintf($this->language->get('text_reviews'), (int)$product_info['reviews']), 
 						'description' => utf8_substr(strip_tags(html_entity_decode($product_info['description'], ENT_QUOTES, 'UTF-8')), 0, $this->config->get('theme_' . $this->config->get('config_theme') . '_product_description_length')) . '..',
 						'price'       => $price,
 						'special'     => $special,
+
+				'label_discount' => $label_discount,
+				'label_new' => $this->config->get('theme_' . $this->config->get('config_theme') . '_label_new') ? $label_new : 0,
+				
 						'tax'         => $tax,
 						'rating'      => $rating,
 						'href'        => $this->url->link('product/product', 'product_id=' . $product_info['product_id'])
+
+				,
+				'options'     => $options
+				
 					);
 				}
 			}
 		}
 
+
+				$this->document->addStyle('catalog/view/javascript/jquery/swiper/css/swiper.min.css');
+				$this->document->addScript('catalog/view/javascript/jquery/swiper/js/swiper.jquery.js');
+				$data['layout_type']  = $setting['layout_type'];
+				
 		if ($data['products']) {
+
+				$data['module'] = $module++;
+				
 			return $this->load->view('extension/module/featured', $data);
 		}
 	}

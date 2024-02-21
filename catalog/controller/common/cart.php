@@ -49,6 +49,10 @@ class ControllerCommonCart extends Controller {
 
 		$data['text_items'] = sprintf($this->language->get('text_items'), $this->cart->countProducts() + (isset($this->session->data['vouchers']) ? count($this->session->data['vouchers']) : 0), $this->currency->format($total, $this->session->data['currency']));
 
+				$data['text_items2'] = sprintf($this->language->get('text_items2'), $this->cart->countProducts() + (isset($this->session->data['vouchers']) ? count($this->session->data['vouchers']) : 0), $this->currency->format($total, $this->session->data['currency']));
+				
+		$data['class_cart'] = $this->cart->countProducts() > 0 ? '' : ' hide';
+		
 		$this->load->model('tool/image');
 		$this->load->model('tool/upload');
 
@@ -97,7 +101,7 @@ class ControllerCommonCart extends Controller {
 			$data['products'][] = array(
 				'cart_id'   => $product['cart_id'],
 				'thumb'     => $image,
-				'name'      => $product['name'],
+				'name'      => html_entity_decode($product['name']),
 				'model'     => $product['model'],
 				'option'    => $option_data,
 				'recurring' => ($product['recurring'] ? $product['recurring']['name'] : ''),

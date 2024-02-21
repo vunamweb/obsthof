@@ -33,15 +33,45 @@
           {% endif %}
           <ul class="nav nav-tabs">
             <li class="active"><a href="#tab-description" data-toggle="tab">{{ tab_description }}</a></li>
+
+				{% if newtabcontent is defined and newtabcontent %}
+				<li><a href="#tab-newtabcontent" data-toggle="tab">{{ newtabcontentname }}</a></li>
+				{% endif %}
+				
             {% if attribute_groups %}
             <li><a href="#tab-specification" data-toggle="tab">{{ tab_attribute }}</a></li>
             {% endif %}
             {% if review_status %}
             <li><a href="#tab-review" data-toggle="tab">{{ tab_review }}</a></li>
             {% endif %}
+
+			<!--xml-->
+			{% if customtabs %}
+			{% for key, customtab in customtabs %}
+				<li><a href="#tabcustom{{ key }}" data-toggle="tab">{{ customtab.title }}</a></li>
+            {% endfor %}
+            {% endif %}
+			<!--xml-->
+			
           </ul>
           <div class="tab-content">
+
+			<!--xml-->
+			{% if customtabs %}
+            {% for key, customtab in customtabs %}
+				<div class="tab-pane"id="tabcustom{{ key }}">
+					{{ customtab.description }}
+				</div>
+			{% endfor %}
+			{% endif %}
+			<!--xml-->
+			
             <div class="tab-pane active" id="tab-description">{{ description }}</div>
+
+				{% if newtabcontent is defined and newtabcontent %}
+				<div class="tab-pane" id="tab-newtabcontent">{{ newtabcontent }}</div>
+				{% endif %}
+				
             {% if attribute_groups %}
             <div class="tab-pane" id="tab-specification">
               <table class="table table-bordered">

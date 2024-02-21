@@ -7,7 +7,7 @@ class ControllerExtensionModuleCarousel extends Controller {
 		$this->load->model('tool/image');
 		
 		$this->document->addStyle('catalog/view/javascript/jquery/swiper/css/swiper.min.css');
-		$this->document->addStyle('catalog/view/javascript/jquery/swiper/css/opencart.css');
+		
 		$this->document->addScript('catalog/view/javascript/jquery/swiper/js/swiper.jquery.js');
 
 		$data['banners'] = array();
@@ -16,8 +16,12 @@ class ControllerExtensionModuleCarousel extends Controller {
 
 		foreach ($results as $result) {
 			if (is_file(DIR_IMAGE . $result['image'])) {
+				//echo $result['image'] . '  /' . $setting['width'] . '/' . $setting['height']; die();
 				$data['banners'][] = array(
 					'title' => $result['title'],
+
+				'description' => html_entity_decode($result['description']),
+				
 					'link'  => $result['link'],
 					'image' => $this->model_tool_image->resize($result['image'], $setting['width'], $setting['height'])
 				);
@@ -26,6 +30,6 @@ class ControllerExtensionModuleCarousel extends Controller {
 
 		$data['module'] = $module++;
 
-		return 'fgf' //$this->load->view('extension/module/carousel', $data);
+		return $this->load->view('extension/module/carousel', $data);
 	}
 }

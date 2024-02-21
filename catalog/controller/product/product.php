@@ -2,14 +2,63 @@
 class ControllerProductProduct extends Controller {
 	private $error = array();
 
+	public function print() {
+		$setMainHeader = null;
+		$setData = null;
+	
+		$setMainHeader .= "Name" . "\t";
+		$setMainHeader .= "Number Places" . "\t";
+		$setMainHeader .= "Phone number" . "\t";
+		$setMainHeader .= "Email" . "\t";
+		$setMainHeader .= "Payment" . "\t";
+		
+		foreach($result as $item) {
+				$rowLine = '';
+	
+				$rowLine .= $item["order_id"] . "\t";
+				$rowLine .= $item["customer"] . "\t";
+				$rowLine .= $item["payment_postcode"] . "\t";
+				$rowLine .= $item["payment_country"] . "\t";
+				$rowLine .= $item["payment_zone"] . "\t";
+				$rowLine .= $item["order_status"] . "\t";
+				$rowLine .= $item["total"] . "\t";
+				$rowLine .= $item["date_added"] . "\t";
+				$rowLine .= $item["date_modified"] . "\t";
+	
+				$setData .= trim($rowLine) . "\n";
+			
+		}
+	
+		$setData = str_replace("\r", "", $setData);
+	
+		//Download headers
+		header("Content-type: application/octet-stream;charset=UTF-8");
+		header("Content-Disposition: attachment; filename=export_order.xls");
+		header("Pragma: no-cache");
+		header("Expires: 0");
+		//Print the table rows as an Excel row with the column name as a header
+		echo ucwords($setMainHeader) . "\n" . $setData . "\n";
+	
+		ob_end_flush();
+	}
+
 	public function index() {
+
+				$data['zoom_type'] = $this->config->get('theme_' . $this->config->get('config_theme') . '_product_zoom_type');
+				
+
+				$data['product_timers'] = $this->config->get('config_special_counters');
+				
 		$this->load->language('product/product');
 
+
+				$this->document->addScript('catalog/view/theme/' . $this->config->get('theme_' . $this->config->get('config_theme') . '_directory') . '/js/jquery.elevatezoom.js', 'footer');
+				
 		$data['breadcrumbs'] = array();
 
 		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('text_home'),
-			'href' => $this->url->link('common/home')
+			'href' => './' //$this->url->link('common/home')
 		);
 
 		$this->load->model('catalog/category');
@@ -157,8 +206,9 @@ class ControllerProductProduct extends Controller {
 		$this->load->model('catalog/product');
 
 		$product_info = $this->model_catalog_product->getProduct($product_id);
-
-		if ($product_info) {
+		$productType = $product_info['type'];
+		
+        if ($product_info) {
 			$url = '';
 
 			if (isset($this->request->get['path'])) {
@@ -218,14 +268,14 @@ class ControllerProductProduct extends Controller {
 			$this->document->setDescription($product_info['meta_description']);
 			$this->document->setKeywords($product_info['meta_keyword']);
 			$this->document->addLink($this->url->link('product/product', 'product_id=' . $this->request->get['product_id']), 'canonical');
-			$this->document->addScript('catalog/view/javascript/jquery/magnific/jquery.magnific-popup.min.js');
-			$this->document->addStyle('catalog/view/javascript/jquery/magnific/magnific-popup.css');
+			
+			
 			$this->document->addScript('catalog/view/javascript/jquery/datetimepicker/moment/moment.min.js');
 			$this->document->addScript('catalog/view/javascript/jquery/datetimepicker/moment/moment-with-locales.min.js');
 			$this->document->addScript('catalog/view/javascript/jquery/datetimepicker/bootstrap-datetimepicker.min.js');
 			$this->document->addStyle('catalog/view/javascript/jquery/datetimepicker/bootstrap-datetimepicker.min.css');
 
-			$data['heading_title'] = $product_info['name'];
+			$data['heading_title'] = html_entity_decode($product_info['name']);
 
 			$data['text_minimum'] = sprintf($this->language->get('text_minimum'), $product_info['minimum']);
 			$data['text_login'] = sprintf($this->language->get('text_login'), $this->url->link('account/login', '', true), $this->url->link('account/register', '', true));
@@ -240,20 +290,48 @@ class ControllerProductProduct extends Controller {
 			$data['model'] = $product_info['model'];
 			$data['reward'] = $product_info['reward'];
 			$data['points'] = $product_info['points'];
-			$data['description'] = html_entity_decode($product_info['description'], ENT_QUOTES, 'UTF-8');
+ 
+				$data['stock_status'] = $product_info['quantity'];
+				
+			
+				$desc = html_entity_decode($product_info['description'], ENT_QUOTES, 'UTF-8');
+				$pos = strpos($desc,'<iframe');
+				if (is_int($pos)) {
+				$pos2 = strpos($desc, '</iframe>') + 9;
+				$video = substr($desc, $pos, $pos2);
+				$data['video'] = $video;
+				$data['description'] = str_replace($video, '', $desc);
+				if (method_exists($this->document, 'add_AddThisMeta')) {
+				$this->document->add_AddThisMeta('description', str_replace('"', '\'', strip_tags($data['description'])));
+				}
+				} else{
+				$data['video'] = '';
+				$data['description'] = $desc;
+				if (method_exists($this->document, 'add_AddThisMeta')) {
+				$this->document->add_AddThisMeta('description', str_replace('"', '\'', strip_tags($data['description'])));
+				}
+				}
+				
 
-			if ($product_info['quantity'] <= 0) {
+			/*if ($product_info['quantity'] <= 0) {
 				$data['stock'] = $product_info['stock_status'];
 			} elseif ($this->config->get('config_stock_display')) {
 				$data['stock'] = $product_info['quantity'];
 			} else {
 				$data['stock'] = $this->language->get('text_instock');
-			}
+			}*/
+
+			$data['stock'] = $product_info['stock_status'];
 
 			$this->load->model('tool/image');
 
 			if ($product_info['image']) {
 				$data['popup'] = $this->model_tool_image->resize($product_info['image'], $this->config->get('theme_' . $this->config->get('config_theme') . '_image_popup_width'), $this->config->get('theme_' . $this->config->get('config_theme') . '_image_popup_height'));
+
+				if (method_exists($this->document, 'add_AddThisMeta')) {
+				$this->document->add_AddThisMeta('image', $data['popup']);
+				}
+				
 			} else {
 				$data['popup'] = '';
 			}
@@ -264,25 +342,89 @@ class ControllerProductProduct extends Controller {
 				$data['thumb'] = '';
 			}
 
+			$data['customtabs'] = array();
+
+				$results = $this->model_catalog_product->getProducttabs($this->request->get['product_id']);
+
+				foreach ($results as $result) {
+					$data['customtabs'][] = array(
+						'title' => $result['title'],
+						'description' => html_entity_decode($result['description'], ENT_QUOTES, 'UTF-8'),
+					);
+				}
+
 			$data['images'] = array();
 
+				$data['image_additional_width']  = $this->config->get('theme_' . $this->config->get('config_theme') . '_image_additional_width');
+				$data['image_additional_height'] = $this->config->get('theme_' . $this->config->get('config_theme') . '_image_additional_height');
+				$data['popup_width']             = $this->config->get('theme_' . $this->config->get('config_theme') . '_image_popup_width');
+				$data['popup_height']            = $this->config->get('theme_' . $this->config->get('config_theme') . '_image_popup_height');
+				$data['thumb_width']             = $this->config->get('theme_' . $this->config->get('config_theme') . '_image_thumb_width');
+				$data['thumb_height']            = $this->config->get('theme_' . $this->config->get('config_theme') . '_image_thumb_height');
+
+				if ($product_info['image']) {
+				$data['images'][] = array(
+				'popup' => $this->model_tool_image->resize($product_info['image'], $this->config->get('theme_' . $this->config->get('config_theme') . '_image_popup_width'), $this->config->get('theme_' . $this->config->get('config_theme') . '_image_popup_height')),
+				'thumb' => $this->model_tool_image->resize($product_info['image'], $this->config->get('theme_' . $this->config->get('config_theme') . '_image_thumb_width'), $this->config->get('theme_' . $this->config->get('config_theme') . '_image_thumb_height')),
+				'additional' => $this->model_tool_image->resize($product_info['image'], $this->config->get('theme_' . $this->config->get('config_theme') . '_image_additional_width'), $this->config->get('theme_' . $this->config->get('config_theme') . '_image_additional_height'))
+				);
+				}
+				
+
+
+				$data['days_title']    = $this->config->get('config_special_counters_title');
+				$data['days_title']    = $data['days_title'][$this->config->get('config_language_id')]['days_title'];
+				
+				$data['hours_title']   = $this->config->get('config_special_counters_title');
+				$data['hours_title']   = $data['hours_title'][$this->config->get('config_language_id')]['hours_title'];
+				
+				$data['minutes_title'] = $this->config->get('config_special_counters_title');
+				$data['minutes_title'] = $data['minutes_title'][$this->config->get('config_language_id')]['minutes_title'];
+				
+				$data['seconds_title'] = $this->config->get('config_special_counters_title');
+				$data['seconds_title'] = $data['seconds_title'][$this->config->get('config_language_id')]['seconds_title'];
+				
 			$results = $this->model_catalog_product->getProductImages($this->request->get['product_id']);
 
 			foreach ($results as $result) {
 				$data['images'][] = array(
 					'popup' => $this->model_tool_image->resize($result['image'], $this->config->get('theme_' . $this->config->get('config_theme') . '_image_popup_width'), $this->config->get('theme_' . $this->config->get('config_theme') . '_image_popup_height')),
-					'thumb' => $this->model_tool_image->resize($result['image'], $this->config->get('theme_' . $this->config->get('config_theme') . '_image_additional_width'), $this->config->get('theme_' . $this->config->get('config_theme') . '_image_additional_height'))
+					
+				'thumb' => $this->model_tool_image->resize($result['image'], $this->config->get('theme_' . $this->config->get('config_theme') . '_image_thumb_width'), $this->config->get('theme_' . $this->config->get('config_theme') . '_image_thumb_height')),
+				'additional' => $this->model_tool_image->resize($result['image'], $this->config->get('theme_' . $this->config->get('config_theme') . '_image_additional_width'), $this->config->get('theme_' . $this->config->get('config_theme') . '_image_additional_height'))
+				
 				);
 			}
 
 			if ($this->customer->isLogged() || !$this->config->get('config_customer_price')) {
 				$data['price'] = $this->currency->format($this->tax->calculate($product_info['price'], $product_info['tax_class_id'], $this->config->get('config_tax')), $this->session->data['currency']);
+				$data['price'] = str_replace(',00', '', $data['price']);
+
+				$data['price_1'] = $this->currency->format($this->tax->calculate($product_info['price']/2, $product_info['tax_class_id'], $this->config->get('config_tax')), $this->session->data['currency']);
+				$data['price_1'] = str_replace(',00', '', $data['price_1']);
+
+				$data['adult'] = $this->language->get('adult');
+				$data['kid'] = $this->language->get('kid');
+				$data['price_lit'] =  $product_info['price_lit'];//$this->currency->format($this->tax->calculate($product_info['price_lit'], $product_info['tax_class_id'], $this->config->get('config_tax')), $this->session->data['currency']);
 			} else {
 				$data['price'] = false;
 			}
+			
+			$data['class_event'] = ($product_info['price'] > 0) ? ' ' : ' hide';
 
+			if(!$productType && $product_info['price_lit'] != 0) {
+				if($product_info['special']) 
+				   $price_per_lit = round($product_info['special']/ $product_info['price_lit'] * 1000, 2);
+		        else 
+				   $price_per_lit = round($product_info['price']/ $product_info['price_lit'] * 1000, 2);
+		   
+		        $data['price_per_lit'] = $this->currency->format($this->tax->calculate($price_per_lit, $product_info['tax_class_id'], $this->config->get('config_tax')), $this->session->data['currency']);	  
+			    $data['price_per_lit'] = str_replace(',00', '', $data['price_per_lit']);
+			}
+			
 			if ((float)$product_info['special']) {
 				$data['special'] = $this->currency->format($this->tax->calculate($product_info['special'], $product_info['tax_class_id'], $this->config->get('config_tax')), $this->session->data['currency']);
+			    $data['special'] = str_replace(',00', '', $data['special']);
 			} else {
 				$data['special'] = false;
 			}
@@ -360,6 +502,9 @@ class ControllerProductProduct extends Controller {
 			}
 
 			$data['reviews'] = sprintf($this->language->get('text_reviews'), (int)$product_info['reviews']);
+
+				$data['date_end'] = $product_info['date_end'] !== '0000-00-00' ? $product_info['date_end'] : false;
+				
 			$data['rating'] = (int)$product_info['rating'];
 
 			// Captcha
@@ -373,27 +518,78 @@ class ControllerProductProduct extends Controller {
 
 			$data['attribute_groups'] = $this->model_catalog_product->getProductAttributes($this->request->get['product_id']);
 
+
+				$data['label_sale']     = $this->config->get('theme_' . $this->config->get('config_theme') . '_label_sale');
+				$data['label_discount'] = $this->config->get('theme_' . $this->config->get('config_theme') . '_label_discount');
+				$data['label_new']      = $this->config->get('theme_' . $this->config->get('config_theme') . '_label_new');
+				if ($this->config->get('theme_' . $this->config->get('config_theme') . '_label_new')) {
+				$product_new = $this->model_catalog_product->getLatestProducts($this->config->get('theme_' . $this->config->get('config_theme') . '_label_new_limit'));
+				}
+				
+
+				$this->document->addStyle('catalog/view/javascript/jquery/swiper/css/swiper.min.css');
+				$this->document->addScript('catalog/view/javascript/jquery/swiper/js/swiper.jquery.js');
+				
 			$data['products'] = array();
 
+
+				$data['days_title']    = $this->config->get('config_special_counters_title');
+				$data['days_title']    = $data['days_title'][$this->config->get('config_language_id')]['days_title'];
+				
+				$data['hours_title']   = $this->config->get('config_special_counters_title');
+				$data['hours_title']   = $data['hours_title'][$this->config->get('config_language_id')]['hours_title'];
+				
+				$data['minutes_title'] = $this->config->get('config_special_counters_title');
+				$data['minutes_title'] = $data['minutes_title'][$this->config->get('config_language_id')]['minutes_title'];
+				
+				$data['seconds_title'] = $this->config->get('config_special_counters_title');
+				$data['seconds_title'] = $data['seconds_title'][$this->config->get('config_language_id')]['seconds_title'];
+				
 			$results = $this->model_catalog_product->getProductRelated($this->request->get['product_id']);
 
 			foreach ($results as $result) {
+
+				if ($this->config->get('theme_' . $this->config->get('config_theme') . '_label_new')) {
+				$label_new = 0;
+				foreach ($product_new as $product_new_id => $product) {
+				if ($product_new[$product_new_id]['product_id'] == $result['product_id']) {
+				$label_new = 1;
+				break;
+				}
+				}
+				}
+				
 				if ($result['image']) {
 					$image = $this->model_tool_image->resize($result['image'], $this->config->get('theme_' . $this->config->get('config_theme') . '_image_related_width'), $this->config->get('theme_' . $this->config->get('config_theme') . '_image_related_height'));
 				} else {
 					$image = $this->model_tool_image->resize('placeholder.png', $this->config->get('theme_' . $this->config->get('config_theme') . '_image_related_width'), $this->config->get('theme_' . $this->config->get('config_theme') . '_image_related_height'));
 				}
 
+
+				$additional_image = $this->model_catalog_product->getProductImages($result['product_id']);
+				if ($additional_image) {
+				$additional_image = $this->model_tool_image->resize($additional_image[0]['image'], $this->config->get('theme_' . $this->config->get('config_theme') . '_image_related_width'), $this->config->get('theme_' . $this->config->get('config_theme') . '_image_related_height'));
+				} else {
+				$additional_image = false;
+				}
+				
 				if ($this->customer->isLogged() || !$this->config->get('config_customer_price')) {
 					$price = $this->currency->format($this->tax->calculate($result['price'], $result['tax_class_id'], $this->config->get('config_tax')), $this->session->data['currency']);
+				    $price = str_replace(',00', '', $price);
 				} else {
 					$price = false;
 				}
 
 				if ((float)$result['special']) {
 					$special = $this->currency->format($this->tax->calculate($result['special'], $result['tax_class_id'], $this->config->get('config_tax')), $this->session->data['currency']);
+
+				$label_discount = '-' . (int)(100 - ($result['special'] * 100 / $result['price'])) . '%';
+				
 				} else {
 					$special = false;
+
+				$label_discount = false;
+				
 				}
 
 				if ($this->config->get('config_tax')) {
@@ -408,17 +604,70 @@ class ControllerProductProduct extends Controller {
 					$rating = false;
 				}
 
+
+				$options = array();
+				foreach ($this->model_catalog_product->getProductOptions($result['product_id']) as $option) {
+				$product_option_value_data = array();
+				foreach ($option['product_option_value'] as $option_value) {
+				if (!$option_value['subtract'] || ($option_value['quantity'] > 0)) {
+				if ((($this->config->get('config_customer_price') && $this->customer->isLogged()) || !$this->config->get('config_customer_price')) && (float)$option_value['price']) {
+				$price_option = $this->currency->format($this->tax->calculate($option_value['price'], $result['tax_class_id'], $this->config->get('config_tax') ? 'P' : false), $this->session->data['currency']);
+				} else {
+				$price_option = false;
+				}
+				$product_option_value_data[] = array(
+				'product_option_value_id' => $option_value['product_option_value_id'],
+				'option_value_id'         => $option_value['option_value_id'],
+				'name'                    => $option_value['name'],
+				'image'                   => $this->model_tool_image->resize($option_value['image'], 50, 50),
+				'price'                   => $price_option,
+				'price_prefix'            => $option_value['price_prefix']
+				);
+				}
+				}
+				$options[] = array(
+				'product_option_id'    => $option['product_option_id'],
+				'product_option_value' => $product_option_value_data,
+				'option_id'            => $option['option_id'],
+				'name'                 => $option['name'],
+				'type'                 => $option['type'],
+				'value'                => $option['value'],
+				'required'             => $option['required']
+				);
+				}
+				
+
+				$this->document->addStyle('catalog/view/javascript/jquery/swiper/css/swiper.min.css');
+				$this->document->addScript('catalog/view/javascript/jquery/swiper/js/swiper.jquery.js');
+				
 				$data['products'][] = array(
 					'product_id'  => $result['product_id'],
 					'thumb'       => $image,
+
+				'additional_thumb' => $additional_image,
+				
+
+				'img-width'  => $this->config->get('theme_' . $this->config->get('config_theme') . '_image_related_width'),
+				'img-height' => $this->config->get('theme_' . $this->config->get('config_theme') . '_image_related_height'),
+				
 					'name'        => $result['name'],
+ 'reviews' => sprintf($this->language->get('text_reviews'), (int)$result['reviews']), 
 					'description' => utf8_substr(trim(strip_tags(html_entity_decode($result['description'], ENT_QUOTES, 'UTF-8'))), 0, $this->config->get('theme_' . $this->config->get('config_theme') . '_product_description_length')) . '..',
-					'price'       => $price,
 					'special'     => $special,
+
+				'label_discount' => $label_discount,
+				'label_new'      => $this->config->get('theme_' . $this->config->get('config_theme') . '_label_new') ? $label_new : 0,
+				
 					'tax'         => $tax,
 					'minimum'     => $result['minimum'] > 0 ? $result['minimum'] : 1,
 					'rating'      => $rating,
+
+				'date_end'       => $result['date_end'] !== '0000-00-00' ? $result['date_end'] : false,
+				
 					'href'        => $this->url->link('product/product', 'product_id=' . $result['product_id'])
+,
+				'options'     => $options
+				
 				);
 			}
 
@@ -445,9 +694,19 @@ class ControllerProductProduct extends Controller {
 			$data['content_bottom'] = $this->load->controller('common/content_bottom');
 			$data['footer'] = $this->load->controller('common/footer');
 			$data['header'] = $this->load->controller('common/header');
+			$data['date_event'] = $this->model_catalog_product->getDateEvent($this->request->get['option']);
+			$data['data_option'] = $_REQUEST['option'];
 
-			$this->response->setOutput($this->load->view('product/product', $data));
-		} else {
+			$data['farm_shop_1'] =  $this->language->get('text_farm_shop_1');
+			$data['farm_shop_2'] =  $this->language->get('text_farm_shop_2');
+			$data['phone'] = $this->config->get('config_telephone');
+			$data['order_link'] = HTTP_SERVER . 'veranstaltungen-anfrage/';
+			
+            if($productType)
+			  $this->response->setOutput($this->load->view('product/product_event', $data));
+			else 
+			  $this->response->setOutput($this->load->view('product/product', $data));
+            } else {
 			$url = '';
 
 			if (isset($this->request->get['path'])) {
@@ -535,6 +794,19 @@ class ControllerProductProduct extends Controller {
 
 		$review_total = $this->model_catalog_review->getTotalReviewsByProductId($this->request->get['product_id']);
 
+
+				$data['days_title']    = $this->config->get('config_special_counters_title');
+				$data['days_title']    = $data['days_title'][$this->config->get('config_language_id')]['days_title'];
+				
+				$data['hours_title']   = $this->config->get('config_special_counters_title');
+				$data['hours_title']   = $data['hours_title'][$this->config->get('config_language_id')]['hours_title'];
+				
+				$data['minutes_title'] = $this->config->get('config_special_counters_title');
+				$data['minutes_title'] = $data['minutes_title'][$this->config->get('config_language_id')]['minutes_title'];
+				
+				$data['seconds_title'] = $this->config->get('config_special_counters_title');
+				$data['seconds_title'] = $data['seconds_title'][$this->config->get('config_language_id')]['seconds_title'];
+				
 		$results = $this->model_catalog_review->getReviewsByProductId($this->request->get['product_id'], ($page - 1) * 5, 5);
 
 		foreach ($results as $result) {
