@@ -1,0 +1,972 @@
+{{ header }}{{ column_left }}
+<div id="content">
+  <div class="page-header">
+    <div class="container-fluid">
+      <div class="pull-right">
+        <button type="submit" form="form-featured" data-toggle="tooltip" title="{{ button_save }}" class="btn btn-primary"><i class="fa fa-save"></i></button>
+        <a href="{{ cancel }}" data-toggle="tooltip" title="{{ button_cancel }}" class="btn btn-default"><i class="fa fa-reply"></i></a></div>
+      <h1>{{ heading_title }}</h1>
+      <ul class="breadcrumb">
+        {% for breadcrumb in breadcrumbs %}
+        <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+  <div class="container-fluid">
+    {% if error_warning %}
+    <div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i> {{ error_warning }}
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+    </div>
+    {% endif %}
+	
+	<div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title"><i class="fa fa-pencil"></i> {{ text_edit }}</h3>
+      </div>
+	  <div class="panel-body">
+        <form action="{{ action }}" method="post" enctype="multipart/form-data" id="form-featured" class="form-horizontal">
+		 
+		  <div class="form-group">
+			<div class="col-sm-10" id="box-trustedshops-info-intro">
+				<span><img src="{{ trustedshops_info_intro }}" /></span>
+				<button style="display:block; margin: 20px auto;" onclick="window.open('{{ get_your_account_url }}'); return false;"><span><span><span>{{ button_get_your_account }}</span></span></span></button>
+			</div>
+		  </div>
+		  
+		   <div class="tab-pane">
+            <ul class="nav nav-tabs" id="language">
+              {% for language in languages %}
+              <li><a href="#language{{ language.language_id }}" data-toggle="tab"><img src="language/{{ language.code }}/{{ language.code }}.png" title="{{ language.name }}" /> {{ language.name }}</a></li>
+              {% endfor %}
+            </ul>
+            <div class="tab-content">
+              {% for language in languages %}
+              <div class="tab-pane" id="language{{ language.language_id }}">
+			   <fieldset>
+                <div class="form-group required">
+                  <label class="col-sm-2 control-label" for="input-trustbadge-shop-id-{{ language.language_id }}"><span data-toggle="tooltip" title="{{ help_tsid }}">{{ entry_trustedshops_info_tsid }}</span></label>
+                  <div class="col-sm-10">
+                    <input type="text" name="trustedshops_info[{{ language.language_id }}][tsid]" placeholder="{{ entry_trustedshops_info_tsid }}" id="input-heading{{ language.language_id }}" value="{{ trustedshops_info[language.language_id].tsid ? trustedshops_info[language.language_id].tsid : '' }}" class="form-control" />
+					{% if error_tsid[language.language_id] %}
+                      <div class="text-danger">{{ error_tsid[language.language_id] }}</div>
+                    {% endif %}
+                  </div>
+                </div>
+				
+				<div class="form-group required">
+					<label class="col-sm-2 control-label" for="input-trustbadge-mode-{{ language.language_id }}">{{ entry_trustedshops_info_mode }}</label>
+					<div class="col-sm-10">
+					  <select name="trustedshops_info[{{ language.language_id }}][mode]" id="input-trustbadge-mode-{{ language.language_id }}" class="form-control">
+						
+						<option value="standard" {% if trustedshops_info[language.language_id].mode and trustedshops_info[language.language_id].mode == "standard" %}selected="selected"{% endif %}>{{ text_standard }}</option>
+						<option value="expert" {% if trustedshops_info[language.language_id].mode and trustedshops_info[language.language_id].mode == "expert" %} selected="selected"{% endif %}>{{ text_expert }}</option>
+					  </select>
+					</div>
+				</div>
+				
+				<div class="form-group">
+					<div class="col-sm-10" id="box-expert-info-{{ language.language_id }}"><span>{{ help_code }}</span></div>
+				</div>
+				
+				<div class="form-group">
+					<label class="col-sm-2 control-label" for="input-trust-badge-status-{{ language.language_id }}">{{ entry_trustedshops_info_status }}</label>
+					<div class="col-sm-10">
+					  <select name="trustedshops_info[{{ language.language_id }}][status]" id="input-trust-badge-status-{{ language.language_id }}" class="form-control">
+						{% if trustedshops_info[language.language_id].status and trustedshops_info[language.language_id].status == 1 %}
+						<option value="1" selected="selected">{{ text_enabled }}</option>
+						<option value="0">{{ text_disabled }}</option>
+						{% else %}
+						<option value="1">{{ text_enabled }}</option>
+						<option value="0" selected="selected">{{ text_disabled }}</option>
+						{% endif %}
+					  </select>
+					</div>
+				</div>
+			   </fieldset>
+			   
+			   <fieldset>
+				<legend>{{ text_trustbadge_code }}</legend>
+				<div id="box-standard-{{ language.language_id }}">
+				  <div class="form-group">
+					<label class="col-sm-2 control-label" for="input-trustbadge-variant-{{ language.language_id }}">{{ entry_trustedshops_trustbadge_variant }}</label>
+					<div class="col-sm-10">			
+					   <select name="trustedshops_trustbadge[{{ language.language_id }}][variant]" id="input-trustbadge-variant-{{ language.language_id }}" class="form-control">
+							<?php foreach($variant_list as $idx=>$variant) { ?>	
+							{% for key,variant in variant_list %}				
+							<option value="{{ key }}" <{% if trustedshops_trustbadge[language.language_id].variant and trustedshops_trustbadge[language.language_id].variant == key %}selected="selected"{% endif %}>{{ variant }}</option>
+							{% endfor %}
+					  </select>
+					</div>
+				  </div>
+				  <div class="form-group">
+					<label class="col-sm-2 control-label" for="input-trustbadge-offset"><span data-toggle="tooltip" title="{{ help_y_offset }}">{{ entry_trustedshops_trustbadge_offset }}</span></label>
+					<div class="col-sm-10">
+					  <input type="text" name="trustedshops_trustbadge[{{ language.language_id }}][offset]" value="{{ trustedshops_trustbadge[language.language_id].offset ? trustedshops_trustbadge[language.language_id].offset:'0' }}" placeholder="{{ entry_trustedshops_trustbadge_offset }}" id="input-trustbadge-offset-{{ language.language_id }}" class="form-control" />
+					</div>
+				  </div>
+				</div>
+				<div id="box-expert-{{ language.language_id }}">
+					<div class="form-group required">
+						<label class="col-sm-2 control-label" for="input-code">{{ entry_trustedshops_trustbadge_code }}</label>
+						<div class="col-sm-10">
+						{% if trustedshops_trustbadge[language.language_id].code %}
+							<textarea name="trustedshops_trustbadge[{{ language.language_id }}][code]" rows="5" id="input-trustedshops-trustbadgecode-{{ language.language_id }}" placeholder="{{ entry_trustedshops_trustbadge_code }}" class="form-control">{{ trustedshops_trustbadge[language.language_id].code }}</textarea>
+						{% else %}
+							<textarea name="trustedshops_trustbadge[{{ language.language_id }}][code]" rows="5" id="input-trustedshops-trustbadgecode-{{ language.language_id }}" placeholder="{{ entry_trustedshops_trustbadge_code }}" class="form-control"><script type="text/javascript">
+	(function ()  {
+	var _tsid = '%tsid%';
+	_tsConfig = {
+	'yOffset': '0',
+	'variant': 'reviews',
+	'customElementId': '',
+	'trustcardDirection': '',
+	'customBadgeWidth': '',
+	'customBadgeHeight': '',
+	'disableResponsive': 'false',
+	'disableTrustbadge': 'false',
+	'trustCardTrigger': 'mouseenter',
+	'customCheckoutElementId': ''
+	};
+	var _ts = document.createElement('script');
+	_ts.type = 'text/javascript';
+	_ts.charset = 'utf-8';
+	_ts.async = true;
+	_ts.src = '//widgets.trustedshops.com/js/' + _tsid + '.js';
+	var __ts = document.getElementsByTagName('script')[0];
+	__ts.parentNode.insertBefore(_ts, __ts);
+	})();
+	</script>
+					</textarea>
+						{% endif %}
+						</div>
+					</div>
+
+				</div>			
+			  </fieldset>
+			  
+			  <fieldset>
+				<legend>{{ heading_shop_rating }}</legend>
+				<div class="form-group" id="box-trustedshops-shop-collect-ratings-{{ language.language_id }}">
+					<label class="col-sm-2 control-label" for="input-trustbadge-collect-shop-ratings-{{ language.language_id }}">{{ entry_display_shop_rating_stickers }}</label>
+					<div class="col-sm-10">
+					  <select name="trustedshops_product[{{ language.language_id }}][collect_shopratings]" id="input-trustbadge-collect-shop-ratings-{{ language.language_id }}" class="form-control">
+						{% if trustedshops_product[language.language_id].collect_shopratings %}
+						<option value="1" selected="selected">{{ text_yes }}</option>
+						<option value="0">{{ text_no }}</option>
+						{% else %}
+						<option value="1">{{ text_yes }}</option>
+						<option value="0" selected="selected">{{ text_no }}</option>
+						{% endif %}
+					  </select>
+					</div>
+				</div>
+
+				<div class="form-group" id="box-trustedshops-expert-collect-shop-ratings-{{ language.language_id }}">
+					<label class="col-sm-2 control-label" for="input-trustbadge-collect-shop-ratings-{{ language.language_id }}">{{ entry_display_shop_rating_stickers }}</label>
+					<div class="col-sm-10">
+					  <select name="trustedshops_product_expert[{{ language.language_id }}][collect_shopratings]" id="input-trustbadge-collect-shop-ratings-{{ language.language_id }}" class="form-control">
+						{% if trustedshops_product_expert[language.language_id].collect_shopratings %}
+						<option value="1" selected="selected">{{ text_yes }}</option>
+						<option value="0">{{ text_no }}</option>
+						{% else %}
+						<option value="1">{{ text_yes }}</option>
+						<option value="0" selected="selected">{{ text_no }}</option>
+						{% endif %}
+					  </select>
+					</div>
+				</div>
+
+				<div id="box-trustedshops-shop-collect-ratings-block-{{ language.language_id }}">
+					<div class="form-group" id="box-standard-shop-rating-background-{{ language.language_id }}">					
+						<label class="col-sm-2 control-label" for="input-shoprating-background-color-{{ language.language_id }}"><span data-toggle="tooltip" title="{{ tooltip_shoprating_background }}">{{ entry_background_color }}</span></label>
+						<div class="col-sm-10">
+						  <input type="text" name="trustedshops_product[{{ language.language_id }}][shoprating_background]" value="{{ trustedshops_product[language.language_id].shoprating_background ? trustedshops_product[language.language_id].shoprating_background: default_shoprating_background }}" placeholder="{{ entry_background_color }}" id="input-shoprating-background-color-{{ language.language_id }}" class="form-control" />
+						</div>
+					</div>
+
+					<div class="form-group" id="box-standard-shop-rating-font-{{ language.language_id }}">					
+						<label class="col-sm-2 control-label" for="input-shoprating-font-{{ language.language_id }}"><span data-toggle="tooltip" title="{{ tooltip_shoprating_font }}">{{ entry_font }}</span></label>
+						<div class="col-sm-10">
+						  <select name="trustedshops_product[{{ language.language_id }}][shoprating_font]" id="input-shoprating-font-{{ language.language_id }}" class="form-control">
+							<option value="Arial" {% if trustedshops_product[language.language_id].shoprating_font == 'Arial' %} selected="selected" {% endif %}>Arial</option>
+							<option value="Geneva" {% if trustedshops_product[language.language_id].shoprating_font == 'Geneva' %} selected="selected" {% endif %}>Geneva</option>						
+							<option value="Georgia" {% if trustedshops_product[language.language_id].shoprating_font == 'Georgia' %} selected="selected" {% endif %}>Georgia</option>
+							<option value="Helvetica" {% if trustedshops_product[language.language_id].shoprating_font == 'Helvetica' %} selected="selected" {% endif %}>Helvetica</option>
+							<option value="Sans-serif" {% if trustedshops_product[language.language_id].shoprating_font == 'Sans-serif' %} selected="selected" {% endif %}>Sans-serif</option>
+							<option value="Serif" {% if trustedshops_product[language.language_id].shoprating_font == 'Serif' %} selected="selected" {% endif %}>Serif</option>
+							<option value="Trebuchet MS" {% if trustedshops_product[language.language_id].shoprating_font == 'Trebuchet MS' %} selected="selected" {% endif %}>Trebuchet MS</option>
+							<option value="Verdana" {% if trustedshops_product[language.language_id].shoprating_font == 'Verdana' %} selected="selected" {% endif %}>Verdana</option>
+						  </select>
+						</div>					
+					</div>
+
+					<div class="form-group" id="box-standard-shop-rating-num-of-rating-{{ language.language_id }}">					
+						<label class="col-sm-2 control-label" for="input-shoprating-num-of-rating-{{ language.language_id }}"><span data-toggle="tooltip" title="{{ tooltip_no_of_shop_ratings }}">{{ entry_no_of_shop_ratings }}</span></label>
+						<div class="col-sm-10">
+						  <select name="trustedshops_product[{{ language.language_id }}][num_of_rating]" id="input-shoprating-num-of-rating-ab-{{ language.language_id }}" class="form-control">
+						  	<option value="5" {% if trustedshops_product[language.language_id].num_of_rating == '5' %} selected="selected" {% endif %}>5</option>
+							<option value="1" {% if trustedshops_product[language.language_id].num_of_rating == '1' %} selected="selected" {% endif %}>1</option>
+							<option value="2" {% if trustedshops_product[language.language_id].num_of_rating == '2' %} selected="selected" {% endif %}>2</option>					
+							<option value="3" {% if trustedshops_product[language.language_id].num_of_rating == '3' %} selected="selected" {% endif %}>3</option>
+							<option value="4" {% if trustedshops_product[language.language_id].num_of_rating == '4' %} selected="selected" {% endif %}>4</option>
+						  </select>
+						</div>					
+					</div>
+
+					<div class="form-group" id="box-standard-shop-rating-from-{{ language.language_id }}">					
+						<label class="col-sm-2 control-label" for="input-shoprating-from-{{ language.language_id }}"><span data-toggle="tooltip" title="{{ tooltip_shop_ratings_from}}">{{ entry_shop_ratings_from }}</span></label>
+						<div class="col-sm-10">
+						  <select name="trustedshops_product[{{ language.language_id }}][shoprating_from]" id="input-shoprating-from-{{ language.language_id }}" class="form-control">
+							<option value="3.0" {% if trustedshops_product[language.language_id].shoprating_from == '3.0' %} selected="selected" {% endif %}>3.0</option>
+							<option value="1.0" {% if trustedshops_product[language.language_id].shoprating_from == '1.0' %} selected="selected" {% endif %}>1.0</option>
+							<option value="2.0" {% if trustedshops_product[language.language_id].shoprating_from == '2.0' %} selected="selected" {% endif %}>2.0</option>
+							<option value="4.0" {% if trustedshops_product[language.language_id].shoprating_from == '4.0' %} selected="selected" {% endif %}>4.0</option>
+							<option value="5.0" {% if trustedshops_product[language.language_id].shoprating_from == '5.0' %} selected="selected" {% endif %}>5.0</option>
+						  </select>
+						</div>					
+					</div>
+
+				</div>
+
+				<div class="form-group" id="box-trustedshops-shop-ratings-google-{{ language.language_id }}">
+					<label class="col-sm-2 control-label" for="input-trustbadge-shop-ratings-google-{{ language.language_id }}"><span data-toggle="tooltip" title="{{ tooltip_shop_ratings_google}}">{{ entry_shop_ratings_google }}</span></label>
+					<div class="col-sm-10">
+					  <select name="trustedshops_product[{{ language.language_id }}][shop_ratings_google]" id="input-trustbadge-shop-ratings-google-{{ language.language_id }}" class="form-control">
+						{% if trustedshops_product[language.language_id].shop_ratings_google %}
+						<option value="1" selected="selected">{{ text_yes }}</option>
+						<option value="0">{{ text_no }}</option>
+						{% else %}
+						<option value="1">{{ text_yes }}</option>
+						<option value="0" selected="selected">{{ text_no }}</option>
+						{% endif %}
+					  </select>
+					</div>
+				</div>
+
+				<div class="form-group" id="box-trustedshops-shop-ratings-rich-snippets-{{ language.language_id }}">
+					<label class="col-sm-2 control-label" for="input-trustbadge-shop-ratings-rich-snippets-{{ language.language_id }}"><span data-toggle="tooltip" title="{{ tooltip_shop_ratings_rich_snippets}}">{{ entry_shop_ratings_rich_snippets }}</span></label>
+					<div class="col-sm-10">
+						{% if trustedshops_product[language.language_id].shop_ratings_rich_snippets.category == 1 %}
+						<input type="checkbox" name="trustedshops_product[{{ language.language_id }}][shop_ratings_rich_snippets][category]" id="input-trustbadge-shop-ratings-rich-snippets-{{ language.language_id }}" value="1" checked="checked" /> {{ text_the_categories_page }} <br />
+						{% else %}
+						<input type="checkbox" name="trustedshops_product[{{ language.language_id }}][shop_ratings_rich_snippets][category]" id="input-trustbadge-shop-ratings-rich-snippets-{{ language.language_id }}" value="1" /> {{ text_the_categories_page }} <br />
+						{% endif %}
+
+						{% if trustedshops_product[language.language_id].shop_ratings_rich_snippets.product == 1 %}
+						<input type="checkbox" name="trustedshops_product[{{ language.language_id }}][shop_ratings_rich_snippets][product]" id="input-trustbadge-shop-ratings-rich-snippets-{{ language.language_id }}" value="1" checked="checked" /> {{ text_the_product_page }} <br />
+						{% else %}
+						<input type="checkbox" name="trustedshops_product[{{ language.language_id }}][shop_ratings_rich_snippets][product]" id="input-trustbadge-shop-ratings-rich-snippets-{{ language.language_id }}" value="1" /> {{ text_the_product_page }} <br />
+						{% endif %}
+
+						{% if trustedshops_product[language.language_id].shop_ratings_rich_snippets.start == 1 %}
+						<input type="checkbox" name="trustedshops_product[{{ language.language_id }}][shop_ratings_rich_snippets][start]" id="input-trustbadge-shop-ratings-rich-snippets-{{ language.language_id }}" value="1" checked="checked" /> {{ text_the_start_page }} <br />
+						{% else %}
+						<input type="checkbox" name="trustedshops_product[{{ language.language_id }}][shop_ratings_rich_snippets][start]" id="input-trustbadge-shop-ratings-rich-snippets-{{ language.language_id }}" value="1" /> {{ text_the_start_page }} <br />
+						{% endif %}
+	
+					</div>
+				</div>
+
+				<div id="box-trustedshops-expert-collect-shop-ratings-block-{{ language.language_id }}">
+					<div class="form-group required">
+						<label class="col-sm-2 control-label" for="input-shop-rating-code-{{ language.language_id }}">{{ entry_trustedshops_shoprating_code }}</label>
+						<div class="col-sm-10">
+						{% if trustedshops_product_expert[language.language_id].shoprating_code != '' %}
+						  <textarea name="trustedshops_product_expert[{{ language.language_id }}][shoprating_code]" rows="5" id="input-shop-rating-code-{{ language.language_id }}" class="form-control">{{ trustedshops_product_expert[language.language_id].shoprating_code }}</textarea>
+						{% else %}
+						  <textarea name="trustedshops_product_expert[{{ language.language_id }}][shoprating_code]" rows="5" id="input-shop-rating-code-{{ language.language_id }}" class="form-control">{
+tsid: '%tsid%',
+element: '#ts_review_sticker',
+variant: 'testimonial',
+reviews: '5',
+betterThan: '3.0',
+richSnippets: 'off',
+backgroundColor: '#ffdc0f',
+linkColor: '#000000',
+quotationMarkColor: '#FFFFFF',
+fontFamily: 'Arial',
+reviewMinLength: '10'
+}</textarea>
+						{% endif %}
+						</div>
+					</div>
+
+					<div class="form-group" id="box-trustedshops-expert-shop-ratings-jquery-selector-{{ language.language_id }}">
+						<label class="col-sm-2 control-label" for="input-trustbadge-expert-shop-ratings-jquery-selector-{{ language.language_id }}"><span data-toggle="tooltip" title="{{ tooltip_shop_ratings_jquery_selector}}">{{ entry_trustedshops_shoprating_jquery_selector }}</span></label>
+						<div class="col-sm-10">
+						  <input type="text" name="trustedshops_product_expert[{{ language.language_id }}][shopratings_jquery_selector]" id="input-trustbadge-expert-shop-ratings-jquery-selector-{{ language.language_id }}" placeholder="{{ entry_trustedshops_shoprating_jquery_selector }}"  value="{{ trustedshops_product_expert[language.language_id].shopratings_jquery_selector ? trustedshops_product_expert[language.language_id].shopratings_jquery_selector : '' }}" class="" />						 
+						</div>
+					</div>
+
+
+					<div class="form-group" id="box-trustedshops-expert-shop-ratings-sticker-generator-{{ language.language_id }}">
+						<label class="col-sm-2 control-label" for="input-trustbadge-expert-shop-ratings-sticker-generator-{{ language.language_id }}">{{ entry_trustedshops_shoprating_sticker_generator }}</label>
+						<div class="col-sm-10">
+						  <input type="button" onclick=" window.open('https://www.trustedshops.com/reviewsticker/test_prt.php','_blank')" name="trustedshops_product_expert[{{ language.language_id }}][shopratings_sticker_generator]" id="input-trustbadge-expert-shop-ratings-jquery-selector-{{ language.language_id }}"   value="{{ text_sticker_generator }}" class="" />						 
+						</div>
+					</div>
+				</div>	
+
+				<div class="form-group" id="box-trustedshops-expert-shop-ratings-google-{{ language.language_id }}">
+						<label class="col-sm-2 control-label" for="input-trustbadge-expert-shop-ratings-google-{{ language.language_id }}"><span data-toggle="tooltip" title="{{ tooltip_shop_ratings_google}}">{{ entry_shop_ratings_google }}</span></label>
+						<div class="col-sm-10">
+						  <select name="trustedshops_product_expert[{{ language.language_id }}][shop_ratings_google]" id="input-trustbadge-expert-shop-ratings-google-{{ language.language_id }}" class="form-control">
+							{% if trustedshops_product_expert[language.language_id].shop_ratings_google %}
+							<option value="1" selected="selected">{{ text_yes }}</option>
+							<option value="0">{{ text_no }}</option>
+							{% else %}
+							<option value="1">{{ text_yes }}</option>
+							<option value="0" selected="selected">{{ text_no }}</option>
+							{% endif %}
+						  </select>
+						</div>
+					</div>
+
+					<div id="box-trustedshops-expert-shop-ratings-rich-snippets-{{ language.language_id }}">
+						<div class="form-group">
+							<label class="col-sm-2 control-label" for="input-trustbadge-expert-shop-ratings-rich-snippets-{{ language.language_id }}"><span data-toggle="tooltip" title="{{ tooltip_shop_ratings_rich_snippets}}">{{ entry_shop_ratings_rich_snippets }}</span></label>
+							<div class="col-sm-10">
+								{% if trustedshops_product_expert[language.language_id].shop_ratings_rich_snippets.category == 1 %}
+								<input type="checkbox" name="trustedshops_product_expert[{{ language.language_id }}][shop_ratings_rich_snippets][category]" id="input-trustbadge-shop-ratings-rich-snippets-{{ language.language_id }}" value="1" checked="checked" /> {{ text_the_categories_page }} <br />
+								{% else %}
+								<input type="checkbox" name="trustedshops_product_expert[{{ language.language_id }}][shop_ratings_rich_snippets][category]" id="input-trustbadge-shop-ratings-rich-snippets-{{ language.language_id }}" value="1" /> {{ text_the_categories_page }} <br />
+								{% endif %}
+
+								{% if trustedshops_product_expert[language.language_id].shop_ratings_rich_snippets.product == 1 %}
+								<input type="checkbox" name="trustedshops_product_expert[{{ language.language_id }}][shop_ratings_rich_snippets][product]" id="input-trustbadge-shop-ratings-rich-snippets-{{ language.language_id }}" value="1" checked="checked" /> {{ text_the_product_page }} <br />
+								{% else %}
+								<input type="checkbox" name="trustedshops_product_expert[{{ language.language_id }}][shop_ratings_rich_snippets][product]" id="input-trustbadge-shop-ratings-rich-snippets-{{ language.language_id }}" value="1" /> {{ text_the_product_page }} <br />
+								{% endif %}
+
+								{% if trustedshops_product_expert[language.language_id].shop_ratings_rich_snippets.start == 1 %}
+								<input type="checkbox" name="trustedshops_product_expert[{{ language.language_id }}][shop_ratings_rich_snippets][start]" id="input-trustbadge-shop-ratings-rich-snippets-{{ language.language_id }}" value="1" checked="checked" /> {{ text_the_start_page }} <br />
+								{% else %}
+								<input type="checkbox" name="trustedshops_product_expert[{{ language.language_id }}][shop_ratings_rich_snippets][start]" id="input-trustbadge-shop-ratings-rich-snippets-{{ language.language_id }}" value="1" /> {{ text_the_start_page }} <br />
+								{% endif %}
+			
+							</div>
+						</div>
+
+						<div class="form-group required">
+							<label class="col-sm-2 control-label" for="input-shop-rating-code-{{ language.language_id }}">{{ entry_trustedshops_shoprating_snippets_code }}</label>
+							<div class="col-sm-10">
+							{% if trustedshops_product_expert[language.language_id].shoprating_snippets_code != '' %}
+							  <textarea name="trustedshops_product_expert[{{ language.language_id }}][shoprating_snippets_code]" rows="5" id="input-shop-rating-code-{{ language.language_id }}" class="form-control">{{ trustedshops_product_expert[language.language_id].shoprating_snippets_code }}</textarea>
+							{% else %}
+							  <textarea name="trustedshops_product_expert[{{ language.language_id }}][shoprating_snippets_code]" rows="5" id="input-shop-rating-code-{{ language.language_id }}" class="form-control"><script type="application/ld+json">
+	{
+	"@context": "http://schema.org",
+	"@type": "Organization",
+	"name": "{$ts_features_richsnippet_shopName}",
+	"aggregateRating" : {
+	"@type": "AggregateRating",
+	"ratingValue" : "{$ts_features_richsnippet_result}",
+	"bestRating" : "{$ts_features_richsnippet_max}",
+	"ratingCount" : "{$ts_features_richsnippet_count}"
+	}
+	}
+	</script></textarea>
+							{% endif %}
+							</div>
+						</div>
+						
+					</div>			
+			  </fieldset>
+			  
+			  <fieldset>
+				<legend>{{ text_product_reviews }}</legend>
+				<div class="form-group" id="box-trustedshops-product-collect-reviews-{{ language.language_id }}">
+					<label class="col-sm-2 control-label" for="input-trustbadge-product-collect-reviews-{{ language.language_id }}">{{ entry_trustedshops_product_collect_reviews }}</label>
+					<div class="col-sm-10">
+					  <select name="trustedshops_product[{{ language.language_id }}][collect_reviews]" id="input-trustbadge-collect-product-reviews-{{ language.language_id }}" class="form-control">
+						{% if trustedshops_product[language.language_id].collect_reviews %}
+						<option value="1" selected="selected">{{ text_yes }}</option>
+						<option value="0">{{ text_no }}</option>
+						{% else %}
+						<option value="1">{{ text_yes }}</option>
+						<option value="0" selected="selected">{{ text_no }}</option>
+						{% endif %}
+					  </select>
+					</div>
+				</div>
+				<div class="form-group" id="box-product-expert-collect-reviews-{{ language.language_id }}">
+					<label class="col-sm-2 control-label" for="input-trustbadge-collect-product-reviews-{{ language.language_id }}">{{ entry_trustedshops_product_collect_reviews }}</label>
+					<div class="col-sm-10">
+					  <select name="trustedshops_product_expert[{{ language.language_id }}][collect_reviews]" id="input-trustbadge-collect-product-reviews-{{ language.language_id }}" class="form-control">
+						{% if trustedshops_product_expert[language.language_id].collect_reviews %}
+						<option value="1" selected="selected">{{ text_yes }}</option>
+						<option value="0">{{ text_no }}</option>
+						{% else %}
+						<option value="1">{{ text_yes }}</option>
+						<option value="0" selected="selected">{{ text_no }}</option>
+						{% endif %}
+					  </select>
+					</div>
+					
+				</div>
+				 <div class="form-group">
+						<div class="col-sm-10" id="box-tips-product-reviews-{{ language.language_id }}"><span>{{ tips_product_reviews }}</span></div>
+					  </div>
+				
+				<div id="box-product-reviews-{{ language.language_id }}">
+					
+				  <div id="box-reviews-standard-{{ language.language_id }}">
+					<legend>{{ text_product_review_sticker }}</legend>
+					<div class="form-group">
+						<label class="col-sm-2 control-label" for="input-trustbadge-product-reviews-sticker-{{ language.language_id }}">{{ entry_trustedshops_product_review_active }}</label>
+						<div class="col-sm-10">
+						  <select name="trustedshops_product[{{ language.language_id }}][review_active]" id="input-trustbadge-product-reviews-sticker-{{ language.language_id }}" class="form-control">
+							{% if trustedshops_product[language.language_id].review_active %}
+							<option value="1" selected="selected">{{ text_yes }}</option>
+							<option value="0">{{ text_no }}</option>
+							{% else %}
+							<option value="1">{{ text_yes }}</option>
+							<option value="0" selected="selected">{{ text_no }}</option>
+							{% endif %}
+						  </select>
+						</div>
+					</div>
+					<div id="box-product-review-{{ language.language_id }}">
+					<div class="form-group">
+						<label class="col-sm-2 control-label" for="input-trustbadge-offset-{{ language.language_id }}"><span data-toggle="tooltip" title="{{ product_review_tab_name_tips }}">{{ entry_trustedshops_product_review_tab_name }}</span></label>
+						<div class="col-sm-10">
+						  <input type="text" name="trustedshops_product[{{ language.language_id }}][review_tab_name]" value="{{ trustedshops_product[language.language_id].review_tab_name ? trustedshops_product[language.language_id].review_tab_name: entry_trustedshops_product_review_tab_name_value }}" placeholder="{{ entry_trustedshops_product_review_tab_name }}" id="input-trustbadge-review-tab-name-{{ language.language_id }}" class="form-control" />
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label" for="input-trustbadge-offset-{{ language.language_id }}">{{ entry_trustedshops_product_review_border_color }}</label>
+						<div class="col-sm-10">
+						  <input type="text" name="trustedshops_product[{{ language.language_id }}][review_border_color]" value="{{ trustedshops_product[language.language_id].review_border_color ? trustedshops_product[language.language_id].review_border_color:'#FFDC0F' }}" placeholder="{{ entry_trustedshops_product_review_border_color }}" id="input-trustbadge-shop-id-{{ language.language_id }}" class="form-control" />
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label" for="input-trustbadge-offset-{{ language.language_id }}">{{ entry_trustedshops_product_review_star_color }}</label>
+						<div class="col-sm-10">
+						  <input type="text" name="trustedshops_product[{{ language.language_id }}][review_star_color]" value="{{ trustedshops_product[language.language_id].review_star_color ? trustedshops_product[language.language_id].review_star_color:'#C0C0C0' }}" placeholder="{{ entry_trustedshops_product_review_star_color }}" id="input-trustbadge-shop-id-{{ language.language_id }}" class="form-control" />
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label" for="input-trustbadge-hide-empty-review"><span data-toggle="tooltip" title="{{ product_review_hide_empty_tips }}">{{ entry_trustedshops_product_review_hide_empty }}</span></label>
+						<div class="col-sm-10">
+							<div class="checkbox">
+								<label>
+								  {% if trustedshops_product[language.language_id].review_hide_empty and trustedshops_product[language.language_id].review_hide_empty == 1 %}
+								  <input type="checkbox" name="trustedshops_product[{{ language.language_id }}][review_hide_empty]" value="1" checked="checked" id="input-top" />
+								  {% else %}
+								  <input type="checkbox" name="trustedshops_product[{{ language.language_id }}][review_hide_empty]" value="1" id="input-top" />
+								  {% endif %}
+								  &nbsp; </label>
+							 </div>
+						</div>
+					</div>
+					</div>
+					<legend>{{ text_product_review_stars }}</legend>
+					<div class="form-group">
+						<label class="col-sm-2 control-label" for="input-trustbadge-product-review-stars-{{ language.language_id }}">{{ entry_trustedshops_product_rating_active }}</label>
+						<div class="col-sm-10">
+						  <select name="trustedshops_product[{{ language.language_id }}][rating_active]" id="input-trustbadge-product-review-stars-{{ language.language_id }}" class="form-control">
+							{% if trustedshops_product[language.language_id].rating_active %}
+							<option value="1" selected="selected">{{ text_yes }}</option>
+							<option value="0">{{ text_no }}</option>
+							{% else %}
+							<option value="1">{{ text_yes }}</option>
+							<option value="0" selected="selected">{{ text_no }}</option>
+							{% endif %}
+						  </select>
+						</div>
+					</div>
+					<div id="box-product-rating-{{ language.language_id }}">
+					<div class="form-group">
+						<label class="col-sm-2 control-label" for="input-trustbadge-offset-{{ language.language_id }}">{{ entry_trustedshops_product_rating_star_color }}</label>
+						<div class="col-sm-10">
+						  <input type="text" name="trustedshops_product[{{ language.language_id }}][rating_star_color]" value="{{ trustedshops_product[language.language_id].rating_star_color ? trustedshops_product[language.language_id].rating_star_color:'#FFDC0F' }}" placeholder="{{ entry_trustedshops_product_rating_star_color }}" id="input-trustbadge-shop-id-{{ language.language_id }}" class="form-control" />
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label" for="input-trustbadge-offset-{{ language.language_id }}">{{ entry_trustedshops_product_rating_star_size }}</label>
+						<div class="col-sm-10">
+						  <input type="text" name="trustedshops_product[{{ language.language_id }}][rating_star_size]" value="{{ trustedshops_product[language.language_id].rating_star_size ? trustedshops_product[language.language_id].rating_star_size:'15px' }}" placeholder="{{ entry_trustedshops_product_rating_star_size }}" id="input-trustbadge-shop-id-{{ language.language_id }}" class="form-control" />
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label" for="input-trustbadge-offset-{{ language.language_id }}">{{ entry_trustedshops_product_rating_font_size }}</label>
+						<div class="col-sm-10">
+						  <input type="text" name="trustedshops_product[{{ language.language_id }}][rating_font_size]" value="{{ trustedshops_product[language.language_id].rating_font_size ? trustedshops_product[language.language_id].rating_font_size:'12px' }}" placeholder="{{ entry_trustedshops_product_rating_font_size }}" id="input-trustbadge-shop-id-{{ language.language_id }}" class="form-control" />
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label" for="input-trustbadge-hide-empty-start-ratings-{{ language.language_id }}"><span data-toggle="tooltip" title="{{ product_rating_hide_empty_tips }}">{{ entry_trustedshops_product_rating_hide_empty }}</span></label>
+						<div class="col-sm-10">
+							<div class="checkbox">
+								<label>
+								  {% if trustedshops_product[language.language_id].rating_hide_empty and trustedshops_product[language.language_id].rating_hide_empty == 1 %}
+								  <input type="checkbox" name="trustedshops_product[{{ language.language_id }}][rating_hide_empty]" value="1" checked="checked" id="input-top" />
+								  {% else %}
+								  <input type="checkbox" name="trustedshops_product[{{ language.language_id }}][rating_hide_empty]" value="1" id="input-top" />
+								  {% endif %}
+								  &nbsp; </label>
+							 </div>
+						</div>
+					</div>
+					</div>
+				  </div>
+				  
+				  <div id="box-review-expert-{{ language.language_id }}">
+					<legend>{{ text_product_review_sticker }}</legend>
+					<div class="form-group">
+						<label class="col-sm-2 control-label" for="input-trustbadge-product-reviews-sticker-{{ language.language_id }}">{{ entry_trustedshops_product_expert_review_active }}</label>
+						<div class="col-sm-10">
+						  <select name="trustedshops_product_expert[{{ language.language_id }}][review_active]" id="input-trustbadge-product-reviews-sticker-{{ language.language_id }}" class="form-control">
+							{% if trustedshops_product_expert[language.language_id].review_active %}
+							<option value="1" selected="selected">{{ text_yes }}</option>
+							<option value="0">{{ text_no }}</option>
+							{% else %}
+							<option value="1">{{ text_yes }}</option>
+							<option value="0" selected="selected">{{ text_no }}</option>
+							{% endif %}
+						  </select>
+						</div>
+					</div>
+					<div id="box-review-sticker-{{ language.language_id }}">
+						<div class="form-group">
+							<label class="col-sm-2 control-label" for="input-trustbadge-offset-{{ language.language_id }}"><span data-toggle="tooltip" title="{{ product_review_tab_name_tips }}">{{ entry_trustedshops_product_review_tab_name }}</span></label>
+							<div class="col-sm-10">
+							  <input type="text" name="trustedshops_product_expert[{{ language.language_id }}][review_tab_name]" value="{{ trustedshops_product_expert[language.language_id].review_tab_name ? trustedshops_product_expert[language.language_id].review_tab_name: entry_trustedshops_product_review_tab_name_value }}" placeholder="{{ entry_trustedshops_product_review_tab_name }}" id="input-trustbadge-review-tab-name-{{ language.language_id }}" class="form-control" />
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class="col-sm-2 control-label" for="input-trustbadge-expert-shop-ratings-jquery-selector-{{ language.language_id }}"><span data-toggle="tooltip" title="{{ tooltip_product_ratings_jquery_selector}}">{{ entry_trustedshops_productrating_jquery_selector }}</span></label>
+							<div class="col-sm-10">
+							  <input type="text" name="trustedshops_product[{{ language.language_id }}][productreviewstiker_jquery_selector]" id="input-trustbadge-expert-shop-ratings-jquery-selector-{{ language.language_id }}" placeholder="{{ entry_trustedshops_productrating_jquery_selector }}"  value="{{ trustedshops_product[language.language_id].productreviewstiker_jquery_selector ? trustedshops_product[language.language_id].productreviewstiker_jquery_selector : '' }}" class="" />						 
+							</div>
+						</div>
+
+						<div class="form-group required">
+							<label class="col-sm-2 control-label" for="input-trustbadge-product-review-code-{{ language.language_id }}">{{ entry_trustedshops_product_review_code }}</label>
+							<div class="col-sm-10">
+							{% if trustedshops_product[language.language_id].review_code != '' %}
+							  <textarea name="trustedshops_product[{{ language.language_id }}][review_code]" rows="5" id="input-trustbadge-product-review-code-{{ language.language_id }}" class="form-control">{{ trustedshops_product[language.language_id].review_code }}</textarea>
+							{% else %}
+							  <textarea name="trustedshops_product[{{ language.language_id }}][review_code]" rows="5" id="input-trustbadge-product-review-code-{{ language.language_id }}" class="form-control"><script type="text/javascript">
+	_tsProductReviewsConfig = {
+	tsid: '%tsid%',
+	sku: ['%sku%'],
+	variant: 'productreviews',
+	borderColor: '#0DBEDC',
+	locale: '%locale%',
+	backgroundColor: ' #ffffff',
+	starColor: '#FFDC0F',
+	starSize: '15px',
+	ratingSummary: 'false',
+	maxHeight: '1200px',
+	'element': '#tab-trustedshop-reviews',
+	hideEmptySticker: 'false',
+	introtext: '' /* optional */
+	};
+	var scripts = document.getElementsByTagName('SCRIPT'),
+	me = scripts[scripts.length - 1];
+	var _ts = document.createElement('SCRIPT');
+	_ts.type = 'text/javascript';
+	_ts.async = true;
+	_ts.charset = 'utf-8';
+	_ts.src
+	='//widgets.trustedshops.com/reviews/tsSticker/tsProductSticker.js';
+	me.parentNode.insertBefore(_ts, me);
+	_tsProductReviewsConfig.script = _ts;
+	</script>
+					</textarea>
+							{% endif %}
+							</div>
+						</div>
+					</div>
+					<legend>{{ text_product_review_stars }}</legend>
+					<div class="form-group">
+						<label class="col-sm-2 control-label" for="input-trustbadge-product-review-stars-{{ language.language_id }}">{{ entry_trustedshops_product_expert_rating_active }}</label>
+						<div class="col-sm-10">
+						  <select name="trustedshops_product_expert[{{ language.language_id }}][rating_active]" id="input-trustbadge-product-review-stars-{{ language.language_id }}" class="form-control">
+							{% if trustedshops_product_expert[language.language_id].rating_active %}
+							<option value="1" selected="selected">{{ text_yes }}</option>
+							<option value="0">{{ text_no }}</option>
+							{% else %}
+							<option value="1">{{ text_yes }}</option>
+							<option value="0" selected="selected">{{ text_no }}</option>
+							{% endif %}
+						  </select>
+						</div>
+					</div>
+
+					
+
+					<div id="box-review-start-{{ language.language_id }}">
+						<div class="form-group">
+							<label class="col-sm-2 control-label" for="input-trustbadge-expert-shop-ratings-jquery-selector-{{ language.language_id }}"><span data-toggle="tooltip" title="{{ tooltip_product_ratings_jquery_selector}}">{{ entry_trustedshops_productrating_jquery_selector }}</span></label>
+							<div class="col-sm-10">
+							  <input type="text" name="trustedshops_product[{{ language.language_id }}][productreviewstar_jquery_selector]" id="input-trustbadge-expert-shop-ratings-jquery-selector-{{ language.language_id }}" placeholder="{{ entry_trustedshops_productrating_jquery_selector }}"  value="{{ trustedshops_product[language.language_id].productreviewstar_jquery_selector ? trustedshops_product[language.language_id].productreviewstar_jquery_selector : '' }}" class="" />						 
+							</div>
+						</div>
+
+
+						<div class="form-group required">
+							<label class="col-sm-2 control-label" for="input-trustbadge-star-rating-code-{{ language.language_id }}">{{ entry_trustedshops_product_rating_code }}</label>
+							<div class="col-sm-10">
+							{% if trustedshops_product[language.language_id].rating_code != '' %}
+							  <textarea name="trustedshops_product[{{ language.language_id }}][rating_code]" rows="5" id="input-trustbadge-star-rating-code-{{ language.language_id }}" class="form-control">{{ trustedshops_product[language.language_id].rating_code }}</textarea>
+							{% else %}
+							  <textarea name="trustedshops_product[{{ language.language_id }}][rating_code]" rows="5" id="input-trustbadge-star-rating-code-{{ language.language_id }}" class="form-control"><script type="text/javascript"
+	src="//widgets.trustedshops.com/reviews/tsSticker/tsProductStickerSummary.
+	js"></script>
+	<script>
+	var summaryBadge = new productStickerSummary();
+	summaryBadge.showSummary(
+	{
+	'tsId': '%tsid%',
+	'sku': ['%sku%'],
+	'element': '#ts_product_widget',
+	'starColor' : '#FFDC0F',
+	'starSize' : '14px',
+	'fontSize' : '12px',
+	'showRating' : true,
+	'scrollToReviews' : false,
+	'enablePlaceholder': true
+	}
+	);
+	</script>
+					</textarea>
+							{% endif %}
+							</div>
+						</div>
+					</div>
+				  </div>
+				</div>
+				<div class="col-sm-10" id="product-reviews-info-{{ language.language_id }}">{# product_reviews_info #}</div>
+			  </fieldset>
+				
+              </div><!-- tab-pane end -->
+              {% endfor %}
+            </div>
+          </div>
+		  
+		  
+		  
+		  <div>
+		</form>
+	  </div>
+	</div>
+  </div>
+<script type="text/javascript"><!--
+{% for language in languages %}
+	$('select[name=\'trustedshops_info[{{ language.language_id }}][mode]\']').on('change', function() {
+		if(this.value == "expert") {
+			$('#box-standard-{{ language.language_id }}').hide();
+			$('#box-expert-{{ language.language_id }}').show();
+			$('#box-expert-info-{{ language.language_id }}').show();
+			$('#box-trustedshops-product-collect-reviews-{{ language.language_id }}').hide();	
+
+			$('#box-trustedshops-shop-collect-ratings-{{ language.language_id }}').hide();
+			$('#box-trustedshops-expert-collect-shop-ratings-{{ language.language_id }}').show();
+			$('#box-product-expert-collect-reviews-{{ language.language_id }}').show();
+			$('#box-trustedshops-expert-shop-ratings-google-{{ language.language_id }}').show();
+
+			if($('select[name=\'trustedshops_product_expert[{{ language.language_id }}][collect_shopratings]\']').val() == 1) {			
+				$('#box-trustedshops-expert-collect-shop-ratings-block-{{ language.language_id }}').show();	
+			} else {
+				$('#box-trustedshops-expert-collect-shop-ratings-block-{{ language.language_id }}').hide();	
+			}
+			
+			if($('select[name=\'trustedshops_product_expert[{{ language.language_id }}][review_active]\']').val() == 1) {			
+				$('#box-review-sticker-{{ language.language_id }}').show();	
+			} else {
+				$('#box-review-sticker-{{ language.language_id }}').hide();	
+			}
+			
+			if($('select[name=\'trustedshops_product_expert[{{ language.language_id }}][rating_active]\']').val() == 1) {			
+				$('#box-review-start-{{ language.language_id }}').show();	
+			} else {
+				$('#box-review-start-{{ language.language_id }}').hide();	
+			}
+			
+			if($('select[name=\'trustedshops_product_expert[{{ language.language_id }}][collect_reviews]\']').val() == 1) {			
+				$('#box-review-expert-{{ language.language_id }}').show();	
+			} else {
+				$('#box-review-expert-{{ language.language_id }}').hide();	
+			}
+			
+			if($('select[name=\'trustedshops_product_expert[{{ language.language_id }}][shop_ratings_google]\']').val() == 1) {			
+				$('#box-trustedshops-expert-shop-ratings-rich-snippets-{{ language.language_id }}').show();	
+			} else {
+				$('#box-trustedshops-expert-shop-ratings-rich-snippets-{{ language.language_id }}').hide();	
+			}				
+			
+			/*if($('select[name=\'trustedshops_trustbadge[{{ language.language_id }}][collect_orders]\']').val() == 1) {
+				$('#box-product-expert-collect-reviews-{{ language.language_id }}').show();
+			} else {
+				$('#box-product-expert-collect-reviews-{{ language.language_id }}').hide();
+				$('#box-review-expert-{{ language.language_id }}').hide();	
+				$('#product-reviews-info-{{ language.language_id }}').show();			
+			}*/
+
+			$('#box-reviews-standard-{{ language.language_id }}').hide();	
+			$('#box-trustedshops-shop-collect-ratings-block-{{ language.language_id }}').hide();	
+			$('#box-trustedshops-shop-ratings-google-{{ language.language_id }}').hide();	
+			$('#box-trustedshops-shop-ratings-rich-snippets-{{ language.language_id }}').hide();	
+
+
+			
+		} else {
+			$('#box-standard-{{ language.language_id }}').show();
+			$('#box-expert-{{ language.language_id }}').hide();
+			$('#box-expert-info-{{ language.language_id }}').hide();
+			$('#box-trustedshops-product-collect-reviews-{{ language.language_id }}').show();
+			$('#box-trustedshops-shop-ratings-google-{{ language.language_id }}').show();
+			$('#box-product-expert-collect-reviews-{{ language.language_id }}').hide();
+			$('#product-reviews-info-{{ language.language_id }}').hide();
+
+			$('#box-trustedshops-shop-collect-ratings-{{ language.language_id }}').show();
+			$('#box-trustedshops-expert-collect-shop-ratings-{{ language.language_id }}').hide();
+
+			if($('select[name=\'trustedshops_product[{{ language.language_id }}][collect_shopratings]\']').val() == 1) {
+				$('#box-trustedshops-shop-collect-ratings-block-{{ language.language_id }}').show();
+			} else {
+				$('#box-trustedshops-shop-collect-ratings-block-{{ language.language_id }}').hide();
+			}	
+			
+			if($('select[name=\'trustedshops_product[{{ language.language_id }}][review_active]\']').val() == 1) {
+				$('#box-product-review-{{ language.language_id }}').show();
+			} else {
+				$('#box-product-review-{{ language.language_id }}').hide();
+			}
+			
+			if($('select[name=\'trustedshops_product[{{ language.language_id }}][rating_active]\']').val() == 1) {
+				$('#box-product-rating-{{ language.language_id }}').show();
+			} else {
+				$('#box-product-rating-{{ language.language_id }}').hide();
+			}				
+				
+			if($('select[name=\'trustedshops_product[{{ language.language_id }}][collect_reviews]\']').val() == 1) {
+				$('#box-reviews-standard-{{ language.language_id }}').show();
+			} else {
+				$('#box-reviews-standard-{{ language.language_id }}').hide();
+			}				
+				
+			if($('select[name=\'trustedshops_product[{{ language.language_id }}][shop_ratings_google]\']').val() == 1) {
+				$('#box-trustedshops-shop-ratings-rich-snippets-{{ language.language_id }}').show();
+			} else {
+				$('#box-trustedshops-shop-ratings-rich-snippets-{{ language.language_id }}').hide();
+			}
+				
+			$('#box-review-expert-{{ language.language_id }}').hide();
+			$('#box-trustedshops-expert-collect-shop-ratings-block-{{ language.language_id }}').hide();
+			$('#box-trustedshops-expert-shop-ratings-google-{{ language.language_id }}').hide();
+			$('#box-trustedshops-expert-shop-ratings-rich-snippets-{{ language.language_id }}').hide();
+			
+		}
+	});
+
+
+
+	{% if trustedshops_info[language.language_id].mode == "expert" %}
+
+		$('#box-standard-{{ language.language_id }}').hide();
+		$('#box-trustedshops-product-collect-reviews-{{ language.language_id }}').hide();
+		$('#box-reviews-standard-{{ language.language_id }}').hide();
+		$('#box-expert-{{ language.language_id }}').show();	
+		$('#box-expert-info-{{ language.language_id }}').show();
+
+		$('#box-trustedshops-shop-collect-ratings-{{ language.language_id }}').hide();
+		$('#box-trustedshops-expert-collect-shop-ratings-{{ language.language_id }}').show();
+
+		{% if trustedshops_product_expert[language.language_id].collect_shopratings == 1 %}
+			$('#box-trustedshops-expert-collect-shop-ratings-block-{{ language.language_id }}').show();
+		{% else %}	
+			$('#box-trustedshops-expert-collect-shop-ratings-block-{{ language.language_id }}').hide();
+		{% endif %}
+		
+		{% if trustedshops_product_expert[language.language_id].collect_reviews == 1 %}
+			$('#box-review-expert-{{ language.language_id }}').show();
+		{% else %}	
+			$('#box-review-expert-{{ language.language_id }}').hide();
+		{% endif %}
+		
+		{% if trustedshops_product_expert[language.language_id].review_active == 1 %}
+			$('#box-review-sticker-{{ language.language_id }}').show();
+		{% else %}
+			$('#box-review-sticker-{{ language.language_id }}').hide();
+		{% endif %}
+		
+		{% if trustedshops_product_expert[language.language_id].rating_active == 1 %}
+			$('#box-review-start-{{ language.language_id }}').show();
+		{% else %}
+			$('#box-review-start-{{ language.language_id }}').hide();
+		{% endif %}
+		
+		{% if trustedshops_product_expert[language.language_id].shop_ratings_google == 1 %}
+			$('#box-trustedshops-expert-shop-ratings-rich-snippets-{{ language.language_id }}').show();
+		{% else %}
+			$('#box-trustedshops-expert-shop-ratings-rich-snippets-{{ language.language_id }}').hide();
+		{% endif %}
+
+
+		$('#box-trustedshops-shop-collect-ratings-block-{{ language.language_id }}').hide();
+		$('#box-trustedshops-shop-ratings-google-{{ language.language_id }}').hide();
+		$('#box-trustedshops-shop-ratings-rich-snippets-{{ language.language_id }}').hide();
+	{% else %}
+
+		$('#box-standard-{{ language.language_id }}').show();
+		$('#box-expert-{{ language.language_id }}').hide();	
+		$('#box-trustedshops-product-collect-reviews-{{ language.language_id }}').show();
+		$('#box-product-expert-collect-reviews-{{ language.language_id }}').hide();
+		$('#box-expert-info-{{ language.language_id }}').hide();
+
+		$('#box-trustedshops-shop-collect-ratings-{{ language.language_id }}').show();
+		$('#box-trustedshops-expert-collect-shop-ratings-{{ language.language_id }}').hide();
+
+		{% if trustedshops_product[language.language_id].collect_shopratings == 1 %}
+			$('#box-trustedshops-shop-collect-ratings-block-{{ language.language_id }}').show();
+		{% else %}	
+			$('#box-trustedshops-shop-collect-ratings-block-{{ language.language_id }}').hide();
+		{% endif %}
+		
+		{% if trustedshops_product[language.language_id].collect_reviews == 1 %}
+			$('#box-reviews-standard-{{ language.language_id }}').show();
+		{% else %}	
+			$('#box-reviews-standard-{{ language.language_id }}').hide();
+		{% endif %}
+		
+		{% if trustedshops_product[language.language_id].review_active == 1 %}
+			$('#box-product-review-{{ language.language_id }}').show();
+		{% else %}
+			$('#box-product-review-{{ language.language_id }}').hide();
+		{% endif %}
+		
+		{% if trustedshops_product[language.language_id].rating_active == 1 %}
+			$('#box-product-rating-{{ language.language_id }}').show();
+		{% else %}
+			$('#box-product-rating-{{ language.language_id }}').hide();
+		{% endif %}
+		
+		{% if trustedshops_product[language.language_id].shop_ratings_google == 1 %}
+			$('#box-trustedshops-shop-ratings-rich-snippets-{{ language.language_id }}').show();
+		{% else %}
+			$('#box-trustedshops-shop-ratings-rich-snippets-{{ language.language_id }}').hide();
+		{% endif %}
+		
+		$('#box-review-expert-{{ language.language_id }}').hide();
+		$('#product-reviews-info-{{ language.language_id }}').hide();
+		$('#box-trustedshops-expert-collect-shop-ratings-block-{{ language.language_id }}').hide();		
+		$('#box-trustedshops-expert-shop-ratings-google-{{ language.language_id }}').hide();
+		$('#box-trustedshops-expert-shop-ratings-rich-snippets-{{ language.language_id }}').hide();
+	{% endif %}
+
+
+	$('select[name=\'trustedshops_product[{{ language.language_id }}][collect_shopratings]\']').on('change', function() {
+		if(this.value == 1){
+			$('#box-trustedshops-shop-collect-ratings-block-{{ language.language_id }}').show();
+		} else {
+			$('#box-trustedshops-shop-collect-ratings-block-{{ language.language_id }}').hide();
+		}
+	});
+
+	$('select[name=\'trustedshops_product[{{ language.language_id }}][collect_reviews]\']').on('change', function() {
+		if(this.value == 1){
+			$('#box-reviews-standard-{{ language.language_id }}').show();
+		} else {
+			$('#box-reviews-standard-{{ language.language_id }}').hide();
+		}
+	});
+
+
+	$('select[name=\'trustedshops_product[{{ language.language_id }}][review_active]\']').on('change', function() {
+		if(this.value == 1){
+			$('#box-product-review-{{ language.language_id }}').show();
+		} else {
+			$('#box-product-review-{{ language.language_id }}').hide();
+		}
+	});
+
+
+	$('select[name=\'trustedshops_product[{{ language.language_id }}][rating_active]\']').on('change', function() {
+		if(this.value == 1){
+			$('#box-product-rating-{{ language.language_id }}').show();
+		} else {
+			$('#box-product-rating-{{ language.language_id }}').hide();
+		}
+	});
+
+	$('select[name=\'trustedshops_product[{{ language.language_id }}][shop_ratings_google]\']').on('change', function() {
+		if(this.value == 1){
+			$('#box-trustedshops-shop-ratings-rich-snippets-{{ language.language_id }}').show();
+		} else {
+			$('#box-trustedshops-shop-ratings-rich-snippets-{{ language.language_id }}').hide();
+		}
+	});
+
+
+	/*$('select[name=\'trustedshops_trustbadge[{{ language.language_id }}][collect_orders]\']').on('change', function() {
+		if(this.value == 1){
+			$('#box-product-expert-collect-reviews-{{ language.language_id }}').show();
+			
+			if($('select[name=\'trustedshops_product_expert[{{ language.language_id }}][collect_reviews]\']').val() == 1) {
+				$('#box-review-expert-{{ language.language_id }}').show();
+			}		
+			
+			$('#product-reviews-info-{{ language.language_id }}').hide();
+		} else {
+			$('#box-product-expert-collect-reviews-{{ language.language_id }}').hide();
+			$('#box-review-expert-{{ language.language_id }}').hide();
+			$('#product-reviews-info-{{ language.language_id }}').show();
+		}
+	});*/
+
+
+	$('select[name=\'trustedshops_product_expert[{{ language.language_id }}][collect_shopratings]\']').on('change', function() {
+		if(this.value == 1){
+			$('#box-trustedshops-expert-collect-shop-ratings-block-{{ language.language_id }}').show();
+		} else {
+			$('#box-trustedshops-expert-collect-shop-ratings-block-{{ language.language_id }}').hide();
+		}
+	});
+
+	$('select[name=\'trustedshops_product_expert[{{ language.language_id }}][collect_reviews]\']').on('change', function() {
+		if(this.value == 1){
+			$('#box-review-expert-{{ language.language_id }}').show();
+		} else {
+			$('#box-review-expert-{{ language.language_id }}').hide();
+		}
+	});
+
+	$('select[name=\'trustedshops_product_expert[{{ language.language_id }}][review_active]\']').on('change', function() {
+		if(this.value == 1){
+			$('#box-review-sticker-{{ language.language_id }}').show();
+		} else {
+			$('#box-review-sticker-{{ language.language_id }}').hide();
+		}
+	});
+
+	$('select[name=\'trustedshops_product_expert[{{ language.language_id }}][rating_active]\']').on('change', function() {
+		if(this.value == 1){
+			$('#box-review-start-{{ language.language_id }}').show();
+		} else {
+			$('#box-review-start-{{ language.language_id }}').hide();
+		}
+	});
+
+	$('select[name=\'trustedshops_product_expert[{{ language.language_id }}][shop_ratings_google]\']').on('change', function() {
+		if(this.value == 1){
+			$('#box-trustedshops-expert-shop-ratings-rich-snippets-{{ language.language_id }}').show();
+		} else {
+			$('#box-trustedshops-expert-shop-ratings-rich-snippets-{{ language.language_id }}').hide();
+		}
+	});
+
+
+
+{% endfor %}
+
+//--></script>
+  <script type="text/javascript"><!--
+$('#language a:first').tab('show');
+//--></script>
+</div>
+{{ footer }}
