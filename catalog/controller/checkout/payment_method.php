@@ -128,6 +128,7 @@ class ControllerCheckoutPaymentMethod extends Controller {
 	public function save() {
 		$this->load->language('checkout/checkout');
 
+
 		$json = array();
 
 		// Validate if payment address has been set.
@@ -170,7 +171,7 @@ class ControllerCheckoutPaymentMethod extends Controller {
 
 			$information_info = $this->model_catalog_information->getInformation($this->config->get('config_checkout_id'));
 
-			if ($information_info && (!isset($this->request->post['agree']) || !isset($this->request->post['agree_']))) {
+			if ( $information_info && ( !isset($this->request->post['agree']) || !isset($this->request->post['agree_']) || !isset($this->request->post['agree__']) ) ) {
 				$json['error']['warning'] = sprintf($this->language->get('error_agree'), $information_info['title']);
 			}
 		}
@@ -178,8 +179,12 @@ class ControllerCheckoutPaymentMethod extends Controller {
 		if (!$json) {
 			$this->session->data['payment_method'] = $this->session->data['payment_methods'][$this->request->post['payment_method']];
 
-			$this->session->data['comment'] = strip_tags($this->request->post['comment']);
-		}
+			$this->session->data['comment'] = strip_tags($this->request->post['comment']); 
+
+			$this->load->model('catalog/information');
+
+			$this->model_catalog_information->insertQuestion($this->request->post['questions']);
+        }
 
 		$this->response->addHeader('Content-Type: application/json');
 		$this->response->setOutput(json_encode($json));

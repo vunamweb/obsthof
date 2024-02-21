@@ -21,4 +21,8 @@ class ModelCatalogInformation extends Model {
 			return 0;
 		}
 	}
+
+	public function insertQuestion($question) {
+		$this->db->query("INSERT INTO " . DB_PREFIX . "questions SET questions = '" . (int)$question . "'");
+	}
 }

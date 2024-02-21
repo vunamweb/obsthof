@@ -2,6 +2,7 @@
 class ControllerCheckoutConfirm extends Controller {
 	public function index() {
 		$redirect = '';
+		$this->load->language('checkout/cart');
 
 		if ($this->cart->hasShipping()) {
 			// Validate if shipping address has been set.
@@ -36,6 +37,7 @@ class ControllerCheckoutConfirm extends Controller {
 
 		// Validate minimum quantity requirements.
 		$products = $this->cart->getProducts();
+		$sum_tax_1 = 0; $sum_tax_2 = 0; $totalNormalProduct = 0;
 
 		foreach ($products as $product) {
 			$product_total = 0;
@@ -225,6 +227,7 @@ class ControllerCheckoutConfirm extends Controller {
 
 				$order_data['products'][] = array(
 					'product_id' => $product['product_id'],
+					'idOption'   => $product['idOption'],
 					'name'       => $product['name'],
 					'model'      => $product['model'],
 					'option'     => $option_data,
@@ -371,6 +374,33 @@ class ControllerCheckoutConfirm extends Controller {
 					}
 				}
 
+				// VU show tax
+				$resultTax_1 = 0; $resultTax_2 = 0;
+
+				$taxs = $this->model_checkout_order->getTaxs();
+				$tax_1 = (int) $taxs[0]['rate']; $tax_2 = (int) $taxs[1]['rate'];
+
+				// if normal product
+				if($product['type'] == 0) {
+				   $total_1 = $product['price'] * $product['quantity'];
+                   $totalNormalProduct = $totalNormalProduct + $total_1;
+
+				   $resultTax_1 = round(($total_1) - ($total_1) / (1 + $tax_1/100), 2);
+
+				   $sum_tax_1 = $sum_tax_1 + $resultTax_1;
+				} else { // if event
+					$total_1 = ($product['price'] - $product['price_1']) * $product['quantity'];
+					$resultTax_1 = round(($total_1) - ($total_1) / (1 + $tax_1/100), 2);
+
+					$total_2 = ($product['price_1']) * $product['quantity'];
+					$resultTax_2 = round(($total_2) - ($total_2) / (1 + $tax_2/100), 2);
+
+					$sum_tax_1 = $sum_tax_1 + $resultTax_1;
+					$sum_tax_2 = $sum_tax_2 + $resultTax_2;
+				}
+				 
+				// END
+
 				$data['products'][] = array(
 					'cart_id'    => $product['cart_id'],
 					'product_id' => $product['product_id'],
@@ -382,7 +412,15 @@ class ControllerCheckoutConfirm extends Controller {
 					'subtract'   => $product['subtract'],
 					'price'      => $this->currency->format($this->tax->calculate($product['price'], $product['tax_class_id'], $this->config->get('config_tax')), $this->session->data['currency']),
 					'total'      => $this->currency->format($this->tax->calculate($product['price'], $product['tax_class_id'], $this->config->get('config_tax')) * $product['quantity'], $this->session->data['currency']),
-					'href'       => $this->url->link('product/product', 'product_id=' . $product['product_id'])
+					'href'       => $this->url->link('product/product', 'product_id=' . $product['product_id']),
+					'price_number' => $product['price'],
+					'price_1'   => $product['price_1'],
+					'price_2'   => $product['price'] - $product['price_1'] ,
+					'type'      => $product['type'],
+					'tax_1'     => $resultTax_1,
+					'tax_2'     => $resultTax_2,
+					'text_tax_1' => $tax_1 . '% of ',//$this->language->get('tax_1'),
+					'text_tax_2' => $tax_2 . '% of ', //$this->language->get('tax_2'),
 				);
 			}
 
@@ -399,6 +437,9 @@ class ControllerCheckoutConfirm extends Controller {
 			}
 
 			$data['totals'] = array();
+
+			$this->document->displayOrder($order_data['totals'], $sum_tax_1, $sum_tax_2, $this->session->data['shipping_address']['country_id'], $totalNormalProduct, $this->config->get('config_login_attempts'));
+
 
 			foreach ($order_data['totals'] as $total) {
 				$data['totals'][] = array(
