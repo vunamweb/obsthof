@@ -83,6 +83,15 @@ class ControllerExtensionModuleBestSeller extends Controller {
 			$module_info = $this->model_setting_module->getModule($this->request->get['module_id']);
 		}
 
+
+				if (isset($this->request->post['layout_type'])) {
+				$data['layout_type'] = $this->request->post['layout_type'];
+				} elseif (!empty($module_info)) {
+				$data['layout_type'] = $module_info['layout_type'];
+				} else {
+				$data['layout_type'] = '';
+				}
+				
 		if (isset($this->request->post['name'])) {
 			$data['name'] = $this->request->post['name'];
 		} elseif (!empty($module_info)) {

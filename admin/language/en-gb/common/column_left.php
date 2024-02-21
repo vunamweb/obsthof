@@ -1,6 +1,14 @@
 <?php
 // Text
 $_['text_api']                  = 'API';
+
+				$_['text_simple_blogs']         = 'Blog';
+				$_['text_simple_blog_author']   = 'Author';
+				$_['text_simple_blog_category'] = 'Category';
+				$_['text_simple_blog_article']  = 'Article';
+				$_['text_simple_blog_comment']  = 'Article Comment';
+				$_['text_simple_blog_report']   = 'Report';
+				
 $_['text_attribute']            = 'Attributes';
 $_['text_attribute_group']      = 'Attribute Groups';
 $_['text_backup']               = 'Backup / Restore';

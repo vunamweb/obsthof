@@ -24,6 +24,9 @@ $_['column_action']		= 'Aktion';
 
 // Entry
 $_['entry_name']		= 'Name';
+
+				$_['entry_description'] = 'Beschreibung';
+				
 $_['entry_title']		= 'Titel';
 $_['entry_link']		= 'Link';
 $_['entry_image']		= 'Bild';

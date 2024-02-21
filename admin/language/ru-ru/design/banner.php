@@ -16,6 +16,9 @@ $_['column_action']     = 'Действие';
 
 // Entry
 $_['entry_name']        = 'Название баннера';
+
+				$_['entry_description'] = 'Описание';
+				
 $_['entry_title']       = 'Заголовок';
 $_['entry_link']        = 'Ссылка';
 $_['entry_image']       = 'Изображение';

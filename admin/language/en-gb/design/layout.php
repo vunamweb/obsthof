@@ -12,6 +12,18 @@ $_['text_route']          = 'Choose the store and routes to be used with this la
 $_['text_module']         = 'Choose the position of the modules';
 $_['text_default']        = 'Default';
 $_['text_content_top']    = 'Content Top';
+
+				$_['text_header_nav'] = 'Header Nav';
+				$_['text_header_top'] = 'Header Top';
+				$_['text_navigation'] = 'Navigation';
+				$_['text_top']        = 'Top';
+				$_['text_bottom']     = 'Bottom';
+				$_['text_footer_1']   = 'Footer 1';
+				$_['text_footer_2']   = 'Footer 2';
+				$_['text_footer_3']   = 'Footer 3';
+				$_['text_footer_4']   = 'Footer 4';
+				$_['text_footer_5']   = 'Footer 5';
+				
 $_['text_content_bottom'] = 'Content Bottom';
 $_['text_column_left']    = 'Column Left';
 $_['text_column_right']   = 'Column Right';

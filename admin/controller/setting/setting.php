@@ -5,6 +5,13 @@ class ControllerSettingSetting extends Controller {
 	public function index() {
 		$this->load->language('setting/setting');
 
+
+				$data['entry_special_counters'] = $this->language->get('entry_special_counters');
+				$data['entry_days_title']       = $this->language->get('entry_days_title');
+				$data['entry_hours_title']      = $this->language->get('entry_hours_title');
+				$data['entry_minutes_title']    = $this->language->get('entry_minutes_title');
+				$data['entry_seconds_title']    = $this->language->get('entry_seconds_title');
+				
 		$this->document->setTitle($this->language->get('heading_title'));
 
 		$this->load->model('setting/setting');
@@ -217,6 +224,19 @@ class ControllerSettingSetting extends Controller {
 
 		$data['layouts'] = $this->model_design_layout->getLayouts();
 
+
+				if (isset($this->request->post['config_special_counters'])) {
+				$data['config_special_counters'] = $this->request->post['config_special_counters'];
+				} else {
+				$data['config_special_counters'] = $this->config->get('config_special_counters');
+				}
+
+				if (isset($this->request->post['config_special_counters_title'])) {
+				$data['config_special_counters_title'] = $this->request->post['config_special_counters_title'];
+				} else {
+				$data['config_special_counters_title'] = $this->config->get('config_special_counters_title');
+				}
+				
 		if (isset($this->request->post['config_name'])) {
 			$data['config_name'] = $this->request->post['config_name'];
 		} else {

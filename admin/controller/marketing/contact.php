@@ -77,6 +77,9 @@ class ControllerMarketingContact extends Controller {
 
 				$this->load->model('sale/order');
 
+				$this->load->model('extension/module/zemez_newsletter');
+				
+
 				if (isset($this->request->get['page'])) {
 					$page = $this->request->get['page'];
 				} else {
@@ -99,6 +102,12 @@ class ControllerMarketingContact extends Controller {
 
 						$results = $this->model_customer_customer->getCustomers($customer_data);
 
+				$guest_results = $this->model_extension_module_zemez_newsletter->getNewsletters();
+				foreach ($guest_results as $result) {
+				$emails[] = $result['zemez_newsletter_email'];
+				}
+				
+
 						foreach ($results as $result) {
 							$emails[] = $result['email'];
 						}
@@ -112,6 +121,12 @@ class ControllerMarketingContact extends Controller {
 						$email_total = $this->model_customer_customer->getTotalCustomers($customer_data);
 
 						$results = $this->model_customer_customer->getCustomers($customer_data);
+
+				$guest_results = $this->model_extension_module_zemez_newsletter->getNewsletters();
+				foreach ($guest_results as $result) {
+				$emails[] = $result['zemez_newsletter_email'];
+				}
+				
 
 						foreach ($results as $result) {
 							$emails[] = $result['email'];
@@ -127,6 +142,12 @@ class ControllerMarketingContact extends Controller {
 						$email_total = $this->model_customer_customer->getTotalCustomers($customer_data);
 
 						$results = $this->model_customer_customer->getCustomers($customer_data);
+
+				$guest_results = $this->model_extension_module_zemez_newsletter->getNewsletters();
+				foreach ($guest_results as $result) {
+				$emails[] = $result['zemez_newsletter_email'];
+				}
+				
 
 						foreach ($results as $result) {
 							$emails[$result['customer_id']] = $result['email'];

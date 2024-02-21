@@ -5,6 +5,10 @@ $_['heading_title']    = 'Featured';
 // Text
 $_['text_extension']   = 'Extensions';
 $_['text_success']     = 'Success: You have modified featured module!';
+
+				$_['text_layout_carousel'] = 'Carousel';
+				$_['text_layout_static']   = 'Static';
+				
 $_['text_edit']        = 'Edit Featured Module';
 
 // Entry
@@ -13,6 +17,9 @@ $_['entry_product']    = 'Products';
 $_['entry_limit']      = 'Limit';
 $_['entry_width']      = 'Width';
 $_['entry_height']     = 'Height';
+
+				$_['entry_layout_type']    = 'Layout Type';
+				
 $_['entry_status']     = 'Status';
 
 // Help

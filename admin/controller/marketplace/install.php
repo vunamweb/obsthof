@@ -137,6 +137,16 @@ class ControllerMarketplaceInstall extends Controller {
 					'catalog/view/theme/',
 					'system/config/',
 					'system/library/',
+
+				'admin/controller/simple_blog/',
+				'admin/model/simple_blog/',
+				'catalog/controller/simple_blog/',
+				'catalog/model/simple_blog/',
+				'catalog/controller/common/',
+				'admin/view/template/simple_blog/',
+				'catalog/controller/product/',
+				'catalog/model/catalog/',
+				
 					'image/catalog/'
 				);
 	

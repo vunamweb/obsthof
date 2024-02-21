@@ -35,6 +35,13 @@ $_['text_error']                     = 'Error Handling';
 
 // Entry
 $_['entry_meta_title']               = 'Meta Title';
+
+				$_['entry_special_counters'] = 'Counters on Special Offers page';
+				$_['entry_days_title']       = 'Title of days';
+				$_['entry_hours_title']      = 'Title of hours';
+				$_['entry_minutes_title']    = 'Title of minutes';
+				$_['entry_seconds_title']    = 'Title of seconds';
+				
 $_['entry_meta_description']         = 'Meta Tag Description';
 $_['entry_meta_keyword']             = 'Meta Tag Keywords';
 $_['entry_layout']                   = 'Default Layout';

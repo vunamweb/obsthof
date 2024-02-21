@@ -5,6 +5,10 @@ $_['heading_title']    = 'Рекомендуемые';
 // Text
 $_['text_extension']   = 'Расширения';
 $_['text_success']     = 'Настройки успешно изменены!';
+
+				$_['text_layout_carousel'] = 'Carousel';
+				$_['text_layout_static']   = 'Static';
+				
 $_['text_edit']        = 'Настройки модуля';
 
 // Entry
@@ -13,6 +17,9 @@ $_['entry_product']    = 'Товары';
 $_['entry_limit']      = 'Лимит';
 $_['entry_width']      = 'Ширина';
 $_['entry_height']     = 'Высота';
+
+				$_['entry_layout_type']    = 'Layout Type';
+				
 $_['entry_status']     = 'Статус';
 
 // Help

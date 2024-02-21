@@ -340,6 +340,77 @@
             <div class="tab-pane" id="tab-option">
               <fieldset>
                 <legend>{{ text_product }}</legend>
+
+				<div class="form-group">
+					<label class="col-sm-2 control-label" for="input-config_special_counters">{{ entry_special_counters }}</label>
+					<div class="col-sm-10">
+						<select name="config_special_counters" id="input-config_special_counters" class="form-control">
+							{% if (config_special_counters) %} 
+							<option value="1" selected="selected">{{ text_enabled }}</option>
+							<option value="0">{{ text_disabled }}</option>
+							{% else %} 
+							<option value="1">{{ text_enabled }}</option>
+							<option value="0" selected="selected">{{ text_disabled }}</option>
+							{% endif %} 
+						</select>
+					</div>
+				</div>
+
+				<div class="tab-pane special-counters-options {{ config_special_counters ? '' : 'hidden' }}">
+					<div class="row">
+						<div class="col-sm-10 col-sm-offset-2">
+							<ul class="nav nav-tabs" id="language">
+								{% for language in languages %} 
+								<li>
+									<a href="#language{{ language['language_id'] }}" data-toggle="tab">
+										<img src="language/{{ language['code'] }}/{{ language['code'] }}.png" title="{{ language['name'] }}" />
+										{{ language['name'] }} 
+									</a>
+								</li>
+								{% endfor %} 
+							</ul>
+						</div>
+					</div>
+					<div class="tab-content">
+						{% for language in languages %} 
+						<div class="tab-pane" id="language{{ language['language_id'] }}">
+							<div class="form-group">
+								<label class="col-sm-2 control-label" for="input-days-title{{ language['language_id'] }}">
+									{{ entry_days_title }} 
+								</label>
+								<div class="col-sm-10">
+									<input name="config_special_counters_title[{{ language['language_id'] }}][days_title]" placeholder="{{ entry_days_title }}" id="input-days-title{{ language['language_id'] }}" class="form-control" value="{{ config_special_counters_title[language['language_id']]['days_title'] is defined ? config_special_counters_title[language['language_id']]['days_title'] : '' }}"/>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-2 control-label" for="input-hours-title{{ language['language_id'] }}">
+									{{ entry_hours_title }} 
+								</label>
+								<div class="col-sm-10">
+									<input name="config_special_counters_title[{{ language['language_id'] }}][hours_title]" placeholder="{{ entry_hours_title }}" id="input-hours-title{{ language['language_id'] }}" class="form-control" value="{{ config_special_counters_title[language['language_id']]['hours_title'] is defined ? config_special_counters_title[language['language_id']]['hours_title'] : '' }}"/>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-2 control-label" for="input-minutes-title{{ language['language_id'] }}">
+									{{ entry_minutes_title }} 
+								</label>
+								<div class="col-sm-10">
+									<input name="config_special_counters_title[{{ language['language_id'] }}][minutes_title]" placeholder="{{ entry_minutes_title }}" id="input-minutes-title{{ language['language_id'] }}" class="form-control" value="{{ config_special_counters_title[language['language_id']]['minutes_title'] is defined ? config_special_counters_title[language['language_id']]['minutes_title'] : '' }}"/>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-2 control-label" for="input-seconds-title{{ language['language_id'] }}">
+									{{ entry_seconds_title }} 
+								</label>
+								<div class="col-sm-10">
+									<input name="config_special_counters_title[{{ language['language_id'] }}][seconds_title]" placeholder="{{ entry_seconds_title }}" id="input-seconds-title{{ language['language_id'] }}" class="form-control" value="{{ config_special_counters_title[language['language_id']]['seconds_title'] is defined ? config_special_counters_title[language['language_id']]['seconds_title'] : '' }}"/>
+								</div>
+							</div>
+						</div>
+						{% endfor %} 
+					</div>
+				</div>
+				
                 <div class="form-group">
                   <label class="col-sm-2 control-label"><span data-toggle="tooltip" title="{{ help_product_count }}">{{ entry_product_count }}</span></label>
                   <div class="col-sm-10">
@@ -1416,4 +1487,14 @@ $('select[name=\'config_country_id\']').on('change', function() {
 
 $('select[name=\'config_country_id\']').trigger('change');
 //--></script></div>
+
+					<script type="text/javascript">
+						$('#language a:first').tab('show');
+						;(function ($) {
+						$('[name="config_special_counters"]').on('change', function(){
+						$('.special-counters-options').toggleClass('hidden');
+						});
+						})(jQuery);
+					</script>
+				
 {{ footer }} 

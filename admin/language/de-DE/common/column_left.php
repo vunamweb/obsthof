@@ -9,11 +9,19 @@
 
 // Text
 $_['text_api']						= 'API';
+
+				$_['text_simple_blogs']         = 'Blog';
+				$_['text_simple_blog_author']   = 'Author';
+				$_['text_simple_blog_category'] = 'Category';
+				$_['text_simple_blog_article']  = 'Article';
+				$_['text_simple_blog_comment']  = 'Article Comment';
+				$_['text_simple_blog_report']   = 'Report';
+				
 $_['text_attribute']				= 'Eigenschaften';
 $_['text_attribute_group']			= 'Eigenschaftsgruppen';
 $_['text_backup']					= 'Sichern / Wiederherstellen';
 $_['text_banner']					= 'Banner';
-$_['text_catalog']					= 'Katalog';
+$_['text_catalog']					= 'Katalog / Produkte';
 $_['text_category']					= 'Kategorien';
 $_['text_country']					= 'Länder';
 $_['text_coupon']					= 'Gutscheine';
@@ -96,3 +104,9 @@ $_['text_paypal_search']			= 'Suche';
 $_['text_complete_status']			= 'Aufträge abgeschlossen';
 $_['text_processing_status']		= 'Aufträge in Arbeit';
 $_['text_other_status']				= 'Andere Statuse';
+
+// EVENT
+$_['text_event_shop']           = 'Events verwalten';
+$_['text_event_Product']        = 'Product';
+$_['text_event_ticket']        = 'Ticket';
+// END
