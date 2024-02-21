@@ -45,7 +45,7 @@ $(document).ready(function () {
 ========================================================*/
 ;
 (function ($) {
-	include('js/jquery.easing.1.3.js');
+	include('../zemez1019/js/jquery.easing.1.3.js');
 })(jQuery);
 
 
@@ -53,7 +53,7 @@ $(document).ready(function () {
 ========================================================*/
 ;
 (function ($) {
-	include('js/jquery.matchHeight.js');
+	include('../zemez1019/js/jquery.matchHeight.js');
 })(jQuery);
 
 
@@ -63,14 +63,14 @@ $(document).ready(function () {
 (function ($) {
 	var o = $('.lazy img');
 	if (o.length > 0) {
-		include('js/jquery.unveil.min.js');
+		include('../zemez1019/js/jquery.unveil.min.js');
 		$(document).ready(function () {
 			$(o).unveil(0, function () {
 				$(this).load(function () {
 					$(this).parent().addClass("lazy-loaded");
 				});
 			});
-    });
+		});
 		$(window).load(function () {
 			$(window).trigger('lookup.unveil');
 			if ($('.nav-tabs').length) {
@@ -93,7 +93,7 @@ $(document).ready(function () {
 (function ($) {
 	var o = $('html');
 	if (o.hasClass('desktop')) {
-		include('js/jquery.ui.totop.min.js');
+		include('../zemez1019/js/jquery.ui.totop.min.js');
 		$(document).ready(function () {
 			$().UItoTop({
 				easingType: 'easeOutQuart',
@@ -125,7 +125,7 @@ $(document).ready(function () {
 	var menu = $('#stuck');
 	var width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
 	if (o.hasClass('desktop') && menu.length && width > 1200) {
-		include('js/scrollfix.min.js');
+		include('../zemez1019/js/scrollfix.min.js');
 		$(window).load(function () {
 			menu.scrollFix({
 				style: false
@@ -141,6 +141,11 @@ $(document).ready(function () {
 (function ($) {
 	var o = $('.toggle');
 	$(document).ready(function () {
+		
+		$('.showCatList').click(function (e) {
+			// console.log(8);
+			$("#column-left").addClass("fix");
+		});
 		$('.toggle').click(function (e) {
 			e.preventDefault();
 			var tmp = $(this);
@@ -196,7 +201,7 @@ $(document).ready(function () {
 	o6 = $('.checkbox-inline'),
 	o7 = $('textarea');
 	if (o.length || o1.length) {
-		include('js/jquery.selectbox-0.2.min.js');
+		include('../zemez1019/js/jquery.selectbox-0.2.min.js');
 	}
 	$(window).load(function () {
 		// Accordion fix
@@ -317,6 +322,13 @@ function replaceForm() {
 /* Breadcrumb Last element replacement
 ========================================================*/
 $(document).ready(function () {
+	act = $("#active_nav").val();
+	// $("#L"+act+".rd-mobilemenu_submenu").addClass("show");
+	$("#L"+act+".rd-mobilemenu_submenu").css({"display":"block"});
+	$(".n"+act+".nav-link").addClass("active");
+	act = $("#active_subnav").val();
+	$(".dd"+act+"").addClass("active");
+
 	if ($('.breadcrumb').length) {
 		var o = $('.breadcrumb li:last-child > a');
 		o.replaceWith('<span>' + o.html() + '</span>');
@@ -344,7 +356,7 @@ $(document).ready(function () {
 	var o1 = $('#productZoom');
 	var o2 = $('#productFullGallery');
 	if (o.length) {
-		include('js/jquery.bxslider/jquery.bxslider.js');
+		include('../zemez1019/js/jquery.bxslider/jquery.bxslider.js');
 		$(document).ready(function () {
 			o
 			.bxSlider({
@@ -382,8 +394,8 @@ $(document).ready(function () {
 		});
 	}
 	if (o2.length) {
-		include('js/photo-swipe/klass.min.js');
-		include('js/photo-swipe/code.photoswipe-3.0.5.min.js');
+		include('../zemez1019/js/photo-swipe/klass.min.js');
+		include('../zemez1019/js/photo-swipe/code.photoswipe-3.0.5.min.js');
 		$(document).ready(function () {
 			o2
 			.bxSlider({
@@ -562,7 +574,7 @@ $(window).resize(function () {
 (function ($) {
 	var o = $('.product-countdown');
 	if (o.length) {
-		include('js/jquery.countdown.min.js');
+		include('../zemez1019/js/jquery.countdown.min.js');
 		$(document).ready(function(){
 			o.each(function(){
 				$(this).countdown($(this).data('date'), function(event){
@@ -598,8 +610,8 @@ $(window).resize(function () {
 	var selector = $('.quickview'),//
 	selector2 = $('#productZoom');
 	if (selector.length > 0 || selector2.length > 0) {
-		include('js/jquery.selectbox-0.2.min.js');
-		include('js/fancybox/jquery.fancybox.js');
+		include('../zemez1019/js/jquery.selectbox-0.2.min.js');
+		include('../zemez1019/js/fancybox/jquery.fancybox.js');
 		//document.write('<script src="catalog/view/javascript/jquery/datetimepicker/moment/moment.min.js"><\/script>');
 		//document.write('<script src="catalog/view/javascript/jquery/datetimepicker/bootstrap-datetimepicker.min.js"><\/script>');
 		//document.write('<script src="catalog/view/javascript/jquery/datetimepicker/bootstrap-datepicker.de.min.js"><\/script>');
@@ -827,3 +839,4 @@ $(window).resize(function () {
 		});
 	}
 })(jQuery);
+
