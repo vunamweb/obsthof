@@ -381,6 +381,7 @@ class ControllerMailOrder extends Controller {
 		  $type = $this->createPDFInvoice($order_info, $order_status_id, $sum_tax_1, $sum_tax_2, $totalNormalProduct);
 		
 		  $this->sendMailSMTP($order_info['email'], $subject, '', $fromName, $this->load->view('mail/order_add', $data), 1, $type);
+		  $this->sendMailSMTP(SPECIAL_EMAIL, $subject, '', $fromName, $this->load->view('mail/order_add', $data), 1, $type);
 		}
 		// if status is not complete
 		else {
@@ -391,23 +392,25 @@ class ControllerMailOrder extends Controller {
 		$this->sendMailSMTP($this->config->get('config_email'), $subject, '', $fromName, $this->load->view('mail/order_alert', $data), 1);
     }
 
-	function sendMailSMTP($to, $subject, $from, $fromName, $message, $senMail=1, $type = false)
+	function sendMailSMTP($to, $subject, $from, $fromName, $message, $sendMail=1, $type = false)
    {
 		$files1 = str_replace("index.php", "", $_SERVER['SCRIPT_FILENAME']) . "pdf/order.pdf";
 		$files2 = str_replace("index.php", "", $_SERVER['SCRIPT_FILENAME']) . "pdf/order_event.pdf";		
 		
-		$from = "shop@obsthofamsteinberg.de";
+		// $from = "shop@obsthofamsteinberg.de";		
+		$from = "webshop@obsthof-am-steinberg.de";
 		
 	    $mail = new PHPMailer();
+		
 		$mail->IsSMTP(); // telling the class to use SMTP
 		$mail->SMTPDebug = 0; // enables SMTP debug information (for testing)
 		$mail->SMTPAuth = true; // enable SMTP authentication
 		$mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS; // Implizite TLS-Verschlüsselung aktivieren
-		// $mail->SMTPSecure = "STARTTLS";
 		$mail->Host = "smtp.ionos.de"; // sets GMAIL as the SMTP server
 		$mail->Port = 465; // set the SMTP port for the GMAIL server
 		$mail->Username = $from; // GMAIL username
 		$mail->Password = "!wEr4!hZtvB";
+		// $mail->Password = "Carp3nt!n18";		
 		$mail->CharSet = 'UTF-8';
 		// $mail->Encoding = 'base64';
 		$mail->AddAddress($to);
@@ -416,13 +419,14 @@ class ControllerMailOrder extends Controller {
 		$mail->FromName = $fromName;
 		$mail->From = $from;
 		$mail->IsHTML(true);
-		$mail->Body = $message;
-
+		$mail->Body = $message;		
+		// $mail->addReplyTo = "webshop@obsthof-am-steinberg.de";
+		
 		// if order on frontend
-		if($senMail == 1) {
-			$mail->addAttachment($files1);
+		if($sendMail == 1) {
+			if($files1) $mail->addAttachment($files1);
 
-			if($type)
+			if($type && $files2)
 			  $mail->addAttachment($files2);	
 		}
 		    
