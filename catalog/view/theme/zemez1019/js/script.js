@@ -45,7 +45,7 @@ $(document).ready(function () {
 ========================================================*/
 ;
 (function ($) {
-	include('../zemez1019/js/jquery.easing.1.3.js');
+	include('js/jquery.easing.1.3.js');
 })(jQuery);
 
 
@@ -53,7 +53,7 @@ $(document).ready(function () {
 ========================================================*/
 ;
 (function ($) {
-	include('../zemez1019/js/jquery.matchHeight.js');
+	include('js/jquery.matchHeight.js');
 })(jQuery);
 
 
@@ -63,7 +63,7 @@ $(document).ready(function () {
 (function ($) {
 	var o = $('.lazy img');
 	if (o.length > 0) {
-		include('../zemez1019/js/jquery.unveil.min.js');
+		include('js/jquery.unveil.min.js');
 		$(document).ready(function () {
 			$(o).unveil(0, function () {
 				$(this).load(function () {
@@ -93,7 +93,7 @@ $(document).ready(function () {
 (function ($) {
 	var o = $('html');
 	if (o.hasClass('desktop')) {
-		include('../zemez1019/js/jquery.ui.totop.min.js');
+		include('js/jquery.ui.totop.min.js');
 		$(document).ready(function () {
 			$().UItoTop({
 				easingType: 'easeOutQuart',
@@ -125,7 +125,7 @@ $(document).ready(function () {
 	var menu = $('#stuck');
 	var width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
 	if (o.hasClass('desktop') && menu.length && width > 1200) {
-		include('../zemez1019/js/scrollfix.min.js');
+		include('js/scrollfix.min.js');
 		$(window).load(function () {
 			menu.scrollFix({
 				style: false
@@ -201,7 +201,7 @@ $(document).ready(function () {
 	o6 = $('.checkbox-inline'),
 	o7 = $('textarea');
 	if (o.length || o1.length) {
-		include('../zemez1019/js/jquery.selectbox-0.2.min.js');
+		include('js/jquery.selectbox-0.2.min.js');
 	}
 	$(window).load(function () {
 		// Accordion fix
@@ -356,7 +356,7 @@ $(document).ready(function () {
 	var o1 = $('#productZoom');
 	var o2 = $('#productFullGallery');
 	if (o.length) {
-		include('../zemez1019/js/jquery.bxslider/jquery.bxslider.js');
+		include('js/jquery.bxslider/jquery.bxslider.js');
 		$(document).ready(function () {
 			o
 			.bxSlider({
@@ -394,8 +394,8 @@ $(document).ready(function () {
 		});
 	}
 	if (o2.length) {
-		include('../zemez1019/js/photo-swipe/klass.min.js');
-		include('../zemez1019/js/photo-swipe/code.photoswipe-3.0.5.min.js');
+		include('js/photo-swipe/klass.min.js');
+		include('js/photo-swipe/code.photoswipe-3.0.5.min.js');
 		$(document).ready(function () {
 			o2
 			.bxSlider({
@@ -574,7 +574,7 @@ $(window).resize(function () {
 (function ($) {
 	var o = $('.product-countdown');
 	if (o.length) {
-		include('../zemez1019/js/jquery.countdown.min.js');
+		include('js/jquery.countdown.min.js');
 		$(document).ready(function(){
 			o.each(function(){
 				$(this).countdown($(this).data('date'), function(event){
@@ -610,8 +610,8 @@ $(window).resize(function () {
 	var selector = $('.quickview'),//
 	selector2 = $('#productZoom');
 	if (selector.length > 0 || selector2.length > 0) {
-		include('../zemez1019/js/jquery.selectbox-0.2.min.js');
-		include('../zemez1019/js/fancybox/jquery.fancybox.js');
+		include('js/jquery.selectbox-0.2.min.js');
+		include('js/fancybox/jquery.fancybox.js');
 		//document.write('<script src="catalog/view/javascript/jquery/datetimepicker/moment/moment.min.js"><\/script>');
 		//document.write('<script src="catalog/view/javascript/jquery/datetimepicker/bootstrap-datetimepicker.min.js"><\/script>');
 		//document.write('<script src="catalog/view/javascript/jquery/datetimepicker/bootstrap-datepicker.de.min.js"><\/script>');

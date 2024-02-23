@@ -38,8 +38,10 @@
 		href="catalog/view/javascript/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen"/>
 		{# styles #}
 		<link href="catalog/view/theme/{{theme_path}}/stylesheet/photoswipe.css" rel="stylesheet">
-		<link href="catalog/view/theme/{{ theme_path }}/stylesheet/stylesheet.css?v=12" rel="stylesheet">
-		<link href="catalog/view/theme/{{ theme_path }}/js/fancybox/jquery.fancybox.css" rel="stylesheet">
+		<link href="catalog/view/theme/{{ theme_path }}/stylesheet/swipebox.min.css?v=18" rel="stylesheet">
+		<link href="/themes/default/default.css" rel="stylesheet" type="text/css">
+		<link href="catalog/view/theme/{{ theme_path }}/stylesheet/stylesheet.css?v=18" rel="stylesheet">
+		<!-- <link href="catalog/view/theme/{{ theme_path }}/js/fancybox/jquery.fancybox.css" rel="stylesheet"> -->
 		{# end styles #}
 		{# rtl #}
 			{% if direction == 'rtl' %}
@@ -72,8 +74,8 @@
 		{{ seo4 }}
 		{% endif %}
 	</head>
-	<body class="{{ url }} body_class">
-		<p id="gl_path" class="hidden">{{ theme_path }}</p>
+	<body class="{{ title }} body_class">
+	<p id="gl_path" class="hidden">{{ theme_path }}</p>
 		<div id="page">
 			<div id="page-preloader" class="visible">
 				<div class="preloader">
@@ -102,20 +104,20 @@
 			</header>
 			<section class="top">
 				<div class="top-center">
-					<a href="./"><img src="image/catalog/obsthof-basics/biozertifiziert.png"/></a>
+					<a href="./"><img src="image/catalog/obsthof-basics/biozertifiziert.png?v=23"/></a>
 				</div>
 				<div class="top-right">
 					<div class="class-1">
 						<a href="https://maps.app.goo.gl/ytr6gydYomN3yJaf9" target="_blank"><i class="fa fa-map-marker" aria-hidden="true"></i></a>
 					</div>
 					<div class="class-1">
-						<i class="fa fa-envelope" aria-hidden="true"></i>
+						<a href="mailto:info@obsthof-am-steinberg.de"><i class="fa fa-envelope" aria-hidden="true"></i></a>
 					</div>
 					<div class="class-1">
-						<a href="tel:061019875725"><i class="icon telefon" aria-hidden="true"></i></a>
+						<a href="tel:0610141522"><i class="icon telefon" aria-hidden="true"></i></a>
 					</div>
 					<div class="class-1">
-						<a href="/shop/index.php?route=information/contact"><i class="icon info" aria-hidden="true"></i></a>
+						<a href="#" data-scroll="myfooter"><i class="icon info" aria-hidden="true"></i></a>
 					</div>
 				</div>
 				<div class="top-left">
