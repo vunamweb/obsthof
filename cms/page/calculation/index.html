@@ -3,7 +3,7 @@
 <script type="text/javascript" src="./calculation_form/jquery-migrate.min.js" id="jquery-migrate-js"></script>
 <script type="text/javascript" src="./calculation_form/jquery.validate.min.js" id="validate-js"></script>
 <script type="text/javascript" src="./calculation_form/jquery-ui.js" id="jquery-ui-1.12.0.custom_js-js"></script>
-<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+<!-- <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script> -->
 <script type="text/javascript" src="./calculation_form/custom.js" id="custom_js-js"></script>
 <script type="text/javascript" src="./calculation_form/accounting.min.js" id="accounting_js-js"></script>
 <script type="text/javascript" id="wpstg-global-js-extra">
@@ -73,9 +73,9 @@
 </script>
 
 
-<div class="container">
+<div class="container anfrage">
 	<div class="row">
-		<div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 main-sidebar		">
+		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 main-sidebar">
 			<div id="primary" class="content-area">
 				<article id="post-145" class="post-145 page type-page status-publish hentry">
 					<div class="entry-content">
@@ -91,7 +91,7 @@
 															<p role="status" aria-live="polite" aria-atomic="true"></p>
 															<ul></ul>
 														</div>
-														<form action="http://localhost/obsthof/cms/page/calculation.php" method="post" class="wpcf7-form init" aria-label="Kontaktformular" novalidate="novalidate" data-status="init">
+														<form action="/cms/page/calculation_send.php" method="post" class="wpcf7-form init" aria-label="Kontaktformular" novalidate="novalidate" data-status="init">
 															<div style="display: none;">
 																<input type="hidden" name="_wpcf7" value="1835">
 																<input type="hidden" name="_wpcf7_version" value="5.8">
@@ -112,7 +112,7 @@
 																			<td>
 																				<p>Speisen und Getränke
 																				</p>
-																				<p style="font-size:1rem; line-height:1rem;">(Begrüßung, Bio Buffet, Stockbrot, Kaffee &amp; Kuchen)
+																				<p style="font-size:1rem; line-height:1rem;">(Begrüßung, Bio Buffet, Kaffee &amp; Kuchen)
 																				</p>
 																			</td>
 																			<td class="oas-total">
@@ -120,7 +120,7 @@
 																				</p>
 																			</td>
 																			<td class="oas-info">
-																				<p><i class="fa fa-info-circle" aria-hidden="true"></i><a class="bg-opener va-info" title="Mehr Info zur Begrüßung">Begrüßung</a>, <a class="bb-opener va-info" title="Mehr Info zum Bio Buffet">Bio Buffet</a>, <a class="sb-opener va-info" title="Mehr Info zum Stockbrot">Stockbrot</a>
+																				<p><i class="fa fa-info-circle" aria-hidden="true"></i><a class="bg-opener va-info" title="Mehr Info zur Begrüßung">Begrüßung</a>, <a class="bb-opener va-info" title="Mehr Info zum Bio Buffet">Bio Buffet</a>
 																				</p>
 																			</td>
 																		</tr>
@@ -244,10 +244,11 @@
 																		<span class="wpcf7-not-valid-tip_3 hide" aria-hidden="true">Das Feld ist erforderlich.</span>
 																	</span>
 																</p>
-																<p><label for="phone">Telefon</label>
+																<p><label for="phone">Telefon*</label>
 																</p>
-																<p><span class="wpcf7-form-control-wrap" data-name="phone"><input size="40" class="wpcf7-form-control wpcf7-tel wpcf7-text wpcf7-validates-as-tel" aria-invalid="false" value="" type="tel" name="phone"></span>
+																<p><span class="wpcf7-form-control-wrap" data-name="phone"><input size="40" class="wpcf7-form-control wpcf7-fon wpcf7-validates-as-required  wpcf7-tel wpcf7-text wpcf7-validates-as-tel" aria-invalid="false" value="" required aria-required="true" aria-invalid="false" type="tel" name="phone"></span>
 																</p>
+																	<span class="wpcf7-not-valid-tip_7 hide" aria-hidden="true">Das Feld ist erforderlich.</span>
 															</div>
 															<div class="col-2">
 																<p class="half"><label for="datum">Datum*</label>
@@ -281,56 +282,46 @@
 															<div class="col-1">
 																<p><label for="begruessung">Begrüßung</label>
 																</p>
-																<p><span class="wpcf7-form-control-wrap" data-name="begruessung"><select class="wpcf7-form-control wpcf7-select calc-food v0v650v950" id="oas-begruessung" aria-invalid="false" name="begruessung">
+																<p><span class="wpcf7-form-control-wrap" data-name="begruessung"><select class="wpcf7-form-control wpcf7-select calc-food v0v750v1050" id="oas-begruessung" aria-invalid="false" name="begruessung">
 																			<option value="Nein, danke">Nein, danke</option>
-																			<option value="Begrüßung mit Cidre/Apfelsaft (6,50€ pro Person)">Begrüßung mit Cidre/Apfelsaft (6,50€ pro Person)</option>
-																			<option value="Begrüßung mit Cidre/Apfelsaft und Frischkäse-/Griebenschmalzbrote (9,50€ pro Person)">Begrüßung mit Cidre/Apfelsaft und Frischkäse-/Griebenschmalzbrote (9,50€ pro Person)</option>
+																			<option value="Begrüßung mit Cidre/Apfelsaft (7,50€ pro Person)">Begrüßung mit Cidre/Apfelsaft (7,50€ pro Person)</option>
+																			<option value="Begrüßung mit Cidre/Apfelsaft und Frischkäse-/Griebenschmalzbrote (10,50€ pro Person)">Begrüßung mit Cidre/Apfelsaft und Frischkäse-/Griebenschmalzbrote (10,50€ pro Person)</option>
 																		</select></span>
 																	<span class="bg-opener va-info">Mehr Informationen zur Begrüßung</span>
 																</p>
 																<p><label for="biobuffet">Bio Buffet</label>
 																</p>
-																<p><span class="wpcf7-form-control-wrap" data-name="biobuffet"><select class="wpcf7-form-control wpcf7-select calc-food v0v2000v3500v4500v4500v3500" id="oas-biobuffet" aria-invalid="false" name="biobuffet">
+																<p><span class="wpcf7-form-control-wrap" data-name="biobuffet"><select class="wpcf7-form-control wpcf7-select calc-food v0v2200v3800v4900v4900v3800" id="oas-biobuffet" aria-invalid="false" name="biobuffet">
 																			<option value="Nein, danke">Nein, danke</option>
-																			<option value="leicht (20€ pro Person)">leicht (20€ pro Person)</option>
-																			<option value="pur (35€ pro Person)">pur (35€ pro Person)</option>
-																			<option value="total (45€ pro Person)">total (45€ pro Person)</option>
-																			<option value="vegan (45€ pro Person)">vegan (45€ pro Person)</option>
-																			<option value="vegetarisch (35€ pro Person)">vegetarisch (35€ pro Person)</option>
+																			<option value="leicht (22€ pro Person)">leicht (22€ pro Person)</option>
+																			<option value="pur (38€ pro Person)">pur (38€ pro Person)</option>
+																			<option value="total (49€ pro Person)">total (49€ pro Person)</option>
+																			<option value="vegan (49€ pro Person)">vegan (49€ pro Person)</option>
+																			<option value="vegetarisch (38€ pro Person)">vegetarisch (38€ pro Person)</option>
 																		</select></span>
 																	<span class="bb-opener va-info">Mehr Informationen zum Bio Buffet</span>
-																</p>
-																<p><label for="alacarte">Speisen à la carte</label>
-																</p>
-																<p><span class="wpcf7-form-control-wrap" data-name="alacarte"><select class="wpcf7-form-control wpcf7-select" id="oas-alacarte" aria-invalid="false" name="alacarte">
-																			<option value="Nein, danke">Nein, danke</option>
-																			<option value="Es kann &quot;a la carte&quot; bestellt werden.">Es kann "a la carte" bestellt werden.</option>
-																		</select></span>
-																</p>
-																<p><label for="stockbrot">Stockbrot</label>
-																</p>
-																<p><span class="wpcf7-form-control-wrap" data-name="stockbrot"><select class="wpcf7-form-control wpcf7-select calc-food v0" id="oas-stockbrot" aria-invalid="false" name="stockbrot">
-																			<option value="zur Zeit nicht buchbar">zur Zeit nicht buchbar</option>
-																		</select></span><!-- "Nein, danke" "Stockbrot am Lagerfeuer (3,00€ pro Person)" -->
-																	<span class="sb-opener va-info">Mehr Informationen zum Stockbrot</span>
-																</p>
+																</p>																
 																<p><label for="kaffee">Kaffee &amp; Kuchen</label>
 																</p>
-																<p><span class="wpcf7-form-control-wrap" data-name="kaffee"><select class="wpcf7-form-control wpcf7-select calc-food v0v1200v1200" id="oas-kaffee" aria-invalid="false" name="kaffee">
+																<p><span class="wpcf7-form-control-wrap" data-name="kaffee"><select class="wpcf7-form-control wpcf7-select calc-food v0v1250v1250" id="oas-kaffee" aria-invalid="false" name="kaffee">
 																			<option value="Nein, danke">Nein, danke</option>
-																			<option value="Kaffee und Waffeln (12,00€ pro Person, nur vom 1. Nov. - Gründonnerstag)">Kaffee und Waffeln (12,00€ pro Person, nur vom 1. Nov. - Gründonnerstag)</option>
-																			<option value="Kaffee und Kuchen (12,00€ pro Person)">Kaffee und Kuchen (12,00€ pro Person)</option>
+																			<option value="Kaffee und Waffeln (12,50€ pro Person, nur vom 1. Nov. - Gründonnerstag)">Kaffee und Waffeln (12,50€ pro Person, nur vom 1. Nov. - Gründonnerstag)</option>
+																			<option value="Kaffee und Kuchen (12,50€ pro Person)">Kaffee und Kuchen (12,50€ pro Person)</option>
 																		</select></span>
 																</p>
 																<p><label for="raclette">Fackelwanderung und Apfel-Raclette</label>
 																</p>
-																<p><span class="wpcf7-form-control-wrap" data-name="raclette"><select class="wpcf7-form-control wpcf7-select calc-fw-ar v0v2750v2750v4950" id="oas-raclette" aria-invalid="false" name="raclette">
+																<p><span class="wpcf7-form-control-wrap" data-name="raclette"><select class="wpcf7-form-control wpcf7-select calc-fw-ar v0v2850v2850v5150" id="oas-raclette" aria-invalid="false" name="raclette">
 																			<option value="Nein, danke">Nein, danke</option>
-																			<option value="Nur Fackelwanderung (27,50 € pro Person)">Nur Fackelwanderung (27,50 € pro Person)</option>
-																			<option value="Nur Apfel-Raclette (27,50 € pro Person)">Nur Apfel-Raclette (27,50 € pro Person)</option>
-																			<option value="Kombination: Fackelwanderung und Apfel-Raclette  (49,50 € pro Person)">Kombination: Fackelwanderung und Apfel-Raclette (49,50 € pro Person)</option>
+																			<option value="Nur Fackelwanderung (28,50 € pro Person)">Nur Fackelwanderung (28,50 € pro Person)</option>
+																			<option value="Nur Apfel-Raclette (28,50 € pro Person)">Nur Apfel-Raclette (28,50 € pro Person)</option>
+																			<option value="Kombination: Fackelwanderung und Apfel-Raclette  (51,50 € pro Person)">Kombination: Fackelwanderung und Apfel-Raclette (51,50 € pro Person)</option>
 																		</select></span>
-																	Mehr Informationen zu <span class="ar-opener va-info">Apfel-Raclette</span> und <span class="fw-opener va-info">Fackelwanderung</span>
+																		<span class="va-info" style="color:#95C11F !important; font-size: .9em;">
+																			Mehr Informationen zu <span class="ar-opener va-info">Apfel-Raclette</span> und <span class="fw-opener va-info">Fackelwanderung</span>
+																			
+																		</span>
+																		
 																</p>
 																<p><label for="lagenwanderung">Lagenwanderung</label>
 																</p>
@@ -350,24 +341,24 @@
 																		</select></span>
 																	<span class="ec-opener va-info">Mehr Informationen zum eigenen Caterer</span>
 																</p>
-																<p><label for="zelt">Feierzelt mit Apfelgarten</label>
+																<p><label for="zelt">Feierzelt mit ApfelVORAUSSICHTLICHE KOSTEN  garten</label>
 																</p>
 																<p><span class="wpcf7-form-control-wrap" data-name="zelt"><select class="wpcf7-form-control wpcf7-select calc-tent v0v1" id="oas-zelt" aria-invalid="false" name="zelt">
 																			<option value="Nein, danke">Nein, danke</option>
 																			<option value="Ja, wir möchten im Zelt feiern">Ja, wir möchten im Zelt feiern</option>
 																		</select></span>
-																	<span class="fz-opener va-info">Mehr Informationen zum Feierzelt</span><br>
+																	<span class="fz-opener va-info">Mehr Informationen zum Feierzelt</span>
 																	<span class="fz-message bgred white hide">Die max. Sitzplatzanzahl im Feierzelt ist überschritten. Wir werden Dir zusätzlich notwendige Sitzplätze im Pavillion anbieten. Bitte fahre fort.</span>
 																</p>
 																<p class="two-third"><label for="servicek">Servicekräfte</label>
 																</p>
-																<p><span class="wpcf7-form-control-wrap" data-name="servicek"><select class="wpcf7-form-control wpcf7-select calc-service v0v3950v7900v11850v15800v19750" id="oas-servicek" aria-invalid="false" name="servicek">
+																<p><span class="wpcf7-form-control-wrap" data-name="servicek"><select class="wpcf7-form-control wpcf7-select calc-service v0v4250v8500v12750v17000v21250" id="oas-servicek" aria-invalid="false" name="servicek">
 																			<option value="Nein, danke">Nein, danke</option>
-																			<option value="1 Servicekraft (39,50€ pro Std.)">1 Servicekraft (39,50€ pro Std.)</option>
-																			<option value="2 Servicekräfte (79,00€ pro Std.)">2 Servicekräfte (79,00€ pro Std.)</option>
-																			<option value="3 Servicekräfte (118,50€ pro Std.)">3 Servicekräfte (118,50€ pro Std.)</option>
-																			<option value="4 Servicekräfte (158,00€ pro Std.)">4 Servicekräfte (158,00€ pro Std.)</option>
-																			<option value="5 Servicekräfte (197,50€ pro Std.)">5 Servicekräfte (197,50€ pro Std.)</option>
+																			<option value="1 Servicekraft (42,50€ pro Std.)">1 Servicekraft (42,50€ pro Std.)</option>
+																			<option value="2 Servicekräfte (85,00€ pro Std.)">2 Servicekräfte (85,00€ pro Std.)</option>
+																			<option value="3 Servicekräfte (127,50€ pro Std.)">3 Servicekräfte (127,50€ pro Std.)</option>
+																			<option value="4 Servicekräfte (170,00€ pro Std.)">4 Servicekräfte (170,00€ pro Std.)</option>
+																			<option value="5 Servicekräfte (212,50€ pro Std.)">5 Servicekräfte (212,50€ pro Std.)</option>
 																		</select></span>
 																</p>
 																<p class="third"><label for="serviceh">Service in Std.</label>
@@ -387,10 +378,10 @@
 																<p>
 
 																</p>
-																<p id="submit"><input style="display: none" class="wpcf7-form-control wpcf7-submit wpcf7-submit_root has-spinner" type="submit" value="Unverbindliche Anfrage senden">
-																<p id="submit"><input class="wpcf7-form-control wpcf7-submit wpcf7-submit_1 has-spinner" type="button" value="Unverbindliche Anfrage senden">
+																<p id="submit"><input style="display: none" class="btn btn-info wpcf7-form-control wpcf7-submit wpcf7-submit_root has-spinner" type="submit" value="Unverbindliche Anfrage senden">
+																<p id="submit"><input class="btn btn-info wpcf7-form-control wpcf7-submit wpcf7-submit_1 has-spinner" type="button" value="Unverbindliche Anfrage senden" style="display: block;">
 																</p>
-																<div class="message" aria-hidden="true"></div>
+																<div class="message" style="margin-top:100px" aria-hidden="true"></div>
 															</div>
 														</form>
 													</div>
@@ -467,6 +458,13 @@
 		else {
 			check = false;
 			$('.wpcf7-not-valid-tip_3').removeClass('hide');
+		}
+
+		if ($('.wpcf7-tel').val() != '')
+			$('.wpcf7-not-valid-tip_7').addClass('hide');
+		else {
+			check = false;
+			$('.wpcf7-not-valid-tip_7').removeClass('hide');
 		}
 
 		if ($('#oas-datum').val() != '')
@@ -573,7 +571,7 @@
 		document.body.className = c;
 	})();
 </script>
-<link rel="stylesheet" id="rs-plugin-settings-css" href="./calculation_form/rs6.css" type="text/css" media="all">
+<!-- <link rel="stylesheet" id="rs-plugin-settings-css" href="./calculation_form/rs6.css" type="text/css" media="all"> -->
 <style id="rs-plugin-settings-inline-css" type="text/css">
 	#rs-demo-id {}
 </style>
@@ -588,8 +586,8 @@
 	/* <![CDATA[ */
 	var wpcf7 = {
 		"api": {
-			"root": "http:\/\/localhost/obsthof\/cms/page\/",
-			"namespace": "calculation.php\/"
+			"root": "https:\/\/neu.obsthofamsteinberg.de\/cms/page\/",
+			"namespace": "calculation-send.php\/"
 		},
 		"cached": "1"
 	};
@@ -722,7 +720,7 @@
 		<p><strong>Fackelwanderungen und Apfel-Raclettes bieten wir Euch alljährlich vom 1. November bis 31. März an.<br>
 			</strong>Nach einer Glühapfel-Begrüßung in unserer winterlich geschmückten Schoppenwirtschaft beginnt die Wanderung mit dem Anzünden der Fackeln am Lagerfeuer. Anschließend geht es durch den Apfelhain. Dort verkostet Ihr direkt unterm Apfelbaum 2 sortenreine Apfelweine. Andreas Schneider oder ein/e Mitarbeiter/in erläutern Euch im Fackelschein unsere Apfelwein-Philosophie und geben Einblick in die biologische Wirtschaftsweise des „Obsthof am Steinberg“. Die eigentliche Fackelwanderung dauert je nach Witterung ca. 45 Minuten auf einer Strecke von etwa 1 km. Die gesamte Führung dauert insgesamt 1,5 Stunden inkl. Begrüßung und Abschluss-Moderation am Lagerfeuer. Auf Wunsch führen wir die Fackelwanderung in Englisch durch. Im Anschluss findet das Apfel-Raclette in unserer beheizten Schoppenwirtschaft statt.<br>
 			Wir empfehlen für die Wanderung festes Schuhwerk und eine der Witterung angepasste Kleidung. Kinder von 0-3 Jahre können kostenfrei teilnehmen. Kinder von 4-7 Jahren und Personen mit Behindertenausweis zahlen den halben Preis (50%).</p>
-		<p>Preis: 24,50 €/Person</p>
+		<p>Preis: 28,50 €/Person</p>
 		<p><strong>Bitte unbedingt beachten:</strong><br>
 			Zum persönlichen Schutz empfehlen wir eine Mütze und keine leicht entflammbare Kleidung wie z.B. Vliesjacken oder ähnliches zu tragen. Bei Funkenflug kann es zu Brandschäden kommen. Der „Obsthof am Steinberg“ übernimmt bei Schäden jeglicher Art keine Haftung. Die Teilnahme erfolgt auf eigene Verantwortung. Die Fackelwanderung findet nur bei Windstille und gutem Wetter statt. Sollte es regnen oder winden, findet als Alternativ-Programm eine individuelle Apfelweinprobe mit je 3 Apfelweinen oder Säften in unserer beheizten Schoppenwirtschaft statt. Bei höherer Gewalt behalten wir uns vor, die Veranstaltung kurzfristig auch noch vor Ort abzusagen.</p>
 	</div>
@@ -740,8 +738,8 @@
 	<div id="ar-dialog" class="ui-dialog-content ui-widget-content">
 		<p><strong>Fackelwanderungen und Apfel-Raclettes bieten wir Euch alljährlich vom 1. November bis 31. März an.<br>
 			</strong>Ihr bucht unser geselliges Apfel-Raclette für Eure ganz persönliche Einkehr in unserer gemütlich beheizten Schoppenwirtschaft – ideal im Freundes-, Familien- oder Kollegenkreis!<br>
-			Ihr erhaltet von uns einen gedeckten Tisch mit Raclettegerät/en, Gläsern, Tellern, Besteck und Servietten. Folgende Bio-Zutaten sind im Preis enthalten: Raclettekäse, Pellkartoffeln, Brot, Mais, Silberzwiebeln, saure Gürkchen, frischgehackte Zwiebeln und Äpfel zum Schmoren.</p>
-		<p>Preis: 24,50 €/Person.</p>
+			Ihr erhaltet von uns einen gedeckten Tisch mit Raclettegerät/en, Gläsern, Tellern, Besteck und Servietten. Folgende Bio-Zutaten sind im Preis enthalten: Raclettekäse, Pellkartoffeln, Brot, Mais, saure Gürkchen, gehackte Zwiebeln und Äpfel zum Schmoren.</p>
+		<p>Preis: 28,50 €/Person.</p>
 		<p><strong>Details:</strong></p>
 		<ul>
 			<li>Ein Raclettegerät steht einer Gruppe von 6 bis max. 7 Personen pro Tisch zur Verfügung</li>
@@ -749,8 +747,7 @@
 			<li>als alkoholfreie Alternative reichen wir unsere hauseigenen Bio-Säfte</li>
 			<li>Kinder von 0 bis 3 Jahre nehmen kostenfrei teil. Kinder von 4 bis 7 Jahre und Personen mit Behindertenausweis zahlen die Hälfte</li>
 			<li>buchbar innerhalb der Schoppenwirtschaftszeiten: Samstag von 12 bis 19 Uhr, Sonntag von 12 bis 17 Uhr</li>
-			<li>exklusive Öffnung unter der Woche für Firmen und Gruppen nach Absprache möglich</li>
-			<li>Bio-Stockbrot nach Voranmeldung, 2,50 €/Person inklusive Haselnuss-Stock</li>
+			<li>exklusive Öffnung unter der Woche für Firmen und Gruppen nach Absprache möglich</li>			
 		</ul>
 	</div>
 	<div class="ui-resizable-handle ui-resizable-n" style="z-index: 90;"></div>
@@ -770,23 +767,23 @@
 			Frischkäsebrote<br>
 			Handkäse mit Musik<br>
 			Hausgemachter Kartoffelsalat<br>
-			Bio-Bratwürste – Lamm oder Rind-Schwein frisch vom Grill</p>
+			Bratwürste – Lamm oder Rind-Schwein frisch vom Grill</p>
 		<p><strong>pur</strong><br>
 			Vesperteller – verschiedene Käse- und Wurstspezialitäten<br>
 			Handkäse mit Musik<br>
 			Quer durch den Garten – eine Auswahl an Rohkostvarianten mit Joghurt-Dip<br>
 			Hausgemachter Kartoffelsalat<br>
-			Bio-Bratwürste – Lamm oder Rind-Schwein frisch vom Grill</p>
+			Bratwürste – Lamm oder Rind-Schwein frisch vom Grill</p>
 		<p><strong>total</strong><br>
 			Vesperteller – verschiedene Käse- und Wurstspezialitäten<br>
 			Handkäse mit Musik<br>
 			Quer durch den Garten – eine Auswahl an Rohkostvarianten mit Joghurt-Dip<br>
 			Grüne Sauce mit Ei und Pellkartoffeln<br>
 			Hausgemachter Kartoffelsalat<br>
-			Bio-Bratwürste – Lamm oder Rind-Schwein frisch vom Grill</p>
+			Bratwürste – Lamm oder Rind-Schwein frisch vom Grill</p>
 		<p>Zu allen Bio-Buffets reichen wir Brot und Butter. Alle Preise verstehen sich inkl. MwSt. Auf Wunsch erhaltet Ihr auch vegane und vegetarische Gerichte. Zum geselligen Abschluss Eurer Feier empfehlen wir Euch Kaffee und Kuchen von der Frankfurter Mühlenbäckerei Denninger.</p>
 		<p><strong>vegan</strong></p>
-		<p>regionale Tofu- und Tempeh-Spezialitäten (gebraten und kalt)<br>
+		<p>Tempeh gebraten<br>
 			Grüne Soße und Pellkartoffeln<br>
 			Quer durch den Garten – eine Auswahl an Rohkostvarianten<br>
 			mit Soja-Joghurt-Dip<br>
@@ -868,9 +865,5 @@
 <div tabindex="-1" role="dialog" class="ui-dialog ui-corner-all ui-widget ui-widget-content ui-front ui-draggable ui-resizable" aria-describedby="ec-dialog" style="display: none; position: absolute;" aria-labelledby="ui-id-8">
 	<div class="ui-dialog-titlebar ui-corner-all ui-widget-header ui-helper-clearfix ui-draggable-handle"><span id="ui-id-8" class="ui-dialog-title">Eigener Caterer</span><button type="button" class="ui-dialog-titlebar-close"></button></div>
 	<div id="ec-dialog" class="ui-dialog-content ui-widget-content">
-		<p>Auf Wunsch beauftragt Ihr einen Caterer Eurer Wahl. Für selbst mitgebrachte oder vom Caterer gelieferte Speisen erheben wir ein Tellergeld – unabhängig von Art oder Menge der Speisen.<br>
-			Wir empfehlen unsere Partner:</p>
-		<ul>
-			<li><a class="red" target="_blank" href="https://obsthof-am-steinberg.de/partner/" rel="noopener noreferrer">Lebensdurst</a>, mit langjähriger Erfahrung in der Gastronomie und eng verbunden mit einem Netzwerk von Lieferanten aus der Region, die dieselben Werte teilen: Verantwortung für die Umwelt und nachhaltiges Wirtschaften. Dabei kommt es an auf regionale und saisonale Zutaten und eine schonende Zubereitung.</li>
-		</ul>
+		<p>Auf Wunsch beauftragt Ihr einen Caterer Eurer Wahl. Für selbst mitgebrachte oder vom Caterer gelieferte Speisen erheben wir ein Tellergeld – unabhängig von Art oder Menge der Speisen.<br>		
 	</div>

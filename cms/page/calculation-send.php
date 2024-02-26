@@ -5,17 +5,20 @@ error_reporting(E_ALL);*/
 
 global $morpheus;
 
-if($_POST) {
-    include("../nogo/config.php");
-    include("../nogo/funktion.inc");
+include("../nogo/config.php");
+include("../nogo/funktion.inc");
 
-    $subject = "calculation form";
-    $to = "janskibicki@gmail.com";
-	$to = "b@7sc.eu";
+$subject = "calculation form";
+$to = "janskibicki@gmail.com";
+$to = "b@7sc.eu";
+//$to= "vukynamkhtn@gmail.com";
+
+if($_POST) {
+
 
     $header = $morpheus["mail_start"];
     
-	print_r($_POST); 
+	//print_r($_POST); 
 	// die();
 
     $personen = $_POST['personen'];
@@ -52,8 +55,11 @@ if($_POST) {
 
     $message .= $footer;
 
-    sendMailSMTP($to, $subject, $message);
+    echo sendMailSMTP($to, $subject, $message);
     return;
+} else {
+	$message = 'test';
+	echo sendMailSMTP($to, $subject, $message);
 }
-$url =  $morpheus['url'] . 'page/calculation/index.html';
-$output = '<div class="form_calculation">' . file_get_contents($url) . '</div>';
+// $url =  $morpheus['url'] . 'page/calculation/index.html';
+// $output = '<div class="form_calculation">' . file_get_contents($url) . '</div>';
