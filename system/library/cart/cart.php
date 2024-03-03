@@ -168,6 +168,8 @@ class Cart {
 				}
 
 				$price = $product_query->row['price'];
+				$valueCoupon = $cart['valueCoupon'];
+				//print_r($cart); die();
 
 				// Product Discounts
 				$discount_quantity = 0;
@@ -262,6 +264,7 @@ class Cart {
                 $product_data[] = array(
 					'cart_id'         => $cart['cart_id'],
 					'idOption'         => $cart['idOption'],
+					'valueCoupon'      => $cart['valueCoupon'],
 					'product_id'      => $product_query->row['product_id'],
 					'name'            => $product_query->row['name'] . '<br>'. $child. '' . $valueTime,
 					'model'           => $product_query->row['model'],
@@ -273,10 +276,11 @@ class Cart {
 					'minimum'         => $product_query->row['minimum'],
 					'subtract'        => $product_query->row['subtract'],
 					'stock'           => $stock,
-					'price'           => $price, //($price + $option_price),
+					'price'           => $valueCoupon > 0 ? $valueCoupon : $price, //($price + $option_price),
 					'price_1'         => $price_1,//$product_query->row['price_1'],
+					'value_coupon'    => $valueCoupon,
 					'type'            => $product_query->row['type'],
-					'total'           => ($price + $option_price) * $cart['quantity'],
+					'total'           => $valueCoupon > 0 ? $valueCoupon * $cart['quantity'] : ($price + $option_price) * $cart['quantity'],
 					'reward'          => $reward * $cart['quantity'],
 					'points'          => ($product_query->row['points'] ? ($product_query->row['points'] + $option_points) * $cart['quantity'] : 0),
 					'tax_class_id'    => $product_query->row['tax_class_id'],
@@ -296,11 +300,11 @@ class Cart {
 		return $product_data;
 	}
 
-	public function add($product_id, $quantity = 1, $option = array(), $recurring_id = 0, $idOption = 0, $child = 0) {
+	public function add($product_id, $quantity = 1, $option = array(), $recurring_id = 0, $idOption = 0, $child = 0, $valueCoupon = 0) {
 		$query = $this->db->query("SELECT COUNT(*) AS total FROM " . DB_PREFIX . "cart WHERE api_id = '" . (isset($this->session->data['api_id']) ? (int)$this->session->data['api_id'] : 0) . "' AND customer_id = '" . (int)$this->customer->getId() . "' AND session_id = '" . $this->db->escape($this->session->getId()) . "' AND product_id = '" . (int)$product_id . "' AND idOption = '" . (int)$idOption . "' AND child = '" . (int)$child . "' AND recurring_id = '" . (int)$recurring_id . "' AND `option` = '" . $this->db->escape(json_encode($option)) . "'");
 
 		if (!$query->row['total']) {
-			$this->db->query("INSERT INTO " . DB_PREFIX . "cart SET api_id = '" . (isset($this->session->data['api_id']) ? (int)$this->session->data['api_id'] : 0) . "', customer_id = '" . (int)$this->customer->getId() . "', session_id = '" . $this->db->escape($this->session->getId()) . "', product_id = '" . (int)$product_id . "', idOption = '" . (int)$idOption . "', child = '" . (int)$child . "', recurring_id = '" . (int)$recurring_id . "', `option` = '" . $this->db->escape(json_encode($option)) . "', quantity = '" . (int)$quantity . "', date_added = NOW()");
+			$this->db->query("INSERT INTO " . DB_PREFIX . "cart SET api_id = '" . (isset($this->session->data['api_id']) ? (int)$this->session->data['api_id'] : 0) . "', customer_id = '" . (int)$this->customer->getId() . "', session_id = '" . $this->db->escape($this->session->getId()) . "', product_id = '" . (int)$product_id . "', idOption = '" . (int)$idOption . "', child = '" . (int)$child . "', valueCoupon = '" . (int)$valueCoupon . "', recurring_id = '" . (int)$recurring_id . "', `option` = '" . $this->db->escape(json_encode($option)) . "', quantity = '" . (int)$quantity . "', date_added = NOW()");
 		} else {
 			$this->db->query("UPDATE " . DB_PREFIX . "cart SET quantity = (quantity + " . (int)$quantity . ") WHERE api_id = '" . (isset($this->session->data['api_id']) ? (int)$this->session->data['api_id'] : 0) . "' AND customer_id = '" . (int)$this->customer->getId() . "' AND session_id = '" . $this->db->escape($this->session->getId()) . "' AND product_id = '" . (int)$product_id . "' AND idOption = '" . (int)$idOption . "' AND child = '" . (int)$child . "' AND recurring_id = '" . (int)$recurring_id . "' AND `option` = '" . $this->db->escape(json_encode($option)) . "'");
 		}

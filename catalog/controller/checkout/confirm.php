@@ -228,6 +228,7 @@ class ControllerCheckoutConfirm extends Controller {
 				$order_data['products'][] = array(
 					'product_id' => $product['product_id'],
 					'idOption'   => $product['idOption'],
+					'valueCoupon'   => $product['valueCoupon'],
 					'name'       => $product['name'],
 					'model'      => $product['model'],
 					'option'     => $option_data,

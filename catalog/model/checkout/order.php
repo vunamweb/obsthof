@@ -24,14 +24,21 @@ class ModelCheckoutOrder extends Model {
 		// Products
 		if (isset($data['products'])) {
 			foreach ($data['products'] as $product) {
+				//print_r($product);
+				// if is coupon
+				if($product['valueCoupon'] > 0)
+				$this->db->query("INSERT INTO " . DB_PREFIX . "order_product SET order_id = '" . (int)$order_id . "', product_id = '" . (int)$product['product_id'] . "' , idOption = -1,  name = '" . $this->db->escape($product['name']) . "', model = '" . $this->db->escape($product['model']) . "', quantity = '" . (int)$product['quantity'] . "', price = '" . (float)$product['price'] . "', total = '" . (float)$product['total'] . "', tax = '" . (float)$product['tax'] . "', reward = '" . (int)$product['reward'] . "'");
+				// if not is coupon
+				else 
 				$this->db->query("INSERT INTO " . DB_PREFIX . "order_product SET order_id = '" . (int)$order_id . "', product_id = '" . (int)$product['product_id'] . "' , idOption = '" . (int)$product['idOption'] . "',  name = '" . $this->db->escape($product['name']) . "', model = '" . $this->db->escape($product['model']) . "', quantity = '" . (int)$product['quantity'] . "', price = '" . (float)$product['price'] . "', total = '" . (float)$product['total'] . "', tax = '" . (float)$product['tax'] . "', reward = '" . (int)$product['reward'] . "'");
-
+				 
 				$order_product_id = $this->db->getLastId();
 
 				foreach ($product['option'] as $option) {
 					$this->db->query("INSERT INTO " . DB_PREFIX . "order_option SET order_id = '" . (int)$order_id . "', order_product_id = '" . (int)$order_product_id . "', product_option_id = '" . (int)$option['product_option_id'] . "', product_option_value_id = '" . (int)$option['product_option_value_id'] . "', name = '" . $this->db->escape($option['name']) . "', `value` = '" . $this->db->escape($option['value']) . "', `type` = '" . $this->db->escape($option['type']) . "'");
 				}
 			}
+			//die();
 		}
 
 		// Gift Voucher
@@ -150,10 +157,13 @@ class ModelCheckoutOrder extends Model {
 		return $order_id;
 	}
 
-	public function setInvoiNumber($order_id, $invoice) {
+	public function setInvoiNumber($order_id, $invoice, $typeCoupon = false, $generateIDCoupon = 'A55FR8') {
 		//echo "UPDATE " . DB_PREFIX . "order set invoice_no = ".$invoice." where order_id = ".$order_id."";
 		//die();
-       $this->db->query("UPDATE " . DB_PREFIX . "order set invoice_no = ".$invoice." where order_id = ".$order_id."");
+	   $this->db->query("UPDATE " . DB_PREFIX . "order set invoice_no = ".$invoice." where order_id = ".$order_id."");
+	   
+	   if($typeCoupon)
+	    $this->db->query("UPDATE " . DB_PREFIX . "order set invoice_coupon = ".$generateIDCoupon." where order_id = ".$order_id."");
 	}
 	
 	public function editOrder($order_id, $data) {

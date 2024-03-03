@@ -13,6 +13,7 @@ a.list-group-item {
         {% for category in categories %}
             
             <a href="{{ category.href }}" class="list-group-item 0-level-cat {{ category.category_id == current ?'active':''}}">{{ category.name}}</a>
+            <a class="list-group-item 0-level-cat" href="./coupon">{{ coupon }}</a>
             {% if category.sub_cat %}
                 {% set sub_cat = category.sub_cat %}
                 {% if sub_cat.category_id %}

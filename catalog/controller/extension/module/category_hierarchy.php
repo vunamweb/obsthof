@@ -1,7 +1,8 @@
 <?php
 class ControllerExtensionModuleCategoryHierarchy extends Controller {
 	public function index() {
-		$this->load->language('extension/module/category_hierarchy');
+        $this->load->language('extension/module/category_hierarchy');
+        $this->load->language('product/category');
 
 		$data['heading_title'] = $this->language->get('heading_title');
 
