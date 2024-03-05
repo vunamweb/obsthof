@@ -17,6 +17,13 @@
 	}
 	body, html { margin-bottom: 0; padding-bottom: 0; }
 	hr { margin: 0; }
+	footer {
+		position: fixed;
+		bottom: 10px;
+		width: 100%;
+		padding: 10px 0;
+		text-align: center; /* Optional: Zentriert den Text im Footer */
+	}
 </style>
 </head>
 
@@ -59,10 +66,6 @@
 	<h2>{{ status }}</h2>
 	<p style="margin-top: 0px; margin-bottom: 20px; margin-top: 40px;">{{ text_greeting }}</p>
 	
-  {% if customer_id %}
-  <p style="margin-top: 0px; margin-bottom: 20px;">{{ text_link }}</p>
-  <p style="margin-top: 0px; margin-bottom: 20px;"><a href="{{ link }}">{{ link }}</a></p>
-  {% endif %}
   {% if download %}
   <p style="margin-top: 0px; margin-bottom: 20px;">{{ text_download }}</p>
   <p style="margin-top: 0px; margin-bottom: 20px;"><a href="{{ download }}">{{ download }}</a></p>
@@ -189,10 +192,11 @@
   
   
 <!--  <p style="margin-top: 0px; margin-bottom: 20px;">### {{ text_footer }}</p>-->
+</div>
   
   
-		  
-  	<table style="border-collapse: collapse; width: 100%;"  class="table top">
+<footer>  
+  	<table style="width: 100%;"  class="table top">
 			<tr>
 				<td colspan="3">
 					<hr>							  
@@ -218,7 +222,7 @@
 		  </td>
 		</tr>
 	</table>
-	
-</div>
+</footer>	
+
 </body>
 </html>

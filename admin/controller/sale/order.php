@@ -224,9 +224,11 @@ class ControllerSaleOrder extends Controller {
 
 		$costShiping = $this->model_sale_order->getCostShipping();
 
+		//echo $costShiping; die();
+
 		$results = $this->model_sale_order->getOrders($filter_data);
 
-		//print_r($results[0]); die();
+		//print_r($results); die();
 
 		foreach ($results as $result) {
 			$setTotal = $result['total'] - $costShiping;
@@ -238,6 +240,7 @@ class ControllerSaleOrder extends Controller {
 			$data['orders'][] = array(
 				'order_id'      => $result['order_id'],
 				'invoice_no'      => $result['invoice_no'],
+				'invoice_coupon'      => $result['invoice_coupon'],
 				'type'          => $this->model_sale_order->isOrderEvent($result['order_id']) ? 'Event' : 'Product', 
 				'customer'      => $result['customer'],
 				'order_status'  => $result['order_status'] ? $result['order_status'] : $this->language->get('text_missing'),
@@ -1072,7 +1075,7 @@ class ControllerSaleOrder extends Controller {
 	        $data['products'][] = array(
 					'order_product_id' => $product['order_product_id'],
 					'product_id'       => $product['product_id'],
-					'name'    	 	   => ($option == 0) ? $product['name'] : $product_name,
+					'name'    	 	   => ($option == 0 || $option == -1) ? $product['name'] : $product_name,
 					'model'    		   => $product['model'],
 					'option'   		   => $option_data,
 					'quantity'		   => $product['quantity'],

@@ -1,4 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/1999/REC-html401-19991224/strict.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "https://www.w3.org/TR/1999/REC-html401-19991224/strict.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -37,7 +37,7 @@
 					<tbody>
 						<tr>
 							<td style="padding:13.0pt 36.0pt 13.0pt 36.0pt" id="header_wrapper">
-								<h1 style="margin:0cm;line-height:110%;background-color:inherit"><span style="font-size:16.5pt;line-height:110%;font-family:'Arial';color:white;font-weight:normal">Auftrag Nr. {{ order_id }}</span></h1>
+								<h1 style="margin:0cm;line-height:110%;background-color:inherit"><span style="font-size:16.5pt;line-height:110%;font-family:'Arial';color:white;font-weight:normal">Rechnung Nr. {{ order_id }}</span></h1>
 							</td>
 						</tr>
 					</tbody>
@@ -132,6 +132,22 @@
 														</tbody>
 													</table>
 												</div>
+												
+{% if comment %}
+<table style="border-collapse: collapse; width: 100%; border-top: 1px solid #DDDDDD; border-left: 1px solid #DDDDDD; margin-bottom: 20px;">
+<thead>
+<tr>
+<td style="font-size:10px; border-right: 1px solid #DDDDDD; border-bottom: 1px solid #DDDDDD;  text-align: left; padding: 7px; color: #222222;">Informationen</td>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="font-size:10px;	border-right: 1px solid #DDDDDD; border-bottom: 1px solid #DDDDDD; text-align: left; padding: 7px;">{{ comment }}</td>
+</tr>
+</tbody>
+</table>
+{% endif %}
+																								
 												<div style="margin-bottom:30.0pt">
 													<h2 style="mso-margin-top-alt:0cm;margin-right:0cm;margin-bottom:16px;margin-left:0cm;line-height:130%">
 														<span style="font-size:16px;line-height:130%;font-family:'Arial';color:#B80229">Zusammenfassung</span>
@@ -175,20 +191,6 @@
 <p style="margin-top: 0px; margin-bottom: 20px;"><a href="{{ download }}">{{ download }}</a></p>
 <{% endif %}
 
-{% if comment %}
-<table style="border-collapse: collapse; width: 100%; border-top: 1px solid #DDDDDD; border-left: 1px solid #DDDDDD; margin-bottom: 20px;">
-<thead>
-<tr>
-<td style="font-size:10px; border-right: 1px solid #DDDDDD; border-bottom: 1px solid #DDDDDD;  text-align: left; padding: 7px; color: #222222;">Informationen</td>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="font-size:10px;	border-right: 1px solid #DDDDDD; border-bottom: 1px solid #DDDDDD; text-align: left; padding: 7px;">{{ comment }}</td>
-</tr>
-</tbody>
-</table>
-{% endif %}
 												</div>
 											</td>
 										</tr>

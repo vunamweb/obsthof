@@ -109,6 +109,7 @@
                     <td class="text-right">{% if sort == 'o.order_id' %} <a href="{{ sort_order }}" class="{{ order|lower }}">{{ column_order_id }}</a> {% else %} <a href="{{ sort_order }}">{{ column_order_id }}</a> {% endif %}</td>
 					<td class="text-right">{% if sort == 'o.order_id' %} <a href="{{ invoice_no }}" class="{{ order|lower }}">{{ column_invoice_no }}</a> {% else %} <a href="{{ invoice_no }}">{{ column_invoice_no }}</a> {% endif %}</td>
                     <td class="text-left">{% if sort == 'customer' %} <a href="{{ sort_customer }}" class="{{ order|lower }}">{{ column_customer }}</a> {% else %} <a href="{{ sort_customer }}">{{ column_customer }}</a> {% endif %}</td>
+                    <td class="text-left">Coupon</td>
                     <td class="text-left">{% if sort == 'order_status' %} <a href="{{ sort_status }}" class="{{ order|lower }}">{{ column_status }}</a> {% else %} <a href="{{ sort_status }}">{{ column_status }}</a> {% endif %}</td>
                     <td class="text-right">{% if sort == 'o.total' %} <a href="{{ sort_total }}" class="{{ order|lower }}">{{ column_total }}</a> {% else %} <a href="{{ sort_total }}">{{ column_total }}</a> {% endif %}</td>
                     <td class="text-left">{% if sort == 'o.date_added' %} <a href="{{ sort_date_added }}" class="{{ order|lower }}">{{ column_date_added }}</a> {% else %} <a href="{{ sort_date_added }}">{{ column_date_added }}</a> {% endif %}</td>
@@ -130,6 +131,7 @@
                   <td class="text-right">{{ order.order_id }}</td>
 				  <td class="text-right">{{ order.invoice_no }}</td>
                   <td class="text-left">{{ order.customer }}</td>
+                  <td class="text-left">{{ order.invoice_coupon }}</td>
                   <td class="text-left">{{ order.order_status }}</td>
                   <td class="text-right">{{ order.total }}</td>
                   <td class="text-left">{{ order.date_added }}</td>

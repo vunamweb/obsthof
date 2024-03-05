@@ -49,6 +49,20 @@ class ControllerMailOrder extends Controller {
 			}		
 		}
 	}
+
+	public function generateRandomString($length = 10) {
+		// Character and number pool
+		$characters = '123456789abcdefghjklmnopqrstuvwxyzABCDEFGHIJKLMNPQRSTUVWXYZ';
+		// Shuffle the characters
+		$charactersLength = strlen($characters);
+		$randomString = '';
+		for ($i = 0; $i < $length; $i++) {
+			$randomString .= $characters[rand(0, $charactersLength - 1)];
+		}
+
+		//echo $randomString; die();
+		return $randomString;
+	}
 		
 	public function add($order_info, $order_status_id, $comment, $notify) {
 		// Check for any downloadable products
@@ -332,7 +346,7 @@ class ControllerMailOrder extends Controller {
 
 		// if status is complete
 		if(in_array($order_status_id, $this->config->get('config_complete_status'))) {
-		  $generateIDCoupon = '12345';
+		  $generateIDCoupon = $this->generateRandomString(6);
 
 		  $invoice = $this->model_checkout_order->countInvoiceNumber() + 1;
 
@@ -342,11 +356,14 @@ class ControllerMailOrder extends Controller {
 
 		  $subject = html_entity_decode(sprintf($language->get('text_subject'), $order_info['store_name'], $data['order_status'], $invoiceNumber), ENT_QUOTES, 'UTF-8');
 
+		  // set invoice
+		  $this->model_checkout_order->setInvoiNumber($order_info['order_id'], $invoice);
+
 		  $type = $this->createPDFInvoice($order_info, $order_status_id, $sum_tax_1, $sum_tax_2, $totalNormalProduct);
 		  $typeCoupon = $this->createPDFInvoiceCoupon($order_info, $order_status_id, $sum_tax_1, $sum_tax_2, $totalNormalProduct, $generateIDCoupon);
 
-		  $this->model_checkout_order->setInvoiNumber($order_info['order_id'], $invoice, $typeCoupon, $generateIDCoupon);
-		
+		  $this->model_checkout_order->setCouponNumber($order_info['order_id'], $typeCoupon, $generateIDCoupon);
+
 		  $this->sendMailSMTP($order_info['email'], $subject, '', $fromName, $this->load->view('mail/order_add', $data), 1, $type, $typeCoupon);
 		}
 		// if status is not complete
@@ -993,7 +1010,7 @@ public function createPDFInvoiceCoupon($order_info, $order_status_id, $sum_tax_1
 		$data['order_id'] = ($order_info['invoice_no'] > 0) ? $order_info['invoice_prefix'] . $invoice_no : $order_info['order_id'];
     }
 	 
-	$data_2['order_id'] = $generateIDCoupon;
+	$data_2['coupon'] = $generateIDCoupon;
 
 	//create pdf
 	$options = new Options();

@@ -157,13 +157,19 @@ class ModelCheckoutOrder extends Model {
 		return $order_id;
 	}
 
-	public function setInvoiNumber($order_id, $invoice, $typeCoupon = false, $generateIDCoupon = 'A55FR8') {
+	public function setInvoiNumber($order_id, $invoice) {
 		//echo "UPDATE " . DB_PREFIX . "order set invoice_no = ".$invoice." where order_id = ".$order_id."";
 		//die();
 	   $this->db->query("UPDATE " . DB_PREFIX . "order set invoice_no = ".$invoice." where order_id = ".$order_id."");
 	   
 	   if($typeCoupon)
 	    $this->db->query("UPDATE " . DB_PREFIX . "order set invoice_coupon = ".$generateIDCoupon." where order_id = ".$order_id."");
+	}
+
+	public function setCouponNumber($order_id, $typeCoupon = false, $generateIDCoupon = 'A55FR8') {
+		//echo "UPDATE " . DB_PREFIX . "order set invoice_coupon = ".$generateIDCoupon." where order_id = ".$order_id.""; die();
+		if($typeCoupon)
+	    $this->db->query("UPDATE " . DB_PREFIX . "order set invoice_coupon = '".$generateIDCoupon."' where order_id = ".$order_id."");
 	}
 	
 	public function editOrder($order_id, $data) {
