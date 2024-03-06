@@ -13,6 +13,7 @@ class ModelCheckoutOrder extends Model {
 	}
 
 	public function addOrder($data) {
+		//print_r($data); die();
 		//$invoice_number = ($data['payment_code'] == 'paypal') ? $this->countInvoiceNumber() + 1 : 0;
 		//$invoice_number = (true) ? $this->countInvoiceNumber() + 1 : 0;
 		$invoice_number = 0;
@@ -171,6 +172,62 @@ class ModelCheckoutOrder extends Model {
 		if($typeCoupon)
 	    $this->db->query("UPDATE " . DB_PREFIX . "order set invoice_coupon = '".$generateIDCoupon."' where order_id = ".$order_id."");
 	}
+
+	public function insertCoupon($generateIDCoupon, $total) {
+		$currentDate = new DateTime(); // Get the current date
+        $currentDate->modify('+3 years'); // Add 3 years to the current date
+        $futureDate = $currentDate->format('Y-m-d'); // Format the date as desired (e.g., 'Y-m-d')
+
+$data = array(
+			'name' => $generateIDCoupon, // Coupon name
+			'code' => $generateIDCoupon, // Coupon code
+			'type' => 'F', // 'F' for fixed amount, 'P' for percentage
+			'discount' => $total, // Discount amount (if fixed amount) or percentage (if percentage)
+			'logged' => 0, // 0 for all users, 1 for logged-in users only
+			'shipping' => 0, // 0 for applicable on shipping, 1 for not applicable on shipping
+			'total' => 0, // Minimum total amount required for coupon to be applied
+			'date_start' => date('Y-m-d'), // Coupon start date (today's date)
+			'date_end' => $futureDate, // Coupon end date
+			'date_added' => date('Y-m-d'), // Coupon start date (today's date)
+			'uses_total' => 0, // Total number of times coupon can be used
+			'uses_customer' => '1', // Total number of times coupon can be used
+			'status' => 1 // 0 for inactive, 1 for active
+		);
+
+$column1Value = $this->db->escape($data['name']);
+$column2Value = $this->db->escape($data['code']);
+$column3Value = $this->db->escape($data['type']);
+$column4Value = $this->db->escape($data['discount']);
+$column5Value = $this->db->escape($data['logged']);
+$column6Value = $this->db->escape($data['shipping']);
+$column7Value = $this->db->escape($data['total']);
+$column8Value = $this->db->escape($data['date_start']);
+$column9Value = $this->db->escape($data['date_end']);
+$column10Value = $this->db->escape($data['uses_total']);
+$column11Value = $this->db->escape($data['status']);
+$column12Value = $this->db->escape($data['uses_customer']);
+$column13Value = $this->db->escape($data['date_added']);
+
+// Build and execute the update query
+$query = "INSERT INTO " . DB_PREFIX . "coupon SET ";
+$query .= "name = '" . $column1Value . "', ";
+$query .= "code = '" . $column2Value . "', ";
+$query .= "type = '" . $column3Value . "', ";
+$query .= "discount = '" . $column4Value . "', ";
+$query .= "logged = '" . $column5Value . "', ";
+$query .= "shipping = '" . $column6Value . "', ";
+$query .= "total = '" . $column7Value . "', ";
+$query .= "date_start = '" . $column8Value . "', ";
+$query .= "date_end = '" . $column9Value . "', ";
+$query .= "uses_total = '" . $column10Value . "', ";
+$query .= "status = '" . $column11Value . "', ";
+$query .= "uses_customer = '" . $column12Value . "', ";
+$query .= "date_added = '" . $column13Value . "' ";
+
+//echo $query; die();
+
+$this->db->query($query);
+}
 	
 	public function editOrder($order_id, $data) {
 		// Void the order first
@@ -529,6 +586,13 @@ class ModelCheckoutOrder extends Model {
 		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "order_voucher WHERE order_id = '" . (int)$order_id . "'");
 	
 		return $query->rows;
+	}
+
+	public function getValueCoupon() {
+		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "cart where valueCoupon <> ''");
+
+		//print_r($query->rows); die();
+		return ($query->num_rows) ? $query->row['valueCoupon'] : null;
 	}
 	
 	public function getOrderTotals($order_id) {

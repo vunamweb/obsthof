@@ -363,8 +363,8 @@ class ControllerMailOrder extends Controller {
 		  $typeCoupon = $this->createPDFInvoiceCoupon($order_info, $order_status_id, $sum_tax_1, $sum_tax_2, $totalNormalProduct, $generateIDCoupon);
 
 		  $this->model_checkout_order->setCouponNumber($order_info['order_id'], $typeCoupon, $generateIDCoupon);
-
-		  $this->sendMailSMTP($order_info['email'], $subject, '', $fromName, $this->load->view('mail/order_add', $data), 1, $type, $typeCoupon);
+		  
+          $this->sendMailSMTP($order_info['email'], $subject, '', $fromName, $this->load->view('mail/order_add', $data), 1, $type, $typeCoupon);
 		}
 		// if status is not complete
 		else {
@@ -930,6 +930,7 @@ public function createPDFInvoiceCoupon($order_info, $order_status_id, $sum_tax_1
 				'model'    => $order_product['model'],
 				'option'   => $option_data,
 				'quantity' => $order_product['quantity'],
+				'price_1' => $order_product['price'],
 				'price'    => $this->currency->format($order_product['price'] + ($this->config->get('config_tax') ? $order_product['tax'] : 0), $order_info['currency_code'], $order_info['currency_value']),
 				'total'    => $this->currency->format($order_product['total'] + ($this->config->get('config_tax') ? ($order_product['tax'] * $order_product['quantity']) : 0), $order_info['currency_code'], $order_info['currency_value'])
 			);
@@ -1020,6 +1021,7 @@ public function createPDFInvoiceCoupon($order_info, $order_status_id, $sum_tax_1
 
 	// if order has event, then create pdf only for event
 	if(count($data_2['products'])) {
+		//print_r($data_2['products']); die();
 		$dompdf = new Dompdf($options);
 		// $dompdf->setHtmlFooter($htmlFooter);
 
@@ -1029,6 +1031,8 @@ public function createPDFInvoiceCoupon($order_info, $order_status_id, $sum_tax_1
 		$pdf = $dompdf->output();
 		$file_location = "./pdf/order_coupon.pdf";
 		file_put_contents($file_location, $pdf);
+
+		$this->model_checkout_order->insertCoupon($generateIDCoupon, $data_2['products'][0]['price_1']);
 	
 		return true;
 	}

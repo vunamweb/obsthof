@@ -64,13 +64,18 @@
 				{% endif %}
 				<div class="{{ class }} product_page-right">
 					<div class="general_info product-info">
+					<div class="coupon_error hide"></div>
+						{% if coupon %}
+<p class="text-danger">{{ warning_coupon }}</p>
+						{% endif %}
 						<h2 class="product-title">{{ heading_title }}</h2>
 						
 						<div id="product">
 							<div class="form-group">
 								<div class="quantity">
-									<input type="text" name="value_coupon" id="value_coupon"/>
+									<input type="text" name="value_coupon" id="value_coupon" value="{{ coupon }}"/>
 									<input type="hidden" name="product_id" value="{{ product_id }}"/>
+									<input type="hidden" name="buy_coupon" value="1"/>
 									<button type="button" id="button-cart" data-loading-text="{{ text_loading }}" class="btn-primary">
 										<span>{{ button_cart }}</span>
 									</button>
@@ -564,7 +569,11 @@ element.after('<div class="text-danger">' + json['error']['option'][i] + '</div>
 }
 
 if (json['error']['recurring']) {
-$('select[name=\'recurring_id\']').after('<div class="text-danger">' + json['error']['recurring'] + '</div>');
+$('.coupon_error').html(json['error']['recurring']);
+$('.coupon_error').addClass('alert');
+$('.coupon_error').removeClass('hide');	
+} else {
+$('.coupon_error').addClass('hide');	
 }
 
 $('.text-danger').parent().addClass('has-error');
