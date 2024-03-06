@@ -57,8 +57,9 @@ class ControllerCheckoutSuccess extends Controller {
 				  $this->session->data['trustedshop_collectorders'] = $collectorders;
 
 			$this->load->model( 'checkout/order' );
+			//print_r($this->session->data['totals']); die();
 			
-			//$this->model_checkout_order->updateValueTicket();
+			$this->model_checkout_order->updateCoupon($this->session->data['order_id']);
 			
 			$this->cart->clear();
 

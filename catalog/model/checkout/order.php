@@ -492,6 +492,33 @@ $this->db->query($query);
         }
     }
 
+	public function updateCoupon($order_id) {
+		// get value of shipping
+		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "setting" . " where code = 'shipping_flat' and value <> 0 ORDER by value ASC");
+          
+        $costObj = $query->rows;
+		$costShiping = $costObj[0]['value'];
+		  
+		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "coupon_history WHERE order_id = ".$order_id."");
+
+		// get value of coupon is paied by this order
+		$coupon_id = $query->row['coupon_id'];
+		$valuePaied = ($query->row['amount'] * -1) + $costShiping;
+
+		//echo $valuePaied; die();
+
+		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "coupon WHERE coupon_id  = ".$coupon_id."");
+	  
+		// orginal value of coupon
+		$valueOrginalCoupon = $query->row['discount'];
+
+		// rest value of coupon
+		$restValueCoupon = ($valueOrginalCoupon - $valuePaied >= 0) ? $valueOrginalCoupon - $valuePaied : 0;
+
+		// update value of coupon after order
+		$this->db->query("UPDATE " . DB_PREFIX . "coupon SET discount = " . $restValueCoupon . " WHERE coupon_id = '" . (int)$coupon_id . "'");
+	}
+
 	public function updateValueTicket() {
 		$listOption = array();
 		$listOptionIn = '(';
