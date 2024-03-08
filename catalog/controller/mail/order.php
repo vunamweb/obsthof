@@ -1025,7 +1025,17 @@ public function createPDFInvoiceCoupon($order_info, $order_status_id, $sum_tax_1
 		$dompdf = new Dompdf($options);
 		// $dompdf->setHtmlFooter($htmlFooter);
 
-		$dompdf->loadHtml($this->load->view('mail/order_coupon_pdf', $data_2));
+		$data_2['start_day'] = date('Y-m-d');
+
+		$currentDate = new DateTime(); // Get the current date
+        $currentDate->modify('+3 years'); // Add 3 years to the current date
+		$futureDate = $currentDate->format('Y-m-d');
+
+		$data_2['end_date'] = $futureDate;
+
+		$data_2['price_coupon'] = $data_2['products'][0]['price_1'];
+		
+        $dompdf->loadHtml($this->load->view('mail/order_coupon_pdf', $data_2));
 		$dompdf->setPaper('A4', 'Horizontal');
 		$dompdf->render();
 		$pdf = $dompdf->output();
