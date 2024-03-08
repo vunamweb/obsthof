@@ -507,17 +507,24 @@ $this->db->query($query);
 
 		//echo $valuePaied; die();
 
-		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "coupon WHERE coupon_id  = ".$coupon_id."");
+		if($coupon_id) {
+			$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "coupon WHERE coupon_id  = ".$coupon_id."");
 	  
-		// orginal value of coupon
-		$valueOrginalCoupon = $query->row['discount'];
-
-		// rest value of coupon
-		$restValueCoupon = ($valueOrginalCoupon - $valuePaied >= 0) ? $valueOrginalCoupon - $valuePaied : 0;
-
-		// update value of coupon after order
-		$this->db->query("UPDATE " . DB_PREFIX . "coupon SET discount = " . $restValueCoupon . " WHERE coupon_id = '" . (int)$coupon_id . "'");
-	}
+			// orginal value of coupon
+			$valueOrginalCoupon = $query->row['discount'];
+	
+			//echo 'dd'; die();
+	
+			// rest value of coupon
+			$restValueCoupon = ($valueOrginalCoupon - $valuePaied >= 0) ? $valueOrginalCoupon - $valuePaied : 0;
+	
+			// update value of coupon after order
+			//echo 'dd'; die();
+			$this->db->query("UPDATE " . DB_PREFIX . "coupon SET discount = " . $restValueCoupon . " WHERE coupon_id = '" . (int)$coupon_id . "'");
+		} else {
+			//echo 'dd'; die();
+		}
+}
 
 	public function updateValueTicket() {
 		$listOption = array();
@@ -616,7 +623,9 @@ $this->db->query($query);
 	}
 
 	public function getValueCoupon() {
-		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "cart where valueCoupon <> ''");
+		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "cart where api_id = " . (isset($this->session->data['api_id']) ? (int)$this->session->data['api_id'] : 0) . " AND customer_id = " . (int)$this->customer->getId() . " AND  valueCoupon <> '' AND session_id = '".$this->db->escape($this->session->getId())."'");
+
+		//echo $this->session->getId(); die();
 
 		//print_r($query->rows); die();
 		return ($query->num_rows) ? $query->row['valueCoupon'] : null;
