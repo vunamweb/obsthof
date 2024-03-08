@@ -723,7 +723,9 @@ class ControllerExtensionPaymentPayPal extends Controller {
 		
 					$order_total_paypal = $this->model_checkout_order->getTotalNormalProducts($this->session->data['order_id']);
 
-					if($order_total_paypal > $this->config->get('config_login_attempts'))
+					//echo $order_total_paypal; die();
+
+					if($order_total_paypal > $this->config->get('config_login_attempts') || $order_total_paypal == 0)
 					  $setTotal = $order_info['total'] - $shipping_total_1;
 					else
 					  $setTotal = $order_info['total'];
