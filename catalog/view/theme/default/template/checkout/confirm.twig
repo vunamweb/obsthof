@@ -55,10 +55,17 @@
       </tfoot>
     
   </table>
+  <input type="hidden" value="{{ auto }}" id="auto_1"/>
 </div>
 {{ payment }}
 {% else %} 
 <script type="text/javascript"><!--
 location = '{{ redirect }}';
-//--></script> 
+//--></script>
+<script>
+if($('#auto_1').val() == 1) {
+  //alert('ddd');
+  $('#button-confirm').click();
+}
+</script> 
 {% endif %} 

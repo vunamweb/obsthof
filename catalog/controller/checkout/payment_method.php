@@ -1,6 +1,8 @@
 <?php
 class ControllerCheckoutPaymentMethod extends Controller {
 	public function index() {
+		session_start();
+
 		$this->load->language('checkout/checkout');
 
 		if (isset($this->session->data['payment_address'])) {
@@ -122,10 +124,15 @@ class ControllerCheckoutPaymentMethod extends Controller {
 			$data['agree'] = '';
 		}
 
+		//print_r($_SESSION['total_1']); die();
+		$data['auto'] = ($_SESSION['total_1'][4]['value'] == 0) ? 1 : 0;
+
 		$this->response->setOutput($this->load->view('checkout/payment_method', $data));
 	}
 
 	public function save() {
+		session_start();
+
 		$this->load->language('checkout/checkout');
 
 
@@ -172,7 +179,8 @@ class ControllerCheckoutPaymentMethod extends Controller {
 			$information_info = $this->model_catalog_information->getInformation($this->config->get('config_checkout_id'));
 
 			if ( $information_info && ( !isset($this->request->post['agree']) || !isset($this->request->post['agree_']) || !isset($this->request->post['agree__']) ) ) {
-				$json['error']['warning'] = sprintf($this->language->get('error_agree'), $information_info['title']);
+				if($_SESSION['total_1'][4]['value'] != 0)
+				 $json['error']['warning'] = sprintf($this->language->get('error_agree'), $information_info['title']);
 			}
 		}
 

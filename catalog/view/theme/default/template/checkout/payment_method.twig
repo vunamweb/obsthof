@@ -54,6 +54,7 @@
 		<label class="agree_1" for="questions_2">
     google
 		</label>
+		<input type="hidden" value="{{ auto }}" id="auto"/>
    </div>
 </div>
 <div class="pull-right">
@@ -65,4 +66,10 @@
     <input type="button" value="{{ button_continue }}" id="button-payment-method" data-loading-text="{{ text_loading }}" class="btn btn-primary" />
   </div>
 </div>
-{% endif %} 
+{% endif %}
+<script>
+if($('#auto').val() == 1) {
+//alert('ddsd');
+$('#button-payment-method').click();
+}
+</script> 
