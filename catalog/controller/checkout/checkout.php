@@ -1,6 +1,7 @@
 <?php
 class ControllerCheckoutCheckout extends Controller {
 	public function index() {
+		session_start();
 		// Validate cart has products and has stock.
 		if ((!$this->cart->hasProducts() && empty($this->session->data['vouchers'])) || (!$this->cart->hasStock() && !$this->config->get('config_stock_checkout'))) {
 			$this->response->redirect($this->url->link('checkout/cart'));
@@ -91,6 +92,12 @@ class ControllerCheckoutCheckout extends Controller {
 		$data['content_bottom'] = $this->load->controller('common/content_bottom');
 		$data['footer'] = $this->load->controller('common/footer');
 		$data['header'] = $this->load->controller('common/header');
+
+		if($_SESSION['total_1'][4] == null || $_SESSION['total_1'][4]['value'] > 0) {
+			$data['auto'] = 0;
+		} else {
+			$data['auto'] = 1;
+		}
 
 		$this->response->setOutput($this->load->view('checkout/checkout', $data));
 	}

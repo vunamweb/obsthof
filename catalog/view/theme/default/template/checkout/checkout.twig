@@ -82,6 +82,7 @@
             <div class="panel-body"></div>
           </div>
         </div>
+        <input type="hidden" value="{{ auto }}" id="auto"/>
       </div>
       {{ content_bottom }}</div>
     {{ column_right }}</div>
@@ -806,7 +807,7 @@ $(document).delegate('#button-payment-method', 'click', function() {
 
 						$('a[href=\'#collapse-checkout-confirm\']').trigger('click');
 
-                        if($('#auto_1').val() == 1) {
+                        if($('#auto').val() == 1) {
                           //alert('ddd');
                           $('#button-confirm').click();
                         }
