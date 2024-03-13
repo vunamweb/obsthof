@@ -752,7 +752,7 @@ $(document).delegate('#button-shipping-method', 'click', function() {
 
                         if($('#auto').val() == 1) {
                           //alert('1');
-                          $('#button-payment-method').click();
+                          //$('#button-payment-method').click();
                         }
 
 						$('#collapse-payment-method').parent().find('.panel-heading .panel-title').html('<a href="#collapse-payment-method" data-toggle="collapse" data-parent="#accordion" class="accordion-toggle">{{ text_checkout_payment_method }} <i class="fa fa-caret-down"></i></a>');
@@ -809,7 +809,7 @@ $(document).delegate('#button-payment-method', 'click', function() {
 
                         if($('#auto').val() == 1) {
                           //alert('ddd');
-                          $('#button-confirm').click();
+                          //$('#button-confirm').click();
                         }
 					},
                     error: function(xhr, ajaxOptions, thrownError) {

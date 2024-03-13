@@ -93,8 +93,10 @@ class ControllerCheckoutCheckout extends Controller {
 		$data['footer'] = $this->load->controller('common/footer');
 		$data['header'] = $this->load->controller('common/header');
 
-		if($_SESSION['total_1'][4] == null || $_SESSION['total_1'][4]['value'] > 0) {
+		//print_r($_SESSION['total_1'][4]); die();
+        if($_SESSION['total_1'][4] == null || $_SESSION['total_1'][4]['value'] > 0) {
 			$data['auto'] = 0;
+			//echo 'dd'; die();
 		} else {
 			$data['auto'] = 1;
 		}
