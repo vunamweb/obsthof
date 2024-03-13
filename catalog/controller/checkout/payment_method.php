@@ -46,21 +46,72 @@ class ControllerCheckoutPaymentMethod extends Controller {
 
 			$results = $this->model_setting_extension->getExtensions('payment');
 
+			//print_r($results); die();
+
+			 //$results = $results_[0];
+
+			//print_r($_SESSION['total_1']); die();
+
+			//print_r($results); die();
+
 			$recurring = $this->cart->hasRecurringProducts();
 
 			foreach ($results as $result) {
-				if ($this->config->get('payment_' . $result['code'] . '_status')) {
-					$this->load->model('extension/payment/' . $result['code']);
-
-					$method = $this->{'model_extension_payment_' . $result['code']}->getMethod($this->session->data['payment_address'], $total);
-
-					if ($method) {
-						if ($recurring) {
-							if (property_exists($this->{'model_extension_payment_' . $result['code']}, 'recurringPayments') && $this->{'model_extension_payment_' . $result['code']}->recurringPayments()) {
+				//print_r($result); die();
+				// if not coupon
+				if($_SESSION['total_1'][2]['code'] != 'coupon') {
+					//echo 'dd'; die();
+					if($result['code'] != 'cod')
+					if ($this->config->get('payment_' . $result['code'] . '_status')) {
+						$this->load->model('extension/payment/' . $result['code']);
+	
+						$method = $this->{'model_extension_payment_' . $result['code']}->getMethod($this->session->data['payment_address'], $total);
+	
+						if ($method) {
+							if ($recurring) {
+								if (property_exists($this->{'model_extension_payment_' . $result['code']}, 'recurringPayments') && $this->{'model_extension_payment_' . $result['code']}->recurringPayments()) {
+									$method_data[$result['code']] = $method;
+								}
+							} else {
 								$method_data[$result['code']] = $method;
 							}
-						} else {
-							$method_data[$result['code']] = $method;
+						}
+					}
+				} else {
+					// if coupon and total is 0
+					if($_SESSION['total_1'][4]['value'] == 0) {
+						if($result['code'] == 'cod')
+						if ($this->config->get('payment_' . $result['code'] . '_status')) {
+							$this->load->model('extension/payment/' . $result['code']);
+		
+							$method = $this->{'model_extension_payment_' . $result['code']}->getMethod($this->session->data['payment_address'], $total);
+		
+							if ($method) {
+								if ($recurring) {
+									if (property_exists($this->{'model_extension_payment_' . $result['code']}, 'recurringPayments') && $this->{'model_extension_payment_' . $result['code']}->recurringPayments()) {
+										$method_data[$result['code']] = $method;
+									}
+								} else {
+									$method_data[$result['code']] = $method;
+								}
+							}
+						}
+					} else { // if coupon and total not 0
+						if($result['code'] != 'cod')
+						if ($this->config->get('payment_' . $result['code'] . '_status')) {
+							$this->load->model('extension/payment/' . $result['code']);
+		
+							$method = $this->{'model_extension_payment_' . $result['code']}->getMethod($this->session->data['payment_address'], $total);
+		
+							if ($method) {
+								if ($recurring) {
+									if (property_exists($this->{'model_extension_payment_' . $result['code']}, 'recurringPayments') && $this->{'model_extension_payment_' . $result['code']}->recurringPayments()) {
+										$method_data[$result['code']] = $method;
+									}
+								} else {
+									$method_data[$result['code']] = $method;
+								}
+							}
 						}
 					}
 				}
