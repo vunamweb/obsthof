@@ -12,7 +12,7 @@
 		{% if column_left and column_right %}
 			{%set class = 'col-sm-6' %}
 		{% elseif column_left or column_right %}
-			{%set class = 'col-sm-9' %}
+			{%set class = 'col-sm-8  col-md-9' %}
 		{% else %}
 			{%set class = 'col-sm-12' %}
 		{% endif %}
@@ -65,15 +65,15 @@
 				<div class="{{ class }} product_page-right">
 					<div class="general_info product-info">
 					<div class="coupon_error hide"></div>
-						{% if coupon %}
-<p class="text-danger">{{ warning_coupon }}</p>
-						{% endif %}
 						<h2 class="product-title">{{ heading_title }}</h2>
-						
+						{{ description }}
 						<div id="product">
+						{% if coupon %}
+							<p class="alert alert-danger ">{{ warning_coupon }}</p>
+						{% endif %}
 							<div class="form-group">
 								<div class="quantity">
-									<input type="text" name="value_coupon" id="value_coupon" value="{{ coupon }}"/>
+									<input type="text" name="value_coupon" id="value_coupon" value="{{ coupon }}"/> <span class="euro">&euro;</span><br class="clearfix"/>
 									<input type="hidden" name="product_id" value="{{ product_id }}"/>
 									<input type="hidden" name="buy_coupon" value="1"/>
 									<button type="button" id="button-cart" data-loading-text="{{ text_loading }}" class="btn-primary">
@@ -142,7 +142,7 @@
 				</div>
 			</div>
 			<!-- 2 cols !-->
-			<div class="row">
+			<div class="row hide">
 				<div
 					class="container">
 					<!-- COL2 !-->

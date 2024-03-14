@@ -4,7 +4,9 @@
 		{% for breadcrumb in breadcrumbs %}
 			<li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
 		{% endfor %}
+		
 	</ul>
+	<!--<p><a class="btn btn-info showCatList">Kategorien</a></p>-->
 	<h2>{{ heading_title }}</h2>
 		{% if thumb or description %}
 			<div class="row">
@@ -47,7 +49,7 @@
 		{% if column_left and column_right %}
 			{%set class = 'col-sm-6' %}
 		{% elseif column_left or column_right %}
-			{%set class = 'col-sm-9' %}
+			{%set class = 'col-sm-8 col-md-9' %}
 		{% else %}
 			{%set class = 'col-sm-12' %}
 		{% endif %}
@@ -276,8 +278,10 @@
 									{% endif %}
 									<div class="button-wrap">
 										<button class="btn-primary"><a href="{{ product.href }}">Detail</a></button>
-										<button class="btn-primary quickview " type="button" data-rel="details" data-product="{{ product['product_id'] }}">{{text_quick}}</button>
-										<button type="button" class="btn-primary" {% if (product.options|length > 3) %} onclick="cart.add('{{ product.product_id }}');" {% else %} onclick="ajaxAdd($(this),{{ product.product_id }});" {% endif %}>{{button_cart}}</button>
+										<!--<button class="btn-primary quickview " type="button" data-rel="details" data-product="{{ product['product_id'] }}">{{text_quick}}</button>-->
+										<!--
+											<button type="button" class="btn-primary" {% if (product.options|length > 3) %} onclick="cart.add('{{ product.product_id }}');" {% else %} onclick="ajaxAdd($(this),{{ product.product_id }});" {% endif %}>{{button_cart}}</button>
+										-->
 									</div>
 								</div>								
 								<div class="content">
@@ -294,13 +298,13 @@
 												{% if not product.special %}
 													{{ product.price }}
 													{% if product.price_lit %}
-													<p class="price_lit">{{ product.price_per_lit }} pro Liter</p>
+													<p class="price_lit">({{ product.price_per_lit }} pro Liter)</p>
 												    {% endif %} 
 												{% else %}
 													 <span class="price-new">{{ product.special }}</span> 
 													 <span class="price-old">{{ product.price }}</span>
 													 {% if product.price_lit %}
-													 <p class="price_lit">{{ product.price_per_lit }} pro Liter</p>
+													 <p class="price_lit">({{ product.price_per_lit }} pro Liter)</p>
 													 {% endif %} 
 												{% endif %}
 												{% if product.tax %}
@@ -309,10 +313,13 @@
 											</p>
 										{% endif %}
 										<div class="button-wrap-list">
-											<button type="button" class="btn-primary" onclick="wishlist.add('{{ product.product_id }}');">{{button_wishlist}}</button>
-											<button type="button" class="btn-primary" onclick="compare.add('{{ product.product_id }}');">{{button_compare}}</button>
-											<button class="btn-primary quickview" type="button" data-rel="details" data-product="{{ product['product_id'] }}">{{text_quick}}</button>
-											<button type="button" class="btn-primary" {% if (product.options|length > 3) %} onclick="cart.add('{{ product.product_id }}');" {% else %} onclick="ajaxAdd($(this),{{ product.product_id }});" {% endif %}>{{button_cart}}</button>
+												<button class="btn-primary"><a href="{{ product.href }}">Detail</a></button>
+												<button class="btn-primary quickview" type="button" data-rel="details" data-product="{{ product['product_id'] }}">{{text_quick}}</button>
+											<!--
+												<button type="button" class="btn-primary" onclick="wishlist.add('{{ product.product_id }}');">{{button_wishlist}}</button>
+												<button type="button" class="btn-primary" onclick="compare.add('{{ product.product_id }}');">{{button_compare}}</button>
+												<button type="button" class="btn-primary" {% if (product.options|length > 3) %} onclick="cart.add('{{ product.product_id }}');" {% else %} onclick="ajaxAdd($(this),{{ product.product_id }});" {% endif %}>{{button_cart}}</button>
+											-->
 										</div>
 									</div>									
 								</div>								
@@ -338,4 +345,22 @@
 		{{ column_right }}
 	</div>
 </div>
+<div id="mobileFilter" class="btn btn-info">Warengruppen</div>
 {{ footer }}
+<script>
+var count = 0;
+
+$('a.lazy img').each(function(e) {
+	var width = $(window).width();
+
+	if(width <= 768) {
+     if(count <= 1) {
+		var data_src = $(this).attr('data-src');
+		$(this).attr('src', data_src);
+		$(this).parent().addClass('lazy-loaded');
+
+		count++;
+      }
+	}
+})
+</script>

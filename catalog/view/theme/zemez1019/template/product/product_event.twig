@@ -68,7 +68,7 @@
 						
 						{{ date_event}}
 						{{ description }}
-						
+						<p>&nbsp;</p>
 						{% if (price) %}
 							<div class="price {{ class_event }}">
 								<p class="type_event">{{ adult }}</p>
@@ -284,8 +284,8 @@
 							<!-- AddThis Button END -->
 						</div>
 					</div>
-					<div class="text_farm_shop_1 {{ class_event }}">{{ farm_shop_1 }} <a href="tel:{{ phone }}">{{ phone }}</a></div>
-					<div class="text_farm_shop_2 {{ class_event }}"><a target="_blank" href="{{ order_link }}">{{ farm_shop_2 }}</a></div>
+					<div class="text_farm_shop_1 {{ class_event }}">{{ farm_shop_1 }}</div>
+					<div class="text_farm_shop_2 {{ class_event }}">{{ farm_shop_2 }}</div>
 				</div>
 			</div>
 			<!-- 2 cols !-->
@@ -293,7 +293,7 @@
 				<div
 					class="container">
 					<!-- COL1 !-->
-					<div class="col-md-6 col-1-tab">
+					<div class="col-md-12 col-1-tab">
 						<div class="tab-pane" id="tab-specification">
 							<table class="table table-bordered">
 								{% for attribute_group in attribute_groups %}
@@ -318,7 +318,7 @@
 					</div>
 					<!-- END COL1 !-->
 					<!-- COL2 !-->
-					<div class="col-md-6 col-2-tab">
+					<div class="col-md-12 col-2-tab">
 						<div class="product_tabs">
 							<ul class="nav nav-tabs">
 								{% if (review_status) %}

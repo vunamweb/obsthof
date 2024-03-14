@@ -47,7 +47,7 @@
 		{% if column_left and column_right %}
 			{%set class = 'col-sm-6' %}
 		{% elseif column_left or column_right %}
-			{%set class = 'col-sm-9' %}
+			{%set class = 'col-sm-8 col-md-9' %}
 		{% else %}
 			{%set class = 'col-sm-12' %}
 		{% endif %}
@@ -295,6 +295,11 @@
 								</div>								
 								<div class="content">
 									<div class="caption">
+										{% if product.price %}
+											{% if product.special %}
+												 <span class="offer">Angebot</span>
+											{% endif %}
+										{% endif %}
 										<h4 class="name"><a href="{{ product.href }}">{{ product.name }}</a></h4>
 										<input type="hidden" class="date_event" value="{{ product.date }}"/>
 										<p class="description">{{ product.description }}</p>
@@ -340,4 +345,22 @@
 		{{ column_right }}
 	</div>
 </div>
+<div id="mobileFilter" class="btn btn-info">Warengruppen</div>
 {{ footer }}
+<script>
+var count = 0;
+
+$('a.lazy img').each(function(e) {
+	var width = $(window).width();
+
+	if(width <= 768) {
+     if(count <= 1) {
+		var data_src = $(this).attr('data-src');
+		$(this).attr('src', data_src);
+		$(this).parent().addClass('lazy-loaded');
+
+		count++;
+      }
+	}
+})
+</script>
