@@ -315,6 +315,9 @@
 												{% endif %}
 											</p>
 										{% endif %}
+										{% if product.number_ticket == 0 %}
+													<div class="text-danger">{{ no_ticket }}</div>
+										{% endif %}
 										<div class="button-wrap-list">
 											<button type="button" class="btn-primary">
 											<a href="{{ product.href }}">Detail</a>
