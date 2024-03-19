@@ -92,10 +92,10 @@
                 {% if product.recurring %} <br/>
                 <span class="label label-info">{{ text_recurring_item }}</span> <small>{{ product.recurring }}</small> {% endif %}</td>
               <td class="text-left hide">{{ product.model }}</td>
-              <td class="text-left tblQ"><div class="input-group btn-block {{ product.class }}" style="max-width: 200px;">
-                  <input type="text" name="quantity[{{ product.cart_id }}]" value="{{ product.quantity }}" size="1" class="form-control"  style="width: 60px;" />
+              <td class="text-left tblQ"><div class="input-group btn-block" style="max-width: 200px;">
+                  <input type="text" name="quantity[{{ product.cart_id }}]" value="{{ product.quantity }}" size="1" class="form-control {{ product.class }}"  style="width: 60px;" />
                   <span class="input-group-btn">
-                  <button type="submit" data-toggle="tooltip" title="{{ button_update }}" class="btn btn-primary"><i class="fa fa-refresh"></i></button>
+                  <button type="submit" data-toggle="tooltip" title="{{ button_update }}" class="btn btn-primary {{ product.class }}"><i class="fa fa-refresh"></i></button>
                   <button type="button" data-toggle="tooltip" title="{{ button_remove }}" class="btn btn-danger" onclick="cart.remove('{{ product.cart_id }}');"><i class="fa fa-times-circle"></i></button>
                   </span></div></td>
               <td class="text-right tblP1">{{ product.price }}</td>
@@ -127,8 +127,13 @@
       {% if modules %}
       <h2>{{ text_next }}</h2>
       <p>{{ text_next_choice }}</p>
-      <div class="panel-group" id="accordion"> {% for module in modules %}
+      <div class="panel-group" id="accordion"> 
+      {% set count = 0 %}
+      {% for module in modules %}
+        {% if count == 0 %}
         {{ module }}
+        {% endif %}
+        {% set count = count + 1 %}
         {% endfor %} </div>
       {% endif %} <br/>
       <div class="row">
