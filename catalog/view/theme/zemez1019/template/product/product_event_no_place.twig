@@ -69,7 +69,9 @@
 						{{ date_event}}
 						{{ description }}
 
-                        <div class="text-danger">{{ no_ticket }}</div>
+                        {% if class_event != ' hide' %}
+						<div class="text-danger">{{ no_ticket }}</div>
+						{% endif %}
 					</div>
 				</div>
 			</div>

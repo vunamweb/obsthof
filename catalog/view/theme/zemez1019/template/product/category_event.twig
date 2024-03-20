@@ -316,7 +316,9 @@
 											</p>
 										{% endif %}
 										{% if product.number_ticket == 0 %}
+										{% if product.class_event != ' hide' %}
 													<div class="text-danger">{{ no_ticket }}</div>
+										{% endif %}
 										{% endif %}
 										<div class="button-wrap-list">
 											<button type="button" class="btn-primary">
