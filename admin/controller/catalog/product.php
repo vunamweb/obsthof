@@ -474,7 +474,11 @@ class ControllerCatalogProduct extends Controller {
                     $date = $item[ 'value' ];
                     $date = explode( ';', $date );
 
-                    $dateEvent .= $date[ 0 ] . '   ' . $date[ 1 ] . '-' .$date[ 2 ] . ' hours :' .$date[ 3 ].' tickets in stock' .'<br>';
+                    $date1 = explode('-', $date[0]);
+                    $date1 = $date1[2] . '-' . $date1[1] . '-' . $date1[0];
+
+                    if(time() - strtotime($date1) <=0)
+                     $dateEvent .= $date[ 0 ] . '   ' . $date[ 1 ] . '-' .$date[ 2 ] . ' hours :' .$date[ 3 ].' tickets in stock' .'<br>';
                     
                     if($date[3] <= 0)
                       $checkQuantity = false; 
