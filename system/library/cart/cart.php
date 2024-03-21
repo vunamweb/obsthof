@@ -33,7 +33,13 @@ class Cart {
 	}
 
 	public function getProducts() {
-		$product_data = array();
+		session_start();
+
+		$_SESSION['session_id'] = $this->session->getId();
+		$_SESSION['api_id'] = $this->session->data['api_id'];
+		$_SESSION['customer_id'] = $this->customer->getId();
+		
+        $product_data = array();
 
 		$cart_query = $this->db->query("SELECT * FROM " . DB_PREFIX . "cart WHERE api_id = '" . (isset($this->session->data['api_id']) ? (int)$this->session->data['api_id'] : 0) . "' AND customer_id = '" . (int)$this->customer->getId() . "' AND session_id = '" . $this->db->escape($this->session->getId()) . "'");
 
