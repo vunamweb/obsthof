@@ -231,11 +231,11 @@ class ControllerSaleOrder extends Controller {
 		//print_r($results); die();
 
 		foreach ($results as $result) {
-			$setTotal = $result['total'] - $costShiping;
+			//$setTotal = $result['total'] - $costShiping;
 
-			$result['total'] = ($setTotal <= $this->config->get('config_login_attempts')) ? $result['total'] : $setTotal;
+			//$result['total'] = ($setTotal <= $this->config->get('config_login_attempts')) ? $result['total'] : $setTotal;
 
-			$totalOrder = (in_array($result['order_status_id'], array(13))) ? $result['total'] * -1 : $result['total']; 
+			$totalOrder = ($this->model_sale_order->isIncludeTax($result['order_id'])) ? $result['total'] : $result['total'] - $costShiping;  //(in_array($result['order_status_id'], array(13))) ? $result['total'] * -1 : $result['total']; 
 
 			$data['orders'][] = array(
 				'order_id'      => $result['order_id'],
