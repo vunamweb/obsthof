@@ -83,6 +83,55 @@ class ControllerSaleOrder extends Controller {
 
 		$this->response->redirect($this->url->link('sale/order', 'user_token=' . $this->session->data['user_token'] . $url, true));
 	}
+
+	public function displayOrder($order_id) {
+		$products = $this->model_sale_order->getOrderProducts($order_id);
+
+			//print_r($products); die();
+
+			$sum_tax_1 = 0; $sum_tax_2 = 0; $totalNormalProduct = 0;
+			
+            foreach ($products as $product) {
+				$product_id = $product['product_id'];
+
+				$product_ = $this->model_sale_order->getProduct($product_id);
+
+				$product['type'] = $product_['type'];
+				$product['price_1'] = $product_['price_1'];
+				
+                // VU show tax
+			$resultTax_1 = 0; $resultTax_2 = 0;
+			$tax_1 = 19; $tax_2 = 7;
+
+			// if normal product
+			if($product['type'] == 0) {
+			   //echo $type . '//';
+			   $total_1 = $product['price'] * $product['quantity'];
+			   $totalNormalProduct = $totalNormalProduct + $total_1;
+
+			   $resultTax_1 = round(($total_1) - ($total_1) / (1 + $tax_1/100), 2);
+
+			   $sum_tax_1 = $sum_tax_1 + $resultTax_1;
+			} else { // if event
+				$total_1 = ($product['price'] - $product['price_1']) * $product['quantity'];
+				$resultTax_1 = round(($total_1) - ($total_1) / (1 + $tax_1/100), 2);
+
+				$total_2 = ($product['price_1']) * $product['quantity'];
+				$resultTax_2 = round(($total_2) - ($total_2) / (1 + $tax_2/100), 2);
+
+				$sum_tax_1 = $sum_tax_1 + $resultTax_1;
+				$sum_tax_2 = $sum_tax_2 + $resultTax_2;
+			}
+	}
+
+	$obj = $obj = new \stdClass;
+
+	$obj->totolNormalProduct = $totalNormalProduct;
+	$obj->sumtax1 = $sum_tax_1;
+	$obj->sumtax2 = $sum_tax_2;
+	
+	return $obj;
+}
 			
 	protected function getList() {
 		if (isset($this->request->get['filter_order_id'])) {
@@ -231,17 +280,29 @@ class ControllerSaleOrder extends Controller {
 		//print_r($results); die();
 
 		foreach ($results as $result) {
-			//$setTotal = $result['total'] - $costShiping;
-
-			//$result['total'] = ($setTotal <= $this->config->get('config_login_attempts')) ? $result['total'] : $setTotal;
-
-			//echo $result['total']; die();
-			if($result['total'] == $costShiping)
+			/*if($result['total'] == $costShiping)
 			  $totalOrder = 0;
 			else 
 			  $totalOrder = ($this->model_sale_order->isIncludeTax($result['order_id'])) ? $result['total'] : $result['total'] - $costShiping;  //(in_array($result['order_status_id'], array(13))) ? $result['total'] * -1 : $result['total']; 
 
-			$data['orders'][] = array(
+			$totalOrder = ($totalOrder > 0) ? $totalOrder : 0;*/
+			
+			$display = $this->displayOrder($result['order_id']);
+
+			$sum_tax_1 = $display->sumtax1;
+			$sum_tax_2 = $display->sumtax2;
+			$totalNormalProduct = $display->totolNormalProduct;
+			
+$totals = $this->model_sale_order->getOrderTotals($result['order_id']);
+			$this->document->displayOrder($totals, $sum_tax_1, $sum_tax_2, $this->session->data['shipping_address']['country_id'], $totalNormalProduct, $this->config->get('config_login_attempts'));
+			
+			$count = count($totals);
+
+			$totalOrder = $totals[$count - 1]['value']; 
+
+			//echo $totals[$count - 1]['value']; 
+			//die();
+$data['orders'][] = array(
 				'order_id'      => $result['order_id'],
 				'invoice_no'      => $result['invoice_no'],
 				'invoice_coupon'      => $result['invoice_coupon'],

@@ -8,7 +8,7 @@ class ModelExtensionPaymentCOD extends Model {
 		if ($this->config->get('payment_cod_total') > 0 && $this->config->get('payment_cod_total') > $total) {
 			$status = false;
 		} elseif (!$this->cart->hasShipping()) {
-			$status = false;
+			$status = true;
 		} elseif (!$this->config->get('payment_cod_geo_zone_id')) {
 			$status = true;
 		} elseif ($query->num_rows) {

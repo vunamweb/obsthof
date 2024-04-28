@@ -59,7 +59,8 @@ class ControllerCheckoutPaymentMethod extends Controller {
 			foreach ($results as $result) {
 				//print_r($result); die();
 				// if not coupon
-				if($_SESSION['total_1'][2]['code'] != 'coupon') {
+				//print_r($_SESSION['total_1'][1]); die();
+				if($_SESSION['total_1'][2]['code'] != 'coupon' || ($_SESSION['total_1'][1] == '' && $_SESSION['total_1'][1] == null)) {
 					//echo 'dd'; die();
 					if($result['code'] != 'cod')
 					if ($this->config->get('payment_' . $result['code'] . '_status')) {
@@ -79,7 +80,8 @@ class ControllerCheckoutPaymentMethod extends Controller {
 					}
 				} else {
 					// if coupon and total is 0
-					if($_SESSION['total_1'][4]['value'] == 0) {
+					//print_r($_SESSION['total_1']); die();
+					if($_SESSION['total_1'][4]['value'] == 0 && $_SESSION['total_1'][3]['value'] == 0) {
 						if($result['code'] == 'cod')
 						if ($this->config->get('payment_' . $result['code'] . '_status')) {
 							$this->load->model('extension/payment/' . $result['code']);
