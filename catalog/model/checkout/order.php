@@ -492,18 +492,47 @@ $this->db->query($query);
         }
     }
 
+	public function checkFreeShipping( $order_id ) {
+		$freeShipping = $this->config->get('config_login_attempts');
+
+        $total = 0;
+
+        $query = $this->db->query( 'SELECT * FROM ' . DB_PREFIX . "order_product WHERE order_id = '" . ( int )$order_id . "'" );
+
+        foreach ( $query->rows as $row ) {
+            if ( $row[ 'idOption' ] == 0 )
+            $total += $row[ 'price' ] * $row[ 'quantity' ];
+        }
+
+        if ( $total == 0 )
+        return true;
+        else if ( $total > 0 && $total > $freeShipping )
+        return true;
+
+        return false;
+	}
+	
 	public function updateCoupon($order_id) {
 		// get value of shipping
 		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "setting" . " where code = 'shipping_flat' and value <> 0 ORDER by value ASC");
           
         $costObj = $query->rows;
-		$costShiping = $costObj[0]['value'];
-		  
+
+        foreach($costObj as $item)
+          if($item['key'] == 'shipping_flat_cost')
+            $costShiping = $item['value'];
+
 		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "coupon_history WHERE order_id = ".$order_id."");
 
 		// get value of coupon is paied by this order
 		$coupon_id = $query->row['coupon_id'];
-		$valuePaied = ($query->row['amount'] * -1) + $costShiping;
+
+		// if free shipping
+		if($this->checkFreeShipping($order_id))
+		  $valuePaied = ($query->row['amount'] * -1);
+		// if not free shipping
+		else
+		  $valuePaied = ($query->row['amount'] * -1) + $costShiping;
 
 		//echo $valuePaied; die();
 

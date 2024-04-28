@@ -235,7 +235,11 @@ class ControllerSaleOrder extends Controller {
 
 			//$result['total'] = ($setTotal <= $this->config->get('config_login_attempts')) ? $result['total'] : $setTotal;
 
-			$totalOrder = ($this->model_sale_order->isIncludeTax($result['order_id'])) ? $result['total'] : $result['total'] - $costShiping;  //(in_array($result['order_status_id'], array(13))) ? $result['total'] * -1 : $result['total']; 
+			//echo $result['total']; die();
+			if($result['total'] == $costShiping)
+			  $totalOrder = 0;
+			else 
+			  $totalOrder = ($this->model_sale_order->isIncludeTax($result['order_id'])) ? $result['total'] : $result['total'] - $costShiping;  //(in_array($result['order_status_id'], array(13))) ? $result['total'] * -1 : $result['total']; 
 
 			$data['orders'][] = array(
 				'order_id'      => $result['order_id'],
@@ -1102,6 +1106,7 @@ class ControllerSaleOrder extends Controller {
 			//echo $totalNormalProduct; die();
 
 			$totals = $this->model_sale_order->getOrderTotals($this->request->get['order_id']);
+			//print_r($totals);die();
 			$this->document->displayOrder($totals, $sum_tax_1, $sum_tax_2, $this->session->data['shipping_address']['country_id'], $totalNormalProduct, $this->config->get('config_login_attempts'));
 
 			$count = count($totals);
