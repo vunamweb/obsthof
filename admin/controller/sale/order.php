@@ -305,11 +305,21 @@ class ControllerSaleOrder extends Controller {
             $totalNormalProduct = $display->totolNormalProduct;
 
             $totals = $this->model_sale_order->getOrderTotals( $result[ 'order_id' ] );
-            $this->document->displayOrder( $totals, $sum_tax_1, $sum_tax_2, $this->session->data[ 'shipping_address' ][ 'country_id' ], $totalNormalProduct, $this->config->get( 'config_login_attempts' ) );
+            $this->document->displayOrder( $totals, $sum_tax_1, $sum_tax_2, $this->session->data[ 'shipping_address' ][ 'country_id' ], $totalNormalProduct, $this->config->get( 'config_login_attempts' ), $result[ 'order_id' ] );
 
-            $count = count( $totals );
+			if($result[ 'order_id' ] == 717) {
+				//print_r($totals);
+				//die();
+			//$this->document->displayOrder( $totals, $sum_tax_1, $sum_tax_2, $this->session->data[ 'shipping_address' ][ 'country_id' ], $totalNormalProduct, $this->config->get( 'config_login_attempts' ), $result[ 'order_id' ] );
 
-            $totalOrder = $totals[ $count - 1 ][ 'value' ];
+		    }
+
+			$count = count( $totals );
+
+			//echo $count -1;	
+			//die();
+
+            $totalOrder = ($totals[ $count - 1 ][ 'value' ] != null) ? $totals[ $count - 1 ][ 'value' ] : $totals[ $count ][ 'value' ];
 
             //echo $totals[ $count - 1 ][ 'value' ];
 
@@ -1192,7 +1202,8 @@ class ControllerSaleOrder extends Controller {
             //die();
             $this->document->displayOrder( $totals, $sum_tax_1, $sum_tax_2, $this->session->data[ 'shipping_address' ][ 'country_id' ], $totalNormalProduct, $this->config->get( 'config_login_attempts' ) );
 
-            $count = count( $totals );
+			//print_r($totals);
+			$count = count( $totals );
 
             if ( $order_info[ 'order_status_id' ] == 13 )
             $totals[ $count ][ 'value' ] = $totals[ $count ][ 'value' ] * -1;
