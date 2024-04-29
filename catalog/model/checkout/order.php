@@ -176,9 +176,13 @@ class ModelCheckoutOrder extends Model {
 	public function insertCoupon($generateIDCoupon, $total) {
 		$currentDate = new DateTime(); // Get the current date
         $currentDate->modify('+3 years'); // Add 3 years to the current date
-        $futureDate = $currentDate->format('Y-m-d'); // Format the date as desired (e.g., 'Y-m-d')
+		$futureDate = $currentDate->format('Y-m-d'); // Format the date as desired (e.g., 'Y-m-d')
 
-$data = array(
+		$currentDate = new DateTime(); // Get the current date
+        $currentDate->modify('-1 day'); // Add 3 years to the current date
+		$startDate = $currentDate->format('Y-m-d'); // Format the date as desired (e.g., 'Y-m-d')
+
+        $data = array(
 			'name' => $generateIDCoupon, // Coupon name
 			'code' => $generateIDCoupon, // Coupon code
 			'type' => 'F', // 'F' for fixed amount, 'P' for percentage
@@ -186,7 +190,7 @@ $data = array(
 			'logged' => 0, // 0 for all users, 1 for logged-in users only
 			'shipping' => 0, // 0 for applicable on shipping, 1 for not applicable on shipping
 			'total' => 0, // Minimum total amount required for coupon to be applied
-			'date_start' => date('Y-m-d'), // Coupon start date (today's date)
+			'date_start' => $startDate, // Coupon start date (today's date)
 			'date_end' => $futureDate, // Coupon end date
 			'date_added' => date('Y-m-d'), // Coupon start date (today's date)
 			'uses_total' => 0, // Total number of times coupon can be used
