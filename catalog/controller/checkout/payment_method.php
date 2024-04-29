@@ -59,24 +59,43 @@ class ControllerCheckoutPaymentMethod extends Controller {
 
 			//print_r($total_data);
 
-			$query = $this->db->query( 'SELECT * FROM ' . DB_PREFIX . 'setting' . " where code = 'shipping_flat' and value <> 0 ORDER by value ASC" );
+			$check = true;
 
-            $costObj = $query->rows;
+			$coupon_id = ($_SESSION['coupon_id']) ? $_SESSION['coupon_id'] : 'null';
 
-            foreach ( $costObj as $item )
-              if ( $item[ 'key' ] == 'shipping_flat_cost' )
-				 $costShiping = $item[ 'value' ];
-				 
-			//echo $costShiping;
-			//die(); 		 
+			if($coupon_id != null) {
+				$query = $this->db->query( 'SELECT * FROM ' . DB_PREFIX . 'coupon' . " where coupon_id = ".$coupon_id."" );
 
-			$recurring = $this->cart->hasRecurringProducts();
+				$row = $query->row;
+
+				//print_r($row);
+				//die();
+
+				$valueCoupon = $row['discount'];
+
+				$sum = 0;
+
+				foreach($total_data['totals'] as $item)
+				  if($item['code'] == 'sub_total' || $item['code'] == 'shipping')
+				    $sum = $sum + $item['value'];
+
+				  if($sum <= $valueCoupon)
+				  $check = false;
+
+				  //echo $valueCoupon . '/' . $sum;
+				  //die();
+			}
+
+            $recurring = $this->cart->hasRecurringProducts();
+
+			//print_r($total_data);
+			//die();
 
 			foreach ($results as $result) {
 				//echo $total_data['total']; 
 				//die(); 
 				// if not pay with cash deliver
-				if($total_data['total'] != $costShiping) {
+				if($check) {
 					//echo 'dd'; 
 					//die();
 					if($result['code'] != 'cod')
