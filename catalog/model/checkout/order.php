@@ -532,7 +532,8 @@ $this->db->query($query);
 		  $valuePaied = ($query->row['amount'] * -1);
 		// if not free shipping
 		else
-		  $valuePaied = ($query->row['amount'] * -1) + $costShiping;
+		  //$valuePaied = ($query->row['amount'] * -1) + $costShiping;
+		  $valuePaied = ($query->row['amount'] * -1);
 
 		//echo $valuePaied; die();
 

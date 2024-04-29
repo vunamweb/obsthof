@@ -17,6 +17,8 @@ class ControllerCheckoutPaymentMethod extends Controller {
 				'taxes'  => &$taxes,
 				'total'  => &$total
 			);
+
+			//print_r($total_data['total']);
 			
 			$this->load->model('setting/extension');
 
@@ -52,16 +54,31 @@ class ControllerCheckoutPaymentMethod extends Controller {
 
 			//print_r($_SESSION['total_1']); die();
 
-			//print_r($results); die();
+			//print_r($results); 
+			//die();
+
+			//print_r($total_data);
+
+			$query = $this->db->query( 'SELECT * FROM ' . DB_PREFIX . 'setting' . " where code = 'shipping_flat' and value <> 0 ORDER by value ASC" );
+
+            $costObj = $query->rows;
+
+            foreach ( $costObj as $item )
+              if ( $item[ 'key' ] == 'shipping_flat_cost' )
+				 $costShiping = $item[ 'value' ];
+				 
+			//echo $costShiping;
+			//die(); 		 
 
 			$recurring = $this->cart->hasRecurringProducts();
 
 			foreach ($results as $result) {
-				//print_r($result); die();
-				// if not coupon
-				//print_r($_SESSION['total_1'][1]); die();
-				if($_SESSION['total_1'][2]['code'] != 'coupon' || ($_SESSION['total_1'][1] == '' && $_SESSION['total_1'][1] == null)) {
-					//echo 'dd'; die();
+				//echo $total_data['total']; 
+				//die(); 
+				// if not pay with cash deliver
+				if($total_data['total'] != $costShiping) {
+					//echo 'dd'; 
+					//die();
 					if($result['code'] != 'cod')
 					if ($this->config->get('payment_' . $result['code'] . '_status')) {
 						$this->load->model('extension/payment/' . $result['code']);
@@ -79,10 +96,7 @@ class ControllerCheckoutPaymentMethod extends Controller {
 						}
 					}
 				} else {
-					// if coupon and total is 0
-					//print_r($_SESSION['total_1']); die();
-					if($_SESSION['total_1'][4]['value'] == 0 && $_SESSION['total_1'][3]['value'] == 0) {
-						if($result['code'] == 'cod')
+					if($result['code'] == 'cod')
 						if ($this->config->get('payment_' . $result['code'] . '_status')) {
 							$this->load->model('extension/payment/' . $result['code']);
 		
@@ -98,24 +112,6 @@ class ControllerCheckoutPaymentMethod extends Controller {
 								}
 							}
 						}
-					} else { // if coupon and total not 0
-						if($result['code'] != 'cod')
-						if ($this->config->get('payment_' . $result['code'] . '_status')) {
-							$this->load->model('extension/payment/' . $result['code']);
-		
-							$method = $this->{'model_extension_payment_' . $result['code']}->getMethod($this->session->data['payment_address'], $total);
-		
-							if ($method) {
-								if ($recurring) {
-									if (property_exists($this->{'model_extension_payment_' . $result['code']}, 'recurringPayments') && $this->{'model_extension_payment_' . $result['code']}->recurringPayments()) {
-										$method_data[$result['code']] = $method;
-									}
-								} else {
-									$method_data[$result['code']] = $method;
-								}
-							}
-						}
-					}
 				}
 			}
 

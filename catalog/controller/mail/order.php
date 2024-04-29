@@ -418,11 +418,11 @@ class ControllerMailOrder extends Controller {
 			  $mail->addAttachment($files3);
 		}
 		    
-        if (!$mail->Send()) {
+        /*if (!$mail->Send()) {
 			//echo "Mailer Error: " . $mail->ErrorInfo;
 		} else {
 			//echo "Message sent!";
-		}
+		}*/
   }
 
   public function createPDFInvoice($order_info, $order_status_id, $sum_tax_1 = 0, $sum_tax_2 = 0, $totalNormalProduct = 0) {

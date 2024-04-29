@@ -1200,7 +1200,7 @@ class ControllerSaleOrder extends Controller {
             $totals = $this->model_sale_order->getOrderTotals( $this->request->get[ 'order_id' ] );
             //print_r( $totals );
             //die();
-            $this->document->displayOrder( $totals, $sum_tax_1, $sum_tax_2, $this->session->data[ 'shipping_address' ][ 'country_id' ], $totalNormalProduct, $this->config->get( 'config_login_attempts' ) );
+            //$this->document->displayOrder( $totals, $sum_tax_1, $sum_tax_2, $this->session->data[ 'shipping_address' ][ 'country_id' ], $totalNormalProduct, $this->config->get( 'config_login_attempts' ) );
 
 			//print_r($totals);
 			$count = count( $totals );

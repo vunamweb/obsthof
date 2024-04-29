@@ -725,10 +725,18 @@ class ControllerExtensionPaymentPayPal extends Controller {
 
 					//echo $order_total_paypal; die();
 
-					if($order_total_paypal > $this->config->get('config_login_attempts') || $order_total_paypal == 0)
+					/*if($order_total_paypal > $this->config->get('config_login_attempts') || $order_total_paypal == 0)
 					  $setTotal = $order_info['total'] - $shipping_total_1;
 					else
-					  $setTotal = $order_info['total'];
+					  $setTotal = $order_info['total'];*/
+					
+					$query = $this->db->query( 'SELECT * FROM ' . DB_PREFIX . 'order_total' . " where order_id = ".$this->session->data['order_id']."" );
+
+					$totals = $query->rows;
+		  
+					$count = count($totals);
+		  
+					$setTotal = $totals[$count - 1]['value'];  
 
 					$order_total = number_format($setTotal * $currency_value, $decimal_place, '.', '');
 					  
