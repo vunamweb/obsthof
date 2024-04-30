@@ -128,7 +128,18 @@ class ModelAccountOrder extends Model {
 		}
 
 	    return false;
-    }
+	}
+	
+
+	public function getTotalOfOrder($order_id) {
+		$query = $this->db->query( 'SELECT * FROM ' . DB_PREFIX . 'order_total' . ' where order_id = '.$order_id.'' );
+
+		$totals = $query->rows;
+
+		$count = count($totals);
+
+		return $totals[$count -1]['value'];
+	}
 
 	public function getOrderProduct($order_id, $order_product_id) {
 		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "order_product WHERE order_id = '" . (int)$order_id . "' AND order_product_id = '" . (int)$order_product_id . "'");
