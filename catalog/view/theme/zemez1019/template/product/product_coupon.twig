@@ -68,12 +68,12 @@
 						<h2 class="product-title">{{ heading_title }}</h2>
 						{{ description }}
 						<div id="product">
-						{% if coupon %}
+						{% if coupon_value %}
 							<p class="alert alert-danger ">{{ warning_coupon }}</p>
 						{% endif %}
 							<div class="form-group">
 								<div class="quantity">
-									<input type="text" name="value_coupon" id="value_coupon" value="{{ coupon }}"/> <span class="euro">&euro;</span><br class="clearfix"/>
+									<input type="text" name="value_coupon" id="value_coupon" value="{{ coupon_value }}"/> <span class="euro">&euro;</span><br class="clearfix"/>
 									<input type="hidden" name="product_id" value="{{ product_id }}"/>
 									<input type="hidden" name="buy_coupon" value="1"/>
 									<button type="button" id="button-cart" data-loading-text="{{ text_loading }}" class="btn-primary">
