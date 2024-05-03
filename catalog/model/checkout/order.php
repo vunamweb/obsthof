@@ -194,7 +194,7 @@ class ModelCheckoutOrder extends Model {
 			'date_end' => $futureDate, // Coupon end date
 			'date_added' => date('Y-m-d'), // Coupon start date (today's date)
 			'uses_total' => 0, // Total number of times coupon can be used
-			'uses_customer' => '1', // Total number of times coupon can be used
+			'uses_customer' => '0', // Total number of times coupon can be used
 			'status' => 1 // 0 for inactive, 1 for active
 		);
 
