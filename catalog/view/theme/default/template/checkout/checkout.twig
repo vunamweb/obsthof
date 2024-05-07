@@ -25,8 +25,12 @@
           <div class="panel-heading">
             <h4 class="panel-title">{{ text_checkout_option }}</h4>
           </div>
+          {% if not logged  %}
+          <div class="panel-collapse collapse always_in" id="collapse-checkout-option">
+          {% else %}
           <div class="panel-collapse collapse" id="collapse-checkout-option">
-            <div class="panel-body"></div>
+          {% endif %}
+          <div class="panel-body"></div>
           </div>
         </div>
         {% if not logged and account != 'guest' %}
@@ -43,7 +47,7 @@
           <div class="panel-heading">
             <h4 class="panel-title">{{ text_checkout_payment_address }}</h4>
           </div>
-          <div class="panel-collapse collapse" id="collapse-payment-address">
+          <div class="panel-collapse collapse always_in" id="collapse-payment-address">
             <div class="panel-body"></div>
           </div>
         </div>
@@ -142,6 +146,9 @@ $(document).ready(function() {
 
 // Checkout
 $(document).delegate('#button-account', 'click', function() {
+    $('#collapse-checkout-option').removeClass('always_in');
+    $('#collapse-payment-address').removeClass('always_in');
+    
     $.ajax({
         url: 'index.php?route=checkout/' + $('input[name=\'account\']:checked').val(),
         dataType: 'html',
@@ -340,6 +347,8 @@ $(document).delegate('#button-register', 'click', function() {
 
 // Payment Address
 $(document).delegate('#button-payment-address', 'click', function() {
+    $('#collapse-payment-address').removeClass('always_in');
+
     $.ajax({
         url: 'index.php?route=checkout/payment_address/save',
         type: 'post',

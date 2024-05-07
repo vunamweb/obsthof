@@ -2,7 +2,14 @@
 namespace Cart;
 class Cart {
 	private $data = array();
-
+	private $config; // Explizite Definition der Eigenschaft $config
+	private $customer; // Explizite Definition der Eigenschaft $config
+	private $session; // Explizite Definition der Eigenschaft $config
+	private $db; // Explizite Definition der Eigenschaft $config
+	private $tax; // Explizite Definition der Eigenschaft $config
+	private $weight; // Explizite Definition der Eigenschaft $config
+	private $language; // Explizite Definition der Eigenschaft $config
+	
 	public function __construct($registry) {
 		$this->config = $registry->get('config');
 		$this->customer = $registry->get('customer');
