@@ -36,4 +36,5 @@ define('MORPHEUS_HOMEPAGE', ['warum/', 'wie/']);
 //define('SPECIAL_EMAIL', 'vu@pixeldusche.com');
 //define('SPECIAL_EMAIL', 'vu@pixeldusche.com');
 define('SPECIAL_EMAIL', 'vukynamkhtn@gmail.com');
+define('SPECIAL_EMAIL2', 'vukynamkhtn@gmail.com');
 

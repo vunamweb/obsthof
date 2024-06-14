@@ -374,18 +374,21 @@ class ControllerMailOrder extends Controller {
 
 		$this->sendMailSMTP($this->config->get('config_email'), $subject, '', $fromName, $this->load->view('mail/order_alert', $data), 1);
 		$this->sendMailSMTP(SPECIAL_EMAIL, $subject, '', $fromName, $this->load->view('mail/order_add', $data), 1);
+		$this->sendMailSMTP(SPECIAL_EMAIL2, $subject, '', $fromName, $this->load->view('mail/order_add', $data), 1);
     }
 
 	function sendMailSMTP($to, $subject, $from, $fromName, $message, $sendMail=1, $type = false, $typeCoupon = false)
    {
-		$files1 = str_replace("index.php", "", $_SERVER['SCRIPT_FILENAME']) . "pdf/order.pdf";
+		// return;
+		
+	    $files1 = str_replace("index.php", "", $_SERVER['SCRIPT_FILENAME']) . "pdf/order.pdf";
 		$files2 = str_replace("index.php", "", $_SERVER['SCRIPT_FILENAME']) . "pdf/order_event.pdf";
 		$files3 = str_replace("index.php", "", $_SERVER['SCRIPT_FILENAME']) . "pdf/order_coupon.pdf";
 				
 		// $from = "shop@obsthofamsteinberg.de";		
 		$from = "webshop@obsthof-am-steinberg.de";
 		
-	    $mail = new PHPMailer();
+		$mail = new PHPMailer();
 		
 		$mail->IsSMTP(); // telling the class to use SMTP
 		$mail->SMTPDebug = 0; // enables SMTP debug information (for testing)
@@ -395,11 +398,10 @@ class ControllerMailOrder extends Controller {
 		$mail->Port = 465; // set the SMTP port for the GMAIL server
 		$mail->Username = $from; // GMAIL username
 		$mail->Password = "!wEr4!hZtvB";
-		// $mail->Password = "Carp3nt!n18";		
 		$mail->CharSet = 'UTF-8';
 		// $mail->Encoding = 'base64';
 		$mail->AddAddress($to);
-		//$mail->addBcc("b@7sc.eu");
+		// $mail->addBcc("b@7sc.eu");
 		$mail->Subject = $subject;
 		$mail->FromName = $fromName;
 		$mail->From = $from;
@@ -418,11 +420,11 @@ class ControllerMailOrder extends Controller {
 			  $mail->addAttachment($files3);
 		}
 		    
-        /*if (!$mail->Send()) {
+        if (!$mail->Send()) {
 			//echo "Mailer Error: " . $mail->ErrorInfo;
 		} else {
 			//echo "Message sent!";
-		}*/
+		}
   }
 
   public function createPDFInvoice($order_info, $order_status_id, $sum_tax_1 = 0, $sum_tax_2 = 0, $totalNormalProduct = 0) {
@@ -1025,15 +1027,16 @@ public function createPDFInvoiceCoupon($order_info, $order_status_id, $sum_tax_1
 		$dompdf = new Dompdf($options);
 		// $dompdf->setHtmlFooter($htmlFooter);
 
-		$data_2['start_day'] = date('Y-m-d');
-
+		$data_2['start_day'] = date('d.m.Y');
+		
 		$currentDate = new DateTime(); // Get the current date
-        $currentDate->modify('+3 years'); // Add 3 years to the current date
-		$futureDate = $currentDate->format('Y-m-d');
+		$currentDate->modify('+3 years'); // Add 3 years to the current date
+		$currentDate->setDate($currentDate->format('Y'), 12, 31); // Set the date to December 31st of the current year
+		$futureDate = $currentDate->format('d.m.Y');
 
 		$data_2['end_date'] = $futureDate;
 
-		$data_2['price_coupon'] = $data_2['products'][0]['price_1'];
+		$data_2['price_coupon'] = intval($data_2['products'][0]['price_1']);
 		
         $dompdf->loadHtml($this->load->view('mail/order_coupon_pdf', $data_2));
 		$dompdf->setPaper('A4', 'Horizontal');
