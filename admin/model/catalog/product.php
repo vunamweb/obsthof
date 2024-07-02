@@ -14,7 +14,7 @@ class ModelCatalogProduct extends Model {
 
 	public function getInformationEvent($option) {
 		$query = $this->db->query('select * from '.DB_PREFIX.'order o, '.DB_PREFIX.'order_product op where o.order_id = 
-		op.order_id and op.idOption = '.$option.'');
+		op.order_id and op.idOption = '.$option.' and o.order_status_id <> 0');
 
 		return $query->rows;
 	}
@@ -161,6 +161,22 @@ class ModelCatalogProduct extends Model {
 
 		$product_id = $this->db->getLastId();
 
+			///xml///
+				if (isset($data['product_customtab'])) {
+					foreach ($data['product_customtab'] as $product_customtab) {
+						$this->db->query("INSERT INTO " . DB_PREFIX . "product_customtab SET product_id = '" . (int)$product_id . "',  sort_order = '" . (int)$product_customtab['sort_order'] . "', status = '" . (int)$product_customtab['status'] . "'");
+						
+						$product_customtab_id = $this->db->getLastId();
+						
+						foreach ($product_customtab['product_customtab_description'] as $language_id => $product_customtab_description) {				
+							$this->db->query("INSERT INTO " . DB_PREFIX . "product_customtab_description SET product_customtab_id = '" . (int)$product_customtab_id . "', language_id = '" . (int)$language_id . "', product_id = '" . (int)$product_id . "', title = '" .  $this->db->escape($product_customtab_description['title']) . "', description = '" .  $this->db->escape($product_customtab_description['description']) . "'");
+						}
+					}
+				}
+			///xml///
+			
+			
+
 		if (isset($data['product_customtab'])) {
 			foreach ($data['product_customtab'] as $product_customtab) {
 				$this->db->query("INSERT INTO " . DB_PREFIX . "product_customtab SET product_id = '" . (int)$product_id . "',  sort_order = '" . (int)$product_customtab['sort_order'] . "', status = '" . (int)$product_customtab['status'] . "'");
@@ -177,6 +193,14 @@ class ModelCatalogProduct extends Model {
 			$this->db->query("UPDATE " . DB_PREFIX . "product SET image = '" . $this->db->escape($data['image']) . "' WHERE product_id = '" . (int)$product_id . "'");
 		}
 
+
+			if(isset($data['product_newtabcontent'])) {
+				$this->db->query("DELETE FROM " . DB_PREFIX . "product_newtabcontent WHERE product_id = '" . (int)$product_id . "'");
+				foreach ($data['product_newtabcontent'] as $language_id => $value) {
+					$this->db->query("INSERT INTO " . DB_PREFIX . "product_newtabcontent SET product_id = '" . (int)$product_id . "', language_id = '" . (int)$language_id . "', newtabcontent = '" . $this->db->escape($value['newtabcontent']) . "',  name = '" . $this->db->escape($value['name']) . "'");
+				}
+			}
+				
 		foreach ($data['product_description'] as $language_id => $value) {
 			$this->db->query("INSERT INTO " . DB_PREFIX . "product_description SET product_id = '" . (int)$product_id . "', language_id = '" . (int)$language_id . "', name = '" . $this->db->escape($value['name']) . "', description = '" . $this->db->escape($value['description']) . "', tag = '" . $this->db->escape($value['tag']) . "', meta_title = '" . $this->db->escape($value['meta_title']) . "', meta_description = '" . $this->db->escape($value['meta_description']) . "', meta_keyword = '" . $this->db->escape($value['meta_keyword']) . "'");
 		}
@@ -311,6 +335,24 @@ class ModelCatalogProduct extends Model {
 		//print_r($data); die();
 		$this->db->query("UPDATE " . DB_PREFIX . "product SET model = '" . $this->db->escape($data['model']) . "', sku = '" . $this->db->escape($data['sku']) . "', upc = '" . $this->db->escape($data['upc']) . "', ean = '" . $this->db->escape($data['ean']) . "', jan = '" . $this->db->escape($data['jan']) . "', isbn = '" . $this->db->escape($data['isbn']) . "', mpn = '" . $this->db->escape($data['mpn']) . "', location = '" . $this->db->escape($data['location']) . "', quantity = '" . (int)$data['quantity'] . "', minimum = '" . (int)$data['minimum'] . "', subtract = '" . (int)$data['subtract'] . "', stock_status_id = '" . (int)$data['stock_status_id'] . "', date_available = '" . $this->db->escape($data['date_available']) . "', manufacturer_id = '" . (int)$data['manufacturer_id'] . "', shipping = '" . (int)$data['shipping'] . "', price_1 = '" . (float)$data['price_1'] . "', price_lit = '" . (float)$data['price_lit'] . "', price = '" . (float)$data['price'] . "', points = '" . (int)$data['points'] . "', weight = '" . (float)$data['weight'] . "', weight_class_id = '" . (int)$data['weight_class_id'] . "', length = '" . (float)$data['length'] . "', width = '" . (float)$data['width'] . "', height = '" . (float)$data['height'] . "', length_class_id = '" . (int)$data['length_class_id'] . "', status = '" . (int)$data['status'] . "', tax_class_id = '" . (int)$data['tax_class_id'] . "', sort_order = '" . (int)$data['sort_order'] . "', date_modified = NOW() WHERE product_id = '" . (int)$product_id . "'");
 
+			///xml///
+				$this->db->query("DELETE FROM " . DB_PREFIX . "product_customtab WHERE product_id = '" . (int)$product_id . "'");
+				$this->db->query("DELETE FROM " . DB_PREFIX . "product_customtab_description WHERE product_id = '" . (int)$product_id . "'");
+				if (isset($data['product_customtab'])) {
+					foreach ($data['product_customtab'] as $product_customtab) {
+						$this->db->query("INSERT INTO " . DB_PREFIX . "product_customtab SET product_id = '" . (int)$product_id . "',  sort_order = '" . (int)$product_customtab['sort_order'] . "', status = '" . (int)$product_customtab['status'] . "'");
+						
+						$product_customtab_id = $this->db->getLastId();
+						
+						foreach ($product_customtab['product_customtab_description'] as $language_id => $product_customtab_description) {				
+							$this->db->query("INSERT INTO " . DB_PREFIX . "product_customtab_description SET product_customtab_id = '" . (int)$product_customtab_id . "', language_id = '" . (int)$language_id . "', product_id = '" . (int)$product_id . "', title = '" .  $this->db->escape($product_customtab_description['title']) . "', description = '" .  $this->db->escape($product_customtab_description['description']) . "'");
+						}
+					}
+				}
+			///xml///
+			
+			
+
 		$this->db->query("DELETE FROM " . DB_PREFIX . "product_customtab WHERE product_id = '" . (int)$product_id . "'");
 				$this->db->query("DELETE FROM " . DB_PREFIX . "product_customtab_description WHERE product_id = '" . (int)$product_id . "'");
 				if (isset($data['product_customtab'])) {
@@ -330,6 +372,14 @@ class ModelCatalogProduct extends Model {
 
 		$this->db->query("DELETE FROM " . DB_PREFIX . "product_description WHERE product_id = '" . (int)$product_id . "'");
 
+
+			if(isset($data['product_newtabcontent'])) {
+				$this->db->query("DELETE FROM " . DB_PREFIX . "product_newtabcontent WHERE product_id = '" . (int)$product_id . "'");
+				foreach ($data['product_newtabcontent'] as $language_id => $value) {
+					$this->db->query("INSERT INTO " . DB_PREFIX . "product_newtabcontent SET product_id = '" . (int)$product_id . "', language_id = '" . (int)$language_id . "', newtabcontent = '" . $this->db->escape($value['newtabcontent']) . "',  name = '" . $this->db->escape($value['name']) . "'");
+				}
+			}
+				
 		foreach ($data['product_description'] as $language_id => $value) {
 			$this->db->query("INSERT INTO " . DB_PREFIX . "product_description SET product_id = '" . (int)$product_id . "', language_id = '" . (int)$language_id . "', name = '" . $this->db->escape($value['name']) . "', description = '" . $this->db->escape($value['description']) . "', tag = '" . $this->db->escape($value['tag']) . "', meta_title = '" . $this->db->escape($value['meta_title']) . "', meta_description = '" . $this->db->escape($value['meta_description']) . "', meta_keyword = '" . $this->db->escape($value['meta_keyword']) . "'");
 		}
@@ -503,6 +553,7 @@ class ModelCatalogProduct extends Model {
 			$data['product_image'] = $this->getProductImages($product_id);
 			$data['product_option'] = $this->getProductOptions($product_id);
 			$data['product_related'] = $this->getProductRelated($product_id);
+$data['product_customtab'] = $this->getProductcustomtabs($product_id);
 			$data['product_customtab'] = $this->getProductcustomtabs($product_id);
 			$data['product_reward'] = $this->getProductRewards($product_id);
 			$data['product_special'] = $this->getProductSpecials($product_id);
@@ -691,6 +742,22 @@ class ModelCatalogProduct extends Model {
 		return $product_attribute_data;
 	}
 
+
+				public function getProductExtraContent($product_id) {
+					$product_newtabcontent_data = array();
+
+					$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "product_newtabcontent WHERE product_id = '" . (int)$product_id . "'");
+
+					foreach ($query->rows as $result) {
+						$product_newtabcontent_data[$result['language_id']] = array(
+							'newtabcontent'             => $result['newtabcontent'],
+							'name'             => $result['name']
+						);
+					}
+
+					return $product_newtabcontent_data;
+				}
+				
 	public function getProductOptions($product_id) {
 		$product_option_data = array();
 
@@ -765,6 +832,38 @@ class ModelCatalogProduct extends Model {
 		return $product_customtab_data;
 	}
 
+
+			//xml///
+	public function getProductcustomtabs_($product_id) {
+		
+		$product_customtab_data = array();
+		
+		$product_customtab_query = $this->db->query("SELECT * FROM " . DB_PREFIX . "product_customtab WHERE product_id = '" . (int)$product_id . "' ORDER BY sort_order ASC");
+		
+		foreach ($product_customtab_query->rows as $product_customtab) {
+			
+			$product_customtab_description_data = array();
+			 
+			$product_customtab_description_query = $this->db->query("SELECT * FROM " . DB_PREFIX . "product_customtab_description WHERE product_customtab_id = '" . (int)$product_customtab['product_customtab_id'] . "' AND product_id = '" . (int)$product_id . "'");
+			
+			foreach ($product_customtab_description_query->rows as $product_customtab_description) {			
+				$product_customtab_description_data[$product_customtab_description['language_id']] = array(
+				'title' => $product_customtab_description['title'],
+				'description' => $product_customtab_description['description'],
+				);
+			}
+		
+			$product_customtab_data[] = array(
+				'product_customtab_description' => $product_customtab_description_data,
+				'status'                     => $product_customtab['status'],
+				'sort_order'                    => $product_customtab['sort_order']	
+			);
+		}
+		
+		return $product_customtab_data;
+	}
+	//xml///
+			
 	public function getProductImages($product_id) {
 		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "product_image WHERE product_id = '" . (int)$product_id . "' ORDER BY sort_order ASC");
 
