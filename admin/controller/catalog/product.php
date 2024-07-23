@@ -478,10 +478,13 @@ class ControllerCatalogProduct extends Controller {
                     $date1 = $date1[2] . '-' . $date1[1] . '-' . $date1[0];
 
                     if(time() - strtotime($date1) <=0)
-                     $dateEvent .= $date[ 0 ] . '   ' . $date[ 1 ] . '-' .$date[ 2 ] . ' hours :' .$date[ 3 ].' tickets in stock' .'<br>';
-                    
-                    if($date[3] <= 0)
-                      $checkQuantity = false; 
+                    if($date[3] <= 0) 
+                     $dateEvent .= '<span class="label label-danger">' . $date[ 0 ] . '   ' . $date[ 1 ] . '-' .$date[ 2 ] . ' hours :' .$date[ 3 ].' tickets in stock' .'</span><br>';
+                    else
+                     $dateEvent .= '<span class="label label-success">' . $date[ 0 ] . '   ' . $date[ 1 ] . '-' .$date[ 2 ] . ' hours :' .$date[ 3 ].' tickets in stock' .'</span><br>';
+                     
+                    //if($date[3] <= 0)
+                      //$checkQuantity = false; 
                 }
 
                 $data[ 'products' ][] = array(
@@ -492,7 +495,7 @@ class ControllerCatalogProduct extends Controller {
                     'price'      => $this->currency->format( $result[ 'price' ], $this->config->get( 'config_currency' ) ),
                     'special'    => $special,
                     'quantity'   => $dateEvent, //$result[ 'quantity' ],
-                    'checkQuantity'   => $checkQuantity, //$result[ 'quantity' ],
+                    'checkQuantity'   => true, //$checkQuantity, //$result[ 'quantity' ],
                     'status'     => $result[ 'status' ] ? $this->language->get( 'text_enabled' ) : $this->language->get( 'text_disabled' ),
                     'edit'       => $this->url->link( 'catalog/product/edit', 'user_token=' . $this->session->data[ 'user_token' ] . ''.$param.'&product_id=' . $result[ 'product_id' ] . $url, true )
                 );
