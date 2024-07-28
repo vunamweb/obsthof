@@ -9,7 +9,7 @@
 # # # # # # # # # # # # # # # # # # # # # # # # # # #
 // error_reporting(E_ALL);
 
- use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\PHPMailer;
  //use PHPMailer\PHPMailer\SMTP;
  //use PHPMailer\PHPMailer\Exception;
 $root = $_SERVER['DOCUMENT_ROOT'].$morpheus["subFolder"];
@@ -18,72 +18,36 @@ $root = $_SERVER['DOCUMENT_ROOT'].$morpheus["subFolder"];
  require ($root.'page/SMTP.php');
  require ($root.'page/Exception.php');
 
-global $jumpIDProdukt, $jumpIDWG, $jumpIDAnwendung, $jumpIDHersteller, $hersteller_nm, $produkte_nm, $anwendungen_nm, $lang, $anw_privat, $anw_smart, $anw_handel, $anw_werte, $anw_beh, $anwendung_arr, $anwendungID, $anwendung_col;
-
-$jumpIDProdukt = 4;
-$jumpIDAnwendung = 18;
-$jumpIDHersteller = 19;
-$jumpIDWG = 20;
-
-$hersteller_nm = $lan == 'de' ? 'Hersteller' : 'Manufacturer';
-$produkte_nm = $lan == 'de' ? 'Produkte' : 'Products';
-$anwendungen_nm = $lan == 'de' ? 'Anwendungen' : 'Applications';
-
-$anw_privat = $lan == 'de' ? 'Privatbereich' : 'Private area';
-$anw_smart = $lan == 'de' ? 'Smart Home' : 'Smart Home';
-$anw_handel = $lan == 'de' ? 'Handel, Gewerbe, Wirtschaft' : 'Trade, commerce, economy';
-$anw_werte = $lan == 'de' ? 'Werteschutz' : 'Value protection';
-$anw_beh = $lan == 'de' ? 'Behörden, öffentliche Einrichtungen' : 'Authorities, public institutions';
-
-$anwendung_arr = array(
-	1=>'Privatbereich',
-	2=>'Smart Home',
-	3=>'Handel, Gewerbe, Wirtschaft',
-	4=>'Werteschutz' ,
-	5=>'Behörden, öffentliche Einrichtungen',
-);
-
-$anwendung_col = array(
-	1=>'pb',
-	2=>'sh',
-	3=>'hg',
-	4=>'ws' ,
-	5=>'be',
-);
-
-$anwendungID = array(
-	'privatbereich'=>1,
-	'smart-home'=>2,
-	'handel-gewerbe-wirtschaft'=>3,
-	'werteschutz' =>4,
-	'behoerden-oeffentliche-einrichtungen'=>5,
-);
-
 function sendMailSMTP($to, $subject, $message, $file='', $display_sent=1) {
 	global $morpheus;
-	$to = trim($to);
-    $mail = new PHPMailer();
-    $mail->IsSMTP();
-    $mail->SMTPDebug = 0; 	// enables SMTP debug information (for testing)
-    						// 1 = errors and messages
-    						// 2 = messages only
-    $mail->SMTPAuth = true; 
-    $mail->SMTPSecure = "ssl";
-    $mail->Host = "w019bb56.kasserver.com"; // sets GMAIL as the SMTP server
+	$to = trim($to);    
+	$from = "webshop@obsthof-am-steinberg.de";
+	$mail = new PHPMailer();
+	
+	
+	
+	$mail->IsSMTP(); // telling the class to use SMTP
+	$mail->SMTPDebug = 0; // enables SMTP debug information (for testing)
+	$mail->SMTPAuth = true; // enable SMTP authentication
+	// $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS; // Implizite TLS-Verschlüsselung aktivieren
+	$mail->SMTPSecure = "ssl";
+	$mail->Host = "w0118b8d.kasserver.com"; // sets GMAIL as the SMTP server
+	// $mail->Host = "smtp.ionos.de"; // sets GMAIL as the SMTP server
 	$mail->Port = 465; // set the SMTP port for the GMAIL server
-	$mail->Username = "shop@yourplate.de"; // GMAIL username
-	$mail->Password = "PovgWK7pNyt7zkg3Dtzw";
-    $mail->addBcc("b@7sc.eu");
-	// $mail->AddAddress($to);
+	$mail->Username = $from; // GMAIL username
+	$mail->Password = "xUG3Kbj3w4bM3x2";
+	// $mail->Password = "!wEr4!hZtvB";
+	$mail->CharSet = 'UTF-8';
+	// $mail->Encoding = 'base64';
+	$mail->AddAddress($to);
 	
 	//Attachments
 	if(file_exists($file))
 	  $mail->addAttachment($file);
-
     $mail->AddAddress($to);
     $mail->Subject = $subject;
-    $mail->FromName = 'obsthof'; //$morpheus["FromName"];
-    $mail->From = 'info@yourplate.de'; //$morpheus["From"];
+    $mail->FromName = 'Obsthof am Steinberg'; //$morpheus["FromName"];
+    $mail->From = $from; //$morpheus["From"];
     $mail->IsHTML(true);
     $mail->Body = $message;
 
@@ -101,14 +65,6 @@ function sendMailSMTP($to, $subject, $message, $file='', $display_sent=1) {
 // require ($root.'/page/SMTP.php');
 
 global $ausrichtungArray, $fileTypes, $imageFolder, $monate, $aArray, $anwendungen;
-
-$anwendungen = array(
-	"pb"=>"Privatbereich",
-	"sh"=>"Smart Home",
-	"hg"=>"Handel, Gewerbe, Wirtschaft",
-	"be"=>"Behörden, öffentliche Einrichtungen",
-	"ws"=>"Werteschutz",
-);
 
 $imageFolder = 'images/userfiles/image/';
 
@@ -218,260 +174,6 @@ function error_404($error_page) {
 	echo $error_page; 
 	die();
 }
-// + + + + + GLSH + + + + + + + + + + + + + + + + + + + + + + + + + GLSH + + + + + 
-// + + + + + GLSH + + + + + + + + + + + + + + + + + + + + + + + + + GLSH + + + + + 
-// + + + + + GLSH + + + + + + + + + + + + + + + + + + + + + + + + + GLSH + + + + + 
-
-global $anredeDropwdon, $formArray, $formSetArray, $formSetArrayTeilnehmer, $formArrayCompany, $formSetArrayCompany;
-
-$anredeDropwdon = array('Frau','Herr');
-$payments = array(
-	1 => 'Rechnung Selbstzahler',
-	2 => 'ohne Funktion ',
-	3 => 'Barzahlung Selbstzahler ',
-	4 => 'Abrechnung über UVT ',
-	5 => 'Vorausüberweisung Selbstzahler ',
-	6 => 'Rechnung an Arbeitgeber ',
-	7 => 'PayPal',
-);
-
-$formArray = array(
-	'ParticipantGender' => array('Anrede', 'dd', 1, $anredeDropwdon),
-	'ParticipantTitel' => array('Akad. Titel', 'inp',1),
-	'ParticipantName' => array('Nachname', 'inp',1),
-	'ParticipantFirstName' => array('Vorname', 'inp',1),
-	'ParticipantDateOfBirth' => array('Geburtsdatum', 'inp',1),
-	'ParticipantStreet' => array('Strasse', 'inp',1),
-	'ParticipantCountryId' => array('LandesId', 'inp',1),
-	'ParticipantPostalCode' => array('Postleitzahl', 'inp', 1, 's'),
-	'ParticipantCity' => array('Ort', 'inp', 1, 'm'),
-	'ParticipantPlaceOfBirth' => array('Geburtsort', 'inp',1),
-	'ParticipantJob' => array('Beruf', 'inp',1),
-	'ParticipantTel' => array('Telefon', 'inp',1),
-	'ParticipantMobil' => array('Mobiltelefon', 'inp',1),
-	'ParticipantFax' => array('Telefax', 'inp',1),
-	'ParticipantEmail' => array('E-Mailadresse', 'inp',1),
-	'ParticipantCompanyId' => array('FirmenID (Arbeitgeber)', 'inp',1),
-	'ParticipantPaymentMethod' => array('Zahlungsart', 'dd', 1, $payments),
-	'ParticipantEventPrice' => array('Preis in Euro', 'hidden',1),
-	// 'ParticipantInfoField' => array('Ihre Nachricht', 'text',1),
-	// 'ParticipantFreeText' => array('Ihre Nachricht', 'text',1),
-);
-
-$formSetArray = array(
-	'MF_S_Salutation'=>'ParticipantGender',
-	'MF_S_Titel'=>'ParticipantTitel',
-	'MF_S_LastName'=>'ParticipantName',
-	'MF_S_FirstName'=>'ParticipantFirstName',
-	'MF_S_Street'=>'ParticipantStreet',
-	'MF_S_PostalCode'=>'ParticipantPostalCode',
-	'MF_S_City'=>'ParticipantCity',
-	'MF_S_Tel'=>'ParticipantTel',
-	'MF_S_Mobile'=>'ParticipantMobile',
-	'MF_S_Email'=>'ParticipantEmail',
-	'MF_S_Profession'=>'ParticipantJob',
-	'MF_S_PlaceOfBirth'=>'ParticipantPlaceOfBirth',
-	// 'MF_S_Freetext'=>'ParticipantFreeText',
-);
-
-$formSetArrayTeilnehmer = array(
-	'MF_C_em_Salutation' => 'ParticipantGender',
-	'MF_C_em_Titel' => 'ParticipantTitel',
-	'MF_C_em_LastName' => 'ParticipantName',
-	'MF_C_em_FirstName' => 'ParticipantFirstName',
-	'MF_C_em_Street' => 'ParticipantStreet',
-	'MF_C_em_PostalCode' => 'ParticipantPostalCode',
-	'MF_C_em_City' => 'ParticipantCity',
-	'MF_C_em_Tel' => 'ParticipantTel',
-	'MF_C_em_Email' => 'ParticipantEmail',
-	'MF_C_em_DateOfBirth' => 'ParticipantDateOfBirth',
-	'MF_C_em_Profession' => 'ParticipantProfession',
-	'MF_C_em_PlaceOfBirth' => 'ParticipantPlaceOfBirth',
-);
-
-$formArrayCompany = array(
-	'CompanyTitel' => array('Gruppe Name', 'inp',1),
-	'CompanySubtitel' => array('Gruppe Subtitel', 'inp',1),
-	'CompanyStreet' => array('Straße', 'inp',1),
-	'CompanyCountryId' => array('Land', 'inp',1),
-	'CompanyPostalCode' => array('PLZ', 'inp',1,'s'),
-	'CompanyCity' => array('Ort', 'inp',1, 'm'),
-	'CompanyTel' => array('Tel', 'inp',1),
-	'CompanyMobil' => array('Mobil', 'inp',1),
-	'CompanyFax' => array('Fax', 'inp',1),
-	'CompanyEmail' => array('E-Mail', 'inp',1),
-	'CompanyTBElektronisch' => array('TBElektronisch', 'inp',1),
-	'CompanyTBEmail' => array('TBEmail', 'inp',1),
-	'CompanyUVTId' => array('UVTId', 'inp',1),
-	'CompanyUVTRegNr' => array('UVTRegNr', 'inp',1),
-	'CompanyInfo' => array('Info', 'inp',1),
-	'CompanyAPGender' => array('Ansprechpartner Anrede', 'dd', 1, $anredeDropwdon),
-	'CompanyAPTitel' => array('Ansprechpartner Titel', 'inp',1),
-	'CompanyAPName' => array('Ansprechpartner Name', 'inp',1),
-	'CompanyAPFirstName' => array('Ansprechpartner Vorname', 'inp',1),
-	// array('CompanyCategoryId', 'CategoryId', 'inp',1),
-	// array('CompanyMGId', 'MGId', 'inp',1),
-);
-
-$formSetArrayCompany = array(
-	'MF_C_CompanyName' => 'CompanyTitel',
-	'MF_C_Salutation' => 'CompanyAPGender',
-	'MF_C_Titel' => 'CompanyAPTitel',
-	'MF_C_LastName' => 'CompanyAPName',
-	'MF_C_FirstName' => 'CompanyAPFirstName',
-	'MF_C_Street' => 'CompanyStreet',
-	'MF_C_PostalCode' => 'CompanyPostalCode',
-	'MF_C_City' => 'CompanyCity',
-	'MF_C_Tel' => 'CompanyTel',
-	'MF_C_Email' => 'CompanyEmail',
-	// 'MF_C_em_Salutation' => 'Companyem_Salutation',
-	// 'MF_C_em_Titel' => 'Companyem_Titel',
-	// 'MF_C_em_LastName' => 'Companyem_LastName',
-	// 'MF_C_em_FirstName' => 'Companyem_FirstName',
-	// 'MF_C_em_Street' => 'Companyem_Street',
-	// 'MF_C_em_PostalCode' => 'Companyem_PostalCode',
-	// 'MF_C_em_City' => 'Companyem_City',
-	// 'MF_C_em_Tel' => 'Companyem_Tel',
-	// 'MF_C_em_Email' => 'Companyem_Email',
-	// 'MF_C_em_DateOfBirth' => 'Companyem_DateOfBirth',
-	// 'MF_C_em_Profession' => 'Companyem_Profession',
-	// 'MF_C_em_PlaceOfBirth' => 'Companyem_PlaceOfBirth',
-);
-
-
-function addClientViaCurl($allData, $url, $AccessToken, $kostenfrei=0) {
-	global $anredeDropwdon, $formArray, $formSetArray, $formSetArrayTeilnehmer, $formArrayCompany, $formSetArrayCompany, $ParticipantId, $ParticipantPaymentMethod, $Zahlungsart;
-
-	$funktion = 'addParticipant';
-	
-	$postData["p1"]=$funktion;
-	$postData["p2"]=$AccessToken;
-	$postData["EventId"]=$allData['EventId'];
-	$postData["ParticipantCompanyId"]=$company;
-	
-	$mail_content = '';
-	
-	foreach($formArray as $key=>$arr) {
-		if($allData[$key]) $mail_content .= '<tr><td>'.$arr[0].'</td><td>'.$allData[$key].'</td></tr>';
-		$postData[$key]=$allData[$key];
-	}
-	
-	if(!$kostenfrei) $mail_content .= '<tr><td>Einzelpreis</td><td>'.$allData['ep'].'</td></tr>';
-		
-	$postData["ParticipantEventPrice"]=$allData['ep'];
-	$postData["ParticipantPaymentMethod"]=$ParticipantPaymentMethod;
-	
-	// if($ParticipantPaymentMethod==6) {
-	$extendInformation = '';
-	if($allData["altName"]) {
-		$postData["ParticipantAlternativeInvoiceName"] = $allData["altName"];
-		// $postData["ParticipantAlternativeInvoiceContact"] = $allData[""];
-		$postData["ParticipantAlternativeInvoiceStreet"] = $allData["altStrasse"];
-		$postData["ParticipantAlternativeInvoicePostalCode"] = $allData["altPLZ"];
-		$postData["ParticipantAlternativeInvoiceCity"] = $allData["altOrt"];	
-		$extendInformation = 'Rechnungsempfänger: '.
-			$allData["altName"]." | ".
-			$allData["altStrasse"]." | ".
-			$allData["altPLZ"]." | ".
-			$allData["altOrt"]." - ";
-	} 
-	// $postData["ParticipantInfoField"]=utf8_decode($allData['ParticipantInfoField']);
-	// TEMPORÄR
-	if($Zahlungsart == "PayPal"){
-		$extendInformation = 'PayPal Payment ID: '.$_GET['paymentId']."\n";
-	} 
-	// ORIGINAL
-	// $postData["ParticipantInfoField"]=utf8_decode($allData['ParticipantInfoField'])."\n".$Zahlungsart."\n".utf8_decode($extendInformation);
-	$postData["ParticipantFreeText"]=utf8_decode($allData['ParticipantInfoField']);
-	$postData["ParticipantInfoField"]=utf8_decode($allData['ParticipantInfoField']);
-	
-	// ***** Free Attribute Fields
-	// ***** Free Attribute Fields
-	
-	$extra_fields = explode(',', $allData['freeAttribute']);
-	$FreeAttributeFieldValues = array();
-	
-	foreach($extra_fields as $val) {
-		if(isin('*',$val)) { }
-		else {
-			// echo $val."\n";
-			$val = explode('|', $val);
-			if($allData[$val[1]]) $mail_content .= '<tr><td>'.$val[0].'</td><td>'.$allData[$val[1]].'</td></tr>';
-
-			if($allData[$val[1]]){
-				$value = $allData[$val[1]] == 'on' ? 1 : $allData[$val[1]];
-				$feld = explode("FA_", $val[1]);
-				$oneField = array('FA_Id'=>intval($feld[1]), 'FA_Value'=>utf8_decode($value));
-				array_push($FreeAttributeFieldValues,$oneField);
-			}
-		}
-	}
-	$postData["FreeAttributeFieldValues"]=$FreeAttributeFieldValues;
-	// echo $data;
-	
-	// ***** Free Select Fields
-	// ***** Free Select Fields
-	
-	$FreeSelectFieldOptions = array();	
-	$extra_fields = explode(',', $allData['freeSelect']);
-	foreach($extra_fields as $val) {
-		if(isin('*',$val)) { }
-		else {
-			$val = explode('|', $val);
-			if($allData[$val[1]]) $mail_content .= '<tr><td>'.$val[0].'</td><td>'.$allData[$val[1]].'</td></tr>';
-
-			if($allData[$val[1]]){
-				$value = $allData[$val[1]] == 'on' ? 1 : $allData[$val[1]];
-				// $feld = explode("FA_", $val[1]);
-				// $oneField = array('FS_Id'=>intval($value));
-				// array_push($FreeSelectFieldOptions,$oneField);
-				// maybe correct parameter because only exists
-				$postData["FS_Id"]=intval($value);
-			}
-		}
-	}
-	// $postData["FreeSelectFieldOptions"]=$FreeSelectFieldOptions;
-	 
-	// echo "\n\n";
-	 print_r($postData);
-	// print_r($FreeAttributeFieldValues);
-	
-	//  + + + SEMPLAN WIEDER ON !!!!!
-	$response = curl_post($url, $postData);
-	$response = json_decode($response, true);
-	$result = $response["Results"];
-	//  + + + SEMPLAN WIEDER ON !!!!!
-	
-	// $ParticipantId = $response["Results"]["ParticipantId"];
-	$ParticipantId = $result[0]["ParticipantId"];
-	$type = "sendStandardEmail";
-	$headers = array( "Content-Type: application/x-www-form-urlencoded" );
-	echo $GetUrl = $url."/$type/$AccessToken/110/".$allData["EventId"].'/'.$ParticipantId;
-	$resp = getCurlData($GetUrl, $headers);
-	$respons = ($resp["Results"]);
-	echo "\n";
-	print_r($resp);
-
-	// https://www.semplan365.de/x/glsh/api/v1/sendStandardEmail/551f6105a2ed5f8fef715df126b31120/110/474/Array
-		
-	// https://www.semplan.net/x/YOUR-SEMPLAN-ID/api/v1/sendStandardEmail/TOKEN/110/4711/123
-		
-	// print_r($response);		
-	// print_r($respons);		
-	// $response["Status"]["Message"] ==> Success   !!!
-	
-	return $mail_content;
-	// die();
-	// return "\n".'add teilnehmer: '. $response["Status"]["Message"];
-}
-
-// + + + + + GLSH + + + + + + + + + + + + + + + + + + + + + + + + + GLSH + + + + + 
-// + + + + + GLSH + + + + + + + + + + + + + + + + + + + + + + + + + GLSH + + + + + 
-// + + + + + GLSH + + + + + + + + + + + + + + + + + + + + + + + + + GLSH + + + + + 
-
-
-
-
 
 function getTextMail($nlid)
 {
@@ -829,11 +531,11 @@ function setPageSelect($max, $pageid, $total)
     return $tmp;
 }
 
-function getSubNavigation($lang, $parentID, $linkDesign = '<li><a href="#lnk#">#txt#</a></li>')
+function getSubNavigation($lang, $parentID, $linkDesign = '<li><a href="#lnk#">#txt#</a></li>', $active=false, $onlyvisible=1)
 {
     global $navID, $dir, $multilang, $lan;
 
-    $que = "SELECT navid, name FROM `morp_cms_nav` WHERE (sichtbar=1 AND lang=$lang AND parent=$parentID AND ebene=2) ORDER BY `sort` ASC, navid ASC";
+    $que = "SELECT navid, name FROM `morp_cms_nav` WHERE (".($onlyvisible ? "sichtbar=1 AND " : "")."lang=$lang AND parent=$parentID AND ebene=2) ORDER BY `sort` ASC, navid ASC";
     $res = safe_query($que);
     $x = mysqli_num_rows($res);
 
@@ -845,15 +547,17 @@ function getSubNavigation($lang, $parentID, $linkDesign = '<li><a href="#lnk#">#
     }
 
     while ($rw = mysqli_fetch_object($res)) {
-        $lnk = $dir . ($multilang ? $lan . '/' : '') . $navID[$rw->navid];
+        $lnk = getUrl($rw->navid);
         $txt = $rw->name;
 
         $subsub = getSubSubNavigation($lang, $rw->navid, '<li><a href="#lnk#" class="einzug">#txt#</a></li>');
-
+		
+		$class = $rw->navid == $active ? ' class="active"' : '';
+		
         if ($subsub) {
-            $ret .= str_replace(array("#lnk#", "#txt#"), array('#', $txt), $linkDesign) . $subsub;
+            $ret .= str_replace(array("#lnk#", "#txt#", "#class#"), array('#', $txt, $class), $linkDesign) . $subsub;
         } else {
-            $ret .= str_replace(array("#lnk#", "#txt#"), array($lnk, $txt), $linkDesign);
+            $ret .= str_replace(array("#lnk#", "#txt#", "#class#"), array($lnk, $txt, $class), $linkDesign);
         }
 
     }
@@ -1517,7 +1221,7 @@ function get_db_field($id, $field, $table, $tid)
     $res = safe_query($sql);
     $row = mysqli_fetch_object($res);
 
-    return $row->$field;
+    return isset($row->$field) ? $row->$field : '';
 }
 
 function get_2_db_field($id, $field, $field2, $table, $tid)
@@ -1579,7 +1283,7 @@ function getUrl($id, $lan = "de", $setLang = 0) {
 		if ($morpheus["home_ID"][$lan] == $id) {
 			$ziel = $morpheus["shopurl"];
 		} else {
-			$ziel = $morpheus["shopurl"] . $navID[$id];
+			$ziel = isset($navID[$id]) ? $morpheus["shopurl"] . $navID[$id] : $morpheus["shopurl"];
 		}
 
 	}
@@ -1707,7 +1411,7 @@ function saveMorpheusForm($edit, $neu, $row = 0, $zusatz = '', $duplicate = '***
     return $edit;
 }
 
-function setMorpheusFormFrontend($row, $arr, $folder = "", $edit, $from, $setid, $imgSize = '800x800', $placeholder = '')
+function setMorpheusFormFrontend($row, $arr, $folder = "", $edit = '', $from = '', $setid = '', $imgSize = '800x800', $placeholder = '')
 {
     global $morpheus, $table, $dir, $navID, $cid, $js;
 
@@ -1812,7 +1516,7 @@ function setMorpheusFormFrontend($row, $arr, $folder = "", $edit, $from, $setid,
     return $echo;
 }
 
-function setMorpheusForm($row, $arr, $folder = "", $edit, $from, $setid, $imgSize = '800x800', $placeholder = '')
+function setMorpheusForm($row, $arr, $folder = "", $edit = '', $from = '', $setid = '', $imgSize = '800x800', $placeholder = '')
 {
     global $morpheus, $table, $dir, $navID, $cid, $js, $img_pfad, $imgFolderShortPDF;
 
@@ -2147,7 +1851,7 @@ $("#' . $arr[0] . '").daterangepicker({
     return $echo;
 }
 
-function setMorpheusFormTable($row, $arr, $folder = "", $edit, $from, $setid)
+function setMorpheusFormTable($row, $arr, $folder = "", $edit = '', $from = '', $setid = '')
 {
     global $morpheus, $table;
 
@@ -3110,8 +2814,10 @@ function getPdf($pid)
 
 # # # # bricks einfuegen
 # # # # auswertung text startet
-function get_cms_text($text, $lang = "de", $dir, $video_page = "", $template_id=0)
+function get_cms_text($text, $lang = "de", $dir = '', $video_page = "", $template_id = 0)
 {
+
+    $text = isset( $text ) ? $text : '';
 
     // echo "$text, $lang, $dir";
     global $navarray, $navarrayFULL, $hn;
@@ -3158,7 +2864,7 @@ function get_cms_text($text, $lang = "de", $dir, $video_page = "", $template_id=
 			$check_template_id = substr( $check_template_id[0], 1, strlen($check_template_id[0]) );
 			if($check_template_id != $template_id && $template_id > 0) {
 				$file_name_to_include = explode("__", $file_name_to_include);
-				$file_name_to_include = 't'.$template_id.'__'.$file_name_to_include[1];
+				$file_name_to_include = isset($file_name_to_include[1]) ? 't'.$template_id.'__'.$file_name_to_include[1] : 't'.$template_id.'__';
 			}
             // echo "bricks/" .$file_name_to_include .".php ## $template_id -- ";
 
@@ -3215,7 +2921,7 @@ function get_raw_text($text, $lang = "de")
 # # # # # # # # # # # # # # # # # # # # # # # # # # #
 # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
-function get_raw_text_BR($tx, $lang = "de", $fbimage)
+function get_raw_text_BR($tx, $lang = "de", $fbimage = '')
 {
     global $no_str, $nw_str, $search_str, $startseite_l, $startseite_r, $socialImage, $fbAuswahl;
 
@@ -3327,7 +3033,7 @@ function browser_detection($which_test)
     $browser_name = '';
     $browser_number = '';
     // get userAgent string
-    $browser_user_agent = strtolower($_SERVER['HTTP_USER_AGENT']);
+    $browser_user_agent = isset($_SERVER['HTTP_USER_AGENT']) ? strtolower($_SERVER['HTTP_USER_AGENT']) : '';
     //pack browser array
     // values [0]= user agent identifier, lowercase, [1] = dom browser, [2] = shorthand for browser,
     $a_browser_types[] = array('opera', true, 'op');
@@ -3530,30 +3236,33 @@ function ts2dat($dat)
 
 function us_dat($dat)
 {
-    $dat = explode(".", $dat);
+	$dat = explode(".", $dat);
 
-    if (strlen($dat[2]) == 2) {
-        $jahr = "20" . $dat[2];
-    } elseif (strlen($dat[2]) < 2) {
-        $jahr = date("Y");
-    } else {
-        $jahr = $dat[2];
-    }
+	if (strlen($dat[2]) == 2) {
+		$jahr = "20" . $dat[2];
+	} elseif (strlen($dat[2]) < 2) {
+		$jahr = date("Y");
+		$jahr = 1999;
+	} else {
+		$jahr = $dat[2];
+	}
 
-    if (strlen($dat[1]) == 1) {
-        $monat = "0" . $dat[1];
-    } else {
-        $monat = $dat[1];
-    }
+	if (strlen($dat[1]) < 1) $monat = "01";
+	else if (strlen($dat[1]) == 1) {
+		$monat = "0" . $dat[1];
+	} else {
+		$monat = $dat[1];
+	}
 
-    if (strlen($dat[0]) == 1) {
-        $tag = "0" . $dat[0];
-    } else {
-        $tag = $dat[0];
-    }
+	if (strlen($dat[0]) < 1) $tag = "01";
+	else if (strlen($dat[0]) == 1) {
+		$tag = "0" . $dat[0];
+	} else {
+		$tag = $dat[0];
+	}
 
-    $dat = $jahr . "-" . $monat . "-" . $tag;
-    return $dat;
+	$dat = $jahr . "-" . $monat . "-" . $tag;
+	return $dat;
 }
 
 # # # # # # # NEWSLETTER # # # # # # # # #

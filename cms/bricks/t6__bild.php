@@ -1,5 +1,5 @@
 <?php
-global $img_pfad, $ausrichtung, $ausrichtungArray, $dir, $imageFolder, $tref, $grIMG;
+global $img_pfad, $ausrichtung, $ausrichtungArray, $dir, $imageFolder, $tref, $grIMG, $morpheus;
 
 $data = explode("|", $text); $imgid = $data[0]; $ausrichtung = $data[1]; if(!$ausrichtung) $ausrichtung = 1;
 

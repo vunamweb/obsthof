@@ -10,6 +10,29 @@ $lastUsedTemplateID = $fileID;
 
 $edit_mode_class = 'container_edit ';
 
+$video_special = '';
+
+$anzahlOffenerDIV=0;
+
+
+$hl = '';
+$farbe = '';
+$tclass = '';
+$class='';
+$bgIMG = '';
+$itext = '';
+$parallaxText = '';
+$parallax = '';
+$tabstand = '';
+$tabstand_bottom = '';
+$accordion = '';
+$imgGal = '';
+$linkbox = '';
+$extLink = 0;
+$left_content='';
+$class_inner = '';
+$farbe_inner = '';
+
 if($lastUsedTemplateID && $lastUsedTemplateID != $fileID && !$templateIsClosed) {
 	for($i=1; $i<=$anzahlOffenerDIV; $i++) $template .= '					</div>
 ';
@@ -31,7 +54,7 @@ if($tref == 1 || !$tref) $template = '
 
   <div class="'.$edit_mode_class.'container '.($class_inner ? $class_inner.' col-inner ' : '').($tabstand ? ' pt0 ' : '').''.($tabstand_bottom? ' pb0 ' : '').'"'.($bgIMG ? ' style="background:url('.$bgIMG.') no-repeat fixed; background-size: cover; padding-top:2em; padding-bottom:2em;"' : '').'>
         <div class="row">
-            <div class="col-12'.($linkbox ? ' linkbox' : '').'"'.($linkbox ? ' id="lb'.$content_id.'" ref="'.$linkbox.'"'.($extLink ? ' data-extern="1"' : '') : '').($farbe_inner ? ' style="background:#'.$farbe_inner.'"' : '').'>
+            <div class="text-left col-12'.($linkbox ? ' linkbox' : '').'"'.($linkbox ? ' id="lb'.$content_id.'" ref="'.$linkbox.'"'.($extLink ? ' data-extern="1"' : '') : '').($farbe_inner ? ' style="background:#'.$farbe_inner.'"' : '').'>
 <div id="'.$uniqueID.'" class="directeditmode">
 '.($date_box ? '#HL#' : '').'
 #cont#
@@ -140,24 +163,3 @@ else if($tref == 7) $template = '
     </div>
 </section>
 ';
-
-$anzahlOffenerDIV=0;
-
-
-$hl = '';
-$farbe = '';
-$tclass = '';
-$class='';
-$bgIMG = '';
-$itext = '';
-$parallaxText = '';
-$parallax = '';
-$tabstand = '';
-$tabstand_bottom = '';
-$accordion = '';
-$imgGal = '';
-$linkbox = '';
-$extLink = 0;
-$left_content='';
-$class_inner = '';
-$farbe_inner = '';

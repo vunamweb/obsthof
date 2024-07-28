@@ -1,14 +1,40 @@
 <?php
 class ControllerErrorNotFound extends Controller {
+	public function getContentUrl($url) {
+		$ch = curl_init();
+		curl_setopt($ch, CURLOPT_URL, $url);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+		
+		$content = curl_exec($ch);
+		
+		if ($content === FALSE) {
+			return '';
+		} else {
+			return $content;
+		}
+		
+		curl_close($ch);
+	}
+
 	public function index() {
 		// GET CONTENT OF MORPHEUS
 		$language = 'de/';
 
 		$urlMorpheus = $this->request->get['_route_'];
-		$urlMorpheus = HTTP_SERVER . 'cms/' . $language . $urlMorpheus;
+		if (substr($urlMorpheus, -1) === "/") {
+		} else {
+			$urlMorpheus.'/';
+		}
+		$urlMorpheus = HTTPS_SERVER . 'cms/' . $language . $urlMorpheus;
+
+		//echo $urlMorpheus; die();
 
 		$response = file_get_contents($urlMorpheus);
 		$response = str_replace(array('</body>', '</html>'), '', $response);
+
+		//$response = $this->getContentUrl($urlMorpheus);
+
+		//echo $response; die();
 
 		$response = json_decode($response);
 
