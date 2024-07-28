@@ -10,6 +10,8 @@ $lastUsedTemplateID = $fileID;
 
 $edit_mode_class = 'container_edit ';
 
+$video_special = null;
+
 if($lastUsedTemplateID && $lastUsedTemplateID != $fileID && !$templateIsClosed) {
 	for($i=1; $i<=$anzahlOffenerDIV; $i++) $template .= '					</div>
 ';

@@ -795,7 +795,7 @@ if($sub3) $sub3 = '
 include("nogo/orderedList_de.inc");
 $orderedListFind = array_flip($orderedList);
 
-$pos = isset($orderedListFind[$cid]) ? $orderedListFind[$cid] : '';
+$pos = isset($orderedListFind[$cid]) ? $orderedListFind[$cid] : null;
 $ctOL = count($orderedList);
 
 // print_r($orderedList);

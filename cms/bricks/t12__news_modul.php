@@ -1,8 +1,8 @@
 <?php
 global $hn, $nid, $ns, $dir, $lan, $navID, $cid, $morpheus;
 
-$nid = $_GET["nid"];
-$ns  = $_GET["ns"];
+$nid = isset($_GET["nid"]) ? $_GET["nid"] : null;
+$ns  = isset($_GET["ns"]) ? $_GET["ns"] : null;
 
 if ($nid) {
 	$news 	= "";
@@ -29,7 +29,8 @@ if ($nid) {
 	
 	$nlink = $row->nlink;
 	if ($nlink) {
-		if (isin("^http", $nlink)) {	$news .= "<p><a href=\"".$nlink ."\" title=\"".$nlink ."\" target=\"_blank\">".$nlink ."</a></p>";	}
+		// if (isin("^http", $nlink)) {	$news .= "<p><a href=\"".$nlink ."\" title=\"".$nlink ."\" target=\"_blank\">".$nlink ."</a></p>";	}
+		if (isin("^http", $nlink)) {	$news .= "<p><a href=\"".$nlink ."\" title=\"".$nlink ."\">".$nlink ."</a></p>";	}
 		else {
  			$news .= "<p><a href=\"$dir".$nlink ."\" title=\"". $navID[$nlink] ."\">".get_text(15)."</a></p>";
 		}
@@ -47,7 +48,8 @@ if ($nid) {
 			
 		#$go 	= $dir."upload.php?dfile=".$row->pname;
 		$go    = $dir."pdf/".$row->pname;
-		$news .= '<div class="pressetitel"><a class="ta" href="'.$go.'" target="_blank" title="' .$row->pdesc .'">'.$row->pdesc.'</a></div>';
+		// $news .= '<div class="pressetitel"><a class="ta" href="'.$go.'" target="_blank" title="' .$row->pdesc .'">'.$row->pdesc.'</a></div>';
+		$news .= '<div class="pressetitel"><a class="ta" href="'.$go.'" title="' .$row->pdesc .'">'.$row->pdesc.'</a></div>';
 	}
 	# _pdfs 
 	# # # # # # # # # # # # 
@@ -67,7 +69,7 @@ if ($nid) {
 else {
 	$news = '';
 	$heute = date("Y-m-d");
-	$query 	= "SELECT * FROM morp_cms_news n, morp_cms_news_group ng WHERE n.ngid=ng.ngid AND n.ngid=$text AND sichtbar=1 ORDER BY nerstellt DESC, nid DESC";
+	$query 	= "SELECT * FROM morp_cms_news n, morp_cms_news_group ng WHERE n.ngid=ng.ngid AND n.ngid=$text AND sichtbar=1 AND ( nvon='1999-01-01' OR ( nvon <= '$heute' AND nbis >= '$heute' ) ) ORDER BY nerstellt DESC, nid DESC";
 	$result = safe_query($query);
 	$x 		= mysqli_num_rows($result);
 	$n 		= 0;
@@ -87,7 +89,8 @@ else {
 			$rs 	= safe_query($sql);
 			$rw 	= mysqli_fetch_object($rs);		
 			$go    = $dir."pdf/".$rw->pname;
-			$pdf = '<br><a class="btn btn-info" href="'.$go.'" target="_blank" title="' .$rw->pdesc .'">'.($rw->pdesc ? $rw->pdesc : 'PDF').'</a></p>';
+			// $pdf = '<br><a class="btn btn-info" href="'.$go.'" target="_blank" title="' .$rw->pdesc .'">'.($rw->pdesc ? $rw->pdesc : 'PDF').'</a></p>';
+			$pdf = '<br><a class="btn btn-info" href="'.$go.'" title="' .$rw->pdesc .'">'.($rw->pdesc ? $rw->pdesc : 'PDF').'</a></p>';
 		}
 		
 		$nvon = $row->nvon;
@@ -95,13 +98,14 @@ else {
 		
 		$display_news = 1;
 		
-		if($nvon != '1999-01-01') {
+		if($nvon != '1999-01-01' || $nbis != '1999-01-01') {
 			if (strtotime($nvon) > strtotime($heute)) $display_news = 0;
 			else if (strtotime($nbis) < strtotime($heute)) $display_news = 0;
 			// if($nvon <= $heute && $nbis >= $heute) { }
 		}
 		
-
+		$nlinkbez = $row->nlinkbez ? $row->nlinkbez : 'Weitere Informationen';
+		
 		if($display_news) {			
 			$n++;
 			$news  .= '
@@ -111,10 +115,11 @@ else {
 					<span>'.($row->nsubtitle) .'</span></h3>		
 					'.($row->ntext).'
 					'.$pdf.'
-					'.($url ? '<a href="'.$url.'"'.$target.'>Weitere Informationen ></a>' : '').'
+					'.($url ? '<a href="'.$url.'">'.$nlinkbez.' ></a>' : '').'
 				</div>
 		  	</div>';
 		}
+					// '.($url ? '<a href="'.$url.'"'.$target.'>'.$nlinkbez.' ></a>' : '').'
 		
 	}
 	

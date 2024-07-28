@@ -4,7 +4,7 @@ global $navarray, $lan, $navID, $produkt_group_arr, $multilang, $cid;
 $tmp 	= explode("|", $text);
 $anker 	= explode("#", $tmp[0]);
 $link 	= trim($anker[0]);
-$anker	= $anker[1];
+$anker	= count($anker)>0 && isset($anker[1]) ? $anker[1] : false;
 $txt 	= $tmp[1];
 
 if(!$link) $link=$cid;

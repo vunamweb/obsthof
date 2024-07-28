@@ -15,6 +15,23 @@ $template = '';
 
 $fileID = basename(__FILE__, '.php');
 
+$portrait = '';
+$popupTarget = '';
+$popupText = '';
+$icon = '';
+$farbe = '';
+$farbe_inner = '';
+$class_inner = '';
+$anker = '';
+$linkbox = '';
+$extLink = 0;
+$interner_link = '';
+$tclass = '';
+$class='';
+$tabstand = '';
+$parallax = '';
+$bgIMGinner='';
+
 
 if ($parallax) {
 	$needBG = 1;
@@ -46,7 +63,7 @@ if($lastUsedTemplateID && $lastUsedTemplateID != $fileID && !$templateIsClosed) 
 }
 
 
-if($template2count == 1 || $templateIsClosed) { $template .= '
+if(($template2count == 1 || $templateIsClosed) && $tref < 7) { $template .= '
 <section class="obsthof '.($tref == 6 ? ' ' : '').($klasse ? $klasse : '').($tclass ? $tclass.' ' : '').($class ? $class.' bg-color' : '').($tabstand ? ' pt0 ' : '').($tabstand_bottom? ' pb0 ' : '').'"'.($farbe ? ' style="background:#'.$farbe.';"' : '').($anker ? ' id="'.$anker.'"' : '').'>
 '.($parallax ? '<div class="parallax " style="background: url('.$parallax.') no-repeat center center; -webkit-background-size: cover; background-size: cover;">' : '').'
     <div class="container'.($tref == 5 ? ' d-flex align-items-stretch' : '').'">
@@ -124,15 +141,11 @@ elseif($tref == 66) $template .= '
 ';
 
 elseif($tref == 7) $template .= '
-			<div class="'.$edit_mode_class.'col-12 col-md-6 col-lg-4 event-3 h-100'.($linkbox ? ' linkbox' : '').'"'.($linkbox ? ' id="lb'.$content_id.'" ref="'.$linkbox.'"'.($extLink ? ' data-extern="1"' : ' data-extern="0"') : '').($bgIMGinner ? ' style="background:url('.$bgIMGinner.') no-repeat fixed; background-size: cover; padding-top:2em; padding-bottom:2em;"' : '').'>
-			'.($class_inner ? '<div class="inner h-100 '.$class_inner .'">' : '').'
-<div id="'.$uniqueID.'" class="directeditmode  inner">#cont#</div>
-			'.($class_inner ? '</div>' : '').'
-			'.edit_bar($content_id,"edit_class").'
-			</div>
-';
+			<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4'.($klasse ? ' '.$klasse : '').'">
+				#cont#
+			</div>';
 
-if(($template2count == $templateTotal || $tende) && !$templateIsClosed) {
+if(($template2count == $templateTotal || $tende) && !$templateIsClosed && $tref < 7) {
 	for($i=1; $i<=$anzahlOffenerDIV; $i++) $template .= '					</div>
 ';
 
@@ -168,21 +181,3 @@ if($popupTarget && $popupText) $template .= '
 </div>
 
 ';
-
-
-$portrait = '';
-$popupTarget = '';
-$popupText = '';
-$icon = '';
-$farbe = '';
-$farbe_inner = '';
-$class_inner = '';
-$anker = '';
-$linkbox = '';
-$extLink = 0;
-$interner_link = '';
-$tclass = '';
-$class='';
-$tabstand = '';
-$parallax = '';
-$bgIMGinner='';
