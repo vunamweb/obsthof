@@ -652,7 +652,7 @@ else	{
 			$res = safe_query($sql);
 
 			$set_link = '';						# hier wird der pfad fuer die subnavigation zusammen gestellt
-			for($n = 1; $n < $ebene; $n++) $set_link .= $nav_arr[$n].'/';
+			for($n = 1; $n < $ebene; $n++) $set_link .= isset($nav_arr[$n]) ? $nav_arr[$n].'/' : '/';
 
 			while ($row = mysqli_fetch_object($res)) {
 				$id		= $row->navid;
