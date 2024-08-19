@@ -62,7 +62,7 @@ class ControllerCheckoutCart extends Controller {
             $data[ 'products' ] = array();
 
             $products = $this->cart->getProducts();
-            //print_r($products);
+            //print_r($products); die();
             $sum_tax_1 = 0;
             $sum_tax_2 = 0;
             $totalNormalProduct = 0;
@@ -186,6 +186,8 @@ class ControllerCheckoutCart extends Controller {
                     'price_number' => $product[ 'price' ],
                     'price_1'   => $product[ 'price_1' ],
                     'price_2'   => $product[ 'price' ] - $product[ 'price_1' ] ,
+                    'value_coupon' => $product['value_coupon'],
+                    'class'        => $product['value_coupon'] > 0 ? ' hide' : '',
                     'type'      => $product[ 'type' ],
                     'tax_1'     => $resultTax_1,
                     'tax_2'     => $resultTax_2,
@@ -255,6 +257,7 @@ class ControllerCheckoutCart extends Controller {
                     array_multisort( $sort_order, SORT_ASC, $totals );
                 }
 
+                //print_r($totals); die();
                 $this->document->displayOrder( $totals, $sum_tax_1, $sum_tax_2, $this->session->data['shipping_address']['country_id'], $totalNormalProduct, $this->config->get('config_login_attempts') );
 
                 if($totalNormalProduct < $this->config->get('config_login_attempts'))
@@ -386,9 +389,20 @@ class ControllerCheckoutCart extends Controller {
 
                 if ( !$json ) {
                     $child = (isset($_REQUEST['child'])) ? 1 : 0;
+                    $valueCoupon = (isset($_REQUEST['value_coupon'])) ? $_REQUEST['value_coupon'] : 0;
+                    $buy_coupon = (isset($_REQUEST['buy_coupon'])) ? $_REQUEST['buy_coupon'] : 0;
 
-                    if($this->model_checkout_order->getStatusValueTicket($data_option, $quantity)) {
-                        $this->cart->add( $this->request->post[ 'product_id' ], $quantity, $option, $recurring_id, $data_option, $child);
+                    if($buy_coupon) {
+                        if(!is_numeric($valueCoupon) || $valueCoupon == 0)
+                          $json[ 'error' ][ 'recurring' ] = $this->language->get( 'warning_coupon_number' );
+                        else {
+                            $this->cart->add( $this->request->post[ 'product_id' ], $quantity, $option, $recurring_id, $data_option, $child, $valueCoupon);
+                        
+                            $json[ 'success' ] = sprintf( $this->language->get( 'text_success' ), $this->url->link( 'product/product', 'product_id=' . $this->request->post[ 'product_id' ] ), $product_info[ 'name' ], $this->url->link( 'checkout/cart' ) );
+                        } 
+                    }
+                    else if($this->model_checkout_order->getStatusValueTicket($data_option, $quantity)) {
+                        $this->cart->add( $this->request->post[ 'product_id' ], $quantity, $option, $recurring_id, $data_option, $child, $valueCoupon);
                         $json[ 'success' ] = sprintf( $this->language->get( 'text_success' ), $this->url->link( 'product/product', 'product_id=' . $this->request->post[ 'product_id' ] ), $product_info[ 'name' ], $this->url->link( 'checkout/cart' ) );
                     } else {
                         //echo '1'; die();
