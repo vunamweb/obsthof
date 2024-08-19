@@ -347,9 +347,10 @@ class ControllerProductProduct extends Controller {
 				$results = $this->model_catalog_product->getProducttabs($this->request->get['product_id']);
 
 				foreach ($results as $result) {
+					$descText = html_entity_decode($result['description'], ENT_QUOTES, 'UTF-8');
 					$data['customtabs'][] = array(
 						'title' => $result['title'],
-						'description' => html_entity_decode($result['description'], ENT_QUOTES, 'UTF-8'),
+						'description' => $descText,
 					);
 				}
 
