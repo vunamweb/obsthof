@@ -101,6 +101,7 @@ class ControllerCommonFooter extends Controller {
 		$contentMorpheus = $objectMorpheus->message;
 
 		$data['content_morpheus'] = $contentMorpheus;
+		$data['cook'] = "55";
 		// END
 		
 		return $this->load->view('common/footer', $data);
