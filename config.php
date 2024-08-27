@@ -38,3 +38,20 @@ define('MORPHEUS_HOMEPAGE', ['warum/', 'wie/']);
 define('SPECIAL_EMAIL', 'vukynamkhtn@gmail.com');
 define('SPECIAL_EMAIL2', 'vukynamkhtn@gmail.com');
 
+// Überprüfe, ob das Cookie "needed" gesetzt ist
+if (isset($_GET['setcookie'])) {
+	define('NEW_COOKIE', 1);
+	delCookieX('cookie_disclaimer');
+} 
+else if (isset($_COOKIE['cookie_disclaimer'])) {
+	define('NEW_COOKIE', null);
+} 
+else {
+	define('NEW_COOKIE', 1);
+}
+
+function delCookieX($key)
+{
+	$past = time() - 3600;
+	setcookie($key, '', $past, '/');
+}
