@@ -65,20 +65,24 @@ class ControllerExtensionModuleCategoryHierarchy extends Controller {
                                                         $filter_data_1 = array();
                                                         $filter_data_1 = array('filter_category_id' => $childOfChild['category_id'], 'filter_sub_category' => true);
             
-                                                        $sub_child_child[] = array(
-                                                            'category_id' => $childOfChild['category_id'], 
-                                                            'name' => $childOfChild['name'] . ($this->config->get('config_product_count') ? ' (' . $this->model_catalog_product->getTotalEvents($filter_data_1) . ')' : ''), 
-                                                            'href' => $this->url->link('product/category', 'path=' . $category['category_id'] . '_' . $child['category_id'] . '_' . $childOfChild['category_id'])
+                                                        if($this->model_catalog_product->getTotalEvents($filter_data_1) > 0) {
+                                                            $sub_child_child[] = array(
+                                                                'category_id' => $childOfChild['category_id'], 
+                                                                'name' => $childOfChild['name'] . ($this->config->get('config_product_count') ? ' (' . $this->model_catalog_product->getTotalEvents($filter_data_1) . ')' : ''), 
+                                                                'href' => $this->url->link('product/category', 'path=' . $category['category_id'] . '_' . $child['category_id'] . '_' . $childOfChild['category_id'])
                                                             );
-                                                 }
+                                                        }
+                                                    }
                                                 }
                                                 // end 
-                                                $sub_child[] = array(
-                                                    'category_id' => $child['category_id'], 
-                                                    'name' => $child['name'] . ($this->config->get('config_product_count') ? ' (' . $this->model_catalog_product->getTotalEvents($filter_data) . ')' : ''), 
-                                                    'href' => $this->url->link('product/category', 'path=' . $category['category_id'] . '_' . $child['category_id']),
-                                                    'children'=>$sub_child_child
+                                                if($this->model_catalog_product->getTotalEvents($filter_data)) {
+                                                    $sub_child[] = array(
+                                                        'category_id' => $child['category_id'], 
+                                                        'name' => $child['name'] . ($this->config->get('config_product_count') ? ' (' . $this->model_catalog_product->getTotalEvents($filter_data) . ')' : ''), 
+                                                        'href' => $this->url->link('product/category', 'path=' . $category['category_id'] . '_' . $child['category_id']),
+                                                        'children'=>$sub_child_child
                                                     );
+                                                }
                                             }
                                             else 
                                                 $sub_child[] = array(
