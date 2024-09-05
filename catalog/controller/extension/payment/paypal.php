@@ -1277,7 +1277,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 									$this->model_checkout_order->addOrderHistory($this->session->data['order_id'], $order_status_id, $message);
 								}
 						
-								if (($capture_status == 'COMPLETED') || ($capture_status == 'PARTIALLY_REFUNDED') || ($capture_status == 'REFUNDED') || ($capture_status == 'PENDING')) {
+								if (($capture_status == null) || ($capture_status == '') || ($capture_status == 'COMPLETED') || ($capture_status == 'PARTIALLY_REFUNDED') || ($capture_status == 'REFUNDED') || ($capture_status == 'PENDING')) {
 									$data['url'] = $this->url->link('checkout/success', '', true);
 								}
 							}
@@ -1288,9 +1288,23 @@ class ControllerExtensionPaymentPayPal extends Controller {
 		}
 
 		$data['error'] = $this->error;
-				
+
+		//$data['url_1'] = $capture_status;
+		
+		// Encode the data into JSON format
+		$json = json_encode($data);
+		
+		// if response of paypal is not json
+		if(!$json) {
+			$data = array();
+			$data['url'] = $this->url->link('checkout/success', '', true);
+			$data['url1'] = 'url1';
+
+			$json = json_encode($data);
+		}
+
 		$this->response->addHeader('Content-Type: application/json');
-		$this->response->setOutput(json_encode($data));		
+		$this->response->setOutput($json);
 	}
 	
 	public function confirmOrder() {
