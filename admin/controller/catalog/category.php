@@ -248,7 +248,14 @@ class ControllerCatalogCategory extends Controller {
 	
 						//echo time() - strtotime($date1) . '//';
 
-						if(time() - strtotime($date1) <=0) {
+						// GET h:i:s of current
+						$currentDay = date("Y-m-d H:i:s");
+						$currentDay = explode(' ', $currentDay);
+
+						$currentDay = $date1 . ' ' . $currentDay[1];
+						// END
+
+						if(time() - strtotime($currentDay) <=0) {
 							if($startDate == 0 && $endDate == 0) {
 	                           $startDate = $date1;
 							   $endDate = $date1;
