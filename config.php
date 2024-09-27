@@ -38,6 +38,9 @@ define('MORPHEUS_HOMEPAGE', ['warum/', 'wie/']);
 define('SPECIAL_EMAIL', 'vukynamkhtn@gmail.com');
 define('SPECIAL_EMAIL2', 'vukynamkhtn@gmail.com');
 
+define('NEW_URL', 'obsthof-am-steinberg.de');
+define('OLD_URL', array("2024neu.obsthof-am-steinberg.de", "neu.obsthofamsteinberg.de", "obsthofamsteinberg.de"));
+
 // Überprüfe, ob das Cookie "needed" gesetzt ist
 if (isset($_GET['setcookie'])) {
 	define('NEW_COOKIE', 1);

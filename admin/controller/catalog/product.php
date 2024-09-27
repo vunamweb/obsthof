@@ -856,6 +856,14 @@ class ControllerCatalogProduct extends Controller {
             $data[ 'shipping' ] = 1;
         }
 
+        if ( isset( $this->request->post[ 'enable_kid' ] ) ) {
+            $data[ 'enable_kid' ] = $this->request->post[ 'enable_kid' ];
+        } elseif ( !empty( $product_info ) ) {
+            $data[ 'enable_kid' ] = $product_info[ 'enable_kid' ];
+        } else {
+            $data[ 'enable_kid' ] = 1;
+        }
+
         if ( isset( $this->request->post[ 'price' ] ) ) {
             $data[ 'price' ] = $this->request->post[ 'price' ];
         } elseif ( !empty( $product_info ) ) {
