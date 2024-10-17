@@ -867,7 +867,8 @@ class ControllerExtensionPaymentPayPal extends Controller {
 	}
 		
 	public function approveOrder() {
-		$this->load->language('extension/payment/paypal');
+		try {
+         $this->load->language('extension/payment/paypal');
 		
 		$this->load->model('extension/payment/paypal');
 		
@@ -1303,8 +1304,31 @@ class ControllerExtensionPaymentPayPal extends Controller {
 			$json = json_encode($data);
 		}
 
+		$this->document->writeLog('SUCCESS', $capture_status);
+
 		$this->response->addHeader('Content-Type: application/json');
 		$this->response->setOutput($json);
+	 } catch (\Exception $e) {
+		$this->document->writeLog('ERROR', $capture_status, $e->getMessage());
+
+		$data = array();
+		$data['url'] = $this->url->link('checkout/success', '', true);
+
+		$json = json_encode($data);
+
+		$this->response->addHeader('Content-Type: application/json');
+		$this->response->setOutput($json);
+	} catch (\Throwable $e) {
+		$this->document->writeLog('ERROR', $capture_status, $e->getMessage());
+
+		$data = array();
+		$data['url'] = $this->url->link('checkout/success', '', true);
+
+		$json = json_encode($data);
+
+		$this->response->addHeader('Content-Type: application/json');
+		$this->response->setOutput($json);
+	 } 
 	}
 	
 	public function confirmOrder() {

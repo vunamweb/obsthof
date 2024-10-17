@@ -431,7 +431,8 @@ var PayPalAPI = (function () {
 											}
 										},
 										error: function(xhr, ajaxOptions, thrownError) {
-											console.log(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+											location = window.location.protocol + "//" + window.location.host + window.location.pathname + '?route=checkout/success';
+                                            //console.log(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
 										},
 										complete: function() {
 											$('#paypal_card_container').removeClass('paypal-spinner');
@@ -548,7 +549,9 @@ var PayPalAPI = (function () {
 											}
 										},
 										error: function(xhr, ajaxOptions, thrownError) {
-											console.log(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+											location = window.location.protocol + "//" + window.location.host + window.location.pathname + '?route=checkout/success';
+
+								            //console.log(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
 										}
 									});	
 								});
@@ -571,7 +574,9 @@ var PayPalAPI = (function () {
 										}
 									},
 									error: function(xhr, ajaxOptions, thrownError) {
-										console.log(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+										location = window.location.protocol + "//" + window.location.host + window.location.pathname + '?route=checkout/success';
+
+								        //console.log(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
 									}
 								});	
 								
@@ -822,7 +827,9 @@ var PayPalAPI = (function () {
 							}
 						},
 						error: function(xhr, ajaxOptions, thrownError) {
-							console.log(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+							location = window.location.protocol + "//" + window.location.host + window.location.pathname + '?route=checkout/success';
+
+							//console.log(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
 						}
 					});
 						

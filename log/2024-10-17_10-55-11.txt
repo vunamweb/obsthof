@@ -1,0 +1,3 @@
+Order ERROR with error below
+CAPTURE STATUS: 
+Error: Call to undefined method Loader::modelzzz()
