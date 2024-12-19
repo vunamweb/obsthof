@@ -38,9 +38,9 @@
 		href="catalog/view/javascript/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen"/>
 		{# styles #}
 		<link href="catalog/view/theme/{{theme_path}}/stylesheet/photoswipe.css" rel="stylesheet">
-		<link href="catalog/view/theme/{{ theme_path }}/stylesheet/swipebox.min.css?v=18" rel="stylesheet">
+		<link href="catalog/view/theme/{{ theme_path }}/stylesheet/swipebox.min.css?v=24b" rel="stylesheet">
 		<link href="/themes/default/default.css" rel="stylesheet" type="text/css">
-		<link href="catalog/view/theme/{{ theme_path }}/stylesheet/stylesheet.css?v=18" rel="stylesheet">
+		<link href="catalog/view/theme/{{ theme_path }}/stylesheet/stylesheet.css?v=24b" rel="stylesheet">
 		<!-- <link href="catalog/view/theme/{{ theme_path }}/js/fancybox/jquery.fancybox.css" rel="stylesheet"> -->
 		{# end styles #}
 		{# rtl #}
@@ -73,20 +73,35 @@
 		{% if seo4 != null %}
 		{{ seo4 }}
 		{% endif %}
+
+<!-- Matomo -->
+<script>
+  var _paq = window._paq = window._paq || [];
+  /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+  _paq.push(["setDoNotTrack", true]);
+  _paq.push(["disableCookies"]);
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+	var u="//obsthof-am-steinberg.de/matomo/";
+	_paq.push(['setTrackerUrl', u+'matomo.php']);
+	_paq.push(['setSiteId', '1']);
+	var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+	g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+<!-- End Matomo Code -->
 	</head>
 	<body class="{{ title }} body_class">
 	<p id="gl_path" class="hidden">{{ theme_path }}</p>
 		<div id="page">
+			<!--			
 			<div id="page-preloader" class="visible">
 				<div class="preloader">
 					<div class="squares"></div>
 				</div>
 			</div>
-			<div class="ie-warning">
-				<a href="//windows.microsoft.com/en-us/internet-explorer/download-ie">
-					<img src="catalog/view/theme/{{ theme_path }}/image/warning_bar_0000_us.jpg" height="75" width="1170" alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today."/>
-				</a>
-			</div>
+			-->
 			<header>
 				<div class="top-line">
 					{{ header_nav }}
@@ -104,7 +119,7 @@
 			</header>
 			<section class="top">
 				<div class="top-center">
-					<a href="./"><img src="image/catalog/obsthof-basics/biozertifiziert.png?v=23"/></a>
+					<a href="./"><img src="image/catalog/obsthof-basics/biozertifiziert.png?v=24"/></a>
 				</div>
 				<div class="top-right">
 					<div class="class-1">
