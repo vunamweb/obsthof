@@ -11,7 +11,7 @@ data-mousewheel-release="{{ mousewheel_release_on_edges }}" style="height: {{ he
 				loop: {{ slide['video_loop'] }}, {{ slide['video_muted'] ? '' : 'volume: ' ~ slide['video_volume'] ~ ',' }}
 				muted: {{ slide['video_muted'] }}">
 				{% if (slide['link']) %}
-					<a href="{{ slide['link'] }}" class="swiper-slide__link ">
+					<a href="#" class="swiper-slide__link ">
 						<div class="swiper-description">{{ slide['description'] }}</div>
 					</a>
 				{% else %}
@@ -21,7 +21,7 @@ data-mousewheel-release="{{ mousewheel_release_on_edges }}" style="height: {{ he
 		{% else %}
 			<div class="swiper-slide  {{ slide['title'] }}" data-slide-bg="{{ slide['image'] }}">
 			{% if (slide['link']) %}
-				<a href="{{ slide['link'] }}" class="swiper-slide__link ">
+				<a href="#" class="swiper-slide__link ">
 					<div class="swiper-description">{{ slide['description'] }}</div>
 				</a>
 			{% else %}

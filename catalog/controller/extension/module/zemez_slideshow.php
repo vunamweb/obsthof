@@ -48,6 +48,7 @@ class ControllerExtensionModuleZemezSlideshow extends Controller {
 
 		if (isset($setting['slides'])) {
 			$i = 0; $vid = 0; foreach ($setting['slides'] as $slide) {
+				//print_r($slide); die();
 
 				if ($slide['slide_type'] && $vid != 1) {
 					$vid = 1;
@@ -77,7 +78,27 @@ class ControllerExtensionModuleZemezSlideshow extends Controller {
 		}
 		
 		$data['module'] = $module++;
+
+		$data['slides'] = $this->shortByLink($data['slides']);
+
+		//print_r($data['slides']); die();
 		
 		return $this->load->view('extension/module/zemez_slideshow', $data);
+	}
+
+	public function shortByLink($data) {
+		//print_r($data); die();
+		for($i = 0; $i < count($data) - 1; $i++) {
+			//echo $data[$i]['short_date'] . '////';
+			for($j = $i + 1; $j < count($data); $j++)
+		    if($data[$i]['link'] > $data[$j]['link']) {
+				$temp = $data[$i];
+				$data[$i] = $data[$j];
+				$data[$j] = $temp;
+			}
+		} 
+		  
+
+		return $data;	
 	}
 }
