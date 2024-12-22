@@ -14,7 +14,7 @@
 							<!--<button type="button" onclick="cart.removeAndSave('{{ product.href|split('product_id=')[1] }}', '{{ product['cart_id'] }}');" class="link">
 								<i class="linearicons-heart"></i>
 							</button>-->
-							<button type="button" onclick="cart.remove('{{ product['cart_id'] }}');" class="link">
+							<button product_id="{{ product['cart_id'] }}" type="button" class="link remove_cart_x">
 								<i class="linearicons-trash"></i>
 							</button>
 						</div>
@@ -24,7 +24,7 @@
 									<img src="{{ product['thumb'] }}" alt="{{ product['name'] }}" title="{{ product['name'] }}" class="img-thumbnail" />
 								</a>
 							{% endif %}
-							<button type="button" onclick="cart.remove('{{ product['cart_id'] }}');" class="link" style="padding-top:5px;">
+							<button product_id="{{ product['cart_id'] }}" type="button" class="link remove_cart_x" style="padding-top:5px;">
 								<i class="linearicons-trash"></i>
 							</button>
 						</div>
@@ -75,3 +75,9 @@
 		</ul>
 	</div>
 </div>
+<script nonce="{{ none_script }}" type="text/javascript">
+$('.remove_cart_x').on('click', function() {
+  var product_id = $(this).attr('product_id');
+  cart.remove(product_id);
+});
+</script>

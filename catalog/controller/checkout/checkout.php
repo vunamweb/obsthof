@@ -101,7 +101,11 @@ class ControllerCheckoutCheckout extends Controller {
 			$data['auto'] = 1;
 		}
 
-		$this->response->setOutput($this->load->view('checkout/checkout', $data));
+		// SECURITY
+		$script_nonce = NONE_SCRIPT;
+		$data['none_script'] = $script_nonce;
+		
+        $this->response->setOutput($this->load->view('checkout/checkout', $data));
 	}
 
 	public function country() {

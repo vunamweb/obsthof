@@ -195,7 +195,11 @@ class ControllerCheckoutPaymentMethod extends Controller {
 		//print_r($_SESSION['total_1']); die();
 		$data['auto'] = ($_SESSION['total_1'][4]['value'] == 0) ? 1 : 0;
 
-		$this->response->setOutput($this->load->view('checkout/payment_method', $data));
+		// SECURITY
+		$script_nonce = NONE_SCRIPT;
+		$data['none_script'] = $script_nonce;
+		
+        $this->response->setOutput($this->load->view('checkout/payment_method', $data));
 	}
 
 	public function save() {

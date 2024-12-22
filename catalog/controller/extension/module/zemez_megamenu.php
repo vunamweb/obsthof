@@ -284,6 +284,9 @@ class ControllerExtensionModuleZemezMegaMenu extends Controller
 		$data['menu_morpheus'] = str_replace(array("<?php", "?>", "nav = '", "$", 'cms/', "';"), '', $data['menu_morpheus']);
 		// end
 
+		$script_nonce = NONE_SCRIPT;
+		$data['none_script'] = $script_nonce; 
+
 		return $this->load->view('extension/module/zemez_megamenu', $data);
 	}
 

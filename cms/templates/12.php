@@ -1,4 +1,5 @@
 <?php
+include('../config.php');
 /* pixel-dusche.de */
 global $uniqueID, $design, $itext, $startDIV, $anker, $hl, $bgIMG;
 global $fileID, $lastUsedTemplateID, $tabstand, $tabstand_bottom, $anker, $anzahlOffenerDIV, $templateIsClosed, $parallaxText;
@@ -37,7 +38,7 @@ if($tref == 1 || $tref == 4 || !$tref) $template = '
 	  </div>
 	</div>
 </section>
-	<script type="text/javascript"><!--
+	<script nonce="'.NONE_SCRIPT.'" type="text/javascript"><!--
 	$("#obsthofNews").swiper({
 		mode: \'horizontal\',
 		slidesPerView: 4,
