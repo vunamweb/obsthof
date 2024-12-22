@@ -136,6 +136,10 @@ class ControllerCheckoutGuest extends Controller {
 		} else {
 			$data['captcha'] = '';
 		}
+
+		// SECURITY
+		$script_nonce = NONE_SCRIPT;
+		$data['none_script'] = $script_nonce;
 		
 		$this->response->setOutput($this->load->view('checkout/guest', $data));
 	}
