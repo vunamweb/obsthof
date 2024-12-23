@@ -59,10 +59,10 @@
 </div>
 {{ payment }}
 {% else %} 
-<script type="text/javascript"><!--
+<script nonce="{{ none_script }}" type="text/javascript"><!--
 location = '{{ redirect }}';
 //--></script>
-<script>
+<script nonce="{{ none_script }}">
 if($('#auto_1').val() == 1) {
   //alert('ddd');
   $('#button-confirm').click();

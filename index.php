@@ -12,6 +12,25 @@ define('VERSION', '3.0.2.0');
 if (is_file('config.php')) {
 	require_once('config.php');
 }
+
+// SECURITY
+$script_nonce = NONE_SCRIPT; //base64_encode(random_bytes(16));
+//$GLOBALS['style_nonce'] = base64_encode(random_bytes(16));
+
+header("X-Frame-Options: DENY");
+header("X-Content-Type-Options: nosniff");
+header("Referrer-Policy: no-referrer");
+header("Strict-Transport-Security: max-age=31536000; includeSubDomains; preload");
+header("Permissions-Policy: geolocation=(), microphone=(), camera=()");
+header("Cross-Origin-Embedder-Policy: require-corp;");
+// header("Content-Security-Policy: default-src 'self'; script-src 'self' 'nonce-$script_nonce' https://www.paypal.com; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self' data:; frame-src 'self' https://www.youtube-nocookie.com https://www.paypal.com https://www.sandbox.paypal.com; connect-src 'self' https://www.paypal.com https://www.sandbox.paypal.com;");
+
+header("Content-Security-Policy: default-src 'self'; script-src 'self' 'nonce-$script_nonce' https://www.paypal.com https://www.googletagmanager.com https://connect.facebook.net https://widgets.trustedshops.com https://static.hotjar.com https://script.hotjar.com https://widgets.trustedshops.com http://widgets.trustedshops.com; style-src 'self' 'unsafe-inline' https://static.hotjar.com; img-src 'self' data: https://widgets.trustedshops.com https://*.facebook.com https://www.google.com https://*.google.de https://static.hotjar.com https://insights.hotjar.com https://s3-us-west-2.amazonaws.com https://www.paypalobjects.com; font-src 'self' data:; frame-src 'self' https://www.youtube-nocookie.com https://www.paypal.com https://www.sandbox.paypal.com https://www.googletagmanager.com https://td.doubleclick.net https://vars.hotjar.com https://assets.braintreegateway.com; connect-src 'self' https://www.paypal.com https://www.sandbox.paypal.com https://*.google.com https://www.googletagmanager.com https://*.hotjar.com https://insights.hotjar.comwss://*.hotjar.com https://api.trustedshops.com https://shops-si.trustedshops.com https://api.trustbadge.etrusted.com https://trustbadge.api.etrusted.com https://shops-si.trustedshops.com https://api.trustbadge.etrusted.com https://trustbadge.api.etrusted.com;");
+
+// _start SECURE
+// + + + + + + + + + + + + + + + + + + + + + + + + + + + + 
+// + + + + + + + + + + + + + + + + + + + + + + + + + + + + 
+
 // Install
 if (!defined('DIR_APPLICATION')) {
 	header('Location: install/index.php');

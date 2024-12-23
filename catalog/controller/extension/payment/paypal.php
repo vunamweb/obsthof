@@ -89,7 +89,11 @@ class ControllerExtensionPaymentPayPal extends Controller {
 
 			if (!empty($this->error['warning'])) {
 				$this->error['warning'] .= ' ' . sprintf($this->language->get('error_payment'), $this->url->link('information/contact', '', true));
-			}			
+			}
+			
+			// SECURITY
+			$script_nonce = NONE_SCRIPT;
+			$data['none_script'] = $script_nonce;
 
 			return $this->load->view('extension/payment/paypal/paypal', $data);
 		}
