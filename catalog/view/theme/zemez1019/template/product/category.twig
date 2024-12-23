@@ -347,20 +347,20 @@
 </div>
 <div id="mobileFilter" class="btn btn-info">Warengruppen</div>
 {{ footer }}
-<script nonce="{{ none_script }}">
+<script  nonce="{{ none_script }}">
 var count = 0;
 
 $('a.lazy img').each(function(e) {
 	var width = $(window).width();
 
 	if(width <= 768) {
-     if(count <= 1) {
-		var data_src = $(this).attr('data-src');
-		$(this).attr('src', data_src);
-		$(this).parent().addClass('lazy-loaded');
-
-		count++;
-      }
+    	if(count <= 6) {
+			console.log(count);
+			var data_src = $(this).attr('data-src');
+			$(this).attr('src', data_src);
+			$(this).parent().addClass('lazy-loaded');
+			count++;
+		}
 	}
 })
 </script>
