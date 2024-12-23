@@ -135,7 +135,7 @@
 							<!-- AddThis Button BEGIN -->
 							<div class="addthis_sharing_toolbox"></div>
 							<!-- Go to www.addthis.com/dashboard to customize your tools -->
-							<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-55e053ac02ebd38e" async="async"></script>
+							<script nonce="{{ none_script }}" type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-55e053ac02ebd38e" async="async"></script>
 							<!-- AddThis Button END -->
 						</div>
 					</div>
@@ -452,7 +452,7 @@
 		{{ column_right }}
 	</div>
 </div>
-<script>
+<script nonce="{{ none_script }}">
 	(function ($) {
 $(document).ready(function () {
 $('#tabcustom0').addClass('active');
@@ -488,7 +488,7 @@ $(this).addClass('close-tab').parents('#tab-review').find('#reviews_form').slide
 });
 })(jQuery);
 </script>
-<script type="text/javascript">
+<script nonce="{{ none_script }}" type="text/javascript">
 	document.getElementById('input-quantity').onkeypress = function (e) {
 e = e || event;
 if (e.ctrlKey || e.altKey || e.metaKey) 
@@ -522,7 +522,7 @@ return String.fromCharCode(event.which)
 return null;
 }
 </script>
-<script type="text/javascript">
+<script nonce="{{ none_script }}" type="text/javascript">
 	$('select[name=\'recurring_id\'], input[name="quantity"]').change(function () {
 $.ajax({
 url: 'index.php?route=product/product/getRecurringDescription',
@@ -542,7 +542,7 @@ $('#recurring-description').html(json['success']);
 });
 });
 </script>
-<script type="text/javascript">
+<script nonce="{{ none_script }}" type="text/javascript">
 	var timer2;
 $('#button-cart').on('click', function () {
 $.ajax({
@@ -601,14 +601,14 @@ alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
 });
 });
 </script>
-<script type="text/javascript">
+<script nonce="{{ none_script }}" type="text/javascript">
 	$('.date').datetimepicker({language: '{{ datepicker }}', pickTime: false});
 
 $('.datetime').datetimepicker({language: '{{ datepicker }}', pickDate: true, pickTime: true});
 
 $('.time').datetimepicker({language: '{{ datepicker }}', pickDate: false});
 </script>
-<script type="text/javascript">
+<script nonce="{{ none_script }}" type="text/javascript">
 	$('#review').delegate('.pagination a', 'click', function (e) {
 e.preventDefault();
 
