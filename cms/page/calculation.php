@@ -10,12 +10,12 @@ if($_POST) {
     include("../nogo/funktion.inc");
 
     $subject = "calculation form";
-    $to = "janskibicki@gmail.com";
-	$to = "b@7sc.eu";
-
+    $to = "info@obsthof-am-steinberg.de";
+	// $to = "b@7sc.eu";
+	
     $header = $morpheus["mail_start"];
     
-	print_r($_POST); 
+	// print_r($_POST); 
 	// die();
 
     $personen = $_POST['personen'];
@@ -52,7 +52,7 @@ if($_POST) {
 
     $message .= $footer;
 
-    sendMailSMTP($to, $subject, $message);
+    // sendMailSMTP($to, $subject, $message);
     return;
 }
 $url =  $morpheus['url'] . 'page/calculation/index.html';
