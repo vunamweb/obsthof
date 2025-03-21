@@ -364,26 +364,26 @@ class ControllerMailOrder extends Controller {
 
 		  $this->model_checkout_order->setCouponNumber($order_info['order_id'], $typeCoupon, $generateIDCoupon);
 		  
-          $this->sendMailSMTP($order_info['email'], $subject, '', $fromName, $this->load->view('mail/order_add', $data), 1, $type, $typeCoupon);
+          $this->sendMailSMTP($order_info['order_id'], $order_info['email'], $subject, '', $fromName, $this->load->view('mail/order_add', $data), 1, $type, $typeCoupon);
 		}
 		// if status is not complete
 		else {
 		   $type = $this->createPDFInvoice($order_info, $order_status_id, $sum_tax_1, $sum_tax_2, $totalNormalProduct);
-		   $this->sendMailSMTP($order_info['email'], $subject, '', $fromName, $this->load->view('mail/order_add', $data), 1);
+		   $this->sendMailSMTP($order_info['order_id'], $order_info['email'], $subject, '', $fromName, $this->load->view('mail/order_add', $data), 1);
 		} 
 
-		$this->sendMailSMTP($this->config->get('config_email'), $subject, '', $fromName, $this->load->view('mail/order_alert', $data), 1);
-		$this->sendMailSMTP(SPECIAL_EMAIL, $subject, '', $fromName, $this->load->view('mail/order_add', $data), 1);
-		$this->sendMailSMTP(SPECIAL_EMAIL2, $subject, '', $fromName, $this->load->view('mail/order_add', $data), 1);
+		$this->sendMailSMTP($order_info['order_id'], $this->config->get('config_email'), $subject, '', $fromName, $this->load->view('mail/order_alert', $data), 1);
+		$this->sendMailSMTP($order_info['order_id'], SPECIAL_EMAIL, $subject, '', $fromName, $this->load->view('mail/order_add', $data), 1);
+		$this->sendMailSMTP($order_info['order_id'], SPECIAL_EMAIL2, $subject, '', $fromName, $this->load->view('mail/order_add', $data), 1);
     }
 
-	function sendMailSMTP($to, $subject, $from, $fromName, $message, $sendMail=1, $type = false, $typeCoupon = false)
+	function sendMailSMTP($order_id, $to, $subject, $from, $fromName, $message, $sendMail=1, $type = false, $typeCoupon = false)
    {
 		// return;
 		
-	    $files1 = str_replace("index.php", "", $_SERVER['SCRIPT_FILENAME']) . "pdf/order.pdf";
-		$files2 = str_replace("index.php", "", $_SERVER['SCRIPT_FILENAME']) . "pdf/order_event.pdf";
-		$files3 = str_replace("index.php", "", $_SERVER['SCRIPT_FILENAME']) . "pdf/order_coupon.pdf";
+	    $files1 = str_replace("index.php", "", $_SERVER['SCRIPT_FILENAME']) . "pdf/order_".$order_id.".pdf";
+		$files2 = str_replace("index.php", "", $_SERVER['SCRIPT_FILENAME']) . "pdf/order_event_".$order_id.".pdf";
+		$files3 = str_replace("index.php", "", $_SERVER['SCRIPT_FILENAME']) . "pdf/order_coupon_".$order_id.".pdf";
 				
 		// $from = "shop@obsthofamsteinberg.de";		
 		$from = "webshop@obsthof-am-steinberg.de";
@@ -718,7 +718,7 @@ class ControllerMailOrder extends Controller {
 	$dompdf->setPaper('A4', 'Horizontal');
 	$dompdf->render();
 	$pdf = $dompdf->output();
-	$file_location = "./pdf/order.pdf";
+	$file_location = "./pdf/order_".$order_info['order_id'].".pdf";
 	file_put_contents($file_location, $pdf);
 	$fileLocal = "./admin/Invoice/".$data['order_id'].".pdf";
 	file_put_contents($fileLocal, $pdf); 
@@ -733,7 +733,7 @@ class ControllerMailOrder extends Controller {
 		$dompdf->setPaper('A4', 'Horizontal');
 		$dompdf->render();
 		$pdf = $dompdf->output();
-		$file_location = "./pdf/order_event.pdf";
+		$file_location = "./pdf/order_event_".$order_info['order_id'].".pdf";
 		file_put_contents($file_location, $pdf);
 	
 		return true;
@@ -1045,7 +1045,7 @@ public function createPDFInvoiceCoupon($order_info, $order_status_id, $sum_tax_1
 		$dompdf->setPaper('A4', 'Horizontal');
 		$dompdf->render();
 		$pdf = $dompdf->output();
-		$file_location = "./pdf/order_coupon.pdf";
+		$file_location = "./pdf/order_coupon_".$order_info['order_id'].".pdf";
 		file_put_contents($file_location, $pdf);
 
 		$this->model_checkout_order->insertCoupon($generateIDCoupon, $data_2['products'][0]['price_1']);
@@ -1416,13 +1416,13 @@ public function createPDFInvoiceCoupon($order_info, $order_status_id, $sum_tax_1
 
 		// if status is complete
 		if(in_array($order_status_id, $this->config->get('config_complete_status')))
-		  $this->sendMailSMTP($order_info['email'], $subject, '', $from, $template, 1, $type);
+		  $this->sendMailSMTP($order_info['order_id'], $order_info['email'], $subject, '', $from, $template, 1, $type);
 		// if status is in process or cancel
 		else if(in_array($order_status_id, $this->config->get('config_processing_status')) || $checkStatus)
-		  $this->sendMailSMTP($order_info['email'], $subject, '', $from, $template, 1);
+		  $this->sendMailSMTP($order_info['order_id'], $order_info['email'], $subject, '', $from, $template, 1);
 		// status not in above
 		else 
-		  $this->sendMailSMTP($order_info['email'], $subject, '', $from, $template, 2, $type);
+		  $this->sendMailSMTP($order_info['order_id'], $order_info['email'], $subject, '', $from, $template, 2, $type);
 		    
 		/*if($order_status_id == 18 || $order_status_id == 5 || $checkStatus)
 		  $this->sendMailSMTP($order_info['email'], $subject, '', $from, $template, 1, $type);
@@ -1431,7 +1431,7 @@ public function createPDFInvoiceCoupon($order_info, $order_status_id, $sum_tax_1
 		   	  
 		// if status is complate or cancel
 		if(in_array($order_status_id, $this->config->get('config_complete_status')) || $checkStatus)
-		  $this->sendMailSMTP(SPECIAL_EMAIL, $subject, '', $from, $template, 1);
+		  $this->sendMailSMTP($order_info['order_id'], SPECIAL_EMAIL, $subject, '', $from, $template, 1);
 	}
 	
 	// Admin Alert Mail
@@ -1573,7 +1573,7 @@ public function createPDFInvoiceCoupon($order_info, $order_status_id, $sum_tax_1
 
 			foreach ($emails as $email) {
 				if ($email && filter_var($email, FILTER_VALIDATE_EMAIL)) {
-					$this->sendMailSMTP($email, $subject, 'test@7sc.eu', $fromName, $this->load->view('mail/order_alert', $data));
+					$this->sendMailSMTP($order_info['order_id'], $email, $subject, 'test@7sc.eu', $fromName, $this->load->view('mail/order_alert', $data));
 					//$mail->setTo($email);
 					//$mail->send();
 				}
