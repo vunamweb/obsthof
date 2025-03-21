@@ -393,11 +393,14 @@ class ControllerMailOrder extends Controller {
 		$mail->IsSMTP(); // telling the class to use SMTP
 		$mail->SMTPDebug = 0; // enables SMTP debug information (for testing)
 		$mail->SMTPAuth = true; // enable SMTP authentication
-		$mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS; // Implizite TLS-Verschlüsselung aktivieren
-		$mail->Host = "smtp.ionos.de"; // sets GMAIL as the SMTP server
+		// $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS; // Implizite TLS-Verschlüsselung aktivieren
+		$mail->SMTPSecure = "ssl";
+		$mail->Host = "sxb1plzcpnl504105.prod.sxb1.secureserver.net"; // sets GMAIL as the SMTP server
+		// $mail->Host = "smtp.ionos.de"; // sets GMAIL as the SMTP server
 		$mail->Port = 465; // set the SMTP port for the GMAIL server
-		$mail->Username = $from; // GMAIL username
-		$mail->Password = "!wEr4!hZtvB";
+		$mail->Username = 'webshop@obsthof-am-steinberg.de'; // GMAIL username
+		$mail->Password = "xUG3Kbj3w4bM3x2";
+		// $mail->Password = "!wEr4!hZtvB";
 		$mail->CharSet = 'UTF-8';
 		// $mail->Encoding = 'base64';
 		$mail->AddAddress($to);
