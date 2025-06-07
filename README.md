@@ -53,5 +53,5 @@ Welcome to the official GitHub repository for **Obsthof am Steinberg**, an e-com
 
 1. **Clone the Repository**
    ```bash
-   git clone https://github.com/your-username/obsthof-am-steinberg-opencart.git
-   cd obsthof-am-steinberg-opencart
+   git clone https://github.com/vunamweb/obsthof.git
+   
