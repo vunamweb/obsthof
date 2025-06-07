@@ -1,66 +1,34 @@
-# Wandfreude.de - Custom OpenCart E-commerce Store
+# Obsthof am Steinberg - OpenCart E-commerce Website
 
-![Wandfreude Logo](image/Wandfreude-Logo.svg)
+Welcome to the official GitHub repository for **Obsthof am Steinberg**, an e-commerce platform built with [OpenCart](https://www.opencart.com/). This website enables customers to explore and order fresh, locally grown fruits and related products online.
 
-**Wandfreude.de** is a custom OpenCart-powered e-commerce platform specializing in high-quality wall tattoos, wall decals, and decorative vinyl designs for home interiors. This project is built for performance, flexibility, and a seamless user experience on both desktop and mobile platforms.
-
-## 🌐 Live Website
-
-👉 [Visit Wandfreude.de](https://www.wandfreude.de/)
+🌐 Live Site: [obsthof-am-steinberg.de](https://obsthof-am-steinberg.de/)
 
 ---
 
-## 🛠️ Built With
+## 🛍️ Features
 
-- [OpenCart](https://www.opencart.com/) 3.x
-- PHP 7.4+
-- MySQL
-- jQuery + Bootstrap
-- Custom OpenCart Themes and Extensions
-- SEO & Performance Optimization (Lighthouse Friendly)
-- Multilingual & Multi-currency support
-
----
-
-## 📦 Features
-
-- 🖼️ Custom wall tattoo product designer
-- 🛍️ Dynamic product filtering and categorization
-- 🔎 Full-text product search
-- 📱 Mobile-optimized responsive layout
-- 🧾 PDF invoice & order management
-- 🔐 Secure customer login and checkout
-- 💬 GDPR-compliant cookie & privacy tools
-- 📤 Contact forms and newsletter subscriptions
-- 🚚 Integrated shipping & tax calculation
-- 💳 Payment integration (PayPal, Klarna, and more)
+- Fully functional OpenCart storefront
+- Custom product categories for seasonal fruits and regional goods
+- Multi-language and multi-currency support
+- SEO-optimized URLs and metadata
+- Responsive design for mobile and desktop
+- Customer registration, login, and profile management
+- Secure checkout with multiple payment options
+- Newsletter and contact form integration
+- CMS for managing pages and content
 
 ---
 
-### Prerequisites
+## 📦 Tech Stack
 
-- Apache/Nginx
-- PHP 7.4 or higher
-- MySQL 5.7+
-- Composer (optional)
-- vQmod or OCMOD enabled
+- **CMS**: OpenCart (PHP-based)
+- **Backend**: PHP, MySQL
+- **Frontend**: HTML5, CSS3, JavaScript, Bootstrap
+- **Server**: Apache / Nginx
+- **Hosting**: Likely a Linux-based web server (e.g., shared/VPS)
 
-### Installation
-
-1. Clone the repo:
-   ```bash
-   git clone https://github.com/vunamweb/wandfreude
-
-🧩 Customizations
-Custom modules developed in-house (e.g., tattoo color picker, wall preview)
-
-Optimized for fast page loads and low bounce rates
-
-Enhanced SEO metadata controls
-
-OpenCart theme modified for better UI/UX
-
-Compatibility with popular OpenCart extensions
+---
 
 📸 Screenshots
 | Page | Description |
@@ -72,5 +40,18 @@ Compatibility with popular OpenCart extensions
 | ![Checkout Page](image/5.png) | **Checkout Page**: Guest or registered checkout with secure payment integration (PayPal, Klarna, etc.). |
 | ![Admin Dashboard](image/6.png) | **Admin Panel**: Clean and powerful admin interface to manage orders, products, customers, and SEO settings. |
 
+## 🚀 Getting Started
 
+### Prerequisites
 
+- PHP >= 7.4
+- MySQL/MariaDB
+- Apache/Nginx with mod_rewrite enabled
+- Composer (optional for dependency management)
+
+### Installation Steps
+
+1. **Clone the Repository**
+   ```bash
+   git clone https://github.com/your-username/obsthof-am-steinberg-opencart.git
+   cd obsthof-am-steinberg-opencart
